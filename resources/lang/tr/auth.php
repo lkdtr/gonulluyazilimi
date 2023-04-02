@@ -25,15 +25,18 @@ return [
     'password' => 'Parola',
     'password_confirm' => 'Parola (Tekrar)',
 
+    'remember_me' => 'Beni Hatırla',
+
     'register_title' => 'Kayıt Ol',
     'register' => 'Kayıt Ol',
 
     'login_title' => 'Giriş Yap',
     'login' => 'Giriş Yap',
 
-    'forgot_password_title' => 'Parola Sıfırlama',
-    'forgot_password' => 'Parola Sıfırlama',
+    'forgot_password_title' => 'Parolamı Unuttum',
+    'forgot_password' => 'Parolamı Unuttum',
 
-    'remember_me' => 'Beni Hatırla',
+    'reset_password_title' => 'Parola Sıfırla',
+    'reset_password' => 'Parola Sıfırla',
 
 ];

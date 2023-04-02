@@ -25,6 +25,8 @@ return [
     'password' => 'Password',
     'password_confirm' => 'Password (Confirm)',
 
+    'remember_me' => 'Remember Me',
+
     'register_title' => 'Register',
     'register' => 'Register',
 
@@ -34,6 +36,7 @@ return [
     'forgot_password_title' => 'Forgot Your Password',
     'forgot_password' => 'Forgot Your Password',
 
-    'remember_me' => 'Remember Me',
+    'reset_password_title' => 'Reset Password',
+    'reset_password' => 'Reset Password',
 
 ];
