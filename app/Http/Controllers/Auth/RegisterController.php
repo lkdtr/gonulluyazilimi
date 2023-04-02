@@ -56,7 +56,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:15'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'agreement' => ['required'],
+            'user_agreement' => ['required'],
+            'kvkk_policy' => ['required'],
         ]);
     }
 
