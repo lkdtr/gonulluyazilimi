@@ -103,9 +103,17 @@
                             </div>
                         </div>
 
+                        <div class="separator bottom"><br></div>
+
+                        <div class="row">
+                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModel('/user-agreement')"> Üyelik Sözleşmesinin</a> koşullarını kabul ediyorum</label>
+                        </div>
+
+                        <div class="separator bottom"><br></div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-lg btn-primary">
                                     {{ trans("auth.register") }}
                                 </button>
                             </div>
