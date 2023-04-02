@@ -107,7 +107,7 @@
 
                         <div class="row">
                             <label class="col-md-8 offset-md-4 mb-3" for="user-agreement"><input name="user-agreement" id="user-agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Üyelik Sözleşmesinin</a> koşullarını kabul ediyorum</label>
-                            <label class="col-md-8 offset-md-4 mb-3" for="kvkk-policy"><input name="kvkk-policy" id="kvkk-policy" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/kvkk-policy')"> KVKK Sözleşmesinin</a> koşullarını kabul ediyorum</label>
+                            <label class="col-md-8 offset-md-4 mb-3" for="kvkk-policy"><input name="kvkk-policy" id="kvkk-policy" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/kvkk-policy')"> Kişisel Verilerin Korunması Kanununa İlişkin, Açık Rıza Onay Metni</a> 'ni onayladım ve kabul ediyorum.</label>
                         </div>
 
                         <div class="separator bottom"><br></div>
