@@ -12,4 +12,3 @@ jQuery(function () {
         console.log($("#phone_number").val() );
     })
 });
-

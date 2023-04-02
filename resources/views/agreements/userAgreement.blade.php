@@ -1,0 +1,1 @@
+Kullanıcı sözleşmesi buraya gelecek
