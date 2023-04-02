@@ -17,4 +17,23 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'name' => 'Ad',
+    'surname' => 'Soyad',
+    'national_id' => 'TC Kimlik Numarası',
+    'email' => 'E-Posta',
+    'phone_number' => 'Telefon Numarası',
+    'password' => 'Parola',
+    'password_confirm' => 'Parola (Tekrar)',
+
+    'register_title' => 'Kayıt Ol',
+    'register' => 'Kayıt Ol',
+
+    'login_title' => 'Giriş Yap',
+    'login' => 'Giriş Yap',
+
+    'forgot_password_title' => 'Parola Sıfırlama',
+    'forgot_password' => 'Parola Sıfırlama',
+
+    'remember_me' => 'Beni Hatırla',
+
 ];
