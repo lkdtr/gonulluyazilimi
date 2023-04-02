@@ -39,4 +39,6 @@ return [
     'reset_password_title' => 'Reset Password',
     'reset_password' => 'Reset Password',
 
+    'send_password_reset_link' => 'Send Password Reset Link',
+
 ];

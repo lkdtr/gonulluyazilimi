@@ -39,4 +39,6 @@ return [
     'reset_password_title' => 'Parola Sıfırla',
     'reset_password' => 'Parola Sıfırla',
 
+    'send_password_reset_link' => 'Parola Sıfırlama Linki Gönder',
+
 ];
