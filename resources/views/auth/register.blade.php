@@ -106,7 +106,8 @@
                         <div class="separator bottom"><br></div>
 
                         <div class="row">
-                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModel('/user-agreement')"> Üyelik Sözleşmesinin</a> koşullarını kabul ediyorum</label>
+                            <label class="col-md-8 offset-md-4 mb-3" for="user-agreement"><input name="user-agreement" id="user-agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Üyelik Sözleşmesinin</a> koşullarını kabul ediyorum</label>
+                            <label class="col-md-8 offset-md-4 mb-3" for="kvkk-policy"><input name="kvkk-policy" id="kvkk-policy" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/kvkk-policy')"> KVKK Sözleşmesinin</a> koşullarını kabul ediyorum</label>
                         </div>
 
                         <div class="separator bottom"><br></div>
@@ -124,4 +125,43 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal" id="modal-iframe" tabindex="-1" role="dialog" aria-hidden="true" style="top: 150px;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body mb-0 p-0">
+          <iframe frameborder="0"  style="border:0; width:100%; height: 500px;" id="iframe-content" src="about:blank" ></iframe>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="submit-btn"  onclick="$('#modal-iframe').hide();">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function isMobile() {
+    if ('maxTouchPoints' in navigator) return navigator.maxTouchPoints > 0;
+
+    const mQ = matchMedia?.('(pointer:coarse)');
+    if (mQ?.media === '(pointer:coarse)') return !!mQ.matches;
+
+    if ('orientation' in window) return true;
+
+    return /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(navigator.userAgent) ||
+        /\b(Android|Windows Phone|iPad|iPod)\b/i.test(navigator.userAgent);
+}
+
+function openModal(url) {
+    if (isMobile()) {
+        window.open(url);
+    }
+    else {
+        $("#modal-iframe").show();
+        $("#iframe-content").attr("src", url + "?iframe");
+    }
+}
+</script>
+
 @endsection

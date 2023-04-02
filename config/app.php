@@ -166,7 +166,6 @@ return [
          * Package Service Providers...
          */
 
-
         /*
          * Application Service Providers...
          */
@@ -176,8 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
-        //Brkphp\Netgsm\NetgsmServiceProvider::class,
     ],
 
     /*
@@ -232,9 +229,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-//        'Netgsm' => Brkphp\Netgsm\Facade\Netgsm::class,
-
     ],
 
 ];
