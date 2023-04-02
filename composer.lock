@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "29579a7670d36c6202b8f2979c4d5505",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5164,6 +5164,89 @@
                 }
             ],
             "time": "2023-03-25T09:27:28+00:00"
+        },
+        {
+            "name": "tarfin-labs/netgsm",
+            "version": "4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tarfin-labs/netgsm.git",
+                "reference": "d9a9ac10157beff8686e6d1bd12117de77e0c781"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tarfin-labs/netgsm/zipball/d9a9ac10157beff8686e6d1bd12117de77e0c781",
+                "reference": "d9a9ac10157beff8686e6d1bd12117de77e0c781",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "guzzlehttp/guzzle": "^7.1",
+                "illuminate/notifications": "^8.0|^9.0|^10.0",
+                "illuminate/support": "^8.0|^9.0|^10.0",
+                "illuminate/translation": "^8.0|^9.0|^10.0",
+                "nesbot/carbon": "^2.0",
+                "php": "^7.4|^8.0|^8.1"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.14",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TarfinLabs\\Netgsm\\NetgsmServiceProvider"
+                    ],
+                    "aliases": {
+                        "Netgsm": "TarfinLabs\\Netgsm\\NetgsmFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TarfinLabs\\Netgsm\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hakan özdemir",
+                    "email": "hakan.ozdemir@tarfin.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Faruk Can",
+                    "email": "faruk.can@tarfin.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Yunus Emre Deligöz",
+                    "email": "emre.deligoz@tarfin.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Turan Karatuğ",
+                    "email": "turan.karatug@tarfin.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "netgsm channel for laravel",
+            "homepage": "https://github.com/tarfin-labs/netgsm",
+            "keywords": [
+                "netgsm",
+                "tarfin-labs"
+            ],
+            "support": {
+                "issues": "https://github.com/tarfin-labs/netgsm/issues",
+                "source": "https://github.com/tarfin-labs/netgsm/tree/4.4.0"
+            },
+            "time": "2023-02-16T06:58:13+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
