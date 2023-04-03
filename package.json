@@ -21,5 +21,8 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
+    },
+    "dependencies": {
+        "innoq-bootstrap-theme": "^2.1.0"
     }
 }
