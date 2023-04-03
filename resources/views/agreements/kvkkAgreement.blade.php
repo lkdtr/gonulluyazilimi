@@ -1,1 +1,0 @@
-Kvkk sözleşmesi buraya gelecek
