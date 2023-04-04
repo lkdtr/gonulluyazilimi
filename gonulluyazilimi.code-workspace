@@ -8,9 +8,6 @@
 		},
 		{
 			"path": "../netgsm-php"
-		},
-		{
-			"path": "../corvass"
 		}
 	]
 }

@@ -30,7 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'Netgsm' => [
+    'netgsm' => [
         'client'     => 'xml', //http or xml
         'http'       => [
             'endpoint' => 'https://api.netgsm.com.tr/sms/send/get/',
