@@ -32,6 +32,7 @@ return [
 
     'login_title' => 'Login',
     'login' => 'Login',
+    'logout' => 'Logout',
 
     'forgot_password_title' => 'Forgot Your Password',
     'forgot_password' => 'Forgot Your Password',

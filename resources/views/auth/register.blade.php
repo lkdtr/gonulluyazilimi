@@ -139,14 +139,14 @@
 </div>
 
 
-<div class="modal" id="modal-iframe" tabindex="-1" role="dialog" aria-hidden="true" style="top: 150px;">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal" id="modal-iframe" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document" style="border: 1px solid #ccc;">
     <div class="modal-content">
       <div class="modal-body mb-0 p-0">
           <iframe frameborder="0"  style="border:0; width:100%; height: 500px;" id="iframe-content" src="about:blank" ></iframe>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="submit-btn"  onclick="$('#modal-iframe').hide();">Kapat</button>
+        <button type="button" class="btn btn-warning"  onclick="$('#modal-iframe').hide();">Kapat</button>
       </div>
     </div>
   </div>
