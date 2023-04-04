@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../netgsm"
+		},
+		{
+			"path": "../netgsm-php"
 		}
 	]
 }

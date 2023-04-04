@@ -18,6 +18,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script type="text/javascript">
+		var _globalToken = {!! json_encode(array('_token'=> csrf_token())) !!}
+	</script>
 </head>
 <body>
     <div id="app">

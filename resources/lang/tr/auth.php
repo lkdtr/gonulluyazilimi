@@ -41,4 +41,8 @@ return [
 
     'send_password_reset_link' => 'Parola Sıfırlama Linki Gönder',
 
+    'phone_number_validation' => 'Telefon Numarası Doğrulama',
+    'validate' => 'Doğrula',
+
+
 ];
