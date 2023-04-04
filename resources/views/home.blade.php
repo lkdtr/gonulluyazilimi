@@ -15,12 +15,12 @@
                     @endif
 
                     @foreach ($events as $event)
-                        <button style="width: 100%;text-align: left;" class="btn btn-lg btn-secondary" type="button" data-bs-toggle="collapse" href="#eventCollapse{{$event->id}}" role="button" aria-expanded="false" aria-controls="eventCollapse{{$event->id}}">
+                        <button style="width: 100%;text-align: left;" class="btn btn-lg btn-secondary rounded-0" type="button" data-bs-toggle="collapse" href="#eventCollapse{{$event->id}}" role="button" aria-expanded="false" aria-controls="eventCollapse{{$event->id}}">
                             {{$event->event_name}} ({{date("d-m-Y", strtotime($event->started_at))}} / {{date("d-m-Y", strtotime($event->finished_at))}} )
                         </button>
 
                         <div class="collapse" id="eventCollapse{{$event->id}}">
-                            <div class="card card-body text-dark bg-light">
+                            <div class="card card-body text-dark bg-light rounded-0">
 
                                 <form method="POST">
                                     @csrf

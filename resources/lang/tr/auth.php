@@ -32,6 +32,7 @@ return [
 
     'login_title' => 'Giriş Yap',
     'login' => 'Giriş Yap',
+    'logout' => 'Çıkış Yap',
 
     'forgot_password_title' => 'Parolamı Unuttum',
     'forgot_password' => 'Parolamı Unuttum',
