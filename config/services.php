@@ -33,10 +33,10 @@ return [
     'Netgsm' => [
         'client'     => 'xml', //http or xml
         'http'       => [
-            'endpoint' => 'https://api.netgsm.com.tr',
+            'endpoint' => 'https://api.netgsm.com.tr/sms/send/get/',
         ],
         'xml'        => [
-            'endpoint' => 'api.netgsm.com.tr',
+            'endpoint' => 'api.netgsm.com.tr/sms/send/xml',
         ],
         'username'   => env('NETGSM_USERNAME'),
         'password'   => env('NETGSM_PASSWORD'),
