@@ -2,9 +2,14 @@
 
 namespace App\Notifications;
 
-use TarfinLabs\Netgsm\NetGsmChannel;
-use TarfinLabs\Netgsm\NetGsmSmsMessage;
+use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+
+use NotificationChannels\Netgsm\NetgsmChannel;
+use NotificationChannels\Netgsm\NetgsmMessage;
+use BahriCanli\Netgsm\ShortMessage;
 
 use Illuminate\Support\Facades\Log;
 
@@ -29,13 +34,15 @@ class MobileVerification extends Notification
      */
     public function via($notifiable)
     {
-        return [NetGsmChannel::class];
+        return [NetgsmChannel::class];
     }
 
     public function toNetgsm($notifiable)
     {
         Log::info("Validate Phone Sent ".$notifiable->phone_number);
 
-        return (new NetGsmSmsMessage("Merhaba, Telefon dogrulama kodunuz {$notifiable->verification_code}"))->setRecipients($notifiable->phone_number);
+        $message = "Merhaba, Telefon dogrulama kodunuz ".$notifiable->verification_code;
+        $message = str_replace(["ı", "ü", "ö", "ç", "ş", "ğ", "İ", "Ü", "Ö"],["i", "u", "o", "c", "s", "g", "I", "U", "O"], $message);
+        return new ShortMessage($notifiable->phone_number, $message);
     }
 }
