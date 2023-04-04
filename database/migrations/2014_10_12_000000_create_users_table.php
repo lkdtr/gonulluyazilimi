@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->string('password');
             $table->timestamp('agreement_at')->nullable();
+            $table->integer('role')->default("3");
+            $table->integer('status')->default("1");
             $table->rememberToken();
             $table->timestamps();
         });

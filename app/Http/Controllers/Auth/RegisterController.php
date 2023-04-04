@@ -75,7 +75,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
-            'agreement_at' =>  \Carbon\Carbon::now(), # new \Datetime()
+            'agreement_at' =>  \Carbon\Carbon::now(),
+            'phone_number_verified_at' =>  \Carbon\Carbon::now(),
         ]);
     }
 }
