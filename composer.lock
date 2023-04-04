@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3be559757708bcc20d31bd7ef6e5ba7",
+    "content-hash": "1b1018b21b7909e16dd5e87728b753de",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,20 +64,20 @@
         },
         {
             "name": "bahricanli/netgsm",
-            "version": "1.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bahricanli/netgsm.git",
-                "reference": "597f71f78ccc18d5723856f51f3f2d676e953782"
+                "reference": "0610e9b86fbfcca281a660a3986d3509026204d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bahricanli/netgsm/zipball/597f71f78ccc18d5723856f51f3f2d676e953782",
-                "reference": "597f71f78ccc18d5723856f51f3f2d676e953782",
+                "url": "https://api.github.com/repos/bahricanli/netgsm/zipball/0610e9b86fbfcca281a660a3986d3509026204d3",
+                "reference": "0610e9b86fbfcca281a660a3986d3509026204d3",
                 "shasum": ""
             },
             "require": {
-                "bahricanli/netgsm-php": "^1.0",
+                "bahricanli/netgsm-php": "dev-master",
                 "illuminate/notifications": "8.*",
                 "illuminate/queue": "8.*",
                 "illuminate/support": "8.*",
@@ -114,22 +114,22 @@
             "description": "Sends SMS using Netgsm API",
             "homepage": "https://github.com/bahricanli/netgsm",
             "support": {
-                "source": "https://github.com/bahricanli/netgsm/tree/1.0"
+                "source": "https://github.com/bahricanli/netgsm/tree/1.0.2"
             },
-            "time": "2023-04-04T12:41:47+00:00"
+            "time": "2023-04-04T15:07:34+00:00"
         },
         {
             "name": "bahricanli/netgsm-php",
-            "version": "1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bahricanli/netgsm-php.git",
-                "reference": "67943893a2de2b295cdfde38ac2851e8e6e91c6a"
+                "reference": "4c89bf433a214ad930c8ba61ab37c5516d3bdf5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bahricanli/netgsm-php/zipball/67943893a2de2b295cdfde38ac2851e8e6e91c6a",
-                "reference": "67943893a2de2b295cdfde38ac2851e8e6e91c6a",
+                "url": "https://api.github.com/repos/bahricanli/netgsm-php/zipball/4c89bf433a214ad930c8ba61ab37c5516d3bdf5e",
+                "reference": "4c89bf433a214ad930c8ba61ab37c5516d3bdf5e",
                 "shasum": ""
             },
             "require": {
@@ -140,6 +140,7 @@
                 "mockery/mockery": "^0.9.5",
                 "phpunit/phpunit": "4.*"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -167,9 +168,9 @@
             "description": "A PHP client library for Netgsm API",
             "homepage": "https://github.com/bahricanli/netgsm",
             "support": {
-                "source": "https://github.com/bahricanli/netgsm-php/tree/1.0"
+                "source": "https://github.com/bahricanli/netgsm-php/tree/1.0.2"
             },
-            "time": "2023-04-04T12:37:44+00:00"
+            "time": "2023-04-04T14:47:01+00:00"
         },
         {
             "name": "brick/math",

@@ -42,7 +42,7 @@ class smsTest extends Command
     public function handle()
     {
         $smsObject = new \stdClass();
-        $smsObject->phone_number = "+905434155440";
+        $smsObject->phone_number = "+905053127806";
         $smsObject->verification_code = "56546";
 
         Notification::send($smsObject, new MobileVerification());

@@ -19,7 +19,7 @@ class MobileVerificationController extends Controller
         ]);
 
         $phone_number = $request->get("phone_number");
-        $verification_code = $this->generateRandomString(5);
+        $verification_code = $this->generateRandomString(6);
 
         $contactPermission = ContactPermissions::where("value_type", "phone_number")->where("value", $phone_number)->first();
         if($contactPermission==null) $contactPermission = new ContactPermissions();
