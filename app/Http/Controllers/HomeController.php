@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Models\Events;
+use App\Models\UserEvents;
 
 class HomeController extends Controller
 {
@@ -21,8 +26,36 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
     {
-        return view('home');
+        $user_id = Auth::id();
+        $events = Events::where("status", 1)->whereRaw('finished_at > NOW()')->get();
+        $user_events = UserEvents::where("status", 1)->where("user_id", $user_id)->get();
+        $joined_events = [];
+        foreach($user_events as $user_event) {
+            $joined_events[$user_event->event_id] = 1;
+        }
+
+        return view('home', ["events" => $events, "joined_events" => $joined_events]);
     }
+
+    public function postHome(Request $request) {
+
+        $validator = $request->validate([
+            'event_id' => 'required',
+        ]);
+
+        $event_id = $request->get("event_id");
+        $user_id = Auth::id();
+
+        $user_event = UserEvents::where("user_id", $user_id)->where("event_id", $event_id)->first();
+        if($user_event==null) $user_event = new UserEvents();
+        $user_event->user_id = $user_id;
+        $user_event->event_id = $event_id;
+        $user_event->status = 1;
+        $user_event->save();
+
+        return Redirect::back()->with("status",  "Etkinlik için kaydınız alındı");
+    }
+
 }
