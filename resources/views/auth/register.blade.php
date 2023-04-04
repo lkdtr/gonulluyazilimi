@@ -71,13 +71,26 @@
                             <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number") }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone_number" type="phone_number" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="email">
+                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
+                                <span style="display: none" id="label_phone_number" class="form-control" >Telefon numaranıza gönderilen doğrulama kodunu, alt kısma yazın</span>
+                                <input id="hidden_phone_number" type="hidden" name="phone_number">
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3" id="phone_number_validation_block" style="display: none">
+                            <label for="phone_number_validation" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number_validation") }}</label>
+
+                            <div class="col-md-3">
+                                <input id="phone_number_validation" type="text" class="form-control" name="phone_number_validation">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" id="validate_button" class="btn btn-secondary">{{ trans("auth.validate") }}</button>
                             </div>
                         </div>
 
@@ -113,7 +126,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-lg btn-primary" disabled="">
+                                <button id="register_button" type="submit" class="btn btn-lg btn-primary" disabled="">
                                     {{ trans("auth.register") }}
                                 </button>
                             </div>
@@ -161,6 +174,7 @@ function openModal(url) {
         $("#iframe-content").attr("src", url + "?iframe");
     }
 }
+
 </script>
 
 @endsection

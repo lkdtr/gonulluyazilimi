@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76fcaeb0ba7d7169ef4d040f1d7acf2a",
+    "content-hash": "1b1018b21b7909e16dd5e87728b753de",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,116 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "bahricanli/netgsm",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bahricanli/netgsm.git",
+                "reference": "0610e9b86fbfcca281a660a3986d3509026204d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bahricanli/netgsm/zipball/0610e9b86fbfcca281a660a3986d3509026204d3",
+                "reference": "0610e9b86fbfcca281a660a3986d3509026204d3",
+                "shasum": ""
+            },
+            "require": {
+                "bahricanli/netgsm-php": "dev-master",
+                "illuminate/notifications": "8.*",
+                "illuminate/queue": "8.*",
+                "illuminate/support": "8.*",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\Netgsm\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bahri Meriç Canlı",
+                    "email": "bahri@bahri.info",
+                    "homepage": "https://www.bahri.info",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hilmi Erdem KEREN",
+                    "email": "erdemkeren@gmail.com",
+                    "homepage": "http://www.erdemkeren.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Sends SMS using Netgsm API",
+            "homepage": "https://github.com/bahricanli/netgsm",
+            "support": {
+                "source": "https://github.com/bahricanli/netgsm/tree/1.0.2"
+            },
+            "time": "2023-04-04T15:07:34+00:00"
+        },
+        {
+            "name": "bahricanli/netgsm-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bahricanli/netgsm-php.git",
+                "reference": "4c89bf433a214ad930c8ba61ab37c5516d3bdf5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bahricanli/netgsm-php/zipball/4c89bf433a214ad930c8ba61ab37c5516d3bdf5e",
+                "reference": "4c89bf433a214ad930c8ba61ab37c5516d3bdf5e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~7.0",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "4.*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BahriCanli\\Netgsm\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bahri Meriç Canlı",
+                    "email": "bahri@bahri.info",
+                    "homepage": "https://www.bahri.info",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hilmi Erdem KEREN",
+                    "email": "erdemkeren@gmail.com",
+                    "homepage": "http://www.erdemkeren.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP client library for Netgsm API",
+            "homepage": "https://github.com/bahricanli/netgsm",
+            "support": {
+                "source": "https://github.com/bahricanli/netgsm-php/tree/1.0.2"
+            },
+            "time": "2023-04-04T14:47:01+00:00"
         },
         {
             "name": "brick/math",
@@ -2486,25 +2596,25 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0.1",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -2533,9 +2643,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
+                "source": "https://github.com/php-fig/http-message/tree/1.1"
             },
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2023-04-04T09:50:52+00:00"
         },
         {
             "name": "psr/log",
@@ -5225,89 +5335,6 @@
                 }
             ],
             "time": "2023-03-25T09:27:28+00:00"
-        },
-        {
-            "name": "tarfin-labs/netgsm",
-            "version": "4.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tarfin-labs/netgsm.git",
-                "reference": "d9a9ac10157beff8686e6d1bd12117de77e0c781"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tarfin-labs/netgsm/zipball/d9a9ac10157beff8686e6d1bd12117de77e0c781",
-                "reference": "d9a9ac10157beff8686e6d1bd12117de77e0c781",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "guzzlehttp/guzzle": "^7.1",
-                "illuminate/notifications": "^8.0|^9.0|^10.0",
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "illuminate/translation": "^8.0|^9.0|^10.0",
-                "nesbot/carbon": "^2.0",
-                "php": "^7.4|^8.0|^8.1"
-            },
-            "require-dev": {
-                "fakerphp/faker": "^1.14",
-                "mockery/mockery": "^1.4",
-                "orchestra/testbench": "^6.0|^7.0",
-                "phpunit/phpunit": "^9.4"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "TarfinLabs\\Netgsm\\NetgsmServiceProvider"
-                    ],
-                    "aliases": {
-                        "Netgsm": "TarfinLabs\\Netgsm\\NetgsmFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "TarfinLabs\\Netgsm\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "hakan özdemir",
-                    "email": "hakan.ozdemir@tarfin.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Faruk Can",
-                    "email": "faruk.can@tarfin.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Yunus Emre Deligöz",
-                    "email": "emre.deligoz@tarfin.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Turan Karatuğ",
-                    "email": "turan.karatug@tarfin.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "netgsm channel for laravel",
-            "homepage": "https://github.com/tarfin-labs/netgsm",
-            "keywords": [
-                "netgsm",
-                "tarfin-labs"
-            ],
-            "support": {
-                "issues": "https://github.com/tarfin-labs/netgsm/issues",
-                "source": "https://github.com/tarfin-labs/netgsm/tree/4.4.0"
-            },
-            "time": "2023-02-16T06:58:13+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

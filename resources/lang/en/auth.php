@@ -41,4 +41,7 @@ return [
 
     'send_password_reset_link' => 'Send Password Reset Link',
 
+    'phone_number_validation' => 'Phone Number Validation',
+    'validate' => 'Validate',
+
 ];

@@ -30,4 +30,18 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'netgsm' => [
+        'client'     => 'xml', //http or xml
+        'http'       => [
+            'endpoint' => 'https://api.netgsm.com.tr/sms/send/get/',
+        ],
+        'xml'        => [
+            'endpoint' => 'api.netgsm.com.tr/sms/send/xml',
+        ],
+        'username'   => env('NETGSM_USERNAME'),
+        'password'   => env('NETGSM_PASSWORD'),
+        'originator' => env('NETGSM_ORGINATOR'), // Sender name.
+        'timeout'    => 60,
+    ],
+
 ];
