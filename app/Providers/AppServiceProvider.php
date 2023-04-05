@@ -25,8 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('app.env') === 'prod') {
+        if($this->checkHTTPSStatus()){
             URL::forceScheme('https');
         }
+    }
+
+    private function checkHTTPSStatus()
+    {
+	    return (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']==='https');
     }
 }
