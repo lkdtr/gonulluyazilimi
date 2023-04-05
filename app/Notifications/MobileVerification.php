@@ -41,7 +41,7 @@ class MobileVerification extends Notification
     {
         Log::info("Validate Phone Sent ".$notifiable->phone_number);
 
-        $message = "Merhaba, Telefon dogrulama kodunuz ".$notifiable->verification_code;
+        $message = $notifiable->verification_code. " kodu ile telefon numaranızı doğrulayabilirsiniz. Linux Kullanıcıları Derneği".
         $message = str_replace(["ı", "ü", "ö", "ç", "ş", "ğ", "İ", "Ü", "Ö"],["i", "u", "o", "c", "s", "g", "I", "U", "O"], $message);
         return new ShortMessage($notifiable->phone_number, $message);
     }
