@@ -19,9 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/login', function () {
-     return redirect('/register');
-})->name('login');
+if($_SERVER["REMOTE_ADDR"]!="46.197.157.200") {
+    Route::get('/login', function () {
+        return redirect('/register');
+    })->name('login');
+}
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);
