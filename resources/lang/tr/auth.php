@@ -21,7 +21,7 @@ return [
     'surname' => 'Soyad',
     'national_id' => 'TC Kimlik Numarası',
     'email' => 'E-Posta',
-    'phone_number' => 'Telefon Numarası',
+    'phone_number' => 'Cep Telefonu Numarası',
     'password' => 'Parola',
     'password_confirm' => 'Parola (Tekrar)',
 
