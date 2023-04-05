@@ -26,3 +26,5 @@ Route::get('/user-agreement', [App\Http\Controllers\AgreementController::class, 
 
 Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerificationRequest']);
 Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
+
+Route::get('/users', [App\Http\Controllers\AdminController::class, 'users']);
