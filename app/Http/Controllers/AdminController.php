@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
-use App\Model\User;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -26,7 +26,7 @@ class AdminController extends Controller
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
-            if(!Auth::user()->role!=1 ) {
+            if(Auth::user()->role!=1 ) {
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function users() {
 
-        $users = Users::where("status", 1)->get();
+        $users = User::where("status", 1)->get();
 
         return view('admin.users', ["users" => $users]);
     }
