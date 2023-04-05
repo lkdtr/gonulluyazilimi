@@ -33,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
 
     private function checkHTTPSStatus()
     {
-	    return (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']!=='https');
+	    return (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']==='http');
     }
 }
