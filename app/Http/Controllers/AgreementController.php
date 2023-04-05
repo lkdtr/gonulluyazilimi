@@ -18,7 +18,7 @@ class AgreementController extends Controller
             return view('agreement-iframe', ["title" => $title, "content" => $content]);
         }
         else {
-            return view('agreement', ["title" => $title, "content_block" => $content, "link" => $link]);
+            return view('agreement', ["title" => $title, "content" => $content, "link" => $link]);
         }
     }
 }
