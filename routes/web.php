@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/login', function () {
+     return redirect('/register');
+})->name('login');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);
 
