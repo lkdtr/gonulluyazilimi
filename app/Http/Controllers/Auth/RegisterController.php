@@ -55,7 +55,6 @@ class RegisterController extends Controller
             'national_id' => ['required', 'string', 'max:11'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:15'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'agreement' => ['required'],
         ]);
     }
@@ -74,7 +73,7 @@ class RegisterController extends Controller
             'national_id' => $data['national_id'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make(\Carbon\Carbon::now()),
             'agreement_at' =>  \Carbon\Carbon::now(),
             'phone_number_verified_at' =>  \Carbon\Carbon::now(),
         ]);
