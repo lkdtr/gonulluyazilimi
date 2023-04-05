@@ -10,7 +10,7 @@ class AgreementController extends Controller
 {
     public function userAgreement(Request $request) {
         $iframe = $request->has("iframe")?true:false;
-        $title = "Kişisel Verilerin Korunması ve İşlenmesi Politikası";
+        $title = "Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni";
         $content = View::make('agreements.userAgreement');
         $link = "/user-agreement";
 

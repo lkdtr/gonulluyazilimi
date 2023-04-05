@@ -5,7 +5,7 @@ import 'inputmask';
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
-    Inputmask({ "mask": "(999) 999-9999" }).mask("phone_number");
+    Inputmask({ "mask": "(599) 999-9999" }).mask("phone_number");
     Inputmask("email").mask("email");
 
     $("#phone_number").on("change", function () {
@@ -27,6 +27,9 @@ jQuery(function () {
                     $("#label_phone_number").show();
                     $("#phone_number").hide();
 
+                }
+                else {
+                    alert(data.message);
                 }
             },
             error: function (data) {
@@ -58,6 +61,9 @@ jQuery(function () {
                     $("#phone_number").show();
 
                     $("#register_button").prop("disabled", false);
+                }
+                else {
+                    alert(data.message);
                 }
             },
             error: function (data) {
