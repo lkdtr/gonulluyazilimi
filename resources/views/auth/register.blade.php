@@ -18,7 +18,7 @@
                                     <li>Etkinlik organizasyonu için bazı bilgilerinize ihtiyaç duyuyoruz.</li>
                                     <li>Etkinliğin yapılacağı ODTÜ'ye girişte sorun yaşamamanız için ODTÜ'ye bildirmek üzere bilgilerinize ihtiyaç duyuyoruz</li>
                                     <li>Cep Telefonu Numaranıza sizi doğrulamak için istiyoruz ve bunun dışında kullanılmayacak.</li>
-                                    <li><a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> içeriğinde yazdığı gibi etkinlik sonunda bilgileri imha edilecektir.</li>
+                                    <li><a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> içeriğinde yazdığı gibi etkinlik sonunda bilgileriniz imha edilecektir.</li>
                                 </ul>
                             </div>
                         </div>
