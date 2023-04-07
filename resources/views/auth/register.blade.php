@@ -11,6 +11,18 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <div class="card text-bg-success mb-5">
+                            <div class="card-header">Bu bilgileri neden istiyoruz</div>
+                            <div class="card-body text-bg-light">
+                                <ul>
+                                    <li>Etkinlik organizasyonu için bazı bilgilerinize ihtiyaç duyuyoruz.</li>
+                                    <li>Etkinliğin yapılacağı ODTÜ'ye girişte sorun yaşamamanız için ODTÜ'ye bildirmek üzere bilgilerinize ihtiyaç duyuyoruz</li>
+                                    <li>Cep Telefonu Numaranıza sizi doğrulamak için istiyoruz ve bunun dışında kullanılmayacak.</li>
+                                    <li><a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> içeriğinde yazdığı gibi etkinlik sonunda bilgileri imha edilecektir.</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
 
@@ -97,7 +109,7 @@
                         <div class="separator bottom"><br></div>
 
                         <div class="row">
-                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Politikası</a> koşullarını kabul ediyorum</label>
+                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a>'ni okudum, kabul ediyorum</label>
                         </div>
 
                         <div class="separator bottom"><br></div>
