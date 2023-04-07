@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans("panel.available_events_title") }}</div>
+                <div class="card-header">Kaydınız başarı ile alındı</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,8 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <br/><br/><br/>
                     <div class="alert alert-success" role="alert">Kaydınız başarı ile alınmıştır. Etkinlikte görüşmek üzere</div>
+                    <br/><br/><br/>
                 </div>
             </div>
         </div>
