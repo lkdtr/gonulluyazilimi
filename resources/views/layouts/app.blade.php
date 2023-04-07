@@ -76,6 +76,12 @@
         <main class="py-4" style="background-color: #f8f8f8;">
             @yield('content')
         </main>
+
+        <footer class="py-4" style="background-color: #f8f8f8;">
+            <div class="text-center">
+                <a href="https://github.com/lkdtr/gonulluyazilimi/tree/etkinlik">Kayıt sistemi</a>kaynak kodlarına erişmek için tıklayın.
+            </div>
+        </footer>
     </div>
 </body>
 </html>
