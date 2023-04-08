@@ -16,9 +16,9 @@
                             <div class="card-body text-bg-light">
                                 <ul>
                                     <li>Etkinlik organizasyonu için bazı bilgilerinize ihtiyaç duyuyoruz.</li>
-                                    <li>Etkinliğin yapılacağı ODTÜ'ye girişte sorun yaşamamanız için ODTÜ'ye bildirmek üzere bilgilerinize ihtiyaç duyuyoruz</li>
+                                    <li>Etkinliğin yapılacağı ODTÜ Kampüsüne girişte sorun yaşamamanız için ODTÜ'ye bildirmek üzere bilgilerinize ihtiyaç duyuyoruz</li>
                                     <li>Cep Telefonu Numaranıza sizi doğrulamak için istiyoruz ve bunun dışında kullanılmayacak.</li>
-                                    <li><a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> içeriğinde yazdığı gibi etkinlik sonunda bilgileriniz imha edilecektir.</li>
+                                    <li><a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> içeriğinde yazdığı gibi etkinlik sonrasında bilgileriniz imha edilecektir. </li>
                                 </ul>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                         <div class="separator bottom"><br></div>
 
                         <div class="row">
-                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a>'ni okudum, kabul ediyorum</label>
+                            <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; Kişisel verilerimin, 6698 sayılı KVKK ve ilgili yasal mevzuat kapsamında, <a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Hakkında Aydınlatma Metni</a> 'nde belirtilen amaçlarla sınırlı olmak üzere, verilerimin gerektiğinde işlenmek üzere kanunen yetkili gerçek ve/veya tüzel üçüncü kişi kurum ve kuruluşlara, KVKK’nın 8. ve 9. maddelerinde belirtilen kişisel verilerin aktarılması koşulları çerçevesinde aktarılmasına, tereddüde yer vermeyecek biçimde bilgi sahibi ve aydınlatılmış olarak açık rızam ile onay veriyorum. </label>
                         </div>
 
                         <div class="separator bottom"><br></div>
