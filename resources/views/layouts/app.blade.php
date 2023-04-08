@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img height="66" src="https://www.internethaftasi.org.tr/2023/wp-content/themes/net_haftasi/static/img/logo.png" > <img height="66" src="https://www.internethaftasi.org.tr/2023/wp-content/uploads/sites/2/2023/03/30yil_kare_transparan.png" >
+                    <img height="66" src="https://www.internethaftasi.org.tr/2023/wp-content/themes/net_haftasi/static/img/logo.png" > <img height="70" src="https://www.internethaftasi.org.tr/2023/wp-content/uploads/sites/2/2023/03/30yil_kare_transparan.png" >
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
