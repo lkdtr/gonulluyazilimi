@@ -28,3 +28,6 @@ Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVe
 Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
 
 Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+
+Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'get'])->name('email-redirects');
+Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'post'])->name('users');
