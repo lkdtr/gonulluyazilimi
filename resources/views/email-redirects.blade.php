@@ -5,12 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-            <div class="alert alert-info">{{ trans("panel.email_redirects_info_box") }}</div>
-
             <div class="card">
                 <div class="card-header">{{ trans("panel.email_redirects_title") }}</div>
-
                 <div class="card-body">
+
+                    <div class="alert alert-info">{{ trans("panel.email_redirects_info_box") }}</div>
+                    <div class="separator bottom"><br></div>
+
                     <form method="POST" action="{{ route('email-redirects') }}">
                         @csrf
 
@@ -80,8 +81,8 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="validate_button" type="submit" class="btn btn-lg btn-primary">
-                                    {{ trans("auth.validate") }}
+                                <button id="verify_button" type="submit" class="btn btn-lg btn-primary">
+                                    {{ trans("panel.verify") }}
                                 </button>
                             </div>
                         </div>

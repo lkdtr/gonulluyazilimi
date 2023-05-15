@@ -2,11 +2,22 @@ import $ from 'jquery';
 window.$ = window.jQuery = $;
 
 import 'inputmask';
+import 'jquery-datetimepicker';
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
     Inputmask({ "mask": "(599) 999-9999" }).mask("phone_number");
     Inputmask("email").mask("email");
+
+    jQuery.datetimepicker.setLocale('tr');
+
+    jQuery('#birthday').datetimepicker({
+        timepicker: false,
+        format: 'd-m-Y',
+        lang: 'tr',
+        mask: true,
+        dayOfWeekStart: 1
+    });
 
     $("#phone_number").on("change", function () {
 
