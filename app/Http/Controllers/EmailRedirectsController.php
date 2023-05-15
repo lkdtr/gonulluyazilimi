@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\User;
 use App\Models\EmailRedirects;
@@ -31,7 +33,7 @@ class EmailRedirectsController extends Controller
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
         if($email_redirects==null) $email_redirects = new EmailRedirects();
 
-        return view('email_redirects', [
+        return view('email-redirects', [
             "user" => $user,
             "email_redirects" => $email_redirects,
         ]);
