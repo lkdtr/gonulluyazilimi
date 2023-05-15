@@ -8,6 +8,9 @@
                 <a href="/email-redirects"><div class="alert alert-info">{{ trans("panel.email_redirects_info") }}</div></a>
                 <br/>
             @endif
+
+            <!--
+            @if($events)
             <div class="card">
                 <div class="card-header">{{ trans("panel.available_announcements_title") }}</div>
 
@@ -46,6 +49,9 @@
                     @endforeach
                 </div>
             </div>
+            @endif
+            -->
+
         </div>
     </div>
 </div>
