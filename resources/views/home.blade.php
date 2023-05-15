@@ -4,6 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if($email_redirect_is_exist==null)
+                <div class="alert alert-info">{{ trans("panel.email_redirects_info") }}</div>
+                <br/>
+            @endif
             <div class="card">
                 <div class="card-header">{{ trans("panel.available_announcements_title") }}</div>
 
