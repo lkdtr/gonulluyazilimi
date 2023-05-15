@@ -29,5 +29,5 @@ Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificati
 
 Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
 
-Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'get'])->name('email-redirects');
-Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'post'])->name('users');
+Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'getValidation']);
+Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'postValidation'])->name('email-redirects');

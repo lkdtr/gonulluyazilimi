@@ -45,4 +45,6 @@ return [
     'phone_number_validation' => 'Phone Number Validation',
     'validate' => 'Validate',
 
+    'birthday' => 'Birthday',
+
 ];

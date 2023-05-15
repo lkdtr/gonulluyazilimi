@@ -45,5 +45,5 @@ return [
     'phone_number_validation' => 'Telefon Numarası Doğrulama',
     'validate' => 'Doğrula',
 
-
+    'birthday' => 'Doğum Tarihi',
 ];

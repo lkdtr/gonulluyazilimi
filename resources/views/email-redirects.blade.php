@@ -6,10 +6,13 @@
         <div class="col-md-12">
 
             <div class="card">
-                <div class="card-header">{{ trans("auth.register_title") }}</div>
-
+                <div class="card-header">{{ trans("panel.email_redirects_title") }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+
+                    <div class="alert alert-info">{{ trans("panel.email_redirects_info_box") }}</div>
+                    <div class="separator bottom"><br></div>
+
+                    <form method="POST" action="{{ route('email-redirects') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -78,8 +81,8 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="register_button" type="submit" class="btn btn-lg btn-primary" disabled="">
-                                    {{ trans("auth.register") }}
+                                <button id="verify_button" type="submit" class="btn btn-lg btn-primary">
+                                    {{ trans("panel.verify") }}
                                 </button>
                             </div>
                         </div>
