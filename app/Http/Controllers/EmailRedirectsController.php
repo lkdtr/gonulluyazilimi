@@ -69,6 +69,11 @@ class EmailRedirectsController extends Controller
             return back()->withErrors(["national_id" => "TC Kimlik Numarası vermiş olduğunuz kimlik bilgilerinizle eşleşmiyor"])->withInput();
         }
 
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+        $user->birthday = $birthday;
+        $user->save();
+
 
         dump($request->all());
     }
