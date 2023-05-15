@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             @if($email_redirect_is_exist==null)
-                <a href="/email-redirects"><div class="alert alert-info">{{ trans("panel.email_redirects_info") }}</div></a>
+                <a href="{{secure_url('/email-redirects')}}"><div class="alert alert-info">{{ trans("panel.email_redirects_info") }}</div></a>
                 <br/>
             @endif
 
