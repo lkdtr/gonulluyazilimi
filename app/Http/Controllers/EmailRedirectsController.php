@@ -71,7 +71,7 @@ class EmailRedirectsController extends Controller
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $user->birthday = $birthday;
+        $user->birthday = date("Y-m-d", strtotime($birthday));
         $user->save();
 
 
