@@ -9,7 +9,11 @@
                 <div class="card-header">{{ trans("panel.email_redirects_title") }}</div>
                 <div class="card-body">
 
-                    <div class="alert alert-info">{{ trans("panel.email_redirects_info_box") }}</div>
+                    <div class="alert alert-info d-flex">
+                        <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                        <div>{{ trans("panel.email_redirects_info_box") }}</div>
+                    </div>
+
                     <div class="separator bottom"><br></div>
 
                     <form method="POST" action="{{ route('email-redirects') }}">
