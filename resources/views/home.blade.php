@@ -14,8 +14,6 @@
                 </div>
             @endif
 
-            <!--
-            @if($events)
             <div class="card">
                 <div class="card-header">{{ trans("panel.available_announcements_title") }}</div>
 
@@ -28,13 +26,13 @@
 
                     @foreach ($events as $event)
                         <button style="width: 100%;text-align: left;" class="btn btn-lg btn-secondary rounded-0" type="button" data-bs-toggle="collapse" href="#eventCollapse{{$event->id}}" role="button" aria-expanded="false" aria-controls="eventCollapse{{$event->id}}">
-                            {{$event->event_name}} ({{date("d-m-Y", strtotime($event->started_at))}} / {{date("d-m-Y", strtotime($event->finished_at))}} )
+                            {{$event->event_name}} <!-- ({{date("d-m-Y", strtotime($event->started_at))}} / {{date("d-m-Y", strtotime($event->finished_at))}} ) -->
                         </button>
 
                         <div class="collapse" id="eventCollapse{{$event->id}}">
                             <div class="card card-body text-dark bg-light rounded-0">
 
-                                <form method="POST">
+                                <!-- form method="POST">
                                     @csrf
                                     <input type="hidden" name="event_id" value="{{$event->id}}">
                                     @if(isset($joined_events[$event->id]))
@@ -44,18 +42,17 @@
                                     @endif
                                 </form>
 
-                                <hr>
+                                <hr  -->
 
                                 <div>{!! $event->event_detail !!}</div>
-                                <p>Etkinlik konumu: {{$event->event_location}}</p>
+
+                                <!-- p>Etkinlik konumu: {{$event->event_location}}</p -->
 
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
-            @endif
-            -->
 
         </div>
     </div>
