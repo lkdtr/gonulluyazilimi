@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name(
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);
 
 Route::get('/user-agreement', [App\Http\Controllers\AgreementController::class, 'userAgreement']);
+Route::get('/email-agreement', [App\Http\Controllers\AgreementController::class, 'emailAgreement']);
 
 Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerificationRequest']);
 Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
@@ -31,3 +32,8 @@ Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->na
 
 Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'getValidation']);
 Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'postValidation'])->name('email-redirects');
+
+Route::get('/email-forwarding', function () {
+     return redirect('/email-redirects');
+});
+Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController::class, 'postForwarding'])->name('email-forwarding');

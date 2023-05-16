@@ -53,4 +53,21 @@ class Controller extends BaseController
 
     }
 
+    public function slug($string, $spaceRepl = "-") {
+
+
+        $string = str_replace("&", "and", $string);// Replace "&" char with "and"
+        $string = str_replace(  array("ö", "ç", "ş", "ğ", "ü", "ı", "İ", "Ş", "Ç", "Ö", "Ü", "Ğ", "I"),
+                                array("o", "c", "s", "g", "u", "i", "i", "s", "c", "o", "u", "g", "i"),
+                                $string
+                            );
+        $string = preg_replace("/[^a-zA-Z0-9 _-]/", "", $string);// Delete any chars but letters, numbers, spaces and _, -
+        $string = strtolower($string);// Optional: Make the string lowercase
+        $string = preg_replace("/[ ]+/", " ", $string);// Optional: Delete double spaces
+        $string = str_replace(" ", $spaceRepl, $string);// Replace spaces with replacement
+
+        return $string;
+
+    }
+
 }

@@ -46,4 +46,7 @@ return [
     'validate' => 'Doğrula',
 
     'birthday' => 'Doğum Tarihi',
+    'alias' => 'Takma Ad',
+    'forwarding' => 'Yönlendirme',
+
 ];

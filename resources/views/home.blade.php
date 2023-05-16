@@ -8,6 +8,11 @@
                 <a href="{{secure_url('/email-redirects')}}"><div class="alert alert-info">{{ trans("panel.email_redirects_info") }}</div></a>
                 <br/>
             @endif
+            @if (session('forwarding-success'))
+                <div class="alert alert-success">
+                    {{ session('forwarding-success') }}
+                </div>
+            @endif
 
             <!--
             @if($events)

@@ -17,6 +17,12 @@
 
     <script type="text/javascript">
 		var _globalToken = {!! json_encode(array('_token'=> csrf_token())) !!}
+
+        @if(env('APP_ENV')!="local")
+            if (location.protocol !== 'https:') {
+                location.replace(`https:${location.href.substring(location.protocol.length)}`);
+            }
+        @endif
 	</script>
 </head>
 <body>
@@ -65,6 +71,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('email-redirects') }}">
+                                        {{trans('panel.email_forwarding')}}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

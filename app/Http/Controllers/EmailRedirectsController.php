@@ -75,7 +75,45 @@ class EmailRedirectsController extends Controller
         $user->birthday = date("Y-m-d", strtotime($birthday));
         $user->save();
 
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        if($email_redirects==null) {
+            $email_redirects = new EmailRedirects();
+            $email_redirects->user_id = $user->id;
+            $email_redirects->email_forwarding = $user->email;
+            $email_redirects->email_alias = $user->name.".".$user->surname."@penguen.org.tr";
+            $email_redirects->save();
+        }
 
-        dump($request->all());
+        $user->name = $this->slug(strtolower($user->name));
+        $user->surname = $this->slug(strtolower($user->surname));
+
+        $name_array = explode("-", $user->name);
+        $surname_array = explode("-", $user->surname);
+
+        $user->name = str_replace("-", "", $user->name);
+        $user->surname = str_replace("-", "", $user->surname);
+
+        return view('email-forwarding', [
+            "user" => $user,
+            "email_redirects" => $email_redirects,
+            "name_array" => $name_array,
+            "surname_array" => $surname_array
+        ]);
     }
+
+    public function postForwarding(Request $request) {
+
+        $validator = $request->validate([
+            'email_alias' => ['required'],
+            'agreement' => ['required']
+        ]);
+
+        $user_id = Auth::id();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $email_redirects->email_alias = $request->get("email_alias");
+        $email_redirects->save();
+
+        return Redirect::to('/home')->with("forwarding-success", trans("panel.email_forwarding_result"));
+    }
+
 }
