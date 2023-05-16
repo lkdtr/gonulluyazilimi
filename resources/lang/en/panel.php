@@ -12,7 +12,7 @@ return [
     'email_redirects_exist_info' => 'Click to update your e-mail forwarding.',
     'email_redirects_info_box' => 'You must verify your credentials for use the e-mail forwarding service. Your information will be verified from the NVI system.',
     'email_redirects_title' => 'Verify your credentials',
-    'email_redirects_result_title' => 'Choose email address',
+    'email_forwarding_title' => 'Choose email address',
 
     "users_title" => 'Users',
     'users' => 'Users',
