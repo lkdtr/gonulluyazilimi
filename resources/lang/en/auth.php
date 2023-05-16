@@ -46,5 +46,7 @@ return [
     'validate' => 'Validate',
 
     'birthday' => 'Birthday',
+    'alias' => 'Alias',
+    'forwarding' => 'Forwarding',
 
 ];
