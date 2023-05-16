@@ -9,6 +9,7 @@ return [
     'email_forwarding' => 'E-posta yönlendirmesi',
 
     'email_redirects_info' => 'E-posta yönlendirmenizi aktif değil. Aktif etmek için tıklayın.',
+    'email_redirects_exist_info' => 'E-posta yönlendirmenizi güncellemek için tıklayın.',
     'email_redirects_info_box' => 'E-posta yönlendirme servisini kullanabilmeniz için kimlik bilgilerinizi doğrulatmanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_redirects_result_title' => 'E-posta adresinizi seçin',
