@@ -113,7 +113,7 @@ class EmailRedirectsController extends Controller
         $email_redirects->email_alias = $request->get("email_alias");
         $email_redirects->save();
 
-        return Redirect::to('/home')->with("forwarding-success", trans("panel.email_forwarding_result"));
+        return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_result"));
     }
 
 }
