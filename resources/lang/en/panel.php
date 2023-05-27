@@ -16,6 +16,7 @@ return [
 
     'set_manager_role_success' => 'Manager role has been set success',
     'set_manager_role_failed' => 'Manager role has been set failed',
+    'unauthorized_process' => 'Unauthorized process',
 
     "users_title" => 'Users',
     'users' => 'Users',

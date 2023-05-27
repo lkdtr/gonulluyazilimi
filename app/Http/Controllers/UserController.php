@@ -35,7 +35,14 @@ class UserController extends Controller
     }
 
     public function getUserInfos($user_id) {
-        dump($user_id);
+
+        if ( (Auth::user()->role!=1 ) && (Auth::id()!=$user_id) ) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $user = Users::where("id", $user_id)->first();
+
+        dump($user);
     }
 
     public function getMyInfos() {

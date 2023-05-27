@@ -16,6 +16,7 @@ return [
 
     'set_manager_role_success' => 'Yönetici rolü başarıyla belirlendi',
     'set_manager_role_failed' => 'Yönetici rolü başarısız oldu',
+    'unauthorized_process' => 'Yetkisiz işlem',
 
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',
