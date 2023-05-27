@@ -32,7 +32,9 @@ return [
     'processes' => 'Processes',
     'user_infos' => 'User Infos',
     'my_infos' => 'My Infos',
+    'set_owner_role' => 'Set Owner Role',
     'set_manager_role' => 'Set Manager Role',
+    'set_user_role' => 'Set User Role',
 
     'user_role' => 'User Role',
 
