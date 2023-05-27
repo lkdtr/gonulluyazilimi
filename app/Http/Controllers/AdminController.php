@@ -41,19 +41,46 @@ class AdminController extends Controller
         return view('admin.users', ["users" => $users]);
     }
 
-    public function set_manager_role($user_id) {
+    public function setManagerRole($user_id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
 
         $user = User::where("id", $user_id)->first();
         if($user==null) {
-            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.set_manager_role_failed"));
+            $this->set_log("other", "Kullanıcı yok");
         }
         else {
             $user->role = 2;
-            $user->save();
+            if($user->save()) {
+                $this->set_log("change", $user->name." ".$user->surname. " kullanıcısının rolü yönetici yapıldı");
+                return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_manager_role_success"));
+            }
 
-            $this->set_log("change", $user->name." ".$user->surname. " kullanıcıs rolü yönetici yapıldı");
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.set_manager_role_failed"));
+        }
 
-            return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_manager_role_success"));
+    }
+
+    public function setOwnerRole($user_id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $user = User::where("id", $user_id)->first();
+        if($user==null) {
+            $this->set_log("other", "Kullanıcı yok");
+        }
+        else {
+            $user->role = 1;
+            if($user->save()) {
+                $this->set_log("change", $user->name." ".$user->surname. " kullanıcısının rolü sahip yapıldı");
+                return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_owner_role_success"));
+            }
+
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.set_owner_role_failed"));
         }
 
     }

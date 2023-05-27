@@ -29,7 +29,8 @@ Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVe
 Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
 
 Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
-Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'users'])->name('set-manager-role');
+Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setManagerRole'])->name('set-manager-role');
+Route::get('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setOwnerRole'])->name('set-owner-role');
 
 Route::get('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'getUserInfos'])->name('user-infos');
 Route::get('/my-infos', [App\Http\Controllers\UserController::class, 'getMyInfos'])->name('my-infos');
