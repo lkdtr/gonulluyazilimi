@@ -18,5 +18,7 @@ return [
     'users' => 'Users',
     'verify' => 'Verify my credentials',
     'save' => 'Save',
+    'processes' => 'Processes',
+    'user_detail' => 'User Details',
 
 ];

@@ -18,5 +18,7 @@ return [
     'users' => 'Kullanıcılar',
     'verify' => 'Bilgilerimi doğrula',
     'save' => 'Kaydet',
+    'processes' => 'İşlemler',
+    'user_detail' => 'Kullanıcı detayları',
 
 ];
