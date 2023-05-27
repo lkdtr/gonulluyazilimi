@@ -7,9 +7,17 @@
             <div class="card">
                 <div class="card-header">{{ trans("panel.user_infos_title") }}</div>
                 <div>
-                    @foreach ($user as $key => $value)
-                        <p>{{$key}}:{{$value}}</p>
-                    @endforeach
+
+                    <p>name: {{$user->name}}</p>
+                    <p>surname: {{$user->surname}}</p>
+
+                    <p>national_id: {{$user->national_id}}</p>
+                    <p>email: {{$user->email}}</p>
+                    <p>phone_number: {{$user->phone_number}}</p>
+
+                    <p>birthday: {{$user->birthday}}</p>
+                    <p>city_id: {{$user->city_id}}</p>
+
                 </div>
             </div>
         </div>
