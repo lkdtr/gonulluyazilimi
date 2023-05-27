@@ -32,7 +32,9 @@ return [
     'processes' => 'İşlemler',
     'user_infos' => 'Kullanıcı Bilgileri',
     'my_infos' => 'Bilgilerim',
+    'set_owner_role' => 'Sahip Yetkisi Ver',
     'set_manager_role' => 'Yönetici Yetkisi Ver',
+    'set_user_role' => 'Kullanıcı Yetkisi Ver',
 
     'user_role' => 'Kullanıcı Yetkisi',
 

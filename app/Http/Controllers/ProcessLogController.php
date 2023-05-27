@@ -36,6 +36,10 @@ class ProcessLogController extends Controller
 
     public function getList() {
 
+        if(Auth::user()->role!=1 )  {
+            return Redirect::to(secure_url('/home'))->with("status", "Bu bölüm yapım aşamasında");
+        }
+
         $processLogs = ProcessLogs::all();
 
         dump($processLogs);
