@@ -29,6 +29,10 @@ Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVe
 Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
 
 Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'users'])->name('set-manager-role');
+
+Route::get('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'getUserInfos'])->name('user-infos');
+Route::get('/my-infos', [App\Http\Controllers\UserController::class, 'getMyInfos'])->name('my-infos');
 
 Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'getValidation']);
 Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'postValidation'])->name('email-redirects');
@@ -37,3 +41,11 @@ Route::get('/email-forwarding', function () {
      return redirect('/email-redirects');
 });
 Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController::class, 'postForwarding'])->name('email-forwarding');
+
+Route::get('/create-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('create-announcement');
+Route::post('/create-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
+
+Route::get('/list-announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('list-announcements');
+
+Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
+

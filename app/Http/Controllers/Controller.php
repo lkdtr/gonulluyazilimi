@@ -8,6 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\ProcessLogs;
 
 class Controller extends BaseController
 {
@@ -67,6 +70,23 @@ class Controller extends BaseController
         $string = str_replace(" ", $spaceRepl, $string);// Replace spaces with replacement
 
         return $string;
+
+    }
+
+    public function set_log($process_type="other", $process) {
+
+        $user_id = Auth::id();
+
+        $processLog = new ProcessLogs();
+        $processLog->process_by = $user_id;
+        $processLog->process_type = $process_type;
+        $processLog->process = $process;
+        if($processLog->save()) {
+            return true;
+        }
+        else {
+            return false;
+        }
 
     }
 

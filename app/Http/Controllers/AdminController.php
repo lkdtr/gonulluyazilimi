@@ -26,7 +26,7 @@ class AdminController extends Controller
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
-            if(Auth::user()->role!=1 ) {
+            if( (Auth::user()->role!=1 ) && (Auth::user()->role!=2 ) ) {
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
@@ -40,5 +40,23 @@ class AdminController extends Controller
 
         return view('admin.users', ["users" => $users]);
     }
+
+    public function set_manager_role($user_id) {
+
+        $user = User::where("id", $user_id)->first();
+        if($user==null) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.set_manager_role_failed"));
+        }
+        else {
+            $user->role = 2;
+            $user->save();
+
+            $this->set_log("change", $user->name." ".$user->surname. " kullanıcıs rolü yönetici yapıldı");
+
+            return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_manager_role_success"));
+        }
+
+    }
+
 
 }

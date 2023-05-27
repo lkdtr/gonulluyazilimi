@@ -59,7 +59,7 @@
                             @endif
                         @else
 
-                            @if(Auth::user()->role==1)
+                            @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('users') }}">{{ trans("panel.users") }}</a>
                                 </li>
@@ -71,6 +71,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('my-infos') }}">
+                                        {{trans('panel.my_infos')}}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('email-redirects') }}">
                                         {{trans('panel.email_forwarding')}}
                                     </a>
