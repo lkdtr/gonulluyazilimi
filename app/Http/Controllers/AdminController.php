@@ -50,6 +50,9 @@ class AdminController extends Controller
         else {
             $user->role = 2;
             $user->save();
+
+            $this->set_log("change", $user->name." ".$user->surname. " kullanıcıs rolü yönetici yapıldı");
+
             return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_manager_role_success"));
         }
 

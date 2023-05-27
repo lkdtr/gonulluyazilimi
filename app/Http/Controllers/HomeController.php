@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Models\Events;
 use App\Models\UserEvents;
 use App\Models\EmailRedirects;
+use App\Models\Announcements;
 
 class HomeController extends Controller
 {
@@ -33,16 +33,18 @@ class HomeController extends Controller
 
         $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->where("status", 1)->first();
 
-        $events = Events::where("status", 1)->whereRaw('finished_at > NOW()')->get();
+        $announcements = Announcements::where("status", 1)->whereRaw('finished_at > NOW()')->get();
+        /*
         $user_events = UserEvents::where("status", 1)->where("user_id", $user_id)->get();
         $joined_events = [];
         foreach($user_events as $user_event) {
             $joined_events[$user_event->event_id] = 1;
         }
+        */
 
         return view('home', [
-            "events" => $events,
-            "joined_events" => $joined_events,
+            "announcements" => $announcements,
+            //"joined_events" => $joined_events,
             "email_redirect_is_exist" => $email_redirect_is_exist,
         ]);
     }
