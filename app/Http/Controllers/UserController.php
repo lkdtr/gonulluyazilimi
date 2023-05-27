@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
-use App\Models\Users;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -40,7 +40,7 @@ class UserController extends Controller
             return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        $user = Users::where("id", $user_id)->first();
+        $user = User::where("id", $user_id)->first();
 
         dump($user);
     }
