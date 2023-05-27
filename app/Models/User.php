@@ -48,4 +48,15 @@ class User extends Authenticatable
         'phone_number_verified_at' => 'datetime',
         'agreement_at' => 'datetime',
     ];
+
+    public function getEmailRedirects() {
+        $emailRedirect = $this->hasOne('App\EmailRedirects', 'id', 'user_id')->first();
+        if($emailRedirect==null) {
+            $res = ["email_alias"=>""];
+            return (object) $res;
+        }
+        else {
+            return $emailRedirect;
+        }
+    }
 }

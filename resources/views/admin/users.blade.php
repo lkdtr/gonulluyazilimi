@@ -22,6 +22,7 @@
                                 <th>{{ trans("auth.surname") }}</th>
                                 <th>{{ trans("auth.email") }}</th>
                                 <th>{{ trans("auth.phone_number") }}</th>
+                                <th>{{ trans("auth.alias") }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,6 +33,7 @@
                                 <td>{{$user->surname}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}}</td>
+                                <td>{{$user->getEmailRedirects()->email_alias}}</td>
                             </tr>
                             @endforeach
                         </tbody>
