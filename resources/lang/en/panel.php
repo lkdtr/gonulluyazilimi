@@ -14,6 +14,9 @@ return [
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
 
+    'create_announcement_title' => 'Create Announcement',
+    'user_infos_title' => 'User Infos',
+
     'set_owner_role_success' => 'Owner role has been set success',
     'set_owner_role_failed' => 'Owner role has been set failed',
 

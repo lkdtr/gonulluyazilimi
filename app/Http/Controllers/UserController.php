@@ -35,6 +35,11 @@ class UserController extends Controller
         });
     }
 
+    public function getMyInfos() {
+        $user_id = Auth::id();
+        return $this->getUserInfos($user_id);
+    }
+
     public function getUserInfos($user_id) {
 
         if ( (Auth::user()->role!=1 ) && (Auth::id()!=$user_id) ) {
@@ -47,12 +52,9 @@ class UserController extends Controller
 
         $user = User::where("id", $user_id)->first();
 
-        dump($user);
+        return view('admin.user_infos', ["user" => $user]);
     }
 
-    public function getMyInfos() {
-        $user_id = Auth::id();
-        return $this->getUserInfos($user_id);
-    }
+
 
 }
