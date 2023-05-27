@@ -59,7 +59,7 @@
                             @endif
                         @else
 
-                            @if(Auth::user()->role==1)
+                            @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('users') }}">{{ trans("panel.users") }}</a>
                                 </li>

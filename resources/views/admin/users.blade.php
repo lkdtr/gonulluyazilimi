@@ -8,9 +8,15 @@
                 <div class="card-header">{{ trans("panel.users_title") }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('success-status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('success-status') }}
+                        </div>
+                    @endif
+
+                    @if (session('danger-status'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('danger-status') }}
                         </div>
                     @endif
 
@@ -22,6 +28,7 @@
                                 <th>{{ trans("auth.surname") }}</th>
                                 <th>{{ trans("auth.email") }}</th>
                                 <th>{{ trans("auth.phone_number") }}</th>
+                                <th>{{ trans("panel.user_role") }}</th>
                                 <th>{{ trans("auth.alias") }}</th>
                                 <th>{{ trans("panel.processes") }}</th>
                             </tr>
@@ -34,6 +41,7 @@
                                 <td>{{$user->surname}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}}</td>
+                                <td>{{trans("panel.user_".$user->role)}}</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
                                 <td>
                                     <div class="dropdown">
@@ -41,7 +49,8 @@
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="/user-detail/{{$user->id}}">{{ trans("panel.user_detail") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/user-detail/'.$user->id)}}">{{ trans("panel.user_detail") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/set-manager-role/'.$user->id)}}">{{ trans("panel.set_manager_role") }}</a></li>
                                         </ul>
                                     </div>
                                 </td>

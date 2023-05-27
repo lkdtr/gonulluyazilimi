@@ -14,11 +14,21 @@ return [
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
 
+    'set_manager_role_success' => 'Manager role has been set success',
+    'set_manager_role_failed' => 'Manager role has been set failed',
+
     "users_title" => 'Users',
     'users' => 'Users',
     'verify' => 'Verify my credentials',
     'save' => 'Save',
     'processes' => 'Processes',
     'user_detail' => 'User Details',
+    'set_manager_role' => 'Set Manager Role',
+
+    'user_role' => 'User Role',
+
+    'user_1' => 'Owner',
+    'user_2' => 'Manager',
+    'user_3' => 'Kullanıcı',
 
 ];

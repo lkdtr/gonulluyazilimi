@@ -14,11 +14,21 @@ return [
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
 
+    'set_manager_role_success' => 'Yönetici rolü başarıyla belirlendi',
+    'set_manager_role_failed' => 'Yönetici rolü başarısız oldu',
+
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',
     'verify' => 'Bilgilerimi doğrula',
     'save' => 'Kaydet',
     'processes' => 'İşlemler',
     'user_detail' => 'Kullanıcı detayları',
+    'set_manager_role' => 'Yönetici Yetkisi Ver',
+
+    'user_role' => 'Kullanıcı Yetkisi',
+
+    'user_1' => 'Sahip',
+    'user_2' => 'Yönetici',
+    'user_3' => 'Kullanıcı',
 
 ];
