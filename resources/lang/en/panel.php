@@ -8,7 +8,7 @@ return [
     'email_forwarding_result' => 'Your email forwarding has been successfully registered',
     'email_forwarding' => 'E-mail forwarding',
 
-    'email_redirects_info' => 'Your e-mail forwarding is not active. Click to activate.',
+    'email_redirects_info' => 'Your name.surname@penguen.org.tr e-mail forwarding is not active. Click to activate.',
     'email_redirects_exist_info' => 'Click to update your e-mail forwarding.',
     'email_redirects_info_box' => 'You must verify your credentials for use the e-mail forwarding service. Your information will be verified from the NVI system.',
     'email_redirects_title' => 'Verify your credentials',

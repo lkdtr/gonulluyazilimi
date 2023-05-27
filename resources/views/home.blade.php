@@ -50,6 +50,7 @@
                                 <div>{!! $announcement->detail !!}</div>
                             </div>
                         </div>
+                        <small>&nbsp;</small>
                     @endforeach
                 </div>
             </div>
