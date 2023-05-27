@@ -23,6 +23,7 @@
                                 <th>{{ trans("auth.email") }}</th>
                                 <th>{{ trans("auth.phone_number") }}</th>
                                 <th>{{ trans("auth.alias") }}</th>
+                                <th>{{ trans("panel.processes") }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,16 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}}</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ trans("panel.processes") }}
+                                        </button>
+                                        <ul class="dropdown-menu pull-left">
+                                            <li><a class="dropdown-item" href="/user-detail/{{$user->id}}">{{ trans("panel.user_detail") }}</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
