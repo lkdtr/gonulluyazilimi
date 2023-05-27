@@ -85,5 +85,27 @@ class AdminController extends Controller
 
     }
 
+    public function setUserRole($user_id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $user = User::where("id", $user_id)->first();
+        if($user==null) {
+            $this->set_log("other", "Kullanıcı yok");
+        }
+        else {
+            $user->role = 3;
+            if($user->save()) {
+                $this->set_log("change", $user->name." ".$user->surname. " kullanıcısının rolü kullanıcı yapıldı");
+                return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.set_user_role_success"));
+            }
+
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.set_user_role_failed"));
+        }
+
+    }
+
 
 }

@@ -14,8 +14,15 @@ return [
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
 
+    'set_owner_role_success' => 'Sahip rolü başarıyla belirlendi',
+    'set_owner_role_failed' => 'Sahip rolü başarısız oldu',
+
     'set_manager_role_success' => 'Yönetici rolü başarıyla belirlendi',
     'set_manager_role_failed' => 'Yönetici rolü başarısız oldu',
+
+    'set_user_role_success' => 'Kullanıcı rolü başarıyla belirlendi',
+    'set_user_role_failed' => 'Kullanıcı rolü başarısız oldu',
+
     'unauthorized_process' => 'Yetkisiz işlem',
 
     'users_title' => 'Kullanıcılar',
