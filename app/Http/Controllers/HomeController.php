@@ -30,21 +30,10 @@ class HomeController extends Controller
     public function home()
     {
         $user_id = Auth::id();
-
         $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->where("status", 1)->first();
-
-        $announcements = Announcements::where("status", 1)->whereRaw('finished_at > NOW()')->get();
-        /*
-        $user_events = UserEvents::where("status", 1)->where("user_id", $user_id)->get();
-        $joined_events = [];
-        foreach($user_events as $user_event) {
-            $joined_events[$user_event->event_id] = 1;
-        }
-        */
-
+        $announcements = Announcements::where("status", 1)->whereRaw('finished_at > NOW()')->orderBy("id", "DESC")->get();
         return view('home', [
             "announcements" => $announcements,
-            //"joined_events" => $joined_events,
             "email_redirect_is_exist" => $email_redirect_is_exist,
         ]);
     }
