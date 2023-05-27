@@ -52,6 +52,7 @@
                                             <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
 
                                             @if( Auth::user()->role==1)
+                                            <hr>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-owner-role/'.$user->id)}}">{{ trans("panel.set_owner_role") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-manager-role/'.$user->id)}}">{{ trans("panel.set_manager_role") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-user-role/'.$user->id)}}">{{ trans("panel.set_user_role") }}</a></li>
