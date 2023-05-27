@@ -14,8 +14,15 @@ return [
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
 
+    'set_owner_role_success' => 'Owner role has been set success',
+    'set_owner_role_failed' => 'Owner role has been set failed',
+
     'set_manager_role_success' => 'Manager role has been set success',
     'set_manager_role_failed' => 'Manager role has been set failed',
+
+    'set_user_role_success' => 'User role has been set success',
+    'set_user_role_failed' => 'User role has been set failed',
+
     'unauthorized_process' => 'Unauthorized process',
 
     "users_title" => 'Users',
