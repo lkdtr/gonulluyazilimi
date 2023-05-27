@@ -38,6 +38,7 @@ class ProcessLogController extends Controller
 
         $processLogs = ProcessLogs::all();
 
+        dump($processLogs);
     }
 
 }
