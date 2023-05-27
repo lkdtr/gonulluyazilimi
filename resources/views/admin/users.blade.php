@@ -49,7 +49,7 @@
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="{{secure_url('/user-detail/'.$user->id)}}">{{ trans("panel.user_detail") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-manager-role/'.$user->id)}}">{{ trans("panel.set_manager_role") }}</a></li>
                                         </ul>
                                     </div>

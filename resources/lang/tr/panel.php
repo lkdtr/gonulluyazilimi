@@ -22,7 +22,8 @@ return [
     'verify' => 'Bilgilerimi doğrula',
     'save' => 'Kaydet',
     'processes' => 'İşlemler',
-    'user_detail' => 'Kullanıcı detayları',
+    'user_infos' => 'Kullanıcı Bilgileri',
+    'my_infos' => 'Bilgilerim',
     'set_manager_role' => 'Yönetici Yetkisi Ver',
 
     'user_role' => 'Kullanıcı Yetkisi',

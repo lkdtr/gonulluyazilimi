@@ -71,6 +71,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('my-infos') }}">
+                                        {{trans('panel.my_infos')}}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('email-redirects') }}">
                                         {{trans('panel.email_forwarding')}}
                                     </a>

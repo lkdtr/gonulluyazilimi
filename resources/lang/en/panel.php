@@ -22,7 +22,8 @@ return [
     'verify' => 'Verify my credentials',
     'save' => 'Save',
     'processes' => 'Processes',
-    'user_detail' => 'User Details',
+    'user_infos' => 'User Infos',
+    'my_infos' => 'My Infos',
     'set_manager_role' => 'Set Manager Role',
 
     'user_role' => 'User Role',
