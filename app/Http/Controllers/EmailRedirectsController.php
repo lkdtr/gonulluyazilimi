@@ -93,6 +93,11 @@ class EmailRedirectsController extends Controller
         $user->name = str_replace("-", "", $user->name);
         $user->surname = str_replace("-", "", $user->surname);
 
+        if ( (count($name_array) == 1) && (count($surname_array) == 1) ) {
+            $name_array = [];
+            $surname_array = [];
+        }
+
         return view('email-forwarding', [
             "user" => $user,
             "email_redirects" => $email_redirects,
