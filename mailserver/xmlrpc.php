@@ -33,7 +33,7 @@
 require_once(dirname(__FILE__) . '/common.php');
 
 if ($CONF['xmlrpc_enabled'] == false) {
-	die("xmlrpc support disabled");
+    die("xmlrpc support disabled");
 }
 
 use Laminas\XmlRpc\Server as Laminas_XmlRpc_Server;
@@ -145,23 +145,22 @@ class AliasProxy {
      * @return array - array of aliases this user has. Array may be empty.
      */
     public function get() {
-	$ah = new AliasHandler(0, $_SESSION['sessid']['username']);
-	$formconf = $ah->webformConfig(); # might change struct
+	    $ah = new AliasHandler(0, $_SESSION['sessid']['username']);
+	    $formconf = $ah->webformConfig(); # might change struct
 
-    $aliasdomain_data = array(
-        'struct'    => $ah->getStruct(),
-        'msg'       => $ah->getMsg(),
-        'formconf'  => $formconf,
-    );
-    $aliasdomain_data['msg']['show_simple_search'] = false; # hide search box
+    	$aliasdomain_data = array(
+        	'struct'    => $ah->getStruct(),
+        	'msg'       => $ah->getMsg(),
+        	'formconf'  => $formconf,
+    	);
+    	$aliasdomain_data['msg']['show_simple_search'] = false; # hide search box
+    	$aliasdomain_data['msg']['can_create'] = 1;
 
-    $aliasdomain_data['msg']['can_create'] = 1;
-
-    # hide create button if all domains (of this admin) are already used as alias domains
-    $ah->getList("");
-
+    	# hide create button if all domains (of this admin) are already used as alias domains
+	    $ah->getList("");
         $result = $ah->result();
-        return $result['goto'];
+        return $result;
+
     }
 
     /**
@@ -170,8 +169,8 @@ class AliasProxy {
      * @return boolean true
      */
     public function update($addresses, $flags) {
-        $ah = new AliasHandler();
-        $ah->init($_SESSION['sessid']['username']);
+	    $ah = new AliasHandler(0, $_SESSION['sessid']['username']);
+	    $formconf = $ah->webformConfig(); # might change struct
         
         $values['goto'] = $addresses;
 
@@ -204,3 +203,4 @@ class AliasProxy {
     }
 }
 /* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */
+
