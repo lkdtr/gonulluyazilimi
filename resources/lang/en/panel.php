@@ -31,6 +31,7 @@ return [
     "manager_operations" => "Manager Operations",
     "announcements" => "Announcements",
     "new_announcement" => "New Announcement",
+    "seminar_requests" => "Seminar Requests",
 
     "users_title" => 'Users',
     'users' => 'Users',
