@@ -60,8 +60,22 @@
                         @else
 
                             @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users') }}">{{ trans("panel.users") }}</a>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ trans("panel.manager_operations") }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('users') }}">
+                                            {{ trans("panel.users") }}
+                                        </a>
+                                        <hr>
+                                        <a class="dropdown-item" href="{{ route('announcements') }}">
+                                            {{ trans("panel.announcements") }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('new-announcement') }}">
+                                            {{ trans("panel.new_announcement") }}
+                                        </a>
+                                    </div>
                                 </li>
                             @endif
 
@@ -69,7 +83,6 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} {{ Auth::user()->surname }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('my-infos') }}">
                                         {{trans('panel.my_infos')}}
@@ -82,7 +95,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ trans("auth.logout") }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>

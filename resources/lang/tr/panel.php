@@ -28,6 +28,10 @@ return [
 
     'unauthorized_process' => 'Yetkisiz işlem',
 
+    "manager_operations" => "Yönetici İşlemleri",
+    "announcements" => "Duyurular",
+    "new_announcement" => "Yeni Duyuru",
+
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',
     'verify' => 'Bilgilerimi doğrula',
