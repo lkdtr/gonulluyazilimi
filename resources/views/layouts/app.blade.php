@@ -75,6 +75,10 @@
                                         <a class="dropdown-item" href="{{ route('new-announcement') }}">
                                             {{ trans("panel.new_announcement") }}
                                         </a>
+                                        <hr>
+                                        <a class="dropdown-item" href="{{ route('seminar-requests') }}">
+                                            {{ trans("panel.seminar_requests") }}
+                                        </a>
                                     </div>
                                 </li>
                             @endif

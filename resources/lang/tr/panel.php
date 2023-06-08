@@ -31,6 +31,7 @@ return [
     "manager_operations" => "Yönetici İşlemleri",
     "announcements" => "Duyurular",
     "new_announcement" => "Yeni Duyuru",
+    "seminar_requests" => "Seminer Talepleri",
 
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',

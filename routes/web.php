@@ -48,6 +48,8 @@ Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController:
 Route::get('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('new-announcement');
 Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
 
+Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
+
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
 
 Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
