@@ -45,10 +45,10 @@ Route::get('/email-forwarding', function () {
 });
 Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController::class, 'postForwarding'])->name('email-forwarding');
 
-Route::get('/create-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('create-announcement');
-Route::post('/create-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
+Route::get('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('new-announcement');
+Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
 
-Route::get('/list-announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('list-announcements');
+Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
 
 Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
 

@@ -28,6 +28,10 @@ return [
 
     'unauthorized_process' => 'Unauthorized process',
 
+    "manager_operations" => "Manager Operations",
+    "announcements" => "Announcements",
+    "new_announcement" => "New Announcement",
+
     "users_title" => 'Users',
     'users' => 'Users',
     'verify' => 'Verify my credentials',
