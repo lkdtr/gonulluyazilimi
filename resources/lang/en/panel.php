@@ -14,6 +14,7 @@ return [
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
     'create_seminar_request_title' => 'Create Seminar Request',
+    'create_reference_request_title' => 'Create Reference Request',
     'create_announcement_title' => 'Create Announcement',
 
     'user_infos_title' => 'User Infos',
@@ -34,6 +35,7 @@ return [
     "announcements" => "Announcements",
     "new_announcement" => "New Announcement",
     "seminar_requests" => "Seminar Requests",
+    "reference_requests" => "Reference Requests",
 
     "users_title" => 'Users',
     'users' => 'Users',

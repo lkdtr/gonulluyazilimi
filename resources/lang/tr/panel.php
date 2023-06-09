@@ -14,6 +14,7 @@ return [
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
     'create_seminar_request_title' => 'Seminer Talebi Oluştur',
+    'create_reference_request_title' => 'Referans Talebi Oluştur',
     'create_announcement_title' => 'Duyuru Oluştur',
 
     'user_infos_title' => 'Kullanıcı Bilgileri',
@@ -34,6 +35,7 @@ return [
     "announcements" => "Duyurular",
     "new_announcement" => "Yeni Duyuru",
     "seminar_requests" => "Seminer Talepleri",
+    "reference_requests" => "Referans Talepleri",
 
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',
