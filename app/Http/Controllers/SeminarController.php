@@ -31,11 +31,11 @@ class SeminarController extends Controller
 
     public function getList() {
 
-        if(Auth::user()->role!=1 )  {
-            return Redirect::to(secure_url('/home'))->with("status", "Bu bölüm yapım aşamasında");
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        dump("seminer talepleri");
+        return view('admin.seminar_requests');
 
     }
 
