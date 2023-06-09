@@ -13,8 +13,9 @@ return [
     'email_redirects_info_box' => 'E-posta yönlendirme servisini kullanabilmeniz için kimlik bilgilerinizi doğrulatmanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
-
+    'create_seminar_request_title' => 'Seminer Talebi Oluştur',
     'create_announcement_title' => 'Duyuru Oluştur',
+
     'user_infos_title' => 'Kullanıcı Bilgileri',
 
     'set_owner_role_success' => 'Sahip rolü başarıyla belirlendi',

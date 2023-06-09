@@ -40,7 +40,7 @@ class SeminarController extends Controller
 
     public function getCreate() {
 
-        return view('admin.create_seminar');
+        return view('admin.create_seminar_request');
 
     }
 

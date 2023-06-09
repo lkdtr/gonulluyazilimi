@@ -13,8 +13,9 @@ return [
     'email_redirects_info_box' => 'You must verify your credentials for use the e-mail forwarding service. Your information will be verified from the NVI system.',
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
-
+    'create_seminar_request_title' => 'Create Seminar Request',
     'create_announcement_title' => 'Create Announcement',
+
     'user_infos_title' => 'User Infos',
 
     'set_owner_role_success' => 'Owner role has been set success',
