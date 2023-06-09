@@ -51,5 +51,6 @@ return [
     'forwarding' => 'Forwarding',
 
     'please_select' => 'Please select',
+    'out_of_turkey' => 'Out of Turkey',
 
 ];
