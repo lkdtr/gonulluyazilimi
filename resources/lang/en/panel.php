@@ -27,6 +27,7 @@ return [
     'set_user_role_failed' => 'User role has been set failed',
 
     'unauthorized_process' => 'Unauthorized process',
+    'successfully_saved' => 'Successfully Saved',
 
     "manager_operations" => "Manager Operations",
     "announcements" => "Announcements",

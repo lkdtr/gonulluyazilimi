@@ -46,6 +46,7 @@ return [
     'validate' => 'Doğrula',
 
     'birthday' => 'Doğum Tarihi',
+    'city' => 'Şehir',
     'alias' => 'Takma Ad',
     'forwarding' => 'Yönlendirme',
 

@@ -27,6 +27,7 @@ return [
     'set_user_role_failed' => 'Kullanıcı rolü başarısız oldu',
 
     'unauthorized_process' => 'Yetkisiz işlem',
+    'successfully_saved' => 'Başarı ile kaydedildi',
 
     "manager_operations" => "Yönetici İşlemleri",
     "announcements" => "Duyurular",
