@@ -35,7 +35,10 @@ Route::get('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::c
 Route::get('/set-user-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setUserRole'])->name('set-user-role');
 
 Route::get('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'getUserInfos'])->name('user-infos');
+Route::post('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'postUserInfos']);
+
 Route::get('/my-infos', [App\Http\Controllers\UserController::class, 'getMyInfos'])->name('my-infos');
+Route::post('/my-infos', [App\Http\Controllers\UserController::class, 'postMyInfos']);
 
 Route::get('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'getValidation']);
 Route::post('/email-redirects', [App\Http\Controllers\EmailRedirectsController::class, 'postValidation'])->name('email-redirects');
