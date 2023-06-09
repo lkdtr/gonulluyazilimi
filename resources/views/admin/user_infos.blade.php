@@ -76,6 +76,7 @@
                                     @foreach($cities as $city)
                                     <option value="{{$city->city_plate_no}}" {{ $user->city_id == $city->city_plate_no ? "selected" : "" }}>{{$city->city_name}}</option>
                                     @endforeach
+                                    <option value="999" {{ $user->city_id == 999 ? "selected" : "" }}>{{ trans("auth.out_of_turkey") }}</option>
                                 </select>
                             </div>
                         </div>

@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 
-class SeminarController extends Controller
+class ReferenceController extends Controller
 {
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -18,10 +22,6 @@ class SeminarController extends Controller
             $this->middleware('auth');
 
             if(!Auth::check() ) {
-                return redirect('/login')->with('redirect', URL::full() );
-            }
-
-            if(Auth::user()->role!=1 )  {
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
@@ -35,17 +35,18 @@ class SeminarController extends Controller
             return Redirect::to(secure_url('/home'))->with("status", "Bu bölüm yapım aşamasında");
         }
 
-        dump("seminer talepleri");
+        dump("referans talepleri");
 
     }
 
     public function getCreate() {
 
-        return view('user.create_seminar_request');
+        return view('user.create_reference_request');
 
     }
 
     public function postCreate(Request $request) {
 
     }
+
 }

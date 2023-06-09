@@ -51,5 +51,6 @@ return [
     'forwarding' => 'Yönlendirme',
 
     'please_select' => 'Lütfen seçin',
+    'out_of_turkey' => 'Türkiye dışı',
 
 ];

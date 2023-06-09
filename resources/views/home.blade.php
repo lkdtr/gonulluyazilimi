@@ -19,14 +19,6 @@
                         </div>
                     </a>
                     <br/>
-                @else
-                    <a href="{{secure_url('/email-redirects')}}" role="alert">
-                        <div class="alert alert-info d-flex">
-                            <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
-                            <div>{{ trans("panel.email_redirects_exist_info") }}</div>
-                        </div>
-                    </a>
-                    <br/>
                 @endif
             @endif
 
@@ -42,7 +34,7 @@
                     @endif
 
                     @foreach ($announcements as $announcement)
-                        <button style="width: 100%;text-align: left;" class="btn btn-lg btn-secondary rounded-0" type="button" data-bs-toggle="collapse" href="#announcementCollapse{{$announcement->id}}" role="button" aria-expanded="false" aria-controls="announcementCollapse{{$announcement->id}}">
+                        <button style="width: 100%;text-align: left;" class="btn btn-lg btn-success rounded-0" type="button" data-bs-toggle="collapse" href="#announcementCollapse{{$announcement->id}}" role="button" aria-expanded="false" aria-controls="announcementCollapse{{$announcement->id}}">
                             {{$announcement->subject}}
                         </button>
                         <div class="collapse" id="announcementCollapse{{$announcement->id}}">

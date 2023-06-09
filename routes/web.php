@@ -48,12 +48,17 @@ Route::get('/email-forwarding', function () {
 });
 Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController::class, 'postForwarding'])->name('email-forwarding');
 
+Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
 Route::get('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('new-announcement');
 Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
 
 Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
+Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
+Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);
 
-Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
+Route::get('/reference-requests', [App\Http\Controllers\ReferenceController::class, 'getList'])->name('reference-requests');
+Route::get('/create-reference-request', [App\Http\Controllers\ReferenceController::class, 'getCreate'])->name('create-reference-request');
+Route::post('/create-reference-request', [App\Http\Controllers\ReferenceController::class, 'postCreate']);
 
 Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
 
