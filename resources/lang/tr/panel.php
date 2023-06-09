@@ -16,8 +16,10 @@ return [
     'create_seminar_request_title' => 'Seminer Talebi Oluştur',
     'create_reference_request_title' => 'Referans Talebi Oluştur',
     'create_announcement_title' => 'Duyuru Oluştur',
-
     'user_infos_title' => 'Kullanıcı Bilgileri',
+
+    'create_seminar_request' => 'Seminer Talebi Oluştur',
+    'create_reference_request' => 'Referans Talebi Oluştur',
 
     'set_owner_role_success' => 'Sahip rolü başarıyla belirlendi',
     'set_owner_role_failed' => 'Sahip rolü başarısız oldu',
@@ -32,6 +34,8 @@ return [
     'successfully_saved' => 'Başarı ile kaydedildi',
 
     "manager_operations" => "Yönetici İşlemleri",
+    "user_operations" => "Kullanıcı İşlemleri",
+
     "announcements" => "Duyurular",
     "new_announcement" => "Yeni Duyuru",
     "seminar_requests" => "Seminer Talepleri",

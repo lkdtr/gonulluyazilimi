@@ -16,8 +16,10 @@ return [
     'create_seminar_request_title' => 'Create Seminar Request',
     'create_reference_request_title' => 'Create Reference Request',
     'create_announcement_title' => 'Create Announcement',
-
     'user_infos_title' => 'User Infos',
+
+    'create_seminar_request' => 'Create Seminar Request',
+    'create_reference_request' => 'Create Reference Request',
 
     'set_owner_role_success' => 'Owner role has been set success',
     'set_owner_role_failed' => 'Owner role has been set failed',
@@ -32,6 +34,8 @@ return [
     'successfully_saved' => 'Successfully Saved',
 
     "manager_operations" => "Manager Operations",
+    "user_operations" => "User Operations",
+
     "announcements" => "Announcements",
     "new_announcement" => "New Announcement",
     "seminar_requests" => "Seminar Requests",

@@ -59,33 +59,53 @@
                             @endif
                         @else
 
-                            @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ trans("panel.manager_operations") }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ trans("panel.user_operations") }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('email-redirects') }}">
+                                    {{trans('panel.email_forwarding')}}
+                                </a>
+                                <hr style="margin: 5px; color: #999;">
+                                <a class="dropdown-item" href="{{ route('create-seminar-request') }}">
+                                    {{ trans("panel.create_seminar_request") }}
+                                </a>
+                                <hr style="margin: 5px; color: #999;">
+                                <a class="dropdown-item" href="{{ route('create-reference-request') }}">
+                                    {{ trans("panel.create_reference_request") }}
+                                </a>
+
+                            </div>
+                        </li>
+
+                        @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ trans("panel.manager_operations") }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users') }}">
+                                        {{ trans("panel.users") }}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('users') }}">
-                                            {{ trans("panel.users") }}
-                                        </a>
-                                        <hr>
-                                        <a class="dropdown-item" href="{{ route('announcements') }}">
-                                            {{ trans("panel.announcements") }}
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('new-announcement') }}">
-                                            {{ trans("panel.new_announcement") }}
-                                        </a>
-                                        <hr>
-                                        <a class="dropdown-item" href="{{ route('seminar-requests') }}">
-                                            {{ trans("panel.seminar_requests") }}
-                                        </a>
-                                        <hr>
-                                        <a class="dropdown-item" href="{{ route('reference-requests') }}">
-                                            {{ trans("panel.reference_requests") }}
-                                        </a>
-                                    </div>
-                                </li>
-                            @endif
+                                    <hr style="margin: 5px; color: #999;">
+                                    <a class="dropdown-item" href="{{ route('announcements') }}">
+                                        {{ trans("panel.announcements") }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('new-announcement') }}">
+                                        {{ trans("panel.new_announcement") }}
+                                    </a>
+                                    <hr style="margin: 5px; color: #999;">
+                                    <a class="dropdown-item" href="{{ route('seminar-requests') }}">
+                                        {{ trans("panel.seminar_requests") }}
+                                    </a>
+                                    <hr style="margin: 5px; color: #999;">
+                                    <a class="dropdown-item" href="{{ route('reference-requests') }}">
+                                        {{ trans("panel.reference_requests") }}
+                                    </a>
+                                </div>
+                            </li>
+                        @endif
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -94,9 +114,6 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('my-infos') }}">
                                         {{trans('panel.my_infos')}}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('email-redirects') }}">
-                                        {{trans('panel.email_forwarding')}}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
