@@ -53,6 +53,9 @@ Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::c
 
 Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
 
+Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
+Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);
+
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
 
 Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
