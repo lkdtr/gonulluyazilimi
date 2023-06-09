@@ -72,6 +72,7 @@
                             </label>
                             <div class="col-md-6">
                                 <select id="city" name="city" class="form-control form-select" style="width: 100%; border: 1px solid #004153;">
+                                    <option value="0" {{ $user->city_id == 0 ? "selected" : "" }}>{{ trans("auth.please_select") }}</option>
                                     @foreach($cities as $city)
                                     <option value="{{$city->city_plate_no}}" {{ $user->city_id == $city->city_plate_no ? "selected" : "" }}>{{$city->city_name}}</option>
                                     @endforeach

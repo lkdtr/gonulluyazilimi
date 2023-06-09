@@ -50,4 +50,6 @@ return [
     'alias' => 'Alias',
     'forwarding' => 'Forwarding',
 
+    'please_select' => 'Please select',
+
 ];
