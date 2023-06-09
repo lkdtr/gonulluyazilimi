@@ -17,6 +17,9 @@ return [
     'create_reference_request_title' => 'Create Reference Request',
     'create_announcement_title' => 'Create Announcement',
     'user_infos_title' => 'User Infos',
+    'seminar_requests_title' => 'Seminar Requests',
+    'reference_requests_title' => 'Reference Requests',
+    'announcements_title' => 'Announcements',
 
     'create_seminar_request' => 'Create Seminar Request',
     'create_reference_request' => 'Create Reference Request',

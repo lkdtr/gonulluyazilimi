@@ -31,11 +31,11 @@ class ReferenceController extends Controller
 
     public function getList() {
 
-        if(Auth::user()->role!=1 )  {
-            return Redirect::to(secure_url('/home'))->with("status", "Bu bölüm yapım aşamasında");
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        dump("referans talepleri");
+        return view('admin.reference_requests');
 
     }
 
