@@ -50,4 +50,6 @@ return [
     'alias' => 'Takma Ad',
     'forwarding' => 'Yönlendirme',
 
+    'please_select' => 'Lütfen seçin',
+
 ];
