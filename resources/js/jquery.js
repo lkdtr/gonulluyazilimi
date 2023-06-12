@@ -9,8 +9,6 @@ jQuery(function () {
     Inputmask({ "mask": "(599) 999-9999" }).mask("phone_number");
     Inputmask("email").mask("email");
 
-    $("#register_button").prop("disabled", true);
-
     jQuery.datetimepicker.setLocale('tr');
 
     jQuery('#birthday').datetimepicker({
