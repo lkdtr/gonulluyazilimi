@@ -33,7 +33,7 @@ return [
     'set_user_role_success' => 'User role has been set success',
     'set_user_role_failed' => 'User role has been set failed',
 
-    'under_construction' => 'This module under construction',
+    'under_construction' => 'This module is under construction',
     'unauthorized_process' => 'Unauthorized process',
     'successfully_saved' => 'Successfully Saved',
 
