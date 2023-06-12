@@ -109,6 +109,12 @@
                                         {{ trans("panel.new_announcement") }}
                                     </a>
                                     <hr style="margin: 5px; color: #999;">
+                                    <a class="dropdown-item" href="{{ route('seminar-subjects') }}">
+                                        {{ trans("panel.seminar_subjects") }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('new-seminar-subject') }}">
+                                        {{ trans("panel.new_seminar_subject") }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('seminar-requests') }}">
                                         {{ trans("panel.seminar_requests") }}
                                     </a>

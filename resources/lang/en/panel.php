@@ -22,8 +22,7 @@ return [
     'reference_requests_title' => 'Reference Requests',
     'announcements_title' => 'Announcements',
 
-    'create_seminar_request' => 'Create Seminar Request',
-    'create_reference_request' => 'Create Reference Request',
+
 
     'set_owner_role_success' => 'Owner role has been set success',
     'set_owner_role_failed' => 'Owner role has been set failed',
@@ -43,7 +42,13 @@ return [
 
     "announcements" => "Announcements",
     "new_announcement" => "New Announcement",
+
+    'create_seminar_request' => 'Create Seminar Request',
     "seminar_requests" => "Seminar Requests",
+    "seminar_subjects" => "Seminar Subjects",
+    "new_seminar_subject" => "Create Seminar Subject",
+
+    'create_reference_request' => 'Create Reference Request',
     "reference_requests" => "Reference Requests",
 
     "users_title" => 'Users',

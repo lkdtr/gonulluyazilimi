@@ -55,6 +55,10 @@ Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::c
 Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
 Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
 Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);
+Route::get('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'getCreateSubject'])->name('new-seminar-subject');
+Route::post('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'postCreateSubject']);
+Route::get('/seminar-subjects', [App\Http\Controllers\SeminarController::class, 'getSubjectList'])->name('seminar-subjects');
+
 
 Route::get('/reference-requests', [App\Http\Controllers\ReferenceController::class, 'getList'])->name('reference-requests');
 Route::get('/create-reference-request', [App\Http\Controllers\ReferenceController::class, 'getCreate'])->name('create-reference-request');

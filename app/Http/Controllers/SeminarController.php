@@ -47,5 +47,37 @@ class SeminarController extends Controller
 
     public function postCreate(Request $request) {
 
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+
+    }
+
+    public function getCreateSubject() {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+
+    }
+
+    public function postCreateSubject() {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+
+    }
+
+    public function getSubjectList() {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+
     }
 }

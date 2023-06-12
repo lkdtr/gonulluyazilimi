@@ -79,6 +79,8 @@ jQuery(function () {
                     $("#phone_number").show();
 
                     $("#register_button").prop("disabled", false);
+                    $("#info-block").hide();
+
                     $("#register_form").after('<input type="hidden" name="phone_number_verified" value="' + _globalToken._token + '">');
                 }
                 else {

@@ -15,6 +15,17 @@
                         </div>
                     @endif
 
+                    <p>Seminer konusu seçin</p>
+                    <p>Seminer tarih aralığı seçin</p>
+                    <p>Seminer verilecek kurum/kuruluş</p>
+                    <p>Seminer Verilecek adres, adres, ilçe, il</p>
+                    <p>İletişim bilgileri
+                        <ul>
+                            <li>Ad Soyad</li>
+                            <li>Eposta</li>
+                            <li>Telefon</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
         </div>
