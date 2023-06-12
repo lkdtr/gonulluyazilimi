@@ -66,6 +66,10 @@ jQuery(function () {
 
         var phone_number = $("#hidden_phone_number").val();
 
+        if(phone_number.length < 6) {
+            return false;
+        }
+
         $.ajax({
             url: "/phone-number-verification-request",
             data: "phone_number=" + phone_number + "&_token=" + _globalToken._token,
