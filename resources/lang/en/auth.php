@@ -56,4 +56,6 @@ return [
     'please_select' => 'Please select',
     'out_of_turkey' => 'Out of Turkey',
 
+    'all_fields_are_required_to_fill' => 'All fields are required to fill',
+
 ];

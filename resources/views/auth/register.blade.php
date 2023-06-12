@@ -8,8 +8,13 @@
                 <div class="card-header">{{ trans("auth.become_a_volunteer_title") }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf
+
+                        <div class="mb-3 alert alert-info d-flex">
+                            <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                            {{ trans("auth.all_fields_are_required_to_fill") }}
+                        </div>
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
@@ -70,7 +75,7 @@
                         <div class="row mb-3">
                             <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number") }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" id="phone_number_block">
                                 <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
                                 <span style="display: none" id="label_phone_number" class="form-control" >Telefon numaranıza gönderilen doğrulama kodunu, alt kısma yazın</span>
                                 <input id="hidden_phone_number" type="hidden" name="phone_number">
