@@ -10,7 +10,8 @@ return [
 
     'email_redirects_info' => 'ad.soyad@penguen.org.tr e-posta yönlendirmenizi aktif değil. Aktif etmek için tıklayın.',
     'email_redirects_exist_info' => 'E-posta yönlendirmenizi güncellemek için tıklayın.',
-    'email_redirects_info_box' => 'E-posta yönlendirme servisini kullanabilmeniz için kimlik bilgilerinizi doğrulatmanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
+    'email_redirects_info_box' => 'E-posta yönlendirme nedir? E-posta adresinize gelen e-postaları istediğiniz herhangi bir e-posta adresine otomatik olarak gönderme işlemidir.',
+    'email_redirects_info_required' => 'E-posta yönlendirme servisini kullanabilmeniz için kimlik bilgilerinizi doğrulatmanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
     'create_seminar_request_title' => 'Seminer Talebi Oluştur',
