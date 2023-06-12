@@ -10,10 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?v1.0.1" defer></script>
+    <script src="{{ asset('js/app.js?v=').time() }}" defer></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?v1.0.1" rel="stylesheet">
+    <link href="{{ asset('css/app.css?v=').time() }}" rel="stylesheet">
 
     <script type="text/javascript">
 		var _globalToken = {!! json_encode(array('_token'=> csrf_token())) !!}
