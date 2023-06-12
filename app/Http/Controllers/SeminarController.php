@@ -21,10 +21,6 @@ class SeminarController extends Controller
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
-            if(Auth::user()->role!=1 )  {
-                return redirect('/login')->with('redirect', URL::full() );
-            }
-
             return $next($request);
         });
     }
