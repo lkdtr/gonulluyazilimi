@@ -16,6 +16,13 @@
                             {{ trans("auth.all_fields_are_required_to_fill") }}
                         </div>
 
+                        @error('phone_number_verified')
+                            <div class="mb-3 alert alert-info d-flex">
+                                <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#check-circle-fill"/></svg>
+                                {{ $message }}
+                            </div>
+                        @enderror
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
 
@@ -104,7 +111,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <div id="password-strength-status" class="password-strength-status"></div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -117,7 +124,14 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ trans("auth.password_confirm") }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+                                <div id="password-confirm-strength-status" class="password-strength-status"></div>
+
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -131,7 +145,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="register_button" type="submit" class="btn btn-lg btn-primary" disabled="">
+                                <button id="register_button" type="submit" class="btn btn-lg btn-primary">
                                     {{ trans("auth.register") }}
                                 </button>
                             </div>

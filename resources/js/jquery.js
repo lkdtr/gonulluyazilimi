@@ -21,6 +21,46 @@ jQuery(function () {
         dayOfWeekStart: 1
     });
 
+    function passwordChecker(input, alertbox) {
+
+        $(input).on('keyup', function () {
+            var number = /([0-9])/;
+            var alphabets = /([a-zA-Z])/;
+            var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+            if ($(input).val().length < 8) {
+                $(alertbox).removeClass();
+                $(alertbox).addClass('weak-password');
+                $(alertbox).html("Basit (en az 8 karakter olmalıdır.)");
+            } else {
+                if ($(input).val().match(number) && $(input).val().match(alphabets) && $(input).val().match(special_characters)) {
+                    $(alertbox).removeClass();
+                    $(alertbox).addClass('strong-password');
+                    $(alertbox).html("Güçlü");
+                } else {
+                    $(alertbox).removeClass();
+                    $(alertbox).addClass('medium-password');
+                    $(alertbox).html("Orta (harfleri, sayıları ve özel karakterleri veya bazı kombinasyonları içermelidir.)");
+                }
+            }
+
+            if (($(input).attr('id') == "password-confirm") && ($("#password").val() != $("#password-confirm").val() ) ) {
+                $(alertbox).removeClass();
+                $(alertbox).addClass('notmatch-password');
+                $(alertbox).html("Parolalar uyuşmuyor");
+            }
+
+            $(alertbox).addClass('password-strength-status');
+        });
+
+    }
+
+    if($("#password").length>0) {
+        passwordChecker($("#password"), $("#password-strength-status"));
+    }
+    if ($("#password").length > 0) {
+        passwordChecker($("#password-confirm"), $("#password-confirm-strength-status"));
+    }
+
     $("#phone_number").on("change", function () {
 
         $("#phone_number_validation_block").show();
@@ -88,7 +128,12 @@ jQuery(function () {
                 }
             },
             error: function (data) {
-                alert("API yanıt vermiyor.");
+                if (data.responseJSON) {
+                    alert(data.responseJSON.message);
+                }
+                else {
+                    alert("API yanıt vermiyor.");
+                }
                 return false;
             }
         });
