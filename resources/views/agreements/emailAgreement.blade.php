@@ -1,47 +1,24 @@
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<p>Cumhurbaşkanlığı Dijital D&ouml;n&uuml;ş&uuml;m Bilgi ve İletişim G&uuml;venliği Tedbirleri ve Genelgesi, 6698 Sayılı Kişisel Verilerin Korunması Kanunu ve ISO 27001:2013 Bilgi G&uuml;venliği Y&ouml;netim sisteminde belirtilen maddelere dayanarak Kişi;</p>
 
-<p>a) Veri Sorumlusu ve Temsilcisi</p>
-<p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“6698 sayılı Kanun”) uyarınca, kişisel verileriniz; veri sorumlusu olarak Linux Kullanıcıları Derneği aşağıda açıklanan kapsamda işlenebilecektir.</p>
+<ol>
+	<li>Linux Kullanıcıları Derneği e-posta servisini kullandığında ileri s&uuml;rd&uuml;ğ&uuml; şahsi fikir, d&uuml;ş&uuml;nce ve ifadelerin, Linux Kullanıcıları Derneği ortamına eklediği dosyaların sorumluluğunun kendisine ait olduğunu ve Linux Kullanıcıları Derneği&#39;nin bu dosyalardan dolayı hi&ccedil;bir şekilde sorumlu tutulamayacağını,</li>
+	<li>Linux Kullanıcıları Derneği e-posta hizmetlerinde, site geneline zarar verecek veya Linux Kullanıcıları Derneği&rsquo;ni başka kişi ya da kuruluşlarla mahkemelik duruma getirecek herhangi bir yazılım veya materyal bulunduramayacağını, paylaşamayacağını ve cezai bir durum doğarsa t&uuml;m cezai sorumlulukları &uuml;st&uuml;ne aldığını,</li>
+	<li>E-posta servisinin kullanımı sırasında kaybolacak ve/veya eksik alınacak, yanlış adrese iletilecek bilgi, mesaj ve dosyalardan Linux Kullanıcıları Derneği&#39;nin sorumlu olmayacağını,</li>
+	<li>E-posta adresi verilerinin Linux Kullanıcıları Derneği&#39;nin ihmali g&ouml;r&uuml;lmeden yetkisiz kişilerce okunmasından (kişinin bilgilerini başka kişiler ile paylaşması, siteden ayrılırken &ccedil;ıkış yapmaması, vb. durumlardan) dolayı gelebilecek zararlardan &ouml;t&uuml;r&uuml; Linux Kullanıcıları Derneği&#39;nin sorumlu olmayacağını,</li>
+	<li>Tehdit edici, ahlak dışı, ırk&ccedil;ı, ayrımcı, T&uuml;rkiye Cumhuriyeti Yasalarına, vatandaşı olduğu diğer &uuml;lkelerin yasalarına ve uluslararası anlaşmalara aykırı mesajlar g&ouml;ndermemeyi,</li>
+	<li>Ortama eklenecek yazışmaların, konu başlıklarının, genel ahlak, g&ouml;rg&uuml; ve hukuk kurallarına uygun olmasını,</li>
+	<li>Diğer kullanıcıları taciz ve tehdit etmemeyi,</li>
+	<li>Diğer kullanıcıların servisi kullanmasını etkileyecek şekilde davranmamayı,</li>
+	<li>Diğer kullanıcıların bilgisayarındaki bilgilere ya da yazılıma zarar verecek bilgi veya programlar g&ouml;ndermemeyi,</li>
+	<li>Linux Kullanıcıları Derneği e-posta servisini kullanarak elde edilen herhangi bir kayıt veya elde edilmiş malzemelerin tamamıyla kullanıcının rızası d&acirc;hilinde olduğunu, kullanıcı bilgisayarında yaratacağı arızalar, bilgi kaybı ve diğer kayıpların sorumluluğunun tamamıyla kendisine ait olduğunu, servisin kullanımından dolayı uğrayabileceği zararlardan dolayı Linux Kullanıcıları Derneği&rsquo;nden tazminat talep etmemeyi,</li>
+	<li>Kurallara aykırı davrandığı takdirde Linux Kullanıcıları Derneği&#39;nin gerekli m&uuml;dahalelerde bulunma, kişiyi hizmet dışına &ccedil;ıkarma ve &uuml;yeliğine son verme hakkına sahip olduğunu,</li>
+	<li>Kanunlara g&ouml;re postalanması yasak olan bilgileri postalamamayı ve zincir posta(chain mail), yazılım vir&uuml;s&uuml; (vb.) gibi g&ouml;nderilme yetkisi olmayan postaları dağıtmamayı,</li>
+	<li>E-posta &quot;kullanıcı&quot; adıyla yapacağı her t&uuml;rl&uuml; işlemden bizzat kendisinin sorumlu olduğunu,</li>
+	<li>E-posta hesap şifresini d&uuml;zenli aralıklarla (yılda bir defa) yenileyeceğini (sistem otomatik olarak kullanıcıları şifre yenilemeye zorlayacaktır) ve bu yenilenecek şifrelerde, kişisel bilgilerle ilişkili ve kolay tahmin edilecek rakam ya da harf dizileri yerine b&uuml;y&uuml;k k&uuml;&ccedil;&uuml;k harf, rakam ve sembollerden oluşacak kombinasyonları tercih edeceğini,</li>
+	<li>Sahip olduğu e-posta hesabı/hesapları &uuml;zerinden yetkili/sorumlu olduğu iş ve g&ouml;revler &ccedil;er&ccedil;evesinde ilgili sistemlere erişim sağlayacağını,</li>
+	<li>E-posta hesabını tek taraflı olarak iptal ettirse bile, bu iptal işleminden &ouml;nce, &uuml;yeliği sırasında ger&ccedil;ekleştirdiği icraatlardan kendisinin sorumlu olacağını,</li>
+</ol>
 
-<p>&nbsp;</p>
+<p>T&uuml;m bu maddeleri daha sonra hi&ccedil;bir itiraza mahal vermeyecek şekilde okuyup anladığını,</p>
 
-<p>b) Kişisel Verilerin Hangi Amaçla İşleneceği</p>
-<p>Toplanan kişisel verileriniz, kişisel verilerinizi bizlere açıklamanıza konu olan; Derneğin ve Dernekle iş ilişkisi içerisinde olan ilgili kişilerin hukuki, teknik ve ticari-iş güvenliğinin temini; Dernek tarafından sunulan ürün ve hizmetlerin ilgili kişilerin beğeni, kullanım alışkanlıkları ve ihtiyaçlarına göre özelleştirilerek ilgili kişilere önerilmesi ve tanıtılması için gerekli olan aktivitelerin planlanması ve icrası; Dernek tarafından sunulan ürün ve hizmetlerden ilgili kişileri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması ve ilgili iş süreçlerinin yürütülmesi; Dernek'in ticari ve/veya iş stratejilerinin planlanması ve icrası; Dernek tarafından yürütülen ticari faaliyetlerin gerçekleştirilmesi için ilgili iş birimlerimiz tarafından gerekli çalışmaların yapılması ve buna bağlı iş süreçlerinin yürütülmesi; Dernek'in insan kaynakları politikaları ve süreçlerinin planlanmasının ve icra edilmesi amaçlarıyla 6698 sayılı Kanun’un 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları dahilinde işlenecektir. Kişisel verilerinizin Şirketimiz tarafından işlenme amaçları konusunda detaylı bilgilere; www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasından ulaşabilirsiniz.</p>
-
-<p>&nbsp;</p>
-
-<p>c) İşlenen Kişisel Verilerin Kimlere ve Hangi Amaçla Aktarılabileceği</p>
-<p>Toplanan kişisel verileriniz; Dernek tarafından sunulan ürün ve hizmetlerin ilgili kişilerin beğeni, kullanım alışkanlıkları ve ihtiyaçlarına göre özelleştirilerek ilgili kişilere önerilmesi ve tanıtılması için gerekli olan aktivitelerin planlanması ve icrası; Dernek tarafından yürütülen ticari faaliyetlerin gerçekleştirilmesi için ilgili iş birimlerimiz tarafından gerekli çalışmaların yapılması ve buna bağlı iş süreçlerinin yürütülmesi; Dernek tarafından sunulan ürün ve hizmetlerden ilgili kişileri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması ve ilgili iş süreçlerinin yürütülmesi; Dernek'in ticari ve/veya iş stratejilerinin planlanması ve icrası; Dernek'in ve dernek'le iş ilişkisi içerisinde olan ilgili kişilerin hukuki, teknik ve ticari-iş güvenliğinin temini amaçlarıyla; bayilerimize, iş ortaklarımıza, tedarikçilerimize, hissedarlarımıza, iştiraklerimize, kanunen yetkili kamu kurumları ve özel kişilere, 6698 sayılı Kanun’un 8. ve 9. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları çerçevesinde www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasında belirtilen amaçlarla sınırlı olarak aktarılabilecektir.</p>
-
-<p>&nbsp;</p>
-
-<p>ç) Kişisel Veri Toplamanın Yöntemi ve Hukuki Sebebi</p>
-<p>Kişisel verileriniz Şirketimiz tarafından farklı kanallarla ve farklı hukuki sebeplere dayanarak; sunduğumuz ürün ile hizmetleri geliştirmek ve ticari faaliyetlerimizi yürütmek amacıyla toplanmaktadır. Bu süreçte kişisel verileriniz; internet sitelerimiz ve mobil uygulamalarımızdaki bilgi ve talep formları aracılığıyla yahut fiziki ortamda toplanmaktadır. Bu hukuki sebeple toplanan kişisel verileriniz 6698 sayılı Kanun’un 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları kapsamında bu Aydınlatma Metni’nin (b) ve (c) maddelerinde belirtilen amaçlarla da işlenebilmekte ve aktarılabilmektedir.</p>
-
-<p>&nbsp;</p>
-
-<p>d) Kişisel Veri Sahibinin 6698 sayılı Kanun’un 11. maddesinde Sayılan Hakları</p>
-<p>Kişisel veri sahipleri olarak, haklarınıza ilişkin taleplerinizi www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasında düzenlenen yöntemlerle Linux Kullanıcıları Derneği’ne iletmeniz durumunda Linux Kullanıcıları Derneği talebin niteliğine göre talebi en kısa sürede ve en geç otuz gün içinde sonuçlandıracaktır. Ancak, işlemin ayrıca bir maliyeti gerektirmesi hâlinde, Linux Kullanıcıları Derneği tarafından Kişisel Verileri Koruma Kurulunca belirlenen tarifedeki ücret alınacaktır. Bu kapsamda kişisel veri sahipleri;</p>
-
-<p>&nbsp;</p>
-
-<ul>
-<li>Kişisel veri işlenip işlenmediğini öğrenme,</li>
-
-<li>Kişisel verileri işlenmişse buna ilişkin bilgi talep etme,</li>
-
-<li>Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
-
-<li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme,</li>
-
-<li>Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
-
-<li>6698 sayılı Kanun ve ilgili diğer kanun hükümlerine uygun olarak işlenmiş olmasına rağmen, işlenmesini gerektiren sebeplerin ortadan kalkması hâlinde kişisel verilerin silinmesini veya yok edilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
-
-<li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme,</li>
-
-<li>Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması hâlinde zararın giderilmesini talep etme haklarına sahiptir.</li>
-
-
-</ul>
+<p>KABUL VE TAAHH&Uuml;T ETMİŞTİR.</p>

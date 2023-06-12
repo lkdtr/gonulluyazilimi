@@ -8,11 +8,11 @@
                 <div class="card-header">{{ trans("auth.become_a_volunteer_title") }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="surname" class="col-md-4 col-form-label text-md-end">{{ trans("auth.surname") }}</label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-end">{{ trans("auth.surname") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="national_id" class="col-md-4 col-form-label text-md-end">{{ trans("auth.national_id") }}</label>
+                            <label for="national_id" class="col-md-4 col-form-label text-md-end">{{ trans("auth.national_id") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ old('national_id') }}" required autocomplete="national_id" autofocus>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ trans("auth.email") }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ trans("auth.email") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -68,9 +68,9 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number") }}</label>
+                            <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number") }} <span style="color:red">*</span></label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6" id="phone_number_block">
                                 <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
                                 <span style="display: none" id="label_phone_number" class="form-control" >Telefon numaranıza gönderilen doğrulama kodunu, alt kısma yazın</span>
                                 <input id="hidden_phone_number" type="hidden" name="phone_number">
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ trans("auth.password") }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ trans("auth.password") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ trans("auth.password_confirm") }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ trans("auth.password_confirm") }} <span style="color:red">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

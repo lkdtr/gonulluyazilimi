@@ -9,6 +9,8 @@ jQuery(function () {
     Inputmask({ "mask": "(599) 999-9999" }).mask("phone_number");
     Inputmask("email").mask("email");
 
+    $("#register_button").prop("disabled", true);
+
     jQuery.datetimepicker.setLocale('tr');
 
     jQuery('#birthday').datetimepicker({
@@ -44,7 +46,12 @@ jQuery(function () {
                 }
             },
             error: function (data) {
-                alert("API yanıt vermiyor.");
+                if(data.responseJSON) {
+                    alert(data.responseJSON.message);
+                }
+                else {
+                    alert("API yanıt vermiyor.");
+                }
                 return false;
             }
         });
@@ -72,6 +79,7 @@ jQuery(function () {
                     $("#phone_number").show();
 
                     $("#register_button").prop("disabled", false);
+                    $("#register_form").after('<input type="hidden" name="phone_number_verified" value="' + _globalToken._token + '">');
                 }
                 else {
                     alert(data.message);

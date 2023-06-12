@@ -33,6 +33,7 @@ return [
     'set_user_role_success' => 'Kullanıcı rolü başarıyla belirlendi',
     'set_user_role_failed' => 'Kullanıcı rolü başarısız oldu',
 
+    'under_construction' => 'Bu modül yapım aşamasında',
     'unauthorized_process' => 'Yetkisiz işlem',
     'successfully_saved' => 'Başarı ile kaydedildi',
 

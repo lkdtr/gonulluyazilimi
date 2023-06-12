@@ -41,6 +41,10 @@ class SeminarController extends Controller
 
     public function getCreate() {
 
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+        }
+
         return view('user.create_seminar_request');
 
     }
