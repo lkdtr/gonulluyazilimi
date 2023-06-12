@@ -75,6 +75,9 @@ class EmailRedirectsController extends Controller
         $user->birthday = date("Y-m-d", strtotime($birthday));
         $user->save();
 
+        $user->name = $this->slug(strtolower($user->name));
+        $user->surname = $this->slug(strtolower($user->surname));
+
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
         if($email_redirects==null) {
             $email_redirects = new EmailRedirects();
@@ -83,9 +86,6 @@ class EmailRedirectsController extends Controller
             $email_redirects->email_alias = $user->name.".".$user->surname."@penguen.org.tr";
             $email_redirects->save();
         }
-
-        $user->name = $this->slug(strtolower($user->name));
-        $user->surname = $this->slug(strtolower($user->surname));
 
         $name_array = explode("-", $user->name);
         $surname_array = explode("-", $user->surname);
