@@ -82,6 +82,7 @@ jQuery(function () {
 
                 }
                 else {
+                    $("#register_button").prop("disabled", true);
                     alert(data.message);
                 }
             },
@@ -124,6 +125,7 @@ jQuery(function () {
                     $("#register_form").after('<input type="hidden" name="phone_number_verified" value="' + _globalToken._token + '">');
                 }
                 else {
+                    $("#register_button").prop("disabled", true);
                     alert(data.message);
                 }
             },
