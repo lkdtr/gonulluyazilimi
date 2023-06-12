@@ -24,7 +24,7 @@ class AgreementController extends Controller
 
     public function emailAgreement(Request $request) {
         $iframe = $request->has("iframe")?true:false;
-        $title = "E-Posta kullanım sözleşmesi";
+        $title = "E-Posta Kullanım Sözleşmesi";
         $content = View::make('agreements.emailAgreement');
         $link = "/email-agreement";
 
