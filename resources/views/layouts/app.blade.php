@@ -67,7 +67,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ trans("auth.register") }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ trans("auth.become_a_volunteer") }}</a>
                                 </li>
                             @endif
                         @else

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans("auth.register_title") }}</div>
+                <div class="card-header">{{ trans("auth.become_a_volunteer_title") }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

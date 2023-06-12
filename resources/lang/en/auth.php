@@ -30,6 +30,9 @@ return [
     'register_title' => 'Register',
     'register' => 'Register',
 
+    'become_a_volunteer_title' => 'Become A Volunteer',
+    'become_a_volunteer' => 'Become A Volunteer',
+
     'login_title' => 'Login',
     'login' => 'Login',
     'logout' => 'Logout',

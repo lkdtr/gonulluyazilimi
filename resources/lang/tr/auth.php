@@ -30,6 +30,9 @@ return [
     'register_title' => 'Kayıt Ol',
     'register' => 'Kayıt Ol',
 
+    'become_a_volunteer_title' => 'Gönüllü Ol',
+    'become_a_volunteer' => 'Gönüllü Ol',
+
     'login_title' => 'Giriş Yap',
     'login' => 'Giriş Yap',
     'logout' => 'Çıkış Yap',
