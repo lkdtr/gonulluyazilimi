@@ -10,7 +10,7 @@ return [
 
     'email_redirects_info' => 'Your name.surname@penguen.org.tr e-mail forwarding is not active. Click to activate.',
     'email_redirects_exist_info' => 'Click to update your e-mail forwarding.',
-    'email_redirects_info_box' => 'What is email forwarding? It is the process of automatically sending the e-mails that come to your e-mail address to any e-mail address you want.',
+    'email_redirects_info_box' => 'What is email forwarding? It is the process of automatically sending the e-mails that come to your e-mail address to any e-mail address you want. E-mails sent to ad.surname@penguen.org.tr are automatically sent to your registered e-mail address.',
     'email_redirects_info_required' => 'You must verify your credentials for use the e-mail forwarding service. Your information will be verified from the NVI system.',
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
