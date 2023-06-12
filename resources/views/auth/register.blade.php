@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('register') }}" id="register_form">
                         @csrf
 
-                        <div class="mb-3 alert alert-info d-flex">
+                        <div class="mb-3 alert alert-info d-flex" id="info-block">
                             <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
                             {{ trans("auth.all_fields_are_required_to_fill") }}
                         </div>
