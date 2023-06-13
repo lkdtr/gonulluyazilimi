@@ -81,6 +81,7 @@ jQuery(function () {
                     $("#phone_number").attr("readonly", "readonly");
                     $("#label_phone_number").show();
                     $("#phone_number").hide();
+                    $("#phone_number_validation").focus();
 
                 }
                 else {
