@@ -4,6 +4,7 @@ window.$ = window.jQuery = $;
 import 'inputmask';
 import 'jquery-datetimepicker';
 import 'datatables.net-bs4';
+import languageTR from 'datatables.net-plugins/i18n/tr.mjs';
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
@@ -20,7 +21,7 @@ jQuery(function () {
         dayOfWeekStart: 1
     });
 
-    $('table').dataTable();
+    $('table').dataTable({ language: languageTR });
 
     function passwordChecker(input, alertbox) {
 
