@@ -62,10 +62,24 @@
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">
                                 {{ trans("auth.birthday") }}
                             </label>
+
+                            @if($user->birthday=="")
                             <div class="col-md-6">
-                                <span class="form-control">{{date("d/m/Y", strtotime($user->birthday))}}</span>
+                                <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ $user->birthday }}" required autocomplete="birthday" autofocus>
+
+                                @error('birthday')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                            @else
+                            <div class="col-md-6">
+                                <span class="form-control">{{date("d-m-Y", strtotime($user->birthday))}}</span>
+                            </div>
+                            @endif
                         </div>
+
                         <div class="row mb-3">
                             <label for="city" class="col-md-4 col-form-label text-md-end">
                                 {{ trans("auth.city") }}
