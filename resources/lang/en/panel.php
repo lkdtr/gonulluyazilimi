@@ -15,13 +15,12 @@ return [
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
     'create_seminar_request_title' => 'Create Seminar Request',
-    'create_reference_request_title' => 'Create Reference Request',
+    'create_reference_request_title' => 'Create Membership Reference Request',
     'create_announcement_title' => 'Create Announcement',
     'user_infos_title' => 'User Infos',
     'seminar_requests_title' => 'Seminar Requests',
-    'reference_requests_title' => 'Reference Requests',
+    'reference_requests_title' => 'Membership Reference Requests',
     'announcements_title' => 'Announcements',
-
 
 
     'set_owner_role_success' => 'Owner role has been set success',
@@ -48,8 +47,8 @@ return [
     "seminar_subjects" => "Seminar Subjects",
     "new_seminar_subject" => "Create Seminar Subject",
 
-    'create_reference_request' => 'Create Reference Request',
-    "reference_requests" => "Reference Requests",
+    'create_reference_request' => 'Create Membership Reference Request',
+    "reference_requests" => "Membership Reference Requests",
 
     "users_title" => 'Users',
     'users' => 'Users',
