@@ -73,6 +73,10 @@ class Controller extends BaseController
 
     }
 
+    public function tr_ucwords($string) {
+        return ltrim(mb_convert_case(str_replace(array('i','I'), array('İ','ı'),mb_strtolower($str)), MB_CASE_TITLE, 'UTF-8'));
+    }
+
     public function set_log($process_type="other", $process) {
 
         $user_id = Auth::id();
