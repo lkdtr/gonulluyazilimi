@@ -73,7 +73,7 @@ class Controller extends BaseController
 
     }
 
-    public function tr_ucwords($string) {
+    public function tr_ucwords($str) {
         return ltrim(mb_convert_case(str_replace(array('i','I'), array('İ','ı'),mb_strtolower($str)), MB_CASE_TITLE, 'UTF-8'));
     }
 
