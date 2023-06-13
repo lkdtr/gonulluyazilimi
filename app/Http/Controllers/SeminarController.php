@@ -117,7 +117,7 @@ class SeminarController extends Controller
         $seminarSubject->syllabus = $request->get("syllabus");
         $seminarSubject->duration = $request->get("duration");
         $seminarSubject->status = 1;
-        $seminarSubject->created_by = Auth::id();
+        $seminarSubject->updated_by = Auth::id();
         $seminarSubject->save();
 
         return Redirect::to(secure_url('/seminar-subjects'))->with("success-status", trans("panel.successfully_saved"));
