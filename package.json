@@ -26,6 +26,7 @@
     "dependencies": {
         "datatables": "^1.10.18",
         "datatables.net-plugins": "^1.13.4",
+        "froala-editor": "^4.0.19",
         "innoq-bootstrap-theme": "^2.1.0",
         "jquery-datetimepicker": "^2.5.21"
     }
