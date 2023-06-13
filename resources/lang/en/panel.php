@@ -71,6 +71,9 @@ return [
 
     'subject' => 'Subject',
     'summary' => 'Summary',
+    'type' => 'Type',
+    'type_awareness' => 'Awareness',
+    'type_education' => 'Education',
     'syllabus' => 'Syllabus',
     'duration' => 'Duration',
     'hour' => 'Hour',

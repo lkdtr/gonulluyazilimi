@@ -34,11 +34,29 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="subject" class="col-md-2 col-form-label text-md-end">
+                                {{ trans("panel.type") }}
+                            </label>
+                            <div class="col-md-8">
+                                <select id="type" name="type" class="form-control form-select" style="width: 100%; border: 1px solid #004153;" required>
+                                    <option value="awareness">{{ trans("panel.type_awareness") }}</option>
+                                    <option value="education">{{ trans("panel.type_education") }}</option>
+                                </select>
+
+                                @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="summary" class="col-md-2 col-form-label text-md-end">
                                 {{ trans("panel.summary") }}
                             </label>
                             <div class="col-md-8">
-                                <textarea id="summary" class="form-control @error('summary') is-invalid @enderror" name="summary" autofocus></textarea>
+                                <textarea id="summary" class="form-control @error('summary') is-invalid @enderror" name="summary" autofocus required></textarea>
 
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">

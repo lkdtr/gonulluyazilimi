@@ -16,6 +16,7 @@ class CreateSeminarSubjectsTable extends Migration
         Schema::create('seminar_subjects', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
+            $table->enum('type', ["awareness", "education"])->default("education");
             $table->text('summary')->nullable();
             $table->longText('syllabus')->nullable();
             $table->integer('duration')->default("1");
