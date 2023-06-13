@@ -78,6 +78,7 @@ return [
     'duration' => 'Duration',
     'hour' => 'Hour',
     'created_by' => 'Created By',
+    'updated_by' => 'Updated By',
 
     'edit' => 'Edit',
     'delete' => 'Delete',
