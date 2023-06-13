@@ -57,6 +57,8 @@ Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::c
 Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);
 Route::get('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'getCreateSubject'])->name('new-seminar-subject');
 Route::post('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'postCreateSubject']);
+Route::get('/edit-seminar-subject/{$id}', [App\Http\Controllers\SeminarController::class, 'getEditSubject'])->name('edit-seminar-subject');
+Route::post('/edit-seminar-subject/{$id}', [App\Http\Controllers\SeminarController::class, 'postEditSubject']);
 Route::get('/seminar-subjects', [App\Http\Controllers\SeminarController::class, 'getSubjectList'])->name('seminar-subjects');
 
 

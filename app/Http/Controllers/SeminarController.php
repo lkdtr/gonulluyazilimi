@@ -59,7 +59,8 @@ class SeminarController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return view('admin.create_seminar_subject');
+        $seminarSubject = new SeminarSubjects();
+        return view('admin.create_edit_seminar_subject', ["seminarSubject" => $seminarSubject]);
     }
 
     public function postCreateSubject(Request $request) {
@@ -84,7 +85,42 @@ class SeminarController extends Controller
         $seminarSubject->created_by = Auth::id();
         $seminarSubject->save();
 
-        return Redirect::to(secure_url(route('seminar-subjects')))->with("success-status", trans("panel.successfully_saved"));
+        return Redirect::to(secure_url('/seminar-subjects'))->with("success-status", trans("panel.successfully_saved"));
+    }
+
+    public function getEditSubject($id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $seminarSubject = SeminarSubjects::where("id", $id)->first();
+        return view('admin.create_edit_seminar_subject', ["seminarSubject" => $seminarSubject]);
+    }
+
+    public function postEditSubject(Request $request, $id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $validator = $request->validate([
+            'subject' => 'required',
+            'summary' => 'required',
+            'duration' => 'required',
+        ]);
+
+        $seminarSubject = SeminarSubjects::where("id", $id)->first();
+        $seminarSubject->subject = $request->get("subject");
+        $seminarSubject->type = $request->get("type");
+        $seminarSubject->summary = $request->get("summary");
+        $seminarSubject->syllabus = $request->get("syllabus");
+        $seminarSubject->duration = $request->get("duration");
+        $seminarSubject->status = 1;
+        $seminarSubject->created_by = Auth::id();
+        $seminarSubject->save();
+
+        return Redirect::to(secure_url('/seminar-subjects'))->with("success-status", trans("panel.successfully_saved"));
     }
 
     public function getSubjectList() {

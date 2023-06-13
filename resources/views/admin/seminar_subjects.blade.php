@@ -47,8 +47,8 @@
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="{{secure_url('/seminar-subject-edit/'.$seminarSubject->id)}}">{{ trans("panel.edit") }}</a></li>
-                                            <li><a class="dropdown-item" href="{{secure_url('/seminar-subject-delete/'.$seminarSubject->id)}}">{{ trans("panel.delete") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/edit-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.edit") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/delete-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.delete") }}</a></li>
                                         </ul>
                                     </div>
                                 </td>
