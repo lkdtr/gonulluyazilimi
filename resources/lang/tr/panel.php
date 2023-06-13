@@ -23,6 +23,7 @@ return [
     'seminar_subjects_title' => 'Seminer Konuları',
     'reference_requests_title' => 'Referans Talepleri',
     'announcements_title' => 'Duyurular',
+    'process_logs_title' => 'İşlem Hareketleri',
 
     'set_owner_role_success' => 'Sahip rolü başarıyla belirlendi',
     'set_owner_role_failed' => 'Sahip rolü başarısız oldu',
@@ -81,4 +82,18 @@ return [
 
     'edit' => 'Düzenle',
     'delete' => 'Sil',
+
+    'process_logs' => 'İşlem Hareketleri',
+
+    'process_type_create' => 'Oluşturma',
+    'process_type_change' => 'Değiştirme',
+    'process_type_delete' => 'Silme',
+    'process_type_other' => 'Diğer',
+    'process_type_' => '-',
+
+    'process_type' => 'İşlem Türü',
+    'process' => 'İşlem',
+    'process_by' => 'İşlemi Yapan',
+    'process_at' => 'İşlem Tarihi',
+
 ];

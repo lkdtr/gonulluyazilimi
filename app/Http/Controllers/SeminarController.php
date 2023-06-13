@@ -85,6 +85,8 @@ class SeminarController extends Controller
         $seminarSubject->created_by = Auth::id();
         $seminarSubject->save();
 
+        $this->set_log("create", $seminarSubject->subject. " semineri eklendi");
+
         return Redirect::to(secure_url('/seminar-subjects'))->with("success-status", trans("panel.successfully_saved"));
     }
 
@@ -119,6 +121,8 @@ class SeminarController extends Controller
         $seminarSubject->status = 1;
         $seminarSubject->updated_by = Auth::id();
         $seminarSubject->save();
+
+        $this->set_log("change", $seminarSubject->subject. " semineri güncellendi");
 
         return Redirect::to(secure_url('/seminar-subjects'))->with("success-status", trans("panel.successfully_saved"));
     }
