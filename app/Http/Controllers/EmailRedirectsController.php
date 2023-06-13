@@ -75,8 +75,8 @@ class EmailRedirectsController extends Controller
         $user->birthday = date("Y-m-d", strtotime($birthday));
         $user->save();
 
-        $user->name = $this->slug(strtolower($user->name));
-        $user->surname = $this->slug(strtolower($user->surname));
+        $user->name = $this->slug(mb_strtolower($user->name));
+        $user->surname = $this->slug(mb_strtolower($user->surname));
 
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
         if($email_redirects==null) {
