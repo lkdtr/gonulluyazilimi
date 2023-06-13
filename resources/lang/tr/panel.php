@@ -73,6 +73,7 @@ return [
     'syllabus' => 'Müfredat',
     'duration' => 'Süresi',
     'hour' => 'Saat',
+    'created_by' => 'Oluşturan',
 
     'edit' => 'Düzenle',
     'delete' => 'Sil',

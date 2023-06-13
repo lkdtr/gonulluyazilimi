@@ -74,6 +74,7 @@ return [
     'syllabus' => 'Syllabus',
     'duration' => 'Duration',
     'hour' => 'Hour',
+    'created_by' => 'Created By',
 
     'edit' => 'Edit',
     'delete' => 'Delete',
