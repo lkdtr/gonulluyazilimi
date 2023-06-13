@@ -73,8 +73,26 @@ class Controller extends BaseController
 
     }
 
+    public function tr_strtolower($str) {
+        $inArray = ["Ö", "Ç", "Ş", "Ğ", "Ü", "I", "İ"];
+        $outArray = ["ö", "ç", "ş", "ğ", "ü", "ı", "i"];
+        return strtolower(str_replace($inArray, $outArray, $str));
+    }
+
+    public function tr_strtoupper($str) {
+        $inArray = ["ö", "ç", "ş", "ğ", "ü", "ı", "i"];
+        $outArray = ["Ö", "Ç", "Ş", "Ğ", "Ü", "I", "İ"];
+        return strtoupper(str_replace($inArray, $outArray, $str));
+    }
+
     public function tr_ucwords($str) {
-        return ltrim(mb_convert_case(str_replace(array('i','I'), array('İ','ı'),mb_strtolower($str)), MB_CASE_TITLE, 'UTF-8'));
+        $str = $this->tr_strtolower($str);
+        $strArray = explode(" ", $str);
+        $newStr = "";
+        foreach ($strArray as $string) {
+            $newStr .=  $this->tr_strtoupper(mb_substr($string, 0, 1, "UTF-8"), "UTF-8").mb_substr($string, 1, 100, "UTF-8")." ";
+        }
+        return trim($newStr);
     }
 
     public function set_log($process_type="other", $process) {
