@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Cities;
 
+use Carbon\Carbon;
+
 class UserController extends Controller
 {
     /**
@@ -69,6 +71,10 @@ class UserController extends Controller
         $user->name = $this->tr_ucwords($user->name);
         $user->surname = $this->tr_ucwords($user->surname);
         $user->city_id = $request->get("city");
+
+        if($request->has("birthday")) {
+            $user->birthday = Carbon::parse($request->get("birthday"));
+        }
 
         $user->save();
 
