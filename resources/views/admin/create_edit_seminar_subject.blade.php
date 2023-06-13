@@ -23,7 +23,7 @@
                                 {{ trans("panel.subject") }}
                             </label>
                             <div class="col-md-8">
-                                <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="" required autofocus>
+                                <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{$seminarSubject->subject}}" required autofocus>
 
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">
@@ -39,8 +39,8 @@
                             </label>
                             <div class="col-md-8">
                                 <select id="type" name="type" class="form-control form-select" style="width: 100%; border: 1px solid #004153;" required>
-                                    <option value="awareness">{{ trans("panel.type_awareness") }}</option>
-                                    <option value="education">{{ trans("panel.type_education") }}</option>
+                                    <option value="awareness" {{ $seminarSubject->type == "awareness" ? "selected" : "" }}>{{ trans("panel.type_awareness") }}</option>
+                                    <option value="education" {{ $seminarSubject->type == "education" ? "selected" : "" }}>{{ trans("panel.type_education") }}</option>
                                 </select>
 
                                 @error('type')
@@ -56,7 +56,7 @@
                                 {{ trans("panel.summary") }}
                             </label>
                             <div class="col-md-8">
-                                <textarea id="summary" class="form-control @error('summary') is-invalid @enderror" name="summary" autofocus required></textarea>
+                                <textarea id="summary" class="form-control @error('summary') is-invalid @enderror" name="summary" autofocus required>{{$seminarSubject->summary}}</textarea>
 
                                 @error('subject')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                 {{ trans("panel.syllabus") }}
                             </label>
                             <div class="col-md-8">
-                                <textarea id="syllabus" class="wysiwyg form-control @error('syllabus') is-invalid @enderror" name="syllabus" autofocus></textarea>
+                                <textarea id="syllabus" class="wysiwyg form-control @error('syllabus') is-invalid @enderror" name="syllabus" autofocus>{{$seminarSubject->syllabus}}</textarea>
 
                                 @error('syllabus')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                                 {{ trans("panel.duration") }} ({{ trans("panel.hour") }})
                             </label>
                             <div class="col-md-8">
-                                <input id="duration" type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" value="" required autofocus>
+                                <input id="duration" type="number" class="form-control @error('duration') is-invalid @enderror" name="duration" value="{{$seminarSubject->duration}}" required autofocus>
 
                                 @error('duration')
                                     <span class="invalid-feedback" role="alert">

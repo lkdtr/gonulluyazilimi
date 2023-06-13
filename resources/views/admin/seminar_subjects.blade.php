@@ -29,6 +29,7 @@
                                 <th>{{ trans("panel.summary") }}</th>
                                 <th>{{ trans("panel.duration") }}</th>
                                 <th>{{ trans("panel.created_by") }}</th>
+                                <th>{{ trans("panel.updated_by") }}</th>
                                 <th>{{ trans("panel.processes") }}</th>
                             </tr>
                         </thead>
@@ -41,14 +42,15 @@
                                 <td>{{$seminarSubject->summary}}</td>
                                 <td>{{$seminarSubject->duration}} {{ trans("panel.hour") }}</td>
                                 <td>{{$seminarSubject->getCreatedBy()->name}} {{$seminarSubject->getCreatedBy()->surname}}</td>
+                                <td>{{$seminarSubject->getUpdatedBy()->name}} {{$seminarSubject->getUpdatedBy()->surname}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="{{secure_url('/seminar-subject-edit/'.$seminarSubject->id)}}">{{ trans("panel.edit") }}</a></li>
-                                            <li><a class="dropdown-item" href="{{secure_url('/seminar-subject-delete/'.$seminarSubject->id)}}">{{ trans("panel.delete") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/edit-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.edit") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/delete-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.delete") }}</a></li>
                                         </ul>
                                     </div>
                                 </td>
