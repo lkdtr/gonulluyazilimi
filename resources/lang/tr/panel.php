@@ -70,6 +70,9 @@ return [
 
     'subject' => 'Konu',
     'summary' => 'Özet',
+    'type' => 'Türü',
+    'type_awareness' => 'Farkındalık',
+    'type_education' => 'Eğitim',
     'syllabus' => 'Müfredat',
     'duration' => 'Süresi',
     'hour' => 'Saat',
