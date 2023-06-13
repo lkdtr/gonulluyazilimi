@@ -1,4 +1,5 @@
 <div style="line-height: 30px; text-align: justify;">
+    <p><br/><br/></p>
     <p>Cumhurbaşkanlığı Dijital D&ouml;n&uuml;ş&uuml;m Bilgi ve İletişim G&uuml;venliği Tedbirleri ve Genelgesi, 6698 Sayılı Kişisel Verilerin Korunması Kanunu ve ISO 27001:2013 Bilgi G&uuml;venliği Y&ouml;netim sisteminde belirtilen maddelere dayanarak Kişi;</p>
 
     <ol>
