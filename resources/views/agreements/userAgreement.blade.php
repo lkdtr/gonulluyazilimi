@@ -1,4 +1,4 @@
-<p>&nbsp;</p>
+<div style="line-height: 30px; text-align: justify;">
 <p>&nbsp;</p>
 
 <p>a) Veri Sorumlusu ve Temsilcisi</p>
@@ -45,3 +45,4 @@
 
 
 </ul>
+</div>
