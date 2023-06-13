@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 
+use App\Models\SeminarSubjects;
+
 class SeminarController extends Controller
 {
 
@@ -57,18 +59,32 @@ class SeminarController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
-
+        return view('admin.create_seminar_subject');
     }
 
-    public function postCreateSubject() {
+    public function postCreateSubject(Request $request) {
 
         if (Auth::user()->role!=1 ) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+        $validator = $request->validate([
+            'subject' => 'required',
+            'summary' => 'required',
+            'syllabus' => 'required',
+            'duration' => 'required',
+        ]);
 
+        $seminarSubject = new SeminarSubjects();
+        $seminarSubject->subject = $request->get("subject");
+        $seminarSubject->summary = $request->get("summary");
+        $seminarSubject->syllabus = $request->get("syllabus");
+        $seminarSubject->duration = $request->get("duration");
+        $seminarSubject->status = 1;
+        $seminarSubject->created_by = Auth::id();
+        $seminarSubject->save();
+
+        return Redirect::to(secure_url(route('seminar-subjects')))->with("success-status", trans("panel.successfully_saved"));
     }
 
     public function getSubjectList() {
@@ -77,7 +93,8 @@ class SeminarController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+        $seminarSubjects = SeminarSubjects::where("status", 1)->get();
 
+        return view('admin.seminar_subjects', ["seminarSubjects" => $seminarSubjects]);
     }
 }

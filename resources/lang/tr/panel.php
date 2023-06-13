@@ -15,10 +15,12 @@ return [
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
     'create_seminar_request_title' => 'Seminer Talebi Oluştur',
+    'create_seminar_subject_title' => 'Seminer Konusu Oluştur',
     'create_reference_request_title' => 'Referans Talebi Oluştur',
     'create_announcement_title' => 'Duyuru Oluştur',
     'user_infos_title' => 'Kullanıcı Bilgileri',
     'seminar_requests_title' => 'Seminer Talepleri',
+    'seminar_subjects_title' => 'Seminer Konuları',
     'reference_requests_title' => 'Referans Talepleri',
     'announcements_title' => 'Duyurular',
 
@@ -66,4 +68,13 @@ return [
     'user_2' => 'Yönetici',
     'user_3' => 'Kullanıcı',
 
+    'subject' => 'Konu',
+    'summary' => 'Özet',
+    'syllabus' => 'Müfredat',
+    'duration' => 'Süresi',
+    'hour' => 'Saat',
+    'created_by' => 'Oluşturan',
+
+    'edit' => 'Düzenle',
+    'delete' => 'Sil',
 ];
