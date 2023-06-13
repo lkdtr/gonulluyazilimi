@@ -23,7 +23,7 @@ return [
     'seminar_subjects_title' => 'Seminar Subjects',
     'reference_requests_title' => 'Membership Reference Requests',
     'announcements_title' => 'Announcements',
-
+    'process_logs_title' => 'Process Logs',
 
     'set_owner_role_success' => 'Owner role has been set success',
     'set_owner_role_failed' => 'Owner role has been set failed',
@@ -82,5 +82,18 @@ return [
 
     'edit' => 'Edit',
     'delete' => 'Delete',
+
+    'process_logs' => 'Process Logs',
+
+    'process_type_create' => 'Create',
+    'process_type_change' => 'Change',
+    'process_type_delete' => 'Delete',
+    'process_type_other' => 'Other',
+    'process_type_' => '-',
+
+    'process_type' => 'Process Type',
+    'process' => 'Process',
+    'process_by' => 'Process By',
+    'process_at' => 'Process At',
 
 ];

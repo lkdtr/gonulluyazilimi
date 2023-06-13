@@ -12,4 +12,12 @@ class ProcessLogs extends Model
     protected $connection = 'mysql';
     protected $table = 'process_logs';
     protected $primaryKey = 'id';
+
+    public function getProcessBy() {
+        if($this->process_by==0) {
+            $res = ["name"=>"", "surname" => ""];
+            return (object) $res;
+        }
+        return $this->hasOne('App\Models\User', 'id', 'process_by')->first();
+    }
 }

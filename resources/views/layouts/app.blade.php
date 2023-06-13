@@ -102,6 +102,10 @@
                                         {{ trans("panel.users") }}
                                     </a>
                                     <hr style="margin: 5px; color: #999;">
+                                    <a class="dropdown-item" href="{{ route('process-logs') }}">
+                                        {{ trans("panel.process_logs") }}
+                                    </a>
+                                    <hr style="margin: 5px; color: #999;">
                                     <a class="dropdown-item" href="{{ route('announcements') }}">
                                         {{ trans("panel.announcements") }}
                                     </a>

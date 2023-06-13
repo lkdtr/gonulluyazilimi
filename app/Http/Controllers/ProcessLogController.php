@@ -43,7 +43,7 @@ class ProcessLogController extends Controller
 
         $processLogs = ProcessLogs::all();
 
-        dump($processLogs);
+        return view('admin.process_logs', ["processLogs" => $processLogs]);
     }
 
 }

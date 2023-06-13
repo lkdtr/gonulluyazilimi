@@ -60,6 +60,8 @@ class MobileVerificationController extends Controller
         $contactPermission->verified = true;
         $contactPermission->save();
 
+        $this->set_log("other", $phone_number. " telefon numarası doğrulandı");
+
         return $this->output("json", ['status' => true]);
     }
 
