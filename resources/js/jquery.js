@@ -3,6 +3,7 @@ window.$ = window.jQuery = $;
 
 import 'inputmask';
 import 'jquery-datetimepicker';
+import 'datatables.net-bs4';
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
@@ -18,6 +19,8 @@ jQuery(function () {
         mask: true,
         dayOfWeekStart: 1
     });
+
+    $('table').dataTable();
 
     function passwordChecker(input, alertbox) {
 
