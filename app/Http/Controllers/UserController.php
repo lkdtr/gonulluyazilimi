@@ -66,8 +66,8 @@ class UserController extends Controller
         ]);
 
         $user = User::where("id", $user_id)->first();
-        $user->name = ucwords(mb_strtolower($user->name));
-        $user->surname = ucwords(mb_strtolower($user->surname));
+        $user->name = $this->tr_ucwords($user->name);
+        $user->surname = $this->tr_ucwords($user->surname);
         $user->city_id = $request->get("city");
 
         $user->save();
