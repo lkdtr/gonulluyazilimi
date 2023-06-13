@@ -61,14 +61,15 @@ jQuery(function () {
 
     $("#phone_number").on("change", function () {
 
-        $("#phone_number_validation_block").show();
         $("#hidden_phone_number").val($("#phone_number").val());
 
         var phone_number = $("#hidden_phone_number").val();
 
-        if(phone_number.length < 6) {
+        if (phone_number.length < 6) {
             return false;
         }
+
+        $("#phone_number_validation_block").show();
 
         $.ajax({
             url: "/phone-number-verification-request",
