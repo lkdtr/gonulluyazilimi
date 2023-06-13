@@ -46,8 +46,8 @@ return [
     "seminar_subjects" => "Seminer Konuları",
     "new_seminar_subject" => "Seminer Konusu Ekle",
 
-    'create_reference_request' => 'Referans Talebi Oluştur',
-    "reference_requests" => "Referans Talepleri",
+    'create_reference_request' => 'Üyelik Referans Talebi Oluştur',
+    "reference_requests" => "Üyelik Referans Talepleri",
 
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',
