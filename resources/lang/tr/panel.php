@@ -77,6 +77,7 @@ return [
     'duration' => 'Süresi',
     'hour' => 'Saat',
     'created_by' => 'Oluşturan',
+    'updated_by' => 'Güncelleyen',
 
     'edit' => 'Düzenle',
     'delete' => 'Sil',
