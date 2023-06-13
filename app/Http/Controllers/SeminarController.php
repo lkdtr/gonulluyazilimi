@@ -71,12 +71,12 @@ class SeminarController extends Controller
         $validator = $request->validate([
             'subject' => 'required',
             'summary' => 'required',
-            'syllabus' => 'required',
             'duration' => 'required',
         ]);
 
         $seminarSubject = new SeminarSubjects();
         $seminarSubject->subject = $request->get("subject");
+        $seminarSubject->type = $request->get("type");
         $seminarSubject->summary = $request->get("summary");
         $seminarSubject->syllabus = $request->get("syllabus");
         $seminarSubject->duration = $request->get("duration");

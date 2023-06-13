@@ -25,6 +25,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>{{ trans("panel.subject") }}</th>
+                                <th>{{ trans("panel.type") }}</th>
                                 <th>{{ trans("panel.summary") }}</th>
                                 <th>{{ trans("panel.duration") }}</th>
                                 <th>{{ trans("panel.created_by") }}</th>
@@ -36,6 +37,7 @@
                             <tr>
                                 <td>{{$seminarSubject->id}}</td>
                                 <td>{{$seminarSubject->subject}}</td>
+                                <td>{{trans("panel.type_".$seminarSubject->type)}}</td>
                                 <td>{{$seminarSubject->summary}}</td>
                                 <td>{{$seminarSubject->duration}} {{ trans("panel.hour") }}</td>
                                 <td>{{$seminarSubject->getCreatedBy()->name}} {{$seminarSubject->getCreatedBy()->surname}}</td>
