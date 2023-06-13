@@ -29,6 +29,7 @@
                                 <th>{{ trans("panel.summary") }}</th>
                                 <th>{{ trans("panel.duration") }}</th>
                                 <th>{{ trans("panel.created_by") }}</th>
+                                <th>{{ trans("panel.updated_by") }}</th>
                                 <th>{{ trans("panel.processes") }}</th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                 <td>{{$seminarSubject->summary}}</td>
                                 <td>{{$seminarSubject->duration}} {{ trans("panel.hour") }}</td>
                                 <td>{{$seminarSubject->getCreatedBy()->name}} {{$seminarSubject->getCreatedBy()->surname}}</td>
+                                <td>{{$seminarSubject->getUpdatedBy()->name}} {{$seminarSubject->getUpdatedBy()->surname}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
