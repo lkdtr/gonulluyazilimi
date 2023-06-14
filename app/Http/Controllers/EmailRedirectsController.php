@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\EmailRedirects;
 
 use Epigra\TcKimlik;
+use Carbon\Carbon;
 
 class EmailRedirectsController extends Controller
 {
@@ -72,7 +73,7 @@ class EmailRedirectsController extends Controller
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $user->birthday = date("Y-m-d", strtotime($birthday));
+        $user->birthday = Carbon::parse($birthday);
         $user->name = $this->tr_ucwords($name);
         $user->surname = $this->tr_ucwords($surname);
         $user->save();
