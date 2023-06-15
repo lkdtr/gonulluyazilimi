@@ -12,6 +12,13 @@
                 </div>
             @endif
 
+            @if (session('success-status'))
+                <div class="alert alert-success d-flex" role="alert">
+                    <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    <div>{{ session('success-status') }}</div>
+                </div>
+            @endif
+
             @if (session('forwarding-success'))
                 <div class="alert alert-success d-flex" role="alert">
                     <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>

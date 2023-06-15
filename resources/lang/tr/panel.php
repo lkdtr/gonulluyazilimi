@@ -12,6 +12,13 @@ return [
     'email_redirects_exist_info' => 'E-posta yönlendirmenizi güncellemek için tıklayın.',
     'email_redirects_info_box' => 'E-posta yönlendirme nedir? E-posta adresinize gelen e-postaları istediğiniz herhangi bir e-posta adresine otomatik olarak gönderme işlemidir. ad.soyad@penguen.org.tr adresine gelen e-postalar, otomatikmen sizin kayıtlı e-posta adresinize otomatik olarak gönderilir.',
     'email_redirects_info_required' => 'E-posta yönlendirme servisini kullanabilmeniz için kimlik bilgilerinizi doğrulatmanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
+    'reference_request_info_required' => 'Dernek üyeliği için referans talebinde bulunmak için kimlik bilgilerinizi doğrulamanız gerekmektedir. Bilgileriniz NVİ sisteminden doğrulanacaktır.',
+    'lkd_user_info' => 'Dernek üyesi olduğunuz için referans talebinde bulunamazsınız.',
+    'reference_request_saved_info' => 'Üyelik için referans talebiniz alındı. Yeni talepte bulunamazsınız.',
+
+    'reference_requests_success' => 'Referans talebiniz kaydedildi.',
+    'reference_requests_failed' => 'Referans talebiniz kaydedilemedi.',
+
     'email_redirects_title' => 'Kimlik bilgilerinizi doğrulayın',
     'email_forwarding_title' => 'E-posta adresinizi seçin',
     'create_seminar_request_title' => 'Seminer Talebi Oluştur',

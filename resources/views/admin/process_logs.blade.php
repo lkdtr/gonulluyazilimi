@@ -34,7 +34,7 @@
                             @foreach ($processLogs as $processLog)
                             <tr>
                                 <td>{{$processLog->id}}</td>
-                                <td>{{trans("panel.process_type_".$processLog->type)}}</td>
+                                <td>{{trans("panel.process_type_".$processLog->process_type)}}</td>
                                 <td>{{$processLog->process}}</td>
                                 <td>{{$processLog->getProcessBy()->name}} {{$processLog->getProcessBy()->surname}}</td>
                                 <td>{{date("d-m-Y H:i:s", strtotime($processLog->created_at))}}</td>

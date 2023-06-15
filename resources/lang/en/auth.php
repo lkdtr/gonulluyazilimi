@@ -56,6 +56,8 @@ return [
     'please_select' => 'Please select',
     'out_of_turkey' => 'Out of Turkey',
 
+    'lkd_user_id' => 'LKD User No',
+
     'all_fields_are_required_to_fill' => 'All fields are required to fill',
 
 ];

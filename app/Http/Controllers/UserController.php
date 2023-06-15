@@ -76,6 +76,10 @@ class UserController extends Controller
             $user->birthday = Carbon::parse($request->get("birthday"));
         }
 
+        if($request->has("lkd_user_id")) {
+            $user->lkd_user_id = $request->get("lkd_user_id");
+        }
+
         $user->save();
 
         return Redirect::back()->with("status", trans("panel.successfully_saved"));

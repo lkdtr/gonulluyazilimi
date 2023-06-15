@@ -56,5 +56,7 @@ return [
     'please_select' => 'Lütfen seçin',
     'out_of_turkey' => 'Türkiye dışı',
 
+    'lkd_user_id' => 'LKD Üye No',
+
     'all_fields_are_required_to_fill' => 'Bütün alanların doldurulması zorunludur.',
 ];
