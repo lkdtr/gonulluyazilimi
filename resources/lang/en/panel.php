@@ -12,6 +12,13 @@ return [
     'email_redirects_exist_info' => 'Click to update your e-mail forwarding.',
     'email_redirects_info_box' => 'What is email forwarding? It is the process of automatically sending the e-mails that come to your e-mail address to any e-mail address you want. E-mails sent to ad.surname@penguen.org.tr are automatically sent to your registered e-mail address.',
     'email_redirects_info_required' => 'You must verify your credentials for use the e-mail forwarding service. Your information will be verified from the NVI system.',
+    'reference_request_info_required' => 'In order to request a reference for association membership, you must verify your identity information. Your information will be verified from the NVI system.',
+    'lkd_user_info' => 'You cannot request a reference because you are a member of the association.',
+    'reference_request_saved_info' => 'Your reference request for membership has been received. You cannot make a new request.',
+
+    'reference_requests_success' => '',
+    'reference_requests_failed' => '',
+
     'email_redirects_title' => 'Verify your credentials',
     'email_forwarding_title' => 'Choose email address',
     'create_seminar_request_title' => 'Create Seminar Request',

@@ -58,6 +58,33 @@
                                 <span class="form-control">{{$user->phone_number}}</span>
                             </div>
                         </div>
+
+                        @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
+                        <div class="row mb-3">
+                            <label for="lkd_user_id" class="col-md-4 col-form-label text-md-end">
+                                {{ trans("auth.lkd_user_id") }}
+                            </label>
+                            <div class="col-md-6">
+                                <input id="lkd_user_id" type="text" class="form-control @error('lkd_user_id') is-invalid @enderror" name="lkd_user_id" value="{{ $user->lkd_user_id }}" required autocomplete="lkd_user_id" autofocus>
+
+                                @error('lkd_user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        @elseif($user->lkd_user_id>0)
+                        <div class="row mb-3">
+                            <label for="lkd_user_id" class="col-md-4 col-form-label text-md-end">
+                                {{ trans("auth.lkd_user_id") }}
+                            </label>
+                            <div class="col-md-6">
+                                <span class="form-control">{{$user->lkd_user_id}}</span>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="row mb-3">
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">
                                 {{ trans("auth.birthday") }}
