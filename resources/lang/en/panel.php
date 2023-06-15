@@ -74,7 +74,8 @@ return [
 
     'user_1' => 'Owner',
     'user_2' => 'Manager',
-    'user_3' => 'Kullanıcı',
+    'user_3' => 'User',
+    'lkd_user' => 'LKD Member',
 
     'subject' => 'Subject',
     'summary' => 'Summary',

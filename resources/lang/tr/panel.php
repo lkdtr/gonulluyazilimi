@@ -75,6 +75,7 @@ return [
     'user_1' => 'Sahip',
     'user_2' => 'Yönetici',
     'user_3' => 'Kullanıcı',
+    'lkd_user' => 'LKD Üyesi',
 
     'subject' => 'Konu',
     'summary' => 'Özet',

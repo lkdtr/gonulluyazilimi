@@ -41,7 +41,7 @@
                                 <td>{{$user->surname}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}}</td>
-                                <td>{{trans("panel.user_".$user->role)}}</td>
+                                <td>{{trans("panel.user_".$user->role)}} @if($user->lkd_user_id>0) ({{trans("panel.lkd_user")}}) @endif</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
                                 <td>
                                     <div class="dropdown">
