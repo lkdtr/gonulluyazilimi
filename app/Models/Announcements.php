@@ -12,4 +12,20 @@ class Announcements extends Model
     protected $connection = 'mysql';
     protected $table = 'announcements';
     protected $primaryKey = 'id';
+
+    public function getCreatedBy() {
+        if($this->created_by==0) {
+            $res = ["name"=>"", "surname" => ""];
+            return (object) $res;
+        }
+        return $this->hasOne('App\Models\User', 'id', 'created_by')->first();
+    }
+
+    public function getUpdatedBy() {
+        if($this->updated_by==0) {
+            $res = ["name"=>"", "surname" => ""];
+            return (object) $res;
+        }
+        return $this->hasOne('App\Models\User', 'id', 'updated_by')->first();
+    }
 }

@@ -10,7 +10,7 @@
                 <div class="card-body">
 
                     @if($user->lkd_user_id > 0)
-                        <div class="alert alert-danger d-flex">
+                        <div class="alert alert-warning d-flex">
                             <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                             <div>{{ trans("panel.lkd_user_info") }}</div>
                         </div>
