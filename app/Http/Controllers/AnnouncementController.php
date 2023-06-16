@@ -36,8 +36,8 @@ class AnnouncementController extends Controller
 
     public function getCreate() {
 
-        return view('admin.create_announcement');
-
+        $announcement = new Announcements();
+        return view('admin.create_edit_announcement', ["announcement" => $announcement]);
     }
 
     public function postCreate() {
