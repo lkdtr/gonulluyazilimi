@@ -85,8 +85,11 @@ return [
     'syllabus' => 'Müfredat',
     'duration' => 'Süresi',
     'hour' => 'Saat',
+
     'created_by' => 'Oluşturan',
     'updated_by' => 'Güncelleyen',
+    'created_at' => 'Oluşturma Tarihi',
+    'updated_at' => 'Güncelleme Tarihi',
 
     'edit' => 'Düzenle',
     'delete' => 'Sil',

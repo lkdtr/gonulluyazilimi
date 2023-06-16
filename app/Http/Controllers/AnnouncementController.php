@@ -70,7 +70,9 @@ class AnnouncementController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return view('admin.announcements');
+        $announcements = Announcements::where("status", 1)->get();
+
+        return view('admin.announcements', ["announcements" => $announcements]);
 
     }
 

@@ -20,6 +20,27 @@
                         </div>
                     @endif
 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>{{ trans("panel.created_by") }}</th>
+                                <th>{{ trans("panel.created_at") }}</th>
+                                <th>{{ trans("panel.updated_by") }}</th>
+                                <th>{{ trans("panel.updated_at") }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($referenceRequests as $referenceRequest)
+                            <tr>
+                                <td>{{$referenceRequest->id}}</td>
+                                <td>{{$referenceRequest->getCreatedBy()->name}} {{$referenceRequest->getCreatedBy()->surname}}</td>
+                                <td>{{date("d-m-Y H:i:s", strtotime($referenceRequest->created_at))}}</td>
+                                <td>{{$referenceRequest->getUpdatedBy()->name}} {{$referenceRequest->getUpdatedBy()->surname}}</td>
+                                <td>{{date("d-m-Y H:i:s", strtotime($referenceRequest->updated_at))}}</td>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
