@@ -124,15 +124,15 @@ class EmailRedirectsController extends Controller
         ]);
 
         $email_alias = $request->get("email_alias");
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
 
         if($email_alias == $email_redirects->email_alias) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
         }
 
-        $user_id = Auth::id();
-        $user = User::where("id", $user_id)->first();
-
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
         $email_redirects->email_alias = $email_alias;
         $email_redirects->save();
 
