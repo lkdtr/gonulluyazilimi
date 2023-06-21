@@ -7,8 +7,13 @@ return [
 
     'email_forwarding_success' => 'Your email forwarding has been successfully registered',
     'email_forwarding_failed' => 'Your email forwarding could not be saved',
+    'email_forwarding_notchange' => 'Your email forwarding has not been changed',
 
     'email_forwarding' => 'E-mail forwarding',
+    'send_penguen_welcome' => 'Send Penguin Welcome Email',
+
+    'send_penguen_welcome_success' => 'Penguin Welcome email sent successfully',
+    'send_penguen_welcome_failed' => 'Failed to send Penguin Welcome email',
 
     'email_redirects_info' => 'Your name.surname@penguen.org.tr e-mail forwarding is not active. Click to activate.',
     'email_redirects_exist_info' => 'Click to update your e-mail forwarding.',

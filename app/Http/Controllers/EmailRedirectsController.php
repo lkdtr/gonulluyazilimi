@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\PenguenWelcome;
 
 use App\Models\User;
 use App\Models\EmailRedirects;
@@ -120,13 +123,26 @@ class EmailRedirectsController extends Controller
             'agreement' => ['required']
         ]);
 
+        $email_alias = $request->get("email_alias");
+
+        if($email_alias == $email_redirects->email_alias) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
+        }
+
         $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
-        $email_redirects->email_alias = $request->get("email_alias");
+        $email_redirects->email_alias = $email_alias;
         $email_redirects->save();
 
         $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
         if($result) {
+
+            $user->alias = $email_redirects->email_alias;
+            Mail::to($email_redirects->email_alias)->send(new PenguenWelcome($user));
+            $this->set_log("other", $email_redirects->email_alias." adresine yönlendirme başarılı e-postası gönderildi");
+
             $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklendi");
             return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_success"));
         }
