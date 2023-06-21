@@ -32,6 +32,9 @@ class HomeController extends Controller
         $user_id = Auth::id();
         $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->where("status", 1)->first();
         $announcements = Announcements::where("status", 1)->whereRaw('finished_at > NOW()')->orderBy("id", "DESC")->get();
+
+        $this->set_log("other", Auth::user()->email." giriş yaptı");
+
         return view('home', [
             "announcements" => $announcements,
             "email_redirect_is_exist" => $email_redirect_is_exist,
