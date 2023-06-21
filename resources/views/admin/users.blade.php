@@ -51,6 +51,11 @@
                                         <ul class="dropdown-menu pull-left">
                                             <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
 
+                                            @if($user->getEmailRedirects()->email_alias!="")
+                                                <hr style="margin: 5px; color: #999;">
+                                                <li><a class="dropdown-item" href="{{secure_url('/send-penguen-welcome/'.$user->id)}}">{{ trans("panel.send_penguen_welcome") }}</a></li>
+                                            @endif
+
                                             @if( Auth::user()->role==1)
                                             <hr style="margin: 5px; color: #999;">
                                             <li><a class="dropdown-item" href="{{secure_url('/set-owner-role/'.$user->id)}}">{{ trans("panel.set_owner_role") }}</a></li>

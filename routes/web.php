@@ -30,6 +30,8 @@ Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificati
 
 Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
 
+Route::get('/send-penguen-welcome/{user_id}', [App\Http\Controllers\AdminController::class, 'sendPenguenWelcome'])->name('send-penguen-welcome');
+
 Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setManagerRole'])->name('set-manager-role');
 Route::get('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setOwnerRole'])->name('set-owner-role');
 Route::get('/set-user-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setUserRole'])->name('set-user-role');

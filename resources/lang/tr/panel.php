@@ -7,8 +7,13 @@ return [
 
     'email_forwarding_success' => 'E-posta yönlendirmeniz başarı ile kaydedildi',
     'email_forwarding_failed' => 'E-posta yönlendirmeniz kaydedilemedi',
+    'email_forwarding_notchange' => 'E-posta yönlendirmeniz değiştirlmedi',
 
     'email_forwarding' => 'E-posta yönlendirmesi',
+    'send_penguen_welcome' => 'Penguen Hoş Geldin E-postası Gönder',
+
+    'send_penguen_welcome_success' => 'Penguen Hoş Geldin e-postası başarı ile gönderildi',
+    'send_penguen_welcome_failed' => 'Penguen Hoş Geldin e-postası gönderilemedi',
 
     'email_redirects_info' => 'ad.soyad@penguen.org.tr e-posta yönlendirmenizi aktif değil. Aktif etmek için tıklayın.',
     'email_redirects_exist_info' => 'E-posta yönlendirmenizi güncellemek için tıklayın.',

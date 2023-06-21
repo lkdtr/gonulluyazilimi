@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\Welcome;
 
 class RegisterController extends Controller
 {
@@ -68,6 +72,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $data = new \stdClass();
+        $data->name = $this->tr_ucwords($data['name']);
+        $data->surname = $this->tr_ucwords($data['surname']);
+        $data->email = strtolower($data['email']);
+
+        Mail::to($data->email)->send(new Welcome($data));
+        $this->set_log("other", $data->email ." adresine hoş geldiniz e-postası gönderildi");
+
         return User::create([
             'name' => $this->tr_ucwords($data['name']),
             'surname' => $this->tr_ucwords($data['surname']),
