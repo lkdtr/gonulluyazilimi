@@ -72,16 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-        $data = new \stdClass();
-        $data->name = $this->tr_ucwords($data['name']);
-        $data->surname = $this->tr_ucwords($data['surname']);
-        $data->email = strtolower($data['email']);
-
-        Mail::to($data->email)->send(new Welcome($data));
-        $this->set_log("other", $data->email ." adresine hoş geldiniz e-postası gönderildi");
-
-        return User::create([
+        $user = User::create([
             'name' => $this->tr_ucwords($data['name']),
             'surname' => $this->tr_ucwords($data['surname']),
             'national_id' => $data['national_id'],
@@ -91,5 +82,10 @@ class RegisterController extends Controller
             'agreement_at' =>  \Carbon\Carbon::now(),
             'phone_number_verified_at' =>  \Carbon\Carbon::now(),
         ]);
+
+        Mail::to($user->email)->send(new Welcome($user));
+        $this->set_log("other", $user->email ." adresine hoş geldiniz e-postası gönderildi");
+
+        return $user;
     }
 }
