@@ -5,7 +5,9 @@ return [
     'available_events_title' => 'Mevcut Etkinlikler',
     'available_announcements_title' => 'Mevcut Duyurular',
 
-    'email_forwarding_result' => 'E-posta yönlendirmeniz başarı ile kaydedildi',
+    'email_forwarding_success' => 'E-posta yönlendirmeniz başarı ile kaydedildi',
+    'email_forwarding_failed' => 'E-posta yönlendirmeniz kaydedilemedi',
+
     'email_forwarding' => 'E-posta yönlendirmesi',
 
     'email_redirects_info' => 'ad.soyad@penguen.org.tr e-posta yönlendirmenizi aktif değil. Aktif etmek için tıklayın.',
@@ -90,6 +92,8 @@ return [
     'updated_by' => 'Güncelleyen',
     'created_at' => 'Oluşturma Tarihi',
     'updated_at' => 'Güncelleme Tarihi',
+
+    'request_ip' => 'IP Adresi',
 
     'edit' => 'Düzenle',
     'delete' => 'Sil',
