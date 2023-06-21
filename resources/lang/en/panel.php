@@ -5,7 +5,9 @@ return [
     'available_events_title' => 'Available Events',
     'available_announcements_title' => 'Available Announcements',
 
-    'email_forwarding_result' => 'Your email forwarding has been successfully registered',
+    'email_forwarding_success' => 'Your email forwarding has been successfully registered',
+    'email_forwarding_failed' => 'Your email forwarding could not be saved',
+
     'email_forwarding' => 'E-mail forwarding',
 
     'email_redirects_info' => 'Your name.surname@penguen.org.tr e-mail forwarding is not active. Click to activate.',
@@ -90,6 +92,8 @@ return [
     'updated_by' => 'Updated By',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
+
+    'request_ip' => 'Request Ip',
 
     'edit' => 'Edit',
     'delete' => 'Delete',

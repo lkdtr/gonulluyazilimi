@@ -12,8 +12,12 @@ use App\Models\EmailRedirects;
 use Epigra\TcKimlik;
 use Carbon\Carbon;
 
+use App\Traits\PostfixAdmin;
+
 class EmailRedirectsController extends Controller
 {
+    use PostfixAdmin;
+
     /**
      * Create a new controller instance.
      *
@@ -123,7 +127,12 @@ class EmailRedirectsController extends Controller
 
         $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklendi");
 
-        return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_result"));
+        $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
+        if($result) {
+            return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_success"));
+        }
+
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_failed"));
     }
 
 }

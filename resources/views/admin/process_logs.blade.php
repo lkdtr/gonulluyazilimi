@@ -26,6 +26,7 @@
                                 <th>ID</th>
                                 <th>{{ trans("panel.process_type") }}</th>
                                 <th>{{ trans("panel.process") }}</th>
+                                <th>{{ trans("panel.request_ip") }}</th>
                                 <th>{{ trans("panel.process_by") }}</th>
                                 <th>{{ trans("panel.process_at") }}</th>
                             </tr>
@@ -36,6 +37,7 @@
                                 <td>{{$processLog->id}}</td>
                                 <td>{{trans("panel.process_type_".$processLog->process_type)}}</td>
                                 <td>{{$processLog->process}}</td>
+                                <td>{{$processLog->request_ip}}</td>
                                 <td>{{$processLog->getProcessBy()->name}} {{$processLog->getProcessBy()->surname}}</td>
                                 <td>{{date("d-m-Y H:i:s", strtotime($processLog->created_at))}}</td>
                             @endforeach

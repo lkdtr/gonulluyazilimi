@@ -44,4 +44,10 @@ return [
         'timeout'    => 60,
     ],
 
+    'postfixadmin' => [
+        'server' => env('POSTFIXADMIN_SERVER'),
+        'username' => env('POSTFIXADMIN_USERNAME'),
+        'password' => env('POSTFIXADMIN_PASSWORD'),
+    ],
+
 ];
