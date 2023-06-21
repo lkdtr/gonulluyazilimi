@@ -7,7 +7,7 @@ return [
 
     'email_forwarding_success' => 'E-posta yönlendirmeniz başarı ile kaydedildi',
     'email_forwarding_failed' => 'E-posta yönlendirmeniz kaydedilemedi',
-    'email_forwarding_notchange' => 'E-posta yönlendirmeniz değiştirlmedi',
+    'email_forwarding_notchange' => 'E-posta yönlendirmeniz değiştirilmedi',
 
     'email_forwarding' => 'E-posta yönlendirmesi',
     'send_penguen_welcome' => 'Penguen Hoş Geldin E-postası Gönder',
