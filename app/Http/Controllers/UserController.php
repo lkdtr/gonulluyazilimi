@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Cities;
 
+use Epigra\TcKimlik;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -74,6 +75,23 @@ class UserController extends Controller
 
         if($request->has("birthday")) {
             $user->birthday = Carbon::parse($request->get("birthday"));
+        }
+
+        if($request->has("national_id")) {
+            $user->national_id = $request->get("national_id");
+
+            $birty_year = date("Y", strtotime($user->birthday));
+
+            $data = [
+                'tcno'          => $user->national_id,
+                'isim'          => $user->name,
+                'soyisim'       => $user->surname,
+                'dogumyili'     => $birty_year,
+            ];
+
+            if (!TcKimlik::validate($data)) {
+                return back()->withErrors(["national_id" => "TC Kimlik Numarası vermiş olduğunuz kimlik bilgilerinizle eşleşmiyor"])->withInput();
+            }
         }
 
         if($request->has("lkd_user_id")) {
