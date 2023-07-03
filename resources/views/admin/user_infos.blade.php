@@ -39,7 +39,21 @@
                                 {{ trans("auth.national_id") }}
                             </label>
                             <div class="col-md-6">
-                                <span class="form-control">{{$user->national_id}}</span>
+                                @if($user->national_id != "")
+
+                                    <span class="form-control">{{$user->national_id}}</span>
+
+                                @else
+
+                                    <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
+
+                                    @error('national_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
+                                @endif
                             </div>
                         </div>
                         <div class="row mb-3">
