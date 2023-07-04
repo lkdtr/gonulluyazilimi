@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 use App\Mail\PenguenWelcome;
 
@@ -137,6 +138,9 @@ class EmailRedirectsController extends Controller
         $email_redirects->save();
 
         $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
+
+        Log::info($result);
+
         if($result) {
 
             $user->alias = $email_redirects->email_alias;
