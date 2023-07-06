@@ -38,6 +38,7 @@ return [
     'reference_requests_title' => 'Membership Reference Requests',
     'announcements_title' => 'Announcements',
     'process_logs_title' => 'Process Logs',
+    'become_university_volunteer_title' => 'Become Our University Volunteer',
 
     'set_owner_role_success' => 'Owner role has been set success',
     'set_owner_role_failed' => 'Owner role has been set failed',
@@ -65,6 +66,8 @@ return [
 
     'create_reference_request' => 'Create Membership Reference Request',
     "reference_requests" => "Membership Reference Requests",
+
+    "become_university_volunteer" => "Become an University Volunteer",
 
     "users_title" => 'Users',
     'users' => 'Users',
