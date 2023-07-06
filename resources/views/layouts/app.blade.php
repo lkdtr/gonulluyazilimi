@@ -88,6 +88,10 @@
                                 <a class="dropdown-item" href="{{ route('create-reference-request') }}">
                                     {{ trans("panel.create_reference_request") }}
                                 </a>
+                                <hr style="margin: 5px; color: #999;">
+                                <a class="dropdown-item" href="{{ route('become-university-volunteer') }}">
+                                    {{ trans("panel.become_university_volunteer") }}
+                                </a>
 
                             </div>
                         </li>

@@ -70,3 +70,5 @@ Route::post('/create-reference-request', [App\Http\Controllers\ReferenceControll
 
 Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, 'getList'])->name('process-logs');
 
+Route::get('/become-university-volunteer', [App\Http\Controllers\UniversityVolunteerController::class, 'getBecomeVolunteer'])->name('become-university-volunteer');
+Route::post('/become-university-volunteer', [App\Http\Controllers\UniversityVolunteerController::class, 'postBecomeVolunteer']);
