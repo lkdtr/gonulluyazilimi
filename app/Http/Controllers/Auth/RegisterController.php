@@ -74,7 +74,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $this->tr_ucwords($data['name']),
             'surname' => $this->tr_ucwords($data['surname']),
-            'national_id' => "",
+            'national_id' => null,
             'email' => strtolower($data['email']),
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
