@@ -74,7 +74,7 @@ class UserController extends Controller
         $user->city_id = $request->get("city");
 
         if($request->has("birthday")) {
-            $user->birthday = Carbon::parse($request->get("birthday"));
+            $user->birthday = Carbon::parse($request->get("birthday"))->format("Y-m-d");
         }
 
         if($request->has("national_id")) {
