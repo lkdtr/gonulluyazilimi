@@ -49,6 +49,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'phone_number_verified_at' => 'datetime',
         'agreement_at' => 'datetime',
+        'birthday' => 'date',
     ];
 
     public function getEmailRedirects() {
