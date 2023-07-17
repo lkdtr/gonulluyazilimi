@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 
-class UniversityVolunteerController extends Controller
+class LkdYoungController extends Controller
 {
 
     public function __construct()
@@ -25,17 +25,17 @@ class UniversityVolunteerController extends Controller
         });
     }
 
-    public function getBecomeVolunteer() {
+    public function getJoinLkdYoung() {
 
         if (Auth::user()->role!=1 ) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
         }
 
-        return view('user.become_volunteer');
+        return view('user.join_lkd_young');
 
     }
 
-    public function postBecomeVolunteer(Request $request) {
+    public function postJoinLkdYoung(Request $request) {
 
         return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
 

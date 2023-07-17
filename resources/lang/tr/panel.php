@@ -38,7 +38,7 @@ return [
     'reference_requests_title' => 'Referans Talepleri',
     'announcements_title' => 'Duyurular',
     'process_logs_title' => 'İşlem Hareketleri',
-    'become_university_volunteer_title' => 'Üniversite Gönüllümüz Olun',
+    'join_lkd_young_title' => 'LKD Genç\'e katıl',
 
     'set_owner_role_success' => 'Sahip rolü başarıyla belirlendi',
     'set_owner_role_failed' => 'Sahip rolü başarısız oldu',
@@ -67,7 +67,7 @@ return [
     'create_reference_request' => 'Üyelik Referans Talebi Oluştur',
     "reference_requests" => "Üyelik Referans Talepleri",
 
-    "become_university_volunteer" => "Üniversite Gönüllümüz Olun",
+    "join_lkd_young" => "LKD Genç\'e katıl",
 
     'users_title' => 'Kullanıcılar',
     'users' => 'Kullanıcılar',

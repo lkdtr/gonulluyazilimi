@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans("panel.become_university_volunteer_title") }}</div>
+                <div class="card-header">{{ trans("panel.join_lkd_young_title") }}</div>
                 <div class="card-body">
 
                     @if (session('status'))
