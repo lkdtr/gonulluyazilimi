@@ -36,8 +36,8 @@
                 @endif
             @endif
 
-            <div class="card border-primary">
-                <div class="card-header text-white bg-primary">{{ trans("panel.available_announcements_title") }}</div>
+            <div class="card border-secondary">
+                <div class="card-header text-white bg-secondary">{{ trans("panel.available_announcements_title") }}</div>
 
                 <div class="card-body">
                     @if (session('status'))

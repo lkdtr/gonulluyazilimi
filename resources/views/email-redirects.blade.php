@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-            <div class="card border-primary">
-                <div class="card-header text-white bg-primary">{{ trans("panel.email_redirects_title") }}</div>
+            <div class="card border-secondary">
+                <div class="card-header text-white bg-secondary">{{ trans("panel.email_redirects_title") }}</div>
                 <div class="card-body">
 
                     <div class="alert alert-info d-flex">
