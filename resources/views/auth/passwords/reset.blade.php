@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ trans("auth.reset_password_title") }}</div>
+            <div class="card border-primary">
+                <div class="card-header text-white bg-primary">{{ trans("auth.reset_password_title") }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">
