@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card border-primary">
-                <div class="card-header text-white bg-primary">{{ __('Confirm Password') }}</div>
+            <div class="card border-secondary">
+                <div class="card-header text-white bg-secondary">{{ __('Confirm Password') }}</div>
 
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
