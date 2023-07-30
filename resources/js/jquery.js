@@ -25,7 +25,10 @@ jQuery(function () {
         dayOfWeekStart: 1
     });
 
-    $('table').dataTable({ language: languageTR });
+    $('table').dataTable({
+        language: languageTR,
+        pageLength: 25
+     });
 
     new FroalaEditor('.wysiwyg', {
         height: 500
