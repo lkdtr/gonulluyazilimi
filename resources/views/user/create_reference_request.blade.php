@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-            <div class="card">
-                <div class="card-header">{{ trans("panel.create_reference_request_title") }}</div>
+            <div class="card border-primary">
+                <div class="card-header text-white bg-primary">{{ trans("panel.create_reference_request_title") }}</div>
                 <div class="card-body">
 
                     @if($user->lkd_user_id > 0)
