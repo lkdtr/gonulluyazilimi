@@ -16,6 +16,7 @@
 
 
                     <ul>
+                        <li>Linux Kullanıcıları Derneği ile ilgili duyuruları e-posta ile alabilirsiniz.</li>
                         <li>Sisteme üye olup bilgilerini doğrulayan herkese ad.soyad@penguen.org.tr uzantılı eposta yönlendirmesi alabilirler.</li>
                         <li>Linux Kullanıcıları Derneği Referans ile üye kabul etmektedir. LKD Gönüllüsü olarak sistem üzerinden talepte bulunup daha hızlı referans bulabilirsiniz.</li>
                         <li>Dernek etkinliklerinde organizasyon sürecinde görev alabilirsiniz.</li>
