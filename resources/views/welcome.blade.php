@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Linux Kullanıcıları Derneği Gönüllü Sistemi Nedir?</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,17 @@
                         </div>
                     @endif
 
-                    Linux Kullanıcıları Derneği Gönüllü Sistemi
+
+                    <ul>
+                        <li>Sisteme üye olup bilgilerini doğrulayan herkese ad.soyad@penguen.org.tr uzantılı eposta yönlendirmesi alabilirler.</li>
+                        <li>Linux Kullanıcıları Derneği Referans ile üye kabul etmektedir. LKD Gönüllüsü olarak sistem üzerinden talepte bulunup daha hızlı referans bulabilirsiniz.</li>
+                        <li>Dernek etkinliklerinde organizasyon sürecinde görev alabilirsiniz.</li>
+                        <li>Derneğimizin üniveresite oluşumu olan LKD Genç'e katılabilir. Üniveresitenizde Linux ve Özgür Yazılım Topluluğu kurmak konusunda destek alabilirsiniz.</li>
+                        <li>Üniversitenizde seminer verilmesi için talepte bulunabilirsiniz.</li>
+                    </ul>
+
+                    <p>Şimdi Linux Kullanıcıları Derneği Gönüllüsü Olmak için <a href="/register">tıklayın</a>.</p>
+
                 </div>
             </div>
         </div>
