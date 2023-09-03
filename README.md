@@ -6,7 +6,7 @@ Laravel ile geliştirilmektedir.
 
 ## Hızlı kurulum
 
-Kurulum aşamaları [[Install](INSTALL.md)].
+Kurulum aşamaları [[Install](INSTALLING.md)].
 
 ## Katkıda bulunanlar
 
