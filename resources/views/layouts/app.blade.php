@@ -162,6 +162,10 @@
         <main class="py-4" style="background-color: #f8f8f8;">
             @yield('content')
         </main>
+
+        <footer style="background-color: #f8f8f8;">
+            <div class="container">Linux Kullanıcıları Derneği Gönüllü Yazılımı Kaynak Kodları</div>
+        </footer>
     </div>
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
