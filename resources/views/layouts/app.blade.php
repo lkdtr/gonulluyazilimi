@@ -164,7 +164,7 @@
         </main>
 
         <footer style="background-color: #f8f8f8;">
-            <div class="container">Linux Kullanıcıları Derneği Gönüllü Yazılımı Kaynak Kodları</div>
+            <div class="container">Linux Kullanıcıları Derneği Gönüllü Yazılımı, özgür lisanlara sahip, açık kaynak kodulu yazılımdır. <a href="https://github.com/lkdtr/gonulluyazilimi">Kaynak kodlarına ulaşmak için tıklayın</a></div>
         </footer>
     </div>
 
