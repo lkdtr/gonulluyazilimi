@@ -6,7 +6,7 @@ Sadece kod değil her türlü katkıyı memnuniyetle karşılıyoruz. yardımcı
 - **QA**: hata raporlarını dosyalayın, ne kadar fazla ayrıntı verirseniz o kadar iyi olur (ör. konsol açıkken ekran görüntüleri)
 - **Pazarlama**: blog yazıları yazmak, nasıl yapılır, çıkartmalar yazdırmak, ...
 - **Topluluk**: projeyi toplantılarda sunmak, yerel topluluk için özel bir buluşma düzenlemek, ...
-- **Kod**: [açık sorunlara](sorunlara) göz atın. Kod yazamasanız bile onlara yorum yapmak, belirli bir konuyu önemsediğinizi göstermek önemlidir. Onları önceliklendirmemize yardımcı olur.
+- **Kod**: [açık sorunlara](issues) göz atın. Kod yazamasanız bile onlara yorum yapmak, belirli bir konuyu önemsediğinizi göstermek önemlidir. Onları önceliklendirmemize yardımcı olur.
 
 ## İlk Katkınız
 
