@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "bahricanli/mailgun": "dev-master",
         "bahricanli/netgsm": "^1.0.2",
         "doctrine/dbal": "^3.6",
         "epigra/tckimlik": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laminas/laminas-xmlrpc": "^2.14",
+        "laminas/laminas-xmlrpc": "^2.16",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
@@ -60,7 +61,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
