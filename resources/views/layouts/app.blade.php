@@ -165,6 +165,8 @@
 
         <footer style="background-color: #f8f8f8;">
             <div class="container">
+                <small>Soru, Şikayet, Önerileriniz için <a href="mailto:gonullu@lkd.org.tr">gonullu@lkd.org.tr</a> adresine eposta gönderebilirsiniz.</small>
+                <br/>
                 <small>Linux Kullanıcıları Derneği Gönüllü Yazılımı, özgür lisanlara sahip, açık kaynak kodulu yazılımdır. <a href="https://github.com/lkdtr/gonulluyazilimi">Kaynak kodlarına ulaşmak için tıklayın</a></small>
             </div>
         </footer>
