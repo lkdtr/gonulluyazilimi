@@ -42,8 +42,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ secure_url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="https://www.lkd.org.tr/wp-content/uploads/2022/03/cropped-LKD_logo.gif" style="height: 50px;">
-                    <span style="font-size: 20px;"> Gönüllüsü</span>
+                    <img src="/images/lkd-gonullusu.png" style="height: 50px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
