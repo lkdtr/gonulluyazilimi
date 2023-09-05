@@ -24,6 +24,8 @@
                         <li>Üniversitenizde/Kurumunuzda seminer verilmesi için talepte bulunabilirsiniz.</li>
                     </ul>
 
+                    <p>Soru, Şikayet, Önerileriniz için <a href="mailto:gonullu@lkd.org.tr">gonullu@lkd.org.tr</a> adresine eposta gönderebilirsiniz.</p>
+
                     <p>Şimdi Linux Kullanıcıları Derneği Gönüllüsü Olmak için <a href="/register">tıklayın</a>.</p>
 
                 </div>
