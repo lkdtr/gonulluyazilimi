@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 
 use App\Notifications\MobileVerification;
 use App\Models\ContactPermissions;
@@ -20,6 +21,8 @@ class MobileVerificationController extends Controller
 
         $phone_number = $request->get("phone_number");
         $verification_code = $this->generateRandomString(6);
+
+        Log::info("SMS kod: ".$verification_code);
 
         $contactPermission = ContactPermissions::where("value_type", "phone_number")->where("value", $phone_number)->first();
         if($contactPermission==null) $contactPermission = new ContactPermissions();

@@ -84,6 +84,7 @@ class RegisterController extends Controller
             'phone_number_verified_at' =>  \Carbon\Carbon::now(),
         ]);
 
+        /*
         $mailList  = "gonullu@mg.penguen.org.tr";
 
         Mailgun::api()->post("lists/{$mailList}/members", [
@@ -91,6 +92,7 @@ class RegisterController extends Controller
             'name'         => $user->name." ".$user->surname,
             'subscribed'   => 'true'
         ]);
+        */
 
         Mail::to($user->email)->send(new Welcome($user));
         $this->set_log("other", $user->email ." adresine hoş geldiniz e-postası gönderildi");

@@ -16,7 +16,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "php-http/guzzle7-adapter": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
