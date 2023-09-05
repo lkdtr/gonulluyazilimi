@@ -16,7 +16,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+        $this->app->bind('mailgun.client', function() {
+            return \Http\Adapter\Guzzle7\Client::createWithConfig([
+                // your Guzzle7 configuration
+            ]);
+        });
+
     }
 
     /**

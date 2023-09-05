@@ -116,7 +116,7 @@ class Controller extends BaseController
         return $ipaddress;
     }
 
-    public function set_log($process_type="other", $process) {
+    public function set_log($process_type="other", $process="") {
 
         $user_id = Auth::id();
 

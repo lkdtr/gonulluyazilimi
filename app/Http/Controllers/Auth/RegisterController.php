@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
+use BahriCanli\Mailgun\Facades\Mailgun;
+
 use App\Mail\Welcome;
 
 class RegisterController extends Controller
@@ -81,6 +83,16 @@ class RegisterController extends Controller
             'agreement_at' =>  \Carbon\Carbon::now(),
             'phone_number_verified_at' =>  \Carbon\Carbon::now(),
         ]);
+
+        /*
+        $mailList  = "gonullu@mg.penguen.org.tr";
+
+        Mailgun::api()->post("lists/{$mailList}/members", [
+            'address'      => $user->email,
+            'name'         => $user->name." ".$user->surname,
+            'subscribed'   => 'true'
+        ]);
+        */
 
         Mail::to($user->email)->send(new Welcome($user));
         $this->set_log("other", $user->email ." adresine hoş geldiniz e-postası gönderildi");
