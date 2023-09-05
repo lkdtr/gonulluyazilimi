@@ -42,7 +42,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ secure_url('/') }}">
                     <!-- {{ config('app.name', 'Laravel') }} -->
-                    <img src="/images/lkd-gonullusu.png" alt="Linux Kullanıcıları Derneği Gönüllüsü" style="height: 75px;">
+                    <img src="/images/lkd-gonullusu.png?v2" alt="Linux Kullanıcıları Derneği Gönüllüsü" style="height: 75px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
