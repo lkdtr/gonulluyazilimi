@@ -138,7 +138,13 @@ class EmailRedirectsController extends Controller
         $email_redirects->email_alias = $email_alias;
         $email_redirects->save();
 
-        $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
+        try {
+            $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
+        }
+        catch(Exception $e) {
+            $this->set_log("create", $e->getMessage() );
+            return Redirect::to(secure_url('/home'))->with("danger-status", $e->getMessage() );
+        }
 
         Log::info($result);
 
