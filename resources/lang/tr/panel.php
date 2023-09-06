@@ -37,6 +37,11 @@ return [
     'seminar_subjects_title' => 'Seminer Konuları',
     'reference_requests_title' => 'Referans Talepleri',
     'announcements_title' => 'Duyurular',
+    'announcement_title' => 'Duyuru Ekle',
+    'announcement_detail' => 'Duyuru Detay',
+    'announcement_started_at'=>  'Duyuru Başlangıç Tarihi',
+    'announcement_finished_at'=>  'Duyuru Bitiş Tarihi',
+    'announcement_status'=>  'Duyuru Durumu',
     'process_logs_title' => 'İşlem Hareketleri',
     'join_lkd_young_title' => "LKD Genç'e katıl",
 
