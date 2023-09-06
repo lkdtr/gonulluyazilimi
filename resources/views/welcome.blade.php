@@ -14,6 +14,9 @@
                         </div>
                     @endif
 
+                    <div style="text-align: center;">
+                        <img src="/images/lkd-gonullusu.png?v3" alt="Linux Kullanıcıları Derneği Gönüllüsü" style="height: 250px;">
+                    </div>
 
                     <ul>
                         <li>Linux Kullanıcıları Derneği ile ilgili duyuruları öncelikli olarak e-posta ile alabilirsiniz.</li>
