@@ -6,9 +6,6 @@ import 'jquery-datetimepicker';
 import 'datatables.net-bs4';
 import languageTR from 'datatables.net-plugins/i18n/tr.mjs';
 
-import FroalaEditor from 'froala-editor'
-import 'froala-editor/js/plugins/align.min.js'
-
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
@@ -29,10 +26,6 @@ jQuery(function () {
         language: languageTR,
         pageLength: 25
      });
-
-    new FroalaEditor('.wysiwyg', {
-        height: 500
-    });
 
     function passwordChecker(input, alertbox) {
 
