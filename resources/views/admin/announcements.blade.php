@@ -6,6 +6,7 @@
         <div class="col-md-12">
             <div class="card border-secondary">
                 <div class="card-header text-white bg-secondary">{{ trans("panel.announcements_title") }}</div>
+                <div class="card-header text-white bg-secondary">{{ trans("panel.announcements_create") }}</div>
 
                 <div class="card-body">
                     @if (session('success-status'))
