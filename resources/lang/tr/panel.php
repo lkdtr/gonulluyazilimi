@@ -124,4 +124,13 @@ return [
     'process_by' => 'İşlemi Yapan',
     'process_at' => 'İşlem Tarihi',
 
+    'status' => 'Durum',
+    'active' => 'Aktif',
+    'passive' => 'Pasif',
+
+    'send_email' => 'Duyuruyu e-posta ile de gönder',
+
+    'save_announcement_success' => 'Duyuru başarı ile kaydedildi',
+    'save_announcement_failed' => 'Duyuru kaydedilemedi',
+
 ];
