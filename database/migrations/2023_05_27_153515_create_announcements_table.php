@@ -21,7 +21,7 @@ class CreateAnnouncementsTable extends Migration
 
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
-            $table->integer('status')->default("1");
+            $table->boolean('status')->default("1");
 
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

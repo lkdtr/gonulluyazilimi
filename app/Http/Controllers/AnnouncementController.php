@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
@@ -40,11 +40,14 @@ class AnnouncementController extends Controller
         return view('admin.create_edit_announcement', ["announcement" => $announcement]);
     }
 
-    public function postCreate() {
+    public function postCreate(Request $request) {
+
+
 
         $announcement = new Announcements();
-        $announcement->subject = "Bizi sosyal medya üzerinden takip ediyormusunuz?";
-        $announcement->detail = '<p>Linux Kullanıcıları Derneği Sosyal Medya Hesaplarını takip edin, gelişmelerden habersiz kalmayın.</p>
+        $announcement->subject = $request->input("subject");
+        $announcement->detail = $request->detail
+        .'<p>Linux Kullanıcıları Derneği Sosyal Medya Hesaplarını takip edin, gelişmelerden habersiz kalmayın.</p>
 
         <h3>LKD Sosyal Medya Hesapları</h3>
 
@@ -56,11 +59,19 @@ class AnnouncementController extends Controller
         ';
         $announcement->started_at = date("Y-m-d H:i:s");
         $announcement->finished_at = date("Y-m-d H:i:s", strtotime("+1 year"));
-        $announcement->status = 1;
-        $announcement->created_by = 1;
+        $announcement->status = $request->status;
+        $announcement->created_by = Auth::id();
+        $announcement->updated_by = Auth::id();
+
+
         $announcement->save();
 
-        dump($announcement);
+        return redirect()->route("announcements");
+
+
+
+
+
 
     }
 

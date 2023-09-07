@@ -37,6 +37,11 @@ return [
     'seminar_subjects_title' => 'Seminar Subjects',
     'reference_requests_title' => 'Membership Reference Requests',
     'announcements_title' => 'Announcements',
+    'announcement_title' => 'Announcement Title',
+    'announcement_detail' => 'Announcement Detail',
+    'announcement_started_at'=>  'Announcement Started At',
+    'announcement_finished_at'=>  'Announcement Finished At',
+    'announcement_status'=>  'Announcement Status',
     'process_logs_title' => 'Process Logs',
     'join_lkd_young_title' => 'Join LKD Young',
 
