@@ -15,7 +15,7 @@
                     @endif
 
                     <div style="text-align: center;">
-                        <img src="/images/lkd-gonullusu.png?v3" alt="Linux Kullanıcıları Derneği Gönüllüsü" style="height: 250px;">
+                        <img src="/images/lkd-gonullusu.png?v3" alt="Linux Kullanıcıları Derneği Gönüllüsü" style="width:100%; max-width: 450px;">
                     </div>
 
                     <ul>
