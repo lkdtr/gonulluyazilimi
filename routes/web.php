@@ -55,6 +55,9 @@ Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class
 Route::get('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('new-announcement');
 Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
 
+Route::get('/edit-announcement/{id}', [App\Http\Controllers\AnnouncementController::class, 'getEdit'])->name('edit-announcement');
+Route::post('/edit-announcement/{id}', [App\Http\Controllers\AnnouncementController::class, 'postEdit']);
+
 Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
 Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
 Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);

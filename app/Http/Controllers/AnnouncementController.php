@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\URL;
 
 use App\Models\Announcements;
 
+use Carbon\Carbon;
+
 class AnnouncementController extends Controller
 {
     /**
@@ -37,42 +39,35 @@ class AnnouncementController extends Controller
     public function getCreate() {
 
         $announcement = new Announcements();
+        $announcement->status = 1;
         return view('admin.create_edit_announcement', ["announcement" => $announcement]);
     }
 
     public function postCreate(Request $request) {
 
+       if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
 
+        $validator = $request->validate([
+            'subject' => 'required',
+            'detail' => 'required',
+            'started_at' => 'required',
+            'finished_at' => 'required',
+        ]);
 
         $announcement = new Announcements();
         $announcement->subject = $request->input("subject");
-        $announcement->detail = $request->detail
-        .'<p>Linux Kullanıcıları Derneği Sosyal Medya Hesaplarını takip edin, gelişmelerden habersiz kalmayın.</p>
-
-        <h3>LKD Sosyal Medya Hesapları</h3>
-
-        <p>Telegram: <a href="https://t.me/lkd_tr">https://t.me/lkd_tr</a></p>
-        <p>Twitter: <a href="https://twitter.com/lkdtr">https://twitter.com/lkdtr</a></p>
-        <p>Facebook: <a href="https://www.facebook.com/lkdtr">https://www.facebook.com/lkdtr</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/lkdorgtr/">https://www.instagram.com/lkdorgtr/</a></p>
-        <p>Tiktok: <a href="https://www.tiktok.com/@lkdtr">https://www.tiktok.com/@lkdtr</a></p>
-        ';
-        $announcement->started_at = date("Y-m-d H:i:s");
-        $announcement->finished_at = date("Y-m-d H:i:s", strtotime("+1 year"));
-        $announcement->status = $request->status;
+        $announcement->detail = $request->input("detail");
+        $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
+        $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
+        $announcement->status = $request->input("status");
         $announcement->created_by = Auth::id();
         $announcement->updated_by = Auth::id();
 
-
         $announcement->save();
 
-        return redirect()->route("announcements");
-
-
-
-
-
-
+        return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
     }
 
     public function getList() {
@@ -86,5 +81,38 @@ class AnnouncementController extends Controller
         return view('admin.announcements', ["announcements" => $announcements]);
 
     }
+
+    public function getEdit($id) {
+
+        $announcement = Announcements::where("id", $id)->first();
+        return view('admin.create_edit_announcement', ["announcement" => $announcement]);
+    }
+
+    public function postEdit(Request $request, $id) {
+
+       if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $validator = $request->validate([
+            'subject' => 'required',
+            'detail' => 'required',
+            'started_at' => 'required',
+            'finished_at' => 'required',
+        ]);
+
+        $announcement = Announcements::where("id", $id)->first();
+        $announcement->subject = $request->input("subject");
+        $announcement->detail = $request->input("detail");
+        $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
+        $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
+        $announcement->status = $request->input("status");
+        $announcement->updated_by = Auth::id();
+
+        $announcement->save();
+
+        return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
+    }
+
 
 }

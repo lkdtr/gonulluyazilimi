@@ -15,7 +15,7 @@
                         </div>
                     @endif
 
-                        <form method="POST" action="{{ route("new-announcement") }}">
+                        <form method="POST">
                             @csrf
 
                             <div class="row mb-3">
@@ -56,7 +56,7 @@
                                     {{ trans("panel.announcement_started_at") }}
                                 </label>
                                 <div class="col-md-8">
-                                    <input type="datetime-local" id="started_at" class="wysiwyg form-control @error('started_at') is-invalid @enderror" name="started_at" autofocus>{{$announcement->started_at}}</input>
+                                    <input type="datetime-local" id="started_at" class="form-control @error('started_at') is-invalid @enderror" name="started_at" value="{{$announcement->started_at}}">
 
                                     @error('started_at')
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
                                     {{ trans("panel.announcement_finished_at") }}
                                 </label>
                                 <div class="col-md-8">
-                                    <input type="datetime-local" id="finished_at" class="wysiwyg form-control @error('finished_at') is-invalid @enderror" name="finished_at" autofocus>{{$announcement->finished_at}}</input>
+                                    <input type="datetime-local" id="finished_at" class="form-control @error('finished_at') is-invalid @enderror" name="finished_at" value="{{$announcement->finished_at}}">
 
                                     @error('finished_at')
                                     <span class="invalid-feedback" role="alert">
@@ -86,16 +86,34 @@
                                 <label for="status" class="col-md-2 col-form-label text-md-end">
                                     {{ trans("panel.status") }}
                                 </label>
-                                <div class="col-md-8">
-                                    <input type="radio" id="status" name="status" autofocus {{ $announcement->status == 1 ? 'checked' : '' }} value="1">Aktif</input>
-                                    <input type="radio" id="status"  name="status" autofocus {{ $announcement->status == 0 ? 'checked' : '' }} value="0">Pasif</input>
-
-
-
-
-
+                                <div class="col-md-8 mt-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="status_1" name="status" autofocus {{ $announcement->status == 1 ? 'checked' : '' }} value="1">
+                                        <label class="form-check-label" for="status_1">{{ trans("panel.active") }}</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="status_0" name="status" autofocus {{ $announcement->status == 0 ? 'checked' : '' }} value="0">
+                                        <label class="form-check-label" for="status_0">{{ trans("panel.passive") }}</label>
+                                    </div>
 
                                     @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="status" class="col-md-2 col-form-label text-md-end">
+                                </label>
+                                <div class="col-md-8 mt-2">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="is_send_email">{{ trans("panel.send_email") }}</label>
+                                        <input class="form-check-input" type="checkbox" id="is_send_email" name="is_send_email" autofocus {{ $announcement->send_mailing == 1 ? 'checked' : '' }}>
+                                    </div>
+
+                                    @error('send_mailing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

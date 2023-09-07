@@ -124,4 +124,13 @@ return [
     'process_by' => 'Process By',
     'process_at' => 'Process At',
 
+    'status' => 'Status',
+    'active' => 'Active',
+    'passive' => 'Passive',
+
+    'send_email' => 'Send announcement with e-mail',
+
+    'save_announcement_success' => 'Announcement has been save success',
+    'save_announcement_failed' => 'Announcement has been save failed',
+
 ];
