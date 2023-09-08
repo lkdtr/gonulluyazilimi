@@ -42,12 +42,17 @@ class EmailRedirectsController extends Controller
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
-        if($email_redirects==null) $email_redirects = new EmailRedirects();
+        $first_redirect = false;
+        if($email_redirects==null) {
+            $email_redirects = new EmailRedirects();
+            $first_redirect = true;
+        }
         $user->birthday = date("d-m-Y", strtotime($user->birthday));
 
         return view('email-redirects', [
             "user" => $user,
             "email_redirects" => $email_redirects,
+            "first_redirect" => $first_redirect,
         ]);
     }
 
