@@ -28,7 +28,11 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                @if($first_redirect)
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
+                                @else
+                                    <span class="form-control">{{ $user->name }}</span>
+                                @endif
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -42,7 +46,11 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-end">{{ trans("auth.surname") }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
+                                @if($first_redirect)
+                                    <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
+                                @else
+                                    <span class="form-control">{{ $user->surname }}</span>
+                                @endif
 
                                 @error('surname')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +64,11 @@
                             <label for="national_id" class="col-md-4 col-form-label text-md-end">{{ trans("auth.national_id") }}</label>
 
                             <div class="col-md-6">
-                                <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
+                                @if($first_redirect)
+                                    <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
+                                @else
+                                    <span class="form-control">{{ $user->national_id }}</span>
+                                @endif
 
                                 @error('national_id')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +82,11 @@
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ trans("auth.birthday") }}</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ date("d-m-Y", strtotime($user->birthday)) }}" required autocomplete="birthday" autofocus>
+                                @if($first_redirect)
+                                    <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ date("d-m-Y", strtotime($user->birthday)) }}" required autocomplete="birthday" autofocus>
+                                @else
+                                    <span class="form-control">{{ date("d-m-Y", strtotime($user->birthday)) }}</span>
+                                @endif
 
                                 @error('birthday')
                                     <span class="invalid-feedback" role="alert">
