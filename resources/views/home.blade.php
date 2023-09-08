@@ -33,6 +33,11 @@
                         </div>
                     </a>
                     <br/>
+                @elseif($email_redirect_is_exist->status==0)
+                    <div class="alert alert-danger d-flex" role="alert">
+                        <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div>{{ trans("panel.remove_penguen_success") }}. <a href="{{secure_url('/email-redirects')}}">{{ trans("panel.try_reactive_penguen") }}</a></div>
+                    </div>
                 @endif
             @endif
 
