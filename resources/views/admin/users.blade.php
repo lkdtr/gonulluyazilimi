@@ -40,7 +40,7 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->surname}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->phone_number}} @if($user->phone_number_verified_at!=null) <svg style="height: 16px;width: 16px;" class="bi flex-shrink-0 me-2" role="img"><use xlink:href="#check-fill"/></svg> @endif</td>
+                                <td>{{$user->phone_number}} @if($user->getValidation()->verified) <svg style="height: 16px;width: 16px;" class="bi flex-shrink-0 me-2" role="img"><use xlink:href="#check-fill"/></svg> @endif</td>
                                 <td>{{trans("panel.user_".$user->role)}} @if($user->lkd_user_id>0) ({{trans("panel.lkd_user")}}) @endif</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
                                 <td>
