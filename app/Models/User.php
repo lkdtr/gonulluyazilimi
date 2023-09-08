@@ -53,7 +53,7 @@ class User extends Authenticatable
     ];
 
     public function getEmailRedirects() {
-        $emailRedirect = $this->hasOne('App\Models\EmailRedirects', 'user_id', 'id')->first();
+        $emailRedirect = $this->hasOne('App\Models\EmailRedirects', 'user_id', 'id')->where("status", 1)->first();
         if($emailRedirect==null) {
             $res = ["email_alias"=>""];
             return (object) $res;

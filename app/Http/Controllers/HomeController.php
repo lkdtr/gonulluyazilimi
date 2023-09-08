@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function home()
     {
         $user_id = Auth::id();
-        $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->where("status", 1)->first();
+        $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->first();
         $announcements = Announcements::where("status", 1)->whereRaw('finished_at > NOW()')->orderBy("id", "DESC")->get();
 
         $user = Auth::user();

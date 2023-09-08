@@ -135,6 +135,7 @@ class EmailRedirectsController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
         }
 
+        $email_redirects->status = 1;
         $email_redirects->email_alias = $email_alias;
         $email_redirects->save();
 

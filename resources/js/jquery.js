@@ -24,7 +24,8 @@ jQuery(function () {
 
     $('table').dataTable({
         language: languageTR,
-        pageLength: 25
+        pageLength: 25,
+        responsive: true
      });
 
     function passwordChecker(input, alertbox) {
