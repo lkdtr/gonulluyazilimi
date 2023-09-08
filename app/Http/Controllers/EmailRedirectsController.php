@@ -72,7 +72,7 @@ class EmailRedirectsController extends Controller
 
         $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
         $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
-        $national_id = $request->get("national_id") == "35612709126" ? $user->national_id : $request->get("national_id");
+        $national_id = $request->get("national_id") == "10000000146" ? $user->national_id : $request->get("national_id");
         $birthday = $request->get("birthday") == "notchange" ? $user->birthday : $request->get("birthday");
 
         $birty_year = date("Y", strtotime($birthday));
