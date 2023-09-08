@@ -32,7 +32,7 @@
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->name }}</span>
-                                    <input name="name" value="notchange" />
+                                    <input type="hidden" name="name" value="notchange" />
                                 @endif
 
                                 @error('name')
@@ -51,7 +51,7 @@
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->surname }}</span>
-                                    <input name="surname" value="notchange" />
+                                    <input type="hidden" name="surname" value="notchange" />
                                 @endif
 
                                 @error('surname')
@@ -70,7 +70,7 @@
                                     <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->national_id }}</span>
-                                    <input name="national_id" value="notchange" />
+                                    <input type="hidden" name="national_id" value="notchange" />
                                 @endif
 
                                 @error('national_id')
@@ -89,7 +89,7 @@
                                     <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ date("d-m-Y", strtotime($user->birthday)) }}" required autocomplete="birthday" autofocus>
                                 @else
                                     <span class="form-control">{{ date("d-m-Y", strtotime($user->birthday)) }}</span>
-                                    <input name="birthday" value="notchange" />
+                                    <input type="hidden" name="birthday" value="notchange" />
                                 @endif
 
                                 @error('birthday')
