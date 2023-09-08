@@ -66,10 +66,14 @@ class EmailRedirectsController extends Controller
             'agreement' => ['required']
         ]);
 
-        $name = $request->get("name");
-        $surname = $request->get("surname");
-        $national_id = $request->get("national_id");
-        $birthday = $request->get("birthday");
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+
+        $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
+        $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
+        $national_id = $request->get("national_id") == "notchange" ? $user->national_id : $request->get("national_id");
+        $birthday = $request->get("birthday") == "notchange" ? $user->birthday : $request->get("birthday");
 
         $birty_year = date("Y", strtotime($birthday));
 
