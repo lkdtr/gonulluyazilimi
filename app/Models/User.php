@@ -62,4 +62,16 @@ class User extends Authenticatable
             return $emailRedirect;
         }
     }
+
+    public function getValidation() {
+        $contactPermission = $this->hasOne('App\Models\ContactPermissions', 'value', 'phone_number')
+                        ->where('value_type', 'phone_number')->first();
+        if($contactPermission==null) {
+            $res = ["verified"=>"", "verification_code" => ""];
+            return (object) $res;
+        }
+        else {
+            return $contactPermission;
+        }
+    }
 }
