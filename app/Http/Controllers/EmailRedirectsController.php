@@ -135,9 +135,7 @@ class EmailRedirectsController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
         }
 
-        $email_redirects->status = 1;
         $email_redirects->email_alias = $email_alias;
-        $email_redirects->save();
 
         try {
             $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
@@ -151,6 +149,9 @@ class EmailRedirectsController extends Controller
 
         if($result) {
 
+            $email_redirects->status = 1;
+            $email_redirects->save();
+
             $user->alias = $email_redirects->email_alias;
             Mail::to($email_redirects->email_alias)->send(new PenguenWelcome($user));
             $this->set_log("other", $email_redirects->email_alias." adresine yönlendirme başarılı e-postası gönderildi");
@@ -158,6 +159,9 @@ class EmailRedirectsController extends Controller
             $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklendi");
             return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_success"));
         }
+
+        $email_redirects->status = 0;
+        $email_redirects->save();
 
         $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklenemedi");
         return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_failed"));
