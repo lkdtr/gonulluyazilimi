@@ -31,7 +31,7 @@
                                 @if( ($first_redirect) || ($user->name=="") )
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
                                 @else
-                                    <span class="form-control">{{ $user->name }}</span>
+                                    <span class="form-control @error('name') is-invalid @enderror">{{ $user->name }}</span>
                                     <input type="hidden" name="name" value="notchange" />
                                 @endif
 
@@ -50,7 +50,7 @@
                                 @if( ($first_redirect) || ($user->surname=="") )
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
                                 @else
-                                    <span class="form-control">{{ $user->surname }}</span>
+                                    <span class="form-control @error('surname') is-invalid @enderror">{{ $user->surname }}</span>
                                     <input type="hidden" name="surname" value="notchange" />
                                 @endif
 
@@ -69,8 +69,8 @@
                                 @if( ($first_redirect) || ($user->national_id=="") )
                                     <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
                                 @else
-                                    <span class="form-control">{{ $user->national_id }}</span>
-                                    <input type="hidden" name="national_id" value="notchange" />
+                                    <span class="form-control @error('national_id') is-invalid @enderror">{{ $user->national_id }}</span>
+                                    <input type="hidden" name="national_id" value="10000000146" />
                                 @endif
 
                                 @error('national_id')
@@ -88,7 +88,7 @@
                                 @if( ($first_redirect) || ($user->birthday=="") )
                                     <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ date("d-m-Y", strtotime($user->birthday)) }}" required autocomplete="birthday" autofocus>
                                 @else
-                                    <span class="form-control">{{ date("d-m-Y", strtotime($user->birthday)) }}</span>
+                                    <span class="form-control @error('birthday') is-invalid @enderror">{{ date("d-m-Y", strtotime($user->birthday)) }}</span>
                                     <input type="hidden" name="birthday" value="notchange" />
                                 @endif
 

@@ -68,10 +68,11 @@ class EmailRedirectsController extends Controller
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
 
         $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
         $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
-        $national_id = $request->get("national_id") == "notchange" ? $user->national_id : $request->get("national_id");
+        $national_id = $request->get("national_id") == "10000000146" ? $user->national_id : $request->get("national_id");
         $birthday = $request->get("birthday") == "notchange" ? $user->birthday : $request->get("birthday");
 
         $birty_year = date("Y", strtotime($birthday));
@@ -87,6 +88,8 @@ class EmailRedirectsController extends Controller
             return back()->withErrors(["national_id" => "TC Kimlik Numarası vermiş olduğunuz kimlik bilgilerinizle eşleşmiyor"])->withInput();
         }
 
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
         $user->birthday = Carbon::parse($birthday)->format("Y-m-d");
         $user->name = $this->tr_ucwords($name);
         $user->surname = $this->tr_ucwords($surname);
