@@ -28,10 +28,11 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>
 
                             <div class="col-md-6">
-                                @if($first_redirect)
+                                @if( ($first_redirect) || ($user->name=="") )
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->name }}</span>
+                                    <input name="name" value="notchange" />
                                 @endif
 
                                 @error('name')
@@ -46,10 +47,11 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-end">{{ trans("auth.surname") }}</label>
 
                             <div class="col-md-6">
-                                @if($first_redirect)
+                                @if( ($first_redirect) || ($user->surname=="") )
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ $user->surname }}" required autocomplete="surname" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->surname }}</span>
+                                    <input name="surname" value="notchange" />
                                 @endif
 
                                 @error('surname')
@@ -64,10 +66,11 @@
                             <label for="national_id" class="col-md-4 col-form-label text-md-end">{{ trans("auth.national_id") }}</label>
 
                             <div class="col-md-6">
-                                @if($first_redirect)
+                                @if( ($first_redirect) || ($user->national_id=="") )
                                     <input id="national_id" type="text" class="form-control @error('national_id') is-invalid @enderror" name="national_id" value="{{ $user->national_id }}" required autocomplete="national_id" autofocus>
                                 @else
                                     <span class="form-control">{{ $user->national_id }}</span>
+                                    <input name="national_id" value="notchange" />
                                 @endif
 
                                 @error('national_id')
@@ -82,10 +85,11 @@
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ trans("auth.birthday") }}</label>
 
                             <div class="col-md-6">
-                                @if($first_redirect)
+                                @if( ($first_redirect) || ($user->birthday=="") )
                                     <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ date("d-m-Y", strtotime($user->birthday)) }}" required autocomplete="birthday" autofocus>
                                 @else
                                     <span class="form-control">{{ date("d-m-Y", strtotime($user->birthday)) }}</span>
+                                    <input name="birthday" value="notchange" />
                                 @endif
 
                                 @error('birthday')

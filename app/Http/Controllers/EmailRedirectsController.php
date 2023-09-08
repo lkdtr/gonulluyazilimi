@@ -58,30 +58,22 @@ class EmailRedirectsController extends Controller
 
     public function postValidation(Request $request)
     {
+        $validator = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'surname' => ['required', 'string', 'max:255', 'min:2'],
+            'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
+            'birthday' => ['required'],
+            'agreement' => ['required']
+        ]);
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
         $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
-        if($email_redirects==null) {
-            $validator = $request->validate([
-                'name' => ['required', 'string', 'max:255', 'min:3'],
-                'surname' => ['required', 'string', 'max:255', 'min:2'],
-                'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
-                'birthday' => ['required'],
-                'agreement' => ['required']
-            ]);
 
-            $name = $request->get("name");
-            $surname = $request->get("surname");
-            $national_id = $request->get("national_id");
-            $birthday = $request->get("birthday");
-        }
-        else {
-            $name = $user->name;;
-            $surname = $user->surname;
-            $national_id = $user->national_id;
-            $birthday = $user->birthday;
-        }
+        $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
+        $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
+        $national_id = $request->get("national_id") == "notchange" ? $user->national_id : $request->get("national_id");
+        $birthday = $request->get("birthday") == "notchange" ? $user->birthday : $request->get("birthday");
 
         $birty_year = date("Y", strtotime($birthday));
 
