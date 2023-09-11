@@ -3,7 +3,7 @@ window.$ = window.jQuery = $;
 
 import 'inputmask';
 import 'jquery-datetimepicker';
-import 'datatables.net-bs4';
+import 'datatables.net-responsive-bs4';
 import languageTR from 'datatables.net-plugins/i18n/tr.mjs';
 
 jQuery(function () {
@@ -24,6 +24,7 @@ jQuery(function () {
     $('table').dataTable({
         language: languageTR,
         pageLength: 25,
+        responsive: true
      });
 
     function passwordChecker(input, alertbox) {
