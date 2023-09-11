@@ -1,48 +1,71 @@
 <div style="line-height: 30px; text-align: justify;">
 <p>&nbsp;</p>
 
-<p>a) Veri Sorumlusu ve Temsilcisi</p>
-<p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“6698 sayılı Kanun”) uyarınca, kişisel verileriniz; veri sorumlusu olarak Linux Kullanıcıları Derneği aşağıda açıklanan kapsamda işlenebilecektir.</p>
+<p>Özel hayatınızın gizliliğine saygı duyuyor ve önem veriyoruz. Kişisel ve özel nitelikli verileriniz derneğimiz Linux Kullanıcıları Derneği (kısaca. LKD) tarafından 6698 sayılı Kişisel Verilerin Korunması Kanunundaki tanımlarıyla “veri sorumlusu” ve “veri işleyen” sıfatları ile işbu sözleşmeler ve/veya ilgili mevzuatta belirtildiği şekilde işlenecektir.</p>
+<p>Bu nedenle, temel hak ve özgürlüklerinizi korumak amacıyla yürürlükte olan 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamındaki kişisel ve özel verilerinizin kullanımı ve korunması ile ilgili haklarınız hakkında sizi bilgilendirmek istiyoruz.</p>
+<p>Genel Kanun Kapsamı</p>
+<p>6698 sayılı Kişisel Verilerin Korunması Kanunu’nda Linux Kullanıcıları Derneği olarak hem “Veri sorumlusu” hem de “ Veri işleyici” sıfatlarıyla anılıyoruz. Yasa kapsamında, Veri Sorumlusu olarak kişisel ve özel verilerinizi elde etmemiz, kaydetmemiz, saklamamız, güncellememiz, sınıflandırmamız, işlememiz, mevzuatın izin verdiği üçüncü kişilerle paylaşmamız veya onlara devretmemiz gibi konularda “veri işleme” olarak kabul edilen işlemlerin gerçekleştirilmesidir.</p>
+<p>Kullanılacak kişisel ve özel nitelikli veriler;</p>
+<p>Tarafımızla iletişime geçtiğiniz sırada yazılı veya sözlü olarak veya elektronik ortamda tarafımıza iletmiş olduğunuz (Adınız, Soyadınız, Doğum tarihiniz, e-posta adresiniz, TC Kimlik Numaranız, Telefon Numaralarınız, Adresiniz, Web Sayfanız vb…) gibi kişisel verileriniz ile özel nitelikli verileriniz de dahil olmak üzere her türlü bilgi ve belgeyi ifade etmekte olup, bu bilgiler fiziki ve dijital ortamda saklanmaktadır. Kişisel verileriniz, KVKK tarafından öngörülen temel ilkelere uygun olarak, KVKK’ nın 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları kapsamında işbu Bildirim’de belirtilen gerçek ve tüzel kişiler ile azami güvenliği sağlamak amacıyla yurtiçinde ve yurtdışında işlenebilmekte ve yurtiçine ve yurtdışına aktarılabilmektedir.</p>
+<p>Kişisel ve Özel Nitelikli Verilerinizi Neden ve Ne İçin Kullanıyoruz? *</p>
+<p>Yaptığınız işlemlerde bilgilerinizi tespit edebilmek için kimlik, adres ve gerekli diğer bilgilerinizi kaydetmek,</p>
+<p>Sizinle paylaşmamız gereken önemli bilgileri iletişim bilgileriniz üzerinden iletmek,</p>
+<p>Kâğıt üzerinde, sözlü veya elektronik ortamlarda işlemlerinizi tamamlayabilmeniz için gerekli tüm kayıt ve belgeleri düzenlemek,</p>
+<p>Mevzuat gereği bilgi verme yükümlülüğümüz olan kamu kurumlarınca ve idari-adli makamlarca istenilen bilgileri saklamak, raporlamak ve bu kurumları bilgilendirmek,</p>
+<p>Kurumsal sürdürülebilirlik, kurumsal yönetim, stratejik planlama ve bilgi güvenliği süreçlerimizi planlamak, denetlemek ve hayata geçirmek,</p>
+<p>İdari, yasal yükümlüklerimizi ve Dernek tüzüğündeki amaçlarımızla ilgili işlemleri yerine getirmek,</p>
+<p>Özel verilerinizi anonimleştirerek istatistiki veri olarak kullanmak,</p>
+<p>Kişisel ve özel verilerinizi çevrimiçi ortamda sizin her bir talebinde akıllı bir yazılım aracılığı ile görüntüleme ve işlenmiş olan veriyi gösterme amacı ile sunduğumuz hizmetlerin ifası içindir.</p>
+<p>Kişisel ve Özel Nitelikli Verilerinizi Kimlerle Paylaşıyoruz?</p>
+<p>Kişisel ve özel verileriniz mevzuattan kaynaklanan zorunluluklar nedeniyle kamu kurum ve kuruluşları, kamu tüzel kişileri, idari ve adli makamlar; ve bunun yanı sıra Dernek yönetim organları, dernek faaliyetlerimizi yürütmek ve tarafınızla kurulmuş olan ilişkiden kaynaklanan yükümlülüklerimizi yerine getirmek üzere hizmet aldığımız, işbirliği yaptığımız kuruluşlara KVKK’da yapılan düzenlemeler ve sınırlamalar çerçevesinde aktarılabilecektir.</p>
+<p>Kişisel ve Özel Verilerinize Nerelerden Ulaşabiliriz?</p>
+<p>Kişisel ve özel verileriniz derneğimiz ile yapmış olabileceğiniz doğrudan temaslar, web sayfalarımız aracılığı ile, seminer, kamp, toplantı, konferans veya sempozyum vb. etkinlikler aracılığı ile, referans aracılığı ile, yönlendirilmiş olmanız ve/veya kişisel ve özel verilerinizin yönlendirilmiş ve/veya verilmiş olması nedeni ile, hizmetlerimizi ifa ederken elde edilmesi ile, sosyal medyada takipçiniz olmamız veya takipçimiz olmanız vb. nedenlerle doğrudan ve/veya dolaylı yollar aracılığıyla sözlü, yazılı veya elektronik ortamlarda toplanabilir.</p>
+<p>Yasa Kapsamındaki Haklarınız Nelerdir?</p>
+<p>Dilediğiniz zaman Derneğimize başvurarak kişisel ve özel verilerinizin;</p>
+<p>İşlenip işlenmediğini, işlenme amacını ve amacına uygun kullanıp kullanılmadığı öğrenebilir ve işlenmiş ise bu konuda bilgi isteyebilir,</p>
+<p>Yasaya uygun olarak yurtiçinde ve yurtdışında bilgilerinizin paylaşıldığı üçüncü kişileri öğrenebilir.</p>
+<p>Bilgilerinizin eksik ya da hatalı işlendiğini düşünüyorsanız düzeltilmesini isteyebilir,</p>
+<p>İlgili Yasanın 7. maddesinde öngörülen koşullar çerçevesinde bilgilerinizin silinmesini ya da yok edilmesini talep edebilir,</p>
+<p>Bilgilerinizin aktarıldığı üçüncü kişilere (c) ve (d) bentlerinde belirtilen taleplerinizin bildirilmesini ve aynı işlemleri gerçekleştirmelerini isteyebilir,</p>
+<p>Bilgilerinizin, otomatik sistemler ile analiz edilmesi nedeniyle aleyhinize bir sonucun ortaya çıkmasına itiraz edebilir veya yasaya aykırı olarak kaydedildiğini veya kullanıldığını düşünüyorsanız ve bu nedenle zarara uğramışsanız zararın giderilmesini isteyebilirsiniz.</p>
+<p>Bu amaçlarla yaptığınız başvurunun ek bir maliyet gerektirmesi durumunda, Kişisel Verileri Koruma Kurulu tarafından belirlenecek tarifedeki ücret tutarını ödemeniz gerekebilir. Başvurunuzda yer alan talepleriniz, talebin niteliğine göre en kısa sürede ve en geç 30 (otuz) gün içinde sonuçlandırılacaktır.</p>
+<p>Yasa kapsamındaki haklarınızdan yararlanmak için başvurularınızı yazılı olarak derneğimize iletebilir, ayrıntılı bilgi almak için Kişisel Verileri Koruma Kurumu’nun internet sayfasını ziyaret edebilirsiniz.</p>
+<p>* Derneğimiz kişisel veri envanter çalışmasında değişiklik oldukça bu bilgilendirmemiz güncellenecektir.</p>
+<p>Açık Rıza Onay Metni</p>
+<p>Tarafınızla iletişime geçtiğim sırada yazılı veya sözlü olarak veya elektronik ortamda tarafınıza iletmiş olduğum (Adım, Soyadım, Doğum tarihim, e-posta adresim, TC Kimlik Numaram, Telefon Numaralarım, Adresim, Web Sayfam vb…) gibi kişisel verilerim ile özel nitelikli verilerim de dahil olmak üzere ilgili kişisel ve/veya özel nitelikli kişisel verilerimin işlenmesini, bu verilerin fiziki ve sayısal ortamda saklanmakta olduğunu, KVKK tarafından öngörülen temel ilkelere uygun olarak, KVKK’nun 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları kapsamında bu Bildirim’de belirtilen gerçek ve tüzel kişiler ile azami güvenliği sağlamak amacıyla yurtiçinde ve yurtdışında işlenebilmekte olduğunu, yurtiçine ve yurtdışına aktarılabilir olduğunu bildiğimi ve onay verdiğimi, ilgili süreç kapsamında işlenme amacına uygun olarak kullanılmasını ve paylaşılmasını, gereken süre kadar saklanmasını, tarafıma ayrıca gerekli aydınlatılmanın yapıldığını, hem aydınlatma metnini hem de işbu metni okuyup anladığımı, metindeki kişisel verilerimin işlenmesine açık rıza gösterdiğimi,</p>
+<p>Hizmetlerinize ilişkin sözleşmemizden kaynaklanan yükümlülüklerinizin yerine getirilmesi vb. konulardaki taleplerimin karşılanması için,</p>
+<p>Linux Kullanıcıları Derneğinin ve dernek faaliyetlerinin yürütmek ve yükümlülüklerini yerine getirmek üzere hizmet aldığı, işbirliği yaptığı, program ortağı kuruluşları ve diğer üçüncü kişiler tarafından işlenmesine ve dernek kayıtlarında yer alan ya da ileride derneğinize bildireceğim iletişim adreslerime, derneğiniz hizmetleriyle ilgili tanıtım faaliyetleriyle hakkında bilgilendirmelerle ilişkin SMS (kısa mesaj), e-posta, posta ve telefonla ulaşılmasına onay veriyorum.</p>
+<p>Kişisel verilerimi bana özel anketler veya soru formları ile görüşlerimi öğrenmek amacıyla e-posta, telefon, SMS veya posta ile iletişime geçmek için işleme ve bu süreçlerde dernek içerisinde ortak erişim ağı oluşturabilmek amacıyla hizmet aldığınız servis sağlayıcıyla, sunucu hizmeti aldığınız servis sağlayıcıyla ve pazarlama faaliyetlerinde e-posta/sms gönderimi gibi konularda hizmet aldığınız servis sağlayıcılarla paylaşmak için izin veriyorum.</p>
+<p>Özel hayatınızın gizliliğine saygı duyuyor ve önem veriyoruz. Kişisel ve özel nitelikli verileriniz Linux Kullanıcıları Derneği tarafından Kanundaki tanımlarıyla “veri sorumlusu” ve “veri işleyen” sıfatları ile işbu sözleşmeler ve/veya ilgili mevzuatta belirtildiği şekilde işlenecektir.</p>
+<p>Bu nedenle, temel hak ve özgürlüklerinizi korumak amacıyla yürürlükte olan 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamındaki kişisel ve özel verilerinizin kullanımı ve korunması ile ilgili haklarınız hakkında sizi bilgilendirmek istiyoruz.</p>
+<p>Genel Kanun Kapsamı</p>
+<p>6698 sayılı Kişisel Verilerin Korunması Kanunu’nda Linux Kullanıcıları Derneği olarak hem “Veri sorumlusu” hem de “ Veri işleyici” sıfatlarıyla anılıyoruz. Kanun kapsamında, Veri Sorumlusu olarak kişisel ve özel verilerinizi elde etmemiz, kaydetmemiz, saklamamız, güncellememiz, sınıflandırmamız, işlememiz, mevzuatın izin verdiği üçüncü kişilerle paylaşmamız veya onlara devretmemiz gibi konularda “veri işleme” olarak kabul edilen işlemlerin gerçekleştirilmesidir.</p>
+<p>Kullanılacak kişisel ve özel nitelikli veriler;</p>
+<p>Tarafımızla iletişime geçtiğiniz sırada yazılı veya sözlü olarak veya elektronik ortamda tarafımıza iletmiş olduğunuz (Adınız, Soyadınız, Doğum tarihiniz, e-mail adresiniz, TC Kimlik Numaranız, Telefon Numaralarınız, Adresiniz, Web Sayfanız vb.) gibi kişisel verileriniz ile özel nitelikli verileriniz de dahil olmak üzere her türlü bilgi ve belgeyi ifade etmekte olup, bu bilgiler fiziki ve sayısal ortamda saklanmaktadır. Kişisel verileriniz, KVKK tarafından öngörülen temel ilkelere uygun olarak, KVKK’nun 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları kapsamında işbu Bildirim’de belirtilen gerçek ve tüzel kişiler ile azami güvenliği sağlamak amacıyla yurtiçinde ve yurtdışında işlenebilmekte ve yurtiçine ve yurtdışına aktarılabilmektedir.</p>
+<p>Kişisel ve Özel Nitelikli Verilerinizi Neden ve Ne İçin Kullanıyoruz? *</p>
+<p>Yaptığınız işlemlerde bilgilerinizi tespit edebilmek için kimlik, adres ve gerekli diğer bilgilerinizi kaydetmek,</p>
+<p>Sizinle paylaşmamız gereken önemli bilgileri iletişim bilgileriniz üzerinden iletmek,</p>
+<p>Kâğıt üzerinde, sözlü veya elektronik ortamlarda işlemlerinizi tamamlayabilmeniz için gerekli tüm kayıt ve belgeleri düzenlemek,</p>
+<p>Mevzuat gereği bilgi verme yükümlülüğümüz olan kamu kurumlarınca ve idari-adli makamlarca istenilen bilgileri saklamak, raporlamak ve bu kurumları bilgilendirmek,</p>
+<p>İzniniz olması durumunda, mevzuat kapsamında yer alan ve Derneğimize üye olma amacınız dışında kalan hizmetlerimizin sunulmasında kullanmak, size özel hizmet faaliyetlerini planlamak ve hayata geçirmek, profilleme, segmentasyon, üye ilişkileri yönetimi, Dernek faaliyetlerinin başarımının takibi ile analiz çalışmalarında kullanma, istatistiki çalışmalar, pazar araştırması;</p>
+<p>Kurumsal sürdürülebilirlik, kurumsal yönetim, stratejik planlama ve bilgi güvenliği süreçlerimizi planlamak, denetlemek ve hayata geçirmek,</p>
+<p>İdari, yasal yükümlüklerimizi ve Dernek tüzüğündeki amaçların gereğini yerine getirmek,</p>
+<p>Özel verilerinizi anonimleştirerek istatistiki veri ve ortalamalar elde ederek, strateji planlamak.</p>
+<p>Kişisel ve özel verilerinizi çevrimiçi ortamda sizin her bir talebinde akıllı bir yazılım aracılığı ile görüntüleme ve işlenmiş olan veriyi gösterme amacı ile sunduğumuz hizmetlerin ifası içindir.</p>
+<p>Kişisel ve Özel Nitelikli Verilerinizi Kimlerle Paylaşıyoruz?</p>
+<p>Kişisel ve özel verileriniz mevzuattan kaynaklanan zorunluluklar nedeniyle kamu kurum ve kuruluşları, kamu tüzel kişileri, idari ve adli makamlar; ve bunun yanı sıra Dernek yönetim organları, dernek faaliyetlerimizi yürütmek ve tarafınızla kurulmuş olan ilişkiden kaynaklanan yükümlülüklerimizi yerine getirmek üzere hizmet aldığımız, işbirliği yaptığımız, program ortağı kuruluşlara KVKK’da yapılan düzenlemeler ve sınırlamalar çerçevesinde aktarılabilecektir.</p>
+<p>Kişisel ve Özel Verilerinize Nerelerden Ulaşabiliriz?</p>
+<p>Kişisel ve özel verileriniz derneğimiz ile yapmış olabileceğiniz doğrudan temaslar, web sayfalarımız aracılığı ile, eğitim, kamp, konferans, seminer ve sempozyum vb. etkinlikler aracılığı ile, referans aracılığı ile, yönlendirilmiş olmanız ve/veya kişisel ve özel verilerinizin yönlendirilmiş ve/veya verilmiş olması nedeni ile, hizmetlerimizi ifa ederken elde edilmesi ile, sosyal medyada takipçiniz olmamız veya takipçimiz olmanız vb. nedenlerle doğrudan ve/veya dolaylı yollar aracılığıyla sözlü, yazılı veya elektronik ortamlarda toplanabilir.</p>
+<p>Yasa Kapsamındaki Haklarınız Nelerdir?</p>
+<p>Dilediğiniz zaman derneğimize başvurarak kişisel ve özel verilerinizin;</p>
+<p>İşlenip işlenmediğini, işlenme amacını ve amacına uygun kullanıp kullanılmadığı öğrenebilir ve işlenmiş ise bu konuda bilgi isteyebilir,</p>
+<p>Kanun’a uygun olarak yurtiçinde ve yurtdışında bilgilerinizin paylaşıldığı üçüncü kişileri öğrenebilir.</p>
+<p>Bilgilerinizin eksik ya da hatalı işlendiğini düşünüyorsanız düzeltilmesini isteyebilir,</p>
+<p>Kanunun 7. maddesinde öngörülen şartlar çerçevesinde bilgilerinizin silinmesini ya da yok edilmesini talep edebilir,</p>
+<p>Bilgilerinizin aktarıldığı üçüncü kişilere (c) ve (d) bentlerinde belirtilen taleplerinizin bildirilmesini ve aynı işlemleri gerçekleştirmelerini isteyebilir,</p>
+<p>Bilgilerinizin, otomatik sistemler ile analiz edilmesi nedeniyle aleyhinize bir sonucun ortaya çıkmasına itiraz edebilir veya yasaya aykırı olarak kaydedildiğini veya kullanıldığını düşünüyorsanız ve bu nedenle zarara uğramışsanız zararın giderilmesini isteyebilirsiniz.</p>
+<p>Bu amaçlarla yaptığınız başvurunun ek bir maliyet gerektirmesi durumunda, Kişisel Verileri Koruma Kurulu tarafından belirlenecek tarifedeki ücret tutarını ödemeniz gerekebilir. Başvurunuzda yer alan talepleriniz, talebin niteliğine göre en kısa sürede ve en geç 30 (otuz) gün içinde sonuçlandırılacaktır.</p>
+<p>Kanun kapsamındaki haklarınızdan yararlanmak için başvurularınızı yazılı olarak derneğimize iletebilir, ayrıntılı bilgi almak için Kişisel Verileri Koruma Kurumu’nun internet sayfasını ziyaret edebilirsiniz.</p>
+<p>* Derneğimiz kişisel veri envanter çalışmasında değişiklik oldukça bu bilgilendirmemiz güncellenecektir.</p>
 
-<p>&nbsp;</p>
-
-<p>b) Kişisel Verilerin Hangi Amaçla İşleneceği</p>
-<p>Toplanan kişisel verileriniz, kişisel verilerinizi bizlere açıklamanıza konu olan; Derneğin ve Dernekle iş ilişkisi içerisinde olan ilgili kişilerin hukuki, teknik ve ticari-iş güvenliğinin temini; Dernek tarafından sunulan ürün ve hizmetlerin ilgili kişilerin beğeni, kullanım alışkanlıkları ve ihtiyaçlarına göre özelleştirilerek ilgili kişilere önerilmesi ve tanıtılması için gerekli olan aktivitelerin planlanması ve icrası; Dernek tarafından sunulan ürün ve hizmetlerden ilgili kişileri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması ve ilgili iş süreçlerinin yürütülmesi; Derneğin ticari ve/veya iş stratejilerinin planlanması ve icrası; Dernek tarafından yürütülen ticari faaliyetlerin gerçekleştirilmesi için ilgili iş birimlerimiz tarafından gerekli çalışmaların yapılması ve buna bağlı iş süreçlerinin yürütülmesi; Derneğin insan kaynakları politikaları ve süreçlerinin planlanmasının ve icra edilmesi amaçlarıyla 6698 sayılı Kanun’un 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları dahilinde işlenecektir. Kişisel verilerinizin Derneğimiz tarafından işlenme amaçları konusunda detaylı bilgilere; www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasından ulaşabilirsiniz.</p>
-
-<p>&nbsp;</p>
-
-<p>c) İşlenen Kişisel Verilerin Kimlere ve Hangi Amaçla Aktarılabileceği</p>
-<p>Toplanan kişisel verileriniz; Dernek tarafından sunulan ürün ve hizmetlerin ilgili kişilerin beğeni, kullanım alışkanlıkları ve ihtiyaçlarına göre özelleştirilerek ilgili kişilere önerilmesi ve tanıtılması için gerekli olan aktivitelerin planlanması ve icrası; Dernek tarafından yürütülen ticari faaliyetlerin gerçekleştirilmesi için ilgili iş birimlerimiz tarafından gerekli çalışmaların yapılması ve buna bağlı iş süreçlerinin yürütülmesi; Dernek tarafından sunulan ürün ve hizmetlerden ilgili kişileri faydalandırmak için gerekli çalışmaların iş birimlerimiz tarafından yapılması ve ilgili iş süreçlerinin yürütülmesi; Derneğin ticari ve/veya iş stratejilerinin planlanması ve icrası; Derneğin ve Dernekle iş ilişkisi içerisinde olan ilgili kişilerin hukuki, teknik ve ticari-iş güvenliğinin temini amaçlarıyla; bayilerimize, iş ortaklarımıza, tedarikçilerimize, hissedarlarımıza, iştiraklerimize, kanunen yetkili kamu kurumları ve özel kişilere, 6698 sayılı Kanun’un 8. ve 9. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları çerçevesinde www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasında belirtilen amaçlarla sınırlı olarak aktarılabilecektir.</p>
-
-<p>&nbsp;</p>
-
-<p>ç) Kişisel Veri Toplamanın Yöntemi ve Hukuki Sebebi</p>
-<p>Kişisel verileriniz Derneğimiz tarafından farklı kanallarla ve farklı hukuki sebeplere dayanarak; sunduğumuz ürün ile hizmetleri geliştirmek ve ticari faaliyetlerimizi yürütmek amacıyla toplanmaktadır. Bu süreçte kişisel verileriniz; internet sitelerimiz ve mobil uygulamalarımızdaki bilgi ve talep formları aracılığıyla yahut fiziki ortamda toplanmaktadır. Bu hukuki sebeple toplanan kişisel verileriniz 6698 sayılı Kanun’un 5. ve 6. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları kapsamında bu Aydınlatma Metni’nin (b) ve (c) maddelerinde belirtilen amaçlarla da işlenebilmekte ve aktarılabilmektedir.</p>
-
-<p>&nbsp;</p>
-
-<p>d) Kişisel Veri Sahibinin 6698 sayılı Kanun’un 11. maddesinde Sayılan Hakları</p>
-<p>Kişisel veri sahipleri olarak, haklarınıza ilişkin taleplerinizi www.lkd.org.tr internet adresinden kamuoyu ile paylaşılmış olan Linux Kullanıcıları Derneği Kişisel Verilerin Korunması ve İşlenmesi Politikasında düzenlenen yöntemlerle Linux Kullanıcıları Derneği’ne iletmeniz durumunda Linux Kullanıcıları Derneği talebin niteliğine göre talebi en kısa sürede ve en geç otuz gün içinde sonuçlandıracaktır. Ancak, işlemin ayrıca bir maliyeti gerektirmesi hâlinde, Linux Kullanıcıları Derneği tarafından Kişisel Verileri Koruma Kurulunca belirlenen tarifedeki ücret alınacaktır. Bu kapsamda kişisel veri sahipleri;</p>
-
-<p>&nbsp;</p>
-
-<ul>
-<li>Kişisel veri işlenip işlenmediğini öğrenme,</li>
-
-<li>Kişisel verileri işlenmişse buna ilişkin bilgi talep etme,</li>
-
-<li>Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme,</li>
-
-<li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme,</li>
-
-<li>Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
-
-<li>6698 sayılı Kanun ve ilgili diğer kanun hükümlerine uygun olarak işlenmiş olmasına rağmen, işlenmesini gerektiren sebeplerin ortadan kalkması hâlinde kişisel verilerin silinmesini veya yok edilmesini isteme ve bu kapsamda yapılan işlemin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,</li>
-
-<li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme,</li>
-
-<li>Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması hâlinde zararın giderilmesini talep etme haklarına sahiptir.</li>
-
-
-</ul>
 </div>
