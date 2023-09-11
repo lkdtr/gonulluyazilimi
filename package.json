@@ -26,6 +26,7 @@
     "dependencies": {
         "datatables": "^1.10.18",
         "datatables.net-plugins": "^1.13.6",
+        "datatables.net-responsive-bs4": "^2.5.0",
         "innoq-bootstrap-theme": "^2.1.0",
         "jquery-datetimepicker": "^2.5.21"
     }
