@@ -98,6 +98,7 @@ class EmailRedirectsController extends Controller
         $user->birthday = Carbon::parse($birthday)->format("Y-m-d");
         $user->name = $this->tr_ucwords($name);
         $user->surname = $this->tr_ucwords($surname);
+        $user->national_id = $national_id;
         $user->save();
 
         $user->name = $this->slug(mb_strtolower($user->name));
