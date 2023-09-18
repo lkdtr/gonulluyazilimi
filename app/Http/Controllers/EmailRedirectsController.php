@@ -95,9 +95,9 @@ class EmailRedirectsController extends Controller
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $user->birthday = Carbon::parse($birthday)->format("Y-m-d");
         $user->name = $this->tr_ucwords($name);
         $user->surname = $this->tr_ucwords($surname);
+        $user->birthday = Carbon::parse($birthday)->format("Y-m-d");
         $user->national_id = $national_id;
         $user->save();
 
