@@ -10,7 +10,8 @@ Sadece kod değil her türlü katkıyı memnuniyetle karşılıyoruz. yardımcı
 
 ## İlk Katkınız
 
-İlk Çekme İsteğiniz üzerinde mi çalışıyorsunuz? Bunu nasıl yapacağınızı bu *ücretsiz* diziden öğrenebilirsiniz: [GitHub'da Açık Kaynaklı Bir Projeye Nasıl Katkıda Bulunulur?](https://app.egghead.io/playlists/how-to-contribute-to-an-open-source-github 'daki proje).
+İlk Çekme İsteğiniz üzerinde mi çalışıyorsunuz? Bunu nasıl yapacağınızı bu *ücretsiz* diziden öğrenebilirsiniz: [GitHub'da Açık Kaynaklı Bir Projeye Nasıl Katkıda Bulunulur?](https://github.com/freeCodeCamp/how-to-contribute-to-open-source/blob/main/README-TR.md).
+
 
 ## Kod gönderiliyor
 

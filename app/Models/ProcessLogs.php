@@ -18,6 +18,12 @@ class ProcessLogs extends Model
             $res = ["name"=>"", "surname" => ""];
             return (object) $res;
         }
-        return $this->hasOne('App\Models\User', 'id', 'process_by')->first();
+        $result = $this->hasOne('App\Models\User', 'id', 'process_by')->first();
+        if($result==null) {
+            $res = ["name"=>"Silinmiş", "surname" => ""];
+            return (object) $res;
+        }
+
+        return $result;
     }
 }
