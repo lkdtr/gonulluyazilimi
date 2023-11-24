@@ -159,4 +159,35 @@ class AdminController extends Controller
 
     }
 
+    public function removeUser($user_id) {
+
+        if (Auth::user()->role!=1 ) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $user = User::where("id", $user_id)->first();
+        if($user==null) {
+            $this->set_log("other", "Kullanıcı yok");
+        }
+        else {
+            $last_removed_user = User::where("email", "LIKE", "XXXX%")->orderBy("id", "DESC")->first();
+            if($last_removed_user==null) $last_removed_user = new User();
+
+            $last_id = str_replace("XXXX", "", $last_removed_user->email) + 1;
+
+            $user->name = "XXXX" + $last_id;
+            $user->surname = "XXXX" + $last_id;
+            $user->email = "XXXX" + $last_id;
+            $user->status = 0;
+
+            if($user->save()) {
+                return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.remove_user_success"));
+            }
+            else {
+                return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.remove_user_failed"));
+            }
+        }
+
+    }
+
 }

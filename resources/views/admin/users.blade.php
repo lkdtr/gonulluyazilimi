@@ -66,6 +66,8 @@
                                             <li><a class="dropdown-item" href="{{secure_url('/set-owner-role/'.$user->id)}}">{{ trans("panel.set_owner_role") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-manager-role/'.$user->id)}}">{{ trans("panel.set_manager_role") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/set-user-role/'.$user->id)}}">{{ trans("panel.set_user_role") }}</a></li>
+                                            <hr style="margin: 5px; color: #999;">
+                                            <li><a class="dropdown-item" href="{{secure_url('/remove-user/'.$user->id)}}">{{ trans("panel.remove_user") }}</a></li>
                                             @endif
 
                                         </ul>

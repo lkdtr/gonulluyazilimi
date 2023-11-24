@@ -131,11 +131,14 @@ return [
     'send_email' => 'Send announcement with e-mail',
 
     'remove_penguen' => 'Disable penguen.org.tr email',
-
+    'remove_user' => 'Remove user',
 
     'try_reactive_penguen' => 'Click to try reactive penguen.org.tr email',
     'remove_penguen_success' => 'Penguen.org.tr email disabled with success',
     'remove_penguen_failed' => 'Penguen.org.tr email could not be disabled',
+
+    'remove_user_success' => 'Remove user with success',
+    'remove_user_failed' => 'Remove user could not be disabled',
 
     'save_announcement_success' => 'Announcement has been save success',
     'save_announcement_failed' => 'Announcement has been save failed',

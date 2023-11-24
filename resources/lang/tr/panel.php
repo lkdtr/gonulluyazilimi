@@ -131,10 +131,14 @@ return [
     'send_email' => 'Duyuruyu e-posta ile de gönder',
 
     'remove_penguen' => 'Penguen.org.tr epostasını devre dışı bırak',
+    'remove_user' => 'Kullanıcıyı kaldır',
 
     'try_reactive_penguen' => 'Penguen.org.tr epostanızı yeniden aktif etmek için tıklayın',
     'remove_penguen_success' => 'Penguen.org.tr epostasını devre dışı bırakıldı',
     'remove_penguen_failed' => 'Penguen.org.tr epostasını devre dışı bırakılamadı',
+
+    'remove_user_success' => 'Kullanıcı silindi',
+    'remove_user_failed' => 'Kullanıcı silinemedi',
 
     'save_announcement_success' => 'Duyuru başarı ile kaydedildi',
     'save_announcement_failed' => 'Duyuru kaydedilemedi',
