@@ -173,7 +173,7 @@ class AdminController extends Controller
             $last_removed_user = User::where("email", "LIKE", "XXXX%")->orderBy("id", "DESC")->first();
             if($last_removed_user==null) $last_removed_user = new User();
 
-            $last_id = str_replace("XXXX", "", $last_removed_user->email) + 1;
+            $last_id = intval(str_replace("XXXX", "", $last_removed_user->email)) + 1;
 
             $user->name = "XXXX" + $last_id;
             $user->surname = "XXXX" + $last_id;
