@@ -6,11 +6,12 @@ Sadece kod değil her türlü katkıyı memnuniyetle karşılıyoruz. yardımcı
 - **QA**: hata raporlarını dosyalayın, ne kadar fazla ayrıntı verirseniz o kadar iyi olur (ör. konsol açıkken ekran görüntüleri)
 - **Pazarlama**: blog yazıları yazmak, nasıl yapılır, çıkartmalar yazdırmak, ...
 - **Topluluk**: projeyi toplantılarda sunmak, yerel topluluk için özel bir buluşma düzenlemek, ...
-- **Kod**: [açık sorunlara](issues) göz atın. Kod yazamasanız bile onlara yorum yapmak, belirli bir konuyu önemsediğinizi göstermek önemlidir. Onları önceliklendirmemize yardımcı olur.
+- **Kod**: [açık sorunlara](https://github.com/lkdtr/gonulluyazilimi/issues) göz atın. Kod yazamasanız bile onlara yorum yapmak, belirli bir konuyu önemsediğinizi göstermek önemlidir. Onları önceliklendirmemize yardımcı olur.
 
 ## İlk Katkınız
 
 İlk Çekme İsteğiniz üzerinde mi çalışıyorsunuz? Bunu nasıl yapacağınızı bu *ücretsiz* diziden öğrenebilirsiniz: [GitHub'da Açık Kaynaklı Bir Projeye Nasıl Katkıda Bulunulur?](https://github.com/freeCodeCamp/how-to-contribute-to-open-source/blob/main/README-TR.md).
+
 
 ## Kod gönderiliyor
 
