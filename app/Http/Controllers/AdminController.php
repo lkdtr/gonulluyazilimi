@@ -175,9 +175,9 @@ class AdminController extends Controller
 
             $last_id = intval(str_replace("XXXX", "", $last_removed_user->email)) + 1;
 
-            $user->name = "XXXX" + $last_id;
-            $user->surname = "XXXX" + $last_id;
-            $user->email = "XXXX" + $last_id;
+            $user->name = "XXXX$last_id";
+            $user->surname = "XXXX$last_id";
+            $user->email = "XXXX$last_id";
             $user->status = 0;
 
             if($user->save()) {
