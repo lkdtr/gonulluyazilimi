@@ -170,7 +170,7 @@ class AdminController extends Controller
             $this->set_log("other", "Kullanıcı yok");
         }
         else {
-            $last_removed_user = User::where("email", "LIKE", "XXXX%")->orderBy("id", "DESC")->first();
+            $last_removed_user = User::where("email", "LIKE", "XXXX%")->orderBy("email", "ASC")->first();
             if($last_removed_user==null) $last_removed_user = new User();
 
             $last_id = intval(str_replace("XXXX", "", $last_removed_user->email)) + 1;
