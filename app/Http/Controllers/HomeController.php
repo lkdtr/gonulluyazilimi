@@ -10,8 +10,6 @@ use App\Models\UserEvents;
 use App\Models\EmailRedirects;
 use App\Models\Announcements;
 
-use BahriCanli\Mailgun\Facades\Mailgun;
-
 class HomeController extends Controller
 {
     /**
@@ -37,11 +35,19 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
-        Mailgun::api()->mailingList()->member()->create(
-            "gonullu@mg.penguen.org.tr",
-            $user->email,
-            $user->name." ".$user->surname
-        );
+        try {
+
+            $result = $this->addMemberInEmmaiList(
+                $user->email,
+                $user->name." ".$user->surname
+            );
+
+            $this->set_log("other", $result->message);
+        }
+        catch(Exception $e) {
+
+        }
+
 
         $this->set_log("other", Auth::user()->email." giriş yaptı");
 

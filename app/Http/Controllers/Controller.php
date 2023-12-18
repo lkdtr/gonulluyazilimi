@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 use App\Models\ProcessLogs;
 
@@ -132,6 +133,31 @@ class Controller extends BaseController
             return false;
         }
 
+    }
+
+    function addMemberInEmmaiList($email, $fullname) {
+
+        $parameters = [
+            'address' => $email,
+            'name' => $fullname,
+            'subscribed' => 'True'
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/lists/'.env('MAILGUN_MAILLIST').'/members');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+        curl_setopt($ch, CURLOPT_USERPWD, 'api' . ':' . env('MAILGUN_SECRET'));
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+
+        return json_decode($result);
     }
 
 }
