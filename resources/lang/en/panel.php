@@ -128,7 +128,8 @@ return [
     'active' => 'Active',
     'passive' => 'Passive',
 
-    'send_email' => 'Send announcement with e-mail',
+    'send_email' => 'Send the announcement to volunteers by email',
+    'send_test_email' => 'Send the announcement to the test group by email',
 
     'remove_penguen' => 'Disable penguen.org.tr email',
     'remove_user' => 'Remove user',

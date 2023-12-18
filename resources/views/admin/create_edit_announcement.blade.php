@@ -113,7 +113,24 @@
                                         <input class="form-check-input" type="checkbox" id="is_send_email" name="is_send_email" autofocus {{ $announcement->send_mailing == 1 ? 'checked' : '' }}>
                                     </div>
 
-                                    @error('send_mailing')
+                                    @error('is_send_email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="status" class="col-md-2 col-form-label text-md-end">
+                                </label>
+                                <div class="col-md-8 mt-2">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="is_send_test_email">{{ trans("panel.send_test_email") }}</label>
+                                        <input class="form-check-input" type="checkbox" id="is_send_test_email" name="is_send_test_email">
+                                    </div>
+
+                                    @error('is_send_test_email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

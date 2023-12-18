@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Announcements;
 
 use Carbon\Carbon;
+
+use App\Mail\AnnouncementMailing;
 
 class AnnouncementController extends Controller
 {
@@ -62,10 +66,32 @@ class AnnouncementController extends Controller
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");
+        $announcement->send_mailing = $request->input("is_send_email");
         $announcement->created_by = Auth::id();
         $announcement->updated_by = Auth::id();
-
         $announcement->save();
+
+        $mailing = false;
+        if($request->has("is_send_email")) {
+            $mailing = true;
+            $tomail = "gonullu@mg.penguen.org.tr";
+        }
+        elseif($request->has("is_send_test_email")) {
+            $mailing = true;
+            $tomail = "gonullu-test@mg.penguen.org.tr";
+        }
+
+        if($mailing) {
+            $toname = "Linux Kullanıcıları Derneği Gönüllüleri";
+
+            $data = (object) [
+                "subject" => $announcement->subject,
+                "content" => $announcement->detail
+            ];
+
+            $result = Mail::to($tomail)->send(new AnnouncementMailing($data));
+        }
+
 
         return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
     }
@@ -107,9 +133,30 @@ class AnnouncementController extends Controller
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");
+        $announcement->send_mailing = $request->input("is_send_email");
         $announcement->updated_by = Auth::id();
-
         $announcement->save();
+
+        $mailing = false;
+        if($request->has("is_send_email")) {
+            $mailing = true;
+            $tomail = "gonullu@mg.penguen.org.tr";
+        }
+        elseif($request->has("is_send_test_email")) {
+            $mailing = true;
+            $tomail = "gonullu-test@mg.penguen.org.tr";
+        }
+
+        if($mailing) {
+            $toname = "Linux Kullanıcıları Derneği Gönüllüleri";
+
+            $data = (object) [
+                "subject" => $announcement->subject,
+                "content" => $announcement->detail
+            ];
+
+            $result = Mail::to($tomail)->send(new AnnouncementMailing($data));
+        }
 
         return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
     }
