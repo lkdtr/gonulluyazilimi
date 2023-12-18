@@ -671,7 +671,7 @@
                                 <td class="content-block aligncenter" align="center">
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a271">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.lkd.org.tr">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/home.png" alt="home" title="home">
                                             </a>
 
@@ -681,37 +681,37 @@
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a272">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="tel:+90%20850%20307%20450">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/phone.png" alt="phone" title="phone">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a273" title="Facebook" alt="Facebook">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.facebook.com/lkdtr" title="Facebook" alt="Facebook">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/facebook.png" alt="facebook" title="facebook">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a274" title="X" alt="X">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://twitter.com/lkdtr" title="X" alt="X">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/twitter.png" alt="X" title="X">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a275" title="Instagram" alt="Instagram">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.instagram.com/lkdorgtr/" title="Instagram" alt="Instagram">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/instagram.png" alt="instagram" title="instagram">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1ab9376178506a1a276" title="Linkedin" alt="Linkedin">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.linkedin.com/company/linux-kullanicilari-dernegi/" title="Linkedin" alt="Linkedin">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/linkedin.png" alt="linkedin" title="linkedin">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/632f37b19376178506a53750" title="Youtube" alt="Youtube">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://youtube.com/channel/UC8tIk0G-bmwVoWQI0qHaQmQ" title="Youtube" alt="Youtube">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/youtube.png" alt="youtube" title="youtube">
                                             </a>
 
 
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1ab9376178506a1a277" title="Whatsapp" alt="Whatsapp">
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=+90%20850%20307%204502" title="Whatsapp" alt="Whatsapp">
                                                 <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/whatsapp.png" alt="whatsapp" title="whatsapp">
                                             </a>
 
