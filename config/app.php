@@ -167,7 +167,6 @@ return [
          */
         NotificationChannels\Netgsm\NetgsmServiceProvider::class,
 	    Epigra\TCKimlikServiceProvider::class,
-        BahriCanli\Mailgun\MailgunServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -233,7 +232,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Netgsm' => NotificationChannels\Netgsm\Netgsm::class,
-        'Mailgun' => BahriCanli\Mailgun\Facades\Mailgun::class,
     ],
 
 ];
