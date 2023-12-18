@@ -637,7 +637,7 @@
 
         <tr>
             <td align="center">
-                <img alt="Linux Kullanıcıları Derneği" align="center" src="/images/mailing/lkd-logo.png" style="max-width:120px;vertical-align:top;" class="img-responsive">
+                <img alt="Linux Kullanıcıları Derneği" align="center" src="{{env('APP_URL')}}/images/mailing/lkd-logo.png" style="max-width:120px;vertical-align:top;" class="img-responsive">
             </td>
         </tr>
 
@@ -672,47 +672,47 @@
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a271">
-                                                <img height="15" width="15" src="/images/mailing/home.png" alt="home" title="home">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/home.png" alt="home" title="home">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="mailto:bilgi@lkd.org.tr">
-                                                <img height="15" width="15" src="/images/mailing/envelope.png" alt="envelope" title="envelope">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/envelope.png" alt="envelope" title="envelope">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a272">
-                                                <img height="15" width="15" src="/images/mailing/phone.png" alt="phone" title="phone">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/phone.png" alt="phone" title="phone">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a273" title="Facebook" alt="Facebook">
-                                                <img height="15" width="15" src="/images/mailing/facebook.png" alt="facebook" title="facebook">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/facebook.png" alt="facebook" title="facebook">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a274" title="X" alt="X">
-                                                <img height="15" width="15" src="/images/mailing/twitter.png" alt="X" title="X">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/twitter.png" alt="X" title="X">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1aa9376178506a1a275" title="Instagram" alt="Instagram">
-                                                <img height="15" width="15" src="/images/mailing/instagram.png" alt="instagram" title="instagram">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/instagram.png" alt="instagram" title="instagram">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1ab9376178506a1a276" title="Linkedin" alt="Linkedin">
-                                                <img height="15" width="15" src="/images/mailing/linkedin.png" alt="linkedin" title="linkedin">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/linkedin.png" alt="linkedin" title="linkedin">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/632f37b19376178506a53750" title="Youtube" alt="Youtube">
-                                                <img height="15" width="15" src="/images/mailing/youtube.png" alt="youtube" title="youtube">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/youtube.png" alt="youtube" title="youtube">
                                             </a>
 
 
                                             <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://email.fonzip.com/notify/click/5ea032eea817ee0001f698ca/658001bf59d663000154cbcd/6312e1ab9376178506a1a277" title="Whatsapp" alt="Whatsapp">
-                                                <img height="15" width="15" src="/images/mailing/whatsapp.png" alt="whatsapp" title="whatsapp">
+                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/whatsapp.png" alt="whatsapp" title="whatsapp">
                                             </a>
 
 
