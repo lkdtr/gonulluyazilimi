@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "bahricanli/mailgun": "dev-master",
         "bahricanli/netgsm": "^1.0.2",
         "doctrine/dbal": "^3.6",
         "epigra/tckimlik": "^1.0",

@@ -128,7 +128,8 @@ return [
     'active' => 'Aktif',
     'passive' => 'Pasif',
 
-    'send_email' => 'Duyuruyu e-posta ile de gönder',
+    'send_email' => 'Duyuruyu gönüllülere e-posta ile de gönder',
+    'send_test_email' => 'Duyuruyu test grubuna e-posta ile de gönder',
 
     'remove_penguen' => 'Penguen.org.tr epostasını devre dışı bırak',
     'remove_user' => 'Kullanıcıyı kaldır',
