@@ -137,18 +137,15 @@ class Controller extends BaseController
 
     function addMemberInEmmaiList($email, $fullname) {
 
-        $emailList = "gonullu-test@mg.penguen.org.tr";
-
         $parameters = [
             'address' => $email,
             'name' => $fullname,
             'subscribed' => 'True'
         ];
 
-
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/lists/'.$emailList.'/members');
+        curl_setopt($ch, CURLOPT_URL, 'https://api.mailgun.net/v3/lists/'.env('MAILGUN_MAILLIST').'/members');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
