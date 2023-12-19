@@ -66,7 +66,7 @@ class AnnouncementController extends Controller
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");
-        $announcement->send_mailing = $request->input("is_send_email");
+        $announcement->send_mailing = $request->has("is_send_email")?1:0;
         $announcement->created_by = Auth::id();
         $announcement->updated_by = Auth::id();
         $announcement->save();
@@ -133,7 +133,7 @@ class AnnouncementController extends Controller
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");
-        $announcement->send_mailing = $request->input("is_send_email");
+        $announcement->send_mailing = $request->has("is_send_email")?1:0;
         $announcement->updated_by = Auth::id();
         $announcement->save();
 
