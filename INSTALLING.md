@@ -1,9 +1,17 @@
 # Kurulum Aşamaları
 
-composer install
+* terminal açılır
 
-php artisan migrate
+* projenin kurulu olduğu klasöre giriş yapılır
 
-php artisan db:seed --class CitiesTableSeeder
+* cp .env.example .env
 
-php artisan db:seed --class UniversitiesTableSeeder
+* composer install
+
+* php artisan migrate
+
+* php artisan db:seed --class CitiesTableSeeder
+
+* php artisan db:seed --class UniversitiesTableSeeder
+
+* çalıştırmak için de php artisan serv
