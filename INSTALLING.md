@@ -4,17 +4,17 @@
 
 * projenin kurulu olduğu klasöre giriş yapılır
 
-* cp .env.example .env
+* ```cp .env.example .env```
 
-* .env dosyasının içi (başta veritabanı bilgileri olmak üzere) düzenlenir 
+* ```.env``` dosyasının içi (başta veritabanı bilgileri olmak üzere) düzenlenir 
 
-* composer install
+* ```composer install```
 
-* php artisan migrate
+* ```php artisan migrate```
 
-* php artisan db:seed --class CitiesTableSeeder
+* ```php artisan db:seed --class CitiesTableSeeder```
 
-* php artisan db:seed --class UniversitiesTableSeeder
+* ```php artisan db:seed --class UniversitiesTableSeeder```
 
-* çalıştırmak için de php artisan serv
+* çalıştırmak için de ```php artisan serv```
 
