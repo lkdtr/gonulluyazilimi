@@ -6,6 +6,8 @@
 
 * cp .env.example .env
 
+* .env dosyasının içi (başta veritabanı bilgileri olmak üzere) düzenlenir 
+
 * composer install
 
 * php artisan migrate
