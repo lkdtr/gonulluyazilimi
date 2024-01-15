@@ -42,7 +42,6 @@ class HomeController extends Controller
                 $user->name." ".$user->surname
             );
 
-            $this->set_log("other", $result->message);
         }
         catch(Exception $e) {
 
