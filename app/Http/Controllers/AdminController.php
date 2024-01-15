@@ -148,6 +148,7 @@ class AdminController extends Controller
             $email_redirect = EmailRedirects::where("user_id", $user_id)->first();
             if($email_redirect!=null) {
                 $email_redirect->status = 0;
+                $email_redirect->email_forwarding = $user->email;
                 $email_redirect->save();
                 $this->set_log("other", $email_redirect->email_alias." adresi devre dışı bırakıldı");
                 return Redirect::to(secure_url('/users'))->with("success-status", trans("panel.remove_penguen_success"));
