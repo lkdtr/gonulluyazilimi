@@ -74,4 +74,12 @@ class User extends Authenticatable
             return $contactPermission;
         }
     }
+
+    public function getCity() {
+        if($this->city_id==0) {
+            $res = ["city_name"=>""];
+            return (object) $res;
+        }
+        return $this->hasOne('App\Models\Cities', 'id', 'city_id')->first();
+    }
 }
