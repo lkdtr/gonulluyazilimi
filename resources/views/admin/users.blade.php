@@ -33,6 +33,8 @@
                                 <th>{{ trans("auth.city") }}</th>
                                 <th>{{ trans("panel.user_role") }}</th>
                                 <th>{{ trans("auth.alias") }}</th>
+                                <th>{{ trans("panel.created_at") }}</th>
+                                <th>{{ trans("panel.updated_at") }}</th>
                                 <th>{{ trans("panel.processes") }}</th>
                             </tr>
                         </thead>
@@ -49,6 +51,8 @@
                                 <td>{{$user->getCity()->city_name}}</td>
                                 <td>{{trans("panel.user_".$user->role)}} @if($user->lkd_user_id>0) ({{trans("panel.lkd_user")}}) @endif</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
+                                <td>{{$user->created_at->format('d-m-Y H:i')}}</td>
+                                <td>{{$user->updated_at->format('d-m-Y H:i')}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
