@@ -135,7 +135,7 @@ class Handler extends ExceptionHandler
             $html = $handler->getBody($e);
             $error_type = get_class($e);
 
-            Mail::to('gonullu@penguen.org.tr')->send(new ExceptionOccured($error_type, $html, $css, $request));
+            Mail::to('web@linux.org.tr')->send(new ExceptionOccured($error_type, $html, $css, $request));
             Log::info('hata bilgisi gönderildi');
 
         } catch (Throwable $ex) {
