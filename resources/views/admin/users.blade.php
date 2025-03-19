@@ -48,7 +48,7 @@
                                 <td>@if($user->birthday!="") {{ date("d-m-Y", strtotime($user->birthday)) }} @endif</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}} @if($user->getValidation()->verified) <svg style="height: 16px;width: 16px;" class="bi flex-shrink-0 me-2" role="img"><use xlink:href="#check-fill"/></svg> @endif</td>
-                                <td>{{$user->getCity()->city_name}}</td>
+                                <td>@if(isset($user->getCity()->city_name)) {{$user->getCity()->city_name}} @endif</td>
                                 <td>{{trans("panel.user_".$user->role)}} @if($user->lkd_user_id>0) ({{trans("panel.lkd_user")}}) @endif</td>
                                 <td>{{$user->getEmailRedirects()->email_alias}}</td>
                                 <td>{{$user->created_at->format('d-m-Y H:i')}}</td>
