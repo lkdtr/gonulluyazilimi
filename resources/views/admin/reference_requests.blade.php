@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{$referenceRequest->id}}</td>
                                 <td>{{$referenceRequest->getCreatedBy()->name}} {{$referenceRequest->getCreatedBy()->surname}}</td>
-                                <td>{{$referenceRequest->getCreatedBy()->getCity()->city_name}} {{$referenceRequest->getCreatedBy()->getCity()->city_name}}</td>
+                                <td>{{isset($referenceRequest->getCreatedBy()->getCity()->city_name)?$referenceRequest->getCreatedBy()->getCity()->city_name:""}}</td>
                                 <td>{{date("d-m-Y H:i:s", strtotime($referenceRequest->created_at))}}</td>
                                 <td>{{$referenceRequest->getUpdatedBy()->name}} {{$referenceRequest->getUpdatedBy()->surname}}</td>
                                 <td>{{date("d-m-Y H:i:s", strtotime($referenceRequest->updated_at))}}</td>
