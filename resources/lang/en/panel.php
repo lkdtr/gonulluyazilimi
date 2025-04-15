@@ -100,6 +100,7 @@ return [
     'syllabus' => 'Syllabus',
     'duration' => 'Duration',
     'hour' => 'Hour',
+    'city' => 'City',
 
     'created_by' => 'Created By',
     'updated_by' => 'Updated By',
