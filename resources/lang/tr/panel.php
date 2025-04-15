@@ -100,6 +100,7 @@ return [
     'syllabus' => 'Müfredat',
     'duration' => 'Süresi',
     'hour' => 'Saat',
+    'city' => 'Şehir',
 
     'created_by' => 'Oluşturan',
     'updated_by' => 'Güncelleyen',
