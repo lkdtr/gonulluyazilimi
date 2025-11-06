@@ -166,7 +166,7 @@ return [
          * Package Service Providers...
          */
         NotificationChannels\Netgsm\NetgsmServiceProvider::class,
-	    Epigra\TCKimlikServiceProvider::class,
+	    BahriCanli\TCKimlikServiceProvider::class,
 
         /*
          * Application Service Providers...
