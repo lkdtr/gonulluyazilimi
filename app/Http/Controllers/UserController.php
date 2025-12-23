@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\Cities;
 
-use Epigra\TcKimlik;
+use BahriCanli\TcKimlik;
 use Carbon\Carbon;
 
 class UserController extends Controller

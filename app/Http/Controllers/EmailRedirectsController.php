@@ -13,7 +13,7 @@ use App\Mail\PenguenWelcome;
 use App\Models\User;
 use App\Models\EmailRedirects;
 
-use Epigra\TcKimlik;
+use BahriCanli\TcKimlik;
 use Carbon\Carbon;
 
 use App\Traits\PostfixAdmin;

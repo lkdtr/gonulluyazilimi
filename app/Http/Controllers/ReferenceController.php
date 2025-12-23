@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use App\Models\ReferenceRequests;
 
-use Epigra\TcKimlik;
+use BahriCanli\TcKimlik;
 use Carbon\Carbon;
 
 class ReferenceController extends Controller
