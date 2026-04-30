@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ac9195cfa24180365f761a08eedc61c",
+    "content-hash": "40f07e180214d089837963092d056651",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -235,7 +235,7 @@
         },
         {
             "name": "bahricanli/whatsapp-bridge",
-            "version": "dev-main",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bahricanli/whatsapp-bridge.git",
@@ -258,7 +258,6 @@
                 "orchestra/testbench": "^6.0|^7.0|^8.0",
                 "phpunit/phpunit": "^9.0|^10.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -9508,9 +9507,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "bahricanli/whatsapp-bridge": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
