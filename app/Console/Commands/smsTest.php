@@ -15,14 +15,14 @@ class smsTest extends Command
      *
      * @var string
      */
-    protected $signature = 'sms:test';
+    protected $signature = 'sms:test {phone : Alıcı telefon numarası (örn: 905551234567)}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'SMS test';
+    protected $description = 'SMS test gönder';
 
     /**
      * Create a new command instance.
@@ -42,9 +42,13 @@ class smsTest extends Command
     public function handle()
     {
         $smsObject = new \stdClass();
-        $smsObject->phone_number = "+905053127806";
-        $smsObject->verification_code = "56546";
+        $smsObject->phone_number = $this->argument('phone');
+        $smsObject->verification_code = rand(100000, 999999);
+
+        $this->info("SMS gönderiliyor → {$smsObject->phone_number} (kod: {$smsObject->verification_code})");
 
         Notification::send($smsObject, new MobileVerification());
+
+        $this->info('Gönderildi.');
     }
 }
