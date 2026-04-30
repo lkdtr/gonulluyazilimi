@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebd7ab1923810473758b043c02c997e6",
+    "content-hash": "11672ae8be232a3d61e66cfe2652d90d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -232,6 +232,77 @@
                 "source": "https://github.com/bahricanli/tckimlik/tree/1.0"
             },
             "time": "2025-11-06T13:23:09+00:00"
+        },
+        {
+            "name": "bahricanli/whatsapp-bridge",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bahricanli/whatsapp-bridge.git",
+                "reference": "30c9ee47cd09c8a5d3e1c31d40a49e462cf9ea86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bahricanli/whatsapp-bridge/zipball/30c9ee47cd09c8a5d3e1c31d40a49e462cf9ea86",
+                "reference": "30c9ee47cd09c8a5d3e1c31d40a49e462cf9ea86",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/notifications": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.0|^10.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "NotificationChannels\\WhatsAppBridge\\WhatsAppServiceProvider"
+                    ],
+                    "aliases": {
+                        "WhatsApp": "NotificationChannels\\WhatsAppBridge\\WhatsAppFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\WhatsAppBridge\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "NotificationChannels\\WhatsAppBridge\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bahri Meriç Canlı",
+                    "email": "bahri@bahri.info",
+                    "homepage": "https://www.bahri.info",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel notification channel for WhatsApp via Baileys Bridge",
+            "homepage": "https://github.com/bahricanli/whatsapp-bridge",
+            "support": {
+                "source": "https://github.com/bahricanli/whatsapp-bridge/tree/main",
+                "issues": "https://github.com/bahricanli/whatsapp-bridge/issues"
+            },
+            "time": "2026-04-30T06:51:33+00:00"
         },
         {
             "name": "brick/math",
@@ -9408,12 +9479,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "bahricanli/whatsapp-bridge": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.3|^8.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
