@@ -3,8 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
+use NotificationChannels\Netgsm\NetgsmChannel;
 use BahriCanli\Netgsm\ShortMessage;
-use BahriCanli\Netgsm\NetgsmService;
 
 class smsTest extends Command
 {
@@ -46,7 +47,7 @@ class smsTest extends Command
 
         $message = $code . " kodu ile telefon numaranizi dogrulayin. Linux Kullanicilari Dernegi";
 
-        app('netgsm-sms')->sendOne(
+        app('netgsm-sms')->sendShortMessage(
             new ShortMessage($phone, $message)
         );
 
