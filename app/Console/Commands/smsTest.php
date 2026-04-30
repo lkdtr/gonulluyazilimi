@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
-use Illuminate\Support\Facades\Notification;
-
-use App\Notifications\MobileVerification;
+use BahriCanli\Netgsm\ShortMessage;
+use BahriCanli\Netgsm\NetgsmService;
 
 class smsTest extends Command
 {
@@ -41,13 +39,16 @@ class smsTest extends Command
      */
     public function handle()
     {
-        $smsObject = new \stdClass();
-        $smsObject->phone_number = $this->argument('phone');
-        $smsObject->verification_code = rand(100000, 999999);
+        $phone = $this->argument('phone');
+        $code  = rand(100000, 999999);
 
-        $this->info("SMS gönderiliyor → {$smsObject->phone_number} (kod: {$smsObject->verification_code})");
+        $this->info("SMS gönderiliyor → {$phone} (kod: {$code})");
 
-        Notification::send($smsObject, new MobileVerification());
+        $message = $code . " kodu ile telefon numaranizi dogrulayin. Linux Kullanicilari Dernegi";
+
+        app('netgsm-sms')->sendOne(
+            new ShortMessage($phone, $message)
+        );
 
         $this->info('Gönderildi.');
     }
