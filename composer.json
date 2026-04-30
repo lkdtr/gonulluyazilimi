@@ -7,8 +7,9 @@
     "require": {
         "php": "^7.3|^8.0",
         "bahricanli/netgsm": "^1.0.2",
-        "doctrine/dbal": "^3.6",
         "bahricanli/tckimlik": "^1.0",
+        "bahricanli/whatsapp-bridge": "dev-main",
+        "doctrine/dbal": "^3.6",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laminas/laminas-xmlrpc": "^2.16",
@@ -67,6 +68,12 @@
             "php-http/discovery": true
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bahricanli/whatsapp-bridge"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
