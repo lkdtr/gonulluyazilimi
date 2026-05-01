@@ -33,6 +33,6 @@ return [
     | Maximum seconds to wait for a response from the bridge.
     |
     */
-    'timeout' => env('WHATSAPP_BRIDGE_TIMEOUT', 10),
+    'timeout' => env('WHATSAPP_BRIDGE_TIMEOUT', 3),
 
 ];
