@@ -235,16 +235,16 @@
         },
         {
             "name": "bahricanli/whatsapp-bridge",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bahricanli/whatsapp-bridge.git",
-                "reference": "1c9543fb46725e32aaeb3eb7d3b8c85a8efe9aa9"
+                "reference": "bbbbaff95465081704cec3cc9396d1d6ccfa5065"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bahricanli/whatsapp-bridge/zipball/1c9543fb46725e32aaeb3eb7d3b8c85a8efe9aa9",
-                "reference": "1c9543fb46725e32aaeb3eb7d3b8c85a8efe9aa9",
+                "url": "https://api.github.com/repos/bahricanli/whatsapp-bridge/zipball/bbbbaff95465081704cec3cc9396d1d6ccfa5065",
+                "reference": "bbbbaff95465081704cec3cc9396d1d6ccfa5065",
                 "shasum": ""
             },
             "require": {
@@ -298,10 +298,10 @@
             "description": "Laravel notification channel for WhatsApp via Baileys Bridge",
             "homepage": "https://github.com/bahricanli/whatsapp-bridge",
             "support": {
-                "source": "https://github.com/bahricanli/whatsapp-bridge/tree/v1.0.1",
+                "source": "https://github.com/bahricanli/whatsapp-bridge/tree/v1.0.2",
                 "issues": "https://github.com/bahricanli/whatsapp-bridge/issues"
             },
-            "time": "2026-04-30T08:45:13+00:00"
+            "time": "2026-05-01T21:22:22+00:00"
         },
         {
             "name": "brick/math",
