@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "bahricanli/netgsm": "^1.0.2",
-        "bahricanli/tckimlik": "^1.0",
+        "bahricanli/tckimlik": "^1.0.1",
         "bahricanli/whatsapp-bridge": "^1.0.1",
         "doctrine/dbal": "^3.6",
         "fruitcake/laravel-cors": "^2.0",
