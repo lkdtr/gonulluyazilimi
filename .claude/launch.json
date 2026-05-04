@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Laravel Dev Server",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["artisan", "serve", "--port=8000"],
+      "port": 8000
+    },
+    {
+      "name": "Mix Watch (Asset Compiler)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "watch"],
+      "port": 8080
+    },
+    {
+      "name": "Mix Hot Reload",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "hot"],
+      "port": 8080
+    }
+  ]
+}
