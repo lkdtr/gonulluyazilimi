@@ -13,6 +13,7 @@ use App\Mail\PenguenWelcome;
 
 use App\Models\User;
 use App\Models\EmailRedirects;
+use TcKimlik;
 
 class AdminController extends Controller
 {
@@ -191,6 +192,42 @@ class AdminController extends Controller
             }
         }
 
+    }
+
+    public function tcKimlikDogrula($user_id) {
+
+        $user = User::where("id", $user_id)->first();
+        if($user==null) {
+            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
+        }
+
+        $birth_year = "";
+        if(!empty($user->birthday)) {
+            $birth_year = date("Y", strtotime($user->birthday));
+        }
+
+        $request_data = [
+            'tcno' => $user->national_id,
+            'isim' => $this->tr_ucwords($user->name),
+            'soyisim' => $this->tr_ucwords($user->surname),
+            'dogumyili' => $birth_year,
+        ];
+
+        $result = false;
+        $error_message = null;
+
+        try {
+            $result = TcKimlik::validate($request_data);
+        } catch (\Throwable $e) {
+            $error_message = $e->getMessage();
+        }
+
+        return view('admin.tc_kimlik_debug', [
+            'user' => $user,
+            'request_data' => $request_data,
+            'result' => $result,
+            'error_message' => $error_message,
+        ]);
     }
 
 }
