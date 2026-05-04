@@ -68,29 +68,23 @@ class ReferenceController extends Controller
             'agreement' => ['required']
         ]);
 
-        $name = $request->get("name");
-        $surname = $request->get("surname");
-        $national_id = $request->get("national_id");
-        $birthday = $request->get("birthday");
+        $name = $this->normalizeIdentityText($request->get("name"));
+        $surname = $this->normalizeIdentityText($request->get("surname"));
+        $national_id = preg_replace('/\D+/', '', (string) $request->get("national_id"));
+        $birthday = $this->parseIdentityBirthday($request->get("birthday"));
 
-        $birty_year = date("Y", strtotime($birthday));
+        $data = $this->buildTcKimlikData($national_id, $name, $surname, $birthday->format("Y-m-d"));
 
-        $data = [
-            'tcno'          => $national_id,
-            'isim'          => $name,
-            'soyisim'       => $surname,
-            'dogumyili'     => $birty_year,
-        ];
-
-        if (!TcKimlik::validate($data)) {
+        if (!$this->validateTcKimlikIdentity($data)) {
             return back()->withErrors(["national_id" => "TC Kimlik Numarası vermiş olduğunuz kimlik bilgilerinizle eşleşmiyor"])->withInput();
         }
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $user->birthday = Carbon::parse($birthday);
+        $user->birthday = $birthday->format("Y-m-d");
         $user->name = $this->tr_ucwords($name);
         $user->surname = $this->tr_ucwords($surname);
+        $user->national_id = $national_id;
         $user->save();
 
         $referenceRequest = ReferenceRequests::where("user_id", $user_id)->first();
@@ -108,6 +102,89 @@ class ReferenceController extends Controller
         }
 
         return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.reference_requests_failed"));
+    }
+
+    private function normalizeIdentityText($value) {
+        $value = trim((string) $value);
+        $value = preg_replace('/\s+/u', ' ', $value);
+
+        return $this->tr_ucwords($value);
+    }
+
+    private function parseIdentityBirthday($birthday) {
+        $birthday = trim((string) $birthday);
+
+        foreach (['d-m-Y', 'd.m.Y', 'd/m/Y', 'Y-m-d'] as $format) {
+            try {
+                return Carbon::createFromFormat($format, $birthday);
+            } catch (\Exception $e) {
+            }
+        }
+
+        return Carbon::parse($birthday);
+    }
+
+    private function buildTcKimlikData($nationalId, $name, $surname, $birthday) {
+        $birthday = $this->parseIdentityBirthday($birthday);
+
+        return [
+            'tcno'          => preg_replace('/\D+/', '', (string) $nationalId),
+            'isim'          => $this->normalizeIdentityText($name),
+            'soyisim'       => $this->normalizeIdentityText($surname),
+            'dogumyili'     => $birthday->format('Y'),
+        ];
+    }
+
+    private function validateTcKimlikIdentity(array $data) {
+        if (!TcKimlik::verify($data)) {
+            return false;
+        }
+
+        $payload = [
+            'TCKimlikNo' => $data['tcno'],
+            'Ad' => TcKimlik::trUppercase($data['isim']),
+            'Soyad' => TcKimlik::trUppercase($data['soyisim']),
+            'DogumYili' => $data['dogumyili'],
+        ];
+
+        $fields = array_reduce(
+            array_chunk($payload, 1, true),
+            function ($result, $item) {
+                return $result . '<' . key($item) . '>' . current($item) . '</' . key($item) . '>' . PHP_EOL;
+            },
+            ''
+        );
+
+        $postData = '<?xml version="1.0" encoding="utf-8"?>' .
+            '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">' .
+            '<soap:Body>' .
+            '<TCKimlikNoDogrula xmlns="http://tckimlik.linux.org.tr/WS">' .
+            $fields .
+            '</TCKimlikNoDogrula>' .
+            '</soap:Body>' .
+            '</soap:Envelope>';
+
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => 'https://tckimlik.linux.org.tr/Service/KPSPublic.asmx',
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $postData,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_HEADER => false,
+            CURLOPT_HTTPHEADER => [
+                'POST /Service/KPSPublic.asmx HTTP/1.1',
+                'Host: tckimlik.linux.org.tr',
+                'Content-Type: text/xml; charset=utf-8',
+                'SOAPAction: "http://tckimlik.linux.org.tr/WS/TCKimlikNoDogrula"',
+                'Content-Length: ' . strlen($postData),
+            ],
+        ]);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return preg_match('/<TCKimlikNoDogrulaResult>\s*true\s*<\/TCKimlikNoDogrulaResult>/i', (string) $response) === 1;
     }
 
 }
