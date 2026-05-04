@@ -40,6 +40,7 @@ Route::get('/remove-user/{user_id}', [App\Http\Controllers\AdminController::clas
 Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setManagerRole'])->name('set-manager-role');
 Route::get('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setOwnerRole'])->name('set-owner-role');
 Route::get('/set-user-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setUserRole'])->name('set-user-role');
+Route::get('/tc-kimlik-dogrula/{user_id}', [App\Http\Controllers\AdminController::class, 'tcKimlikDogrula'])->name('tc-kimlik-dogrula');
 
 Route::get('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'getUserInfos'])->name('user-infos');
 Route::post('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'postUserInfos']);

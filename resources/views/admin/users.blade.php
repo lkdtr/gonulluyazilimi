@@ -60,6 +60,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-left">
                                             <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{secure_url('/tc-kimlik-dogrula/'.$user->id)}}" target="_blank">TC Kimlik Doğru mu?</a></li>
 
                                             @if($user->getEmailRedirects()->email_alias!="")
                                                 <hr style="margin: 5px; color: #999;">
