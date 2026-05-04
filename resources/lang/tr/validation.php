@@ -84,6 +84,7 @@ return [
     ],
     'string'   => ':attribute karakterlerden oluşmalıdır.',
     'timezone' => ':attribute geçerli bir zaman bölgesi olmalıdır.',
+    'tckimlik' => 'Belirtilen T.C. Kimlik Numarası doğrulanamadı.',
     'unique'   => ':attribute daha önceden kayıt edilmiş.',
     'uploaded' => ':attribute yüklenirken hata oluştu.',
     'url'      => ':attribute biçimi geçersiz.',

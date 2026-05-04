@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ef8f03b6c682ce48173de6e4d91a985",
+    "content-hash": "a01b69e70c7903d2d95369e2773e5ac0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -174,20 +174,21 @@
         },
         {
             "name": "bahricanli/tckimlik",
-            "version": "v1.0.1",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bahricanli/tckimlik.git",
-                "reference": "9f7b78d6ba556ec2935a875c0cad5d1c79719f1d"
+                "reference": "8daf25e27100bec43633f73c74c145fd638e9983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bahricanli/tckimlik/zipball/9f7b78d6ba556ec2935a875c0cad5d1c79719f1d",
-                "reference": "9f7b78d6ba556ec2935a875c0cad5d1c79719f1d",
+                "url": "https://api.github.com/repos/bahricanli/tckimlik/zipball/8daf25e27100bec43633f73c74c145fd638e9983",
+                "reference": "8daf25e27100bec43633f73c74c145fd638e9983",
                 "shasum": ""
             },
             "require": {
-                "ext-intl": "*"
+                "ext-intl": "*",
+                "illuminate/support": "^8.75"
             },
             "require-dev": {
                 "orchestra/testbench": "^6.x-dev"
@@ -229,9 +230,9 @@
                 "validation"
             ],
             "support": {
-                "source": "https://github.com/bahricanli/tckimlik/tree/v1.0.1"
+                "source": "https://github.com/bahricanli/tckimlik/tree/1.0.4"
             },
-            "time": "2026-05-04T14:15:34+00:00"
+            "time": "2026-05-04T18:15:52+00:00"
         },
         {
             "name": "bahricanli/whatsapp-bridge",
@@ -2344,16 +2345,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "8.x-dev",
+            "version": "v8.83.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "863d9289a5150e19ee8f6a09631a6ce441f701bc"
+                "reference": "d841a226a50c715431952a10260ba4fac9e91cc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/863d9289a5150e19ee8f6a09631a6ce441f701bc",
-                "reference": "863d9289a5150e19ee8f6a09631a6ce441f701bc",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d841a226a50c715431952a10260ba4fac9e91cc4",
+                "reference": "d841a226a50c715431952a10260ba4fac9e91cc4",
                 "shasum": ""
             },
             "require": {
@@ -2513,7 +2514,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-03-24T11:25:05+00:00"
+            "time": "2024-11-20T15:55:41+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -9439,12 +9440,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^8.4"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }
