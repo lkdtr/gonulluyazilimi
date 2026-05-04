@@ -13,7 +13,7 @@ use App\Mail\PenguenWelcome;
 
 use App\Models\User;
 use App\Models\EmailRedirects;
-use TcKimlik;
+use BahriCanli\TcKimlik;
 
 class AdminController extends Controller
 {
