@@ -14,7 +14,7 @@
                             <div>{{ session('success-status') }}</div>
                         </div>
                     @endif
-                    <p class="text-end"><a href="{{ route('create-seminar-offer') }}">Seminer vermek ister misiniz? Başvuru formunu doldurun.</a></p>
+                    <p class="text-end"><a href="{{ route('create-seminar-offer', $inIframe ? ['in-iframe' => 1] : []) }}">Seminer vermek ister misiniz? Başvuru formunu doldurun.</a></p>
 
                     @guest
                         <p>Talep oluşturabilmek için üye girişi gereklidir. İletişim bilgileriniz üyelik kaydınızdan alınır.</p>

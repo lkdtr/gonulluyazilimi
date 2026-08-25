@@ -25,6 +25,14 @@ class SeminarOfferTest extends TestCase
         $this->assertDatabaseCount('seminar_offers', 0);
     }
 
+    public function test_offer_form_uses_the_iframe_layout_when_requested(): void
+    {
+        $this->get('/create-seminar-offer?in-iframe=1')
+            ->assertOk()
+            ->assertDontSee('navbar')
+            ->assertHeader('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+    }
+
     public function test_authenticated_member_submission_notifies_member_and_board(): void
     {
         Mail::fake();

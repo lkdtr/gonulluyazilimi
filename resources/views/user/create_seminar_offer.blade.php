@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends($inIframe ? 'layouts.iframe' : 'layouts.app')
 @section('content')
 <div class="container"><div class="row justify-content-center"><div class="col-md-9"><div class="card border-secondary"><div class="card-header text-white bg-secondary">Seminer Vermek İstiyorum</div><div class="card-body">
 @if(session('success-status'))<div class="alert alert-success">{{ session('success-status') }}</div>@endif
 <p>Başvuru formunu doldurabilirsiniz. Gönderim aşamasında üyelik veya giriş gereklidir; iletişim bilgileriniz üyelik kaydınızdan alınır.</p>
-<form method="POST" action="{{ route('seminar-offer.store') }}">@csrf
+<form method="POST" action="{{ route('seminar-offer.store', $inIframe ? ['in-iframe' => 1] : []) }}">@csrf
 <div class="mb-3"><label class="form-label">Konu</label><div class="form-check"><input class="form-check-input subject-choice" type="radio" name="subject_choice" value="existing" id="subject_existing" @checked(old('subject_choice', $formData['subject_choice'] ?? 'existing') === 'existing')><label class="form-check-label" for="subject_existing">Seminer havuzundan seç</label></div><div class="form-check"><input class="form-check-input subject-choice" type="radio" name="subject_choice" value="proposed" id="subject_proposed" @checked(old('subject_choice', $formData['subject_choice'] ?? '') === 'proposed')><label class="form-check-label" for="subject_proposed">Yeni konu öner</label></div></div>
 <div class="mb-3" id="existing-subject"><select name="seminar_subject_id" class="form-select @error('seminar_subject_id') is-invalid @enderror"><option value="">Seminer seçin</option>@foreach($seminarSubjects as $subject)<option value="{{ $subject->id }}" @selected(old('seminar_subject_id', $formData['seminar_subject_id'] ?? '') == $subject->id)>{{ $subject->subject }}</option>@endforeach</select>@error('seminar_subject_id')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
 <div class="mb-3 d-none" id="proposed-subject"><input name="proposed_subject" value="{{ old('proposed_subject', $formData['proposed_subject'] ?? '') }}" class="form-control @error('proposed_subject') is-invalid @enderror" placeholder="Önerdiğiniz seminer konusu">@error('proposed_subject')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>

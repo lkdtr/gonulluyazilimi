@@ -16,13 +16,21 @@ class SeminarOfferController extends Controller
 {
     public function create()
     {
+        $inIframe = request()->boolean('in-iframe');
         $seminarSubjects = SeminarSubjects::where('status', 1)->orderBy('subject')->get();
         $formData = session('seminar_offer_form', []);
-        return view('user.create_seminar_offer', compact('seminarSubjects', 'formData'));
+        $response = response()->view('user.create_seminar_offer', compact('seminarSubjects', 'formData', 'inIframe'));
+
+        if ($inIframe) {
+            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+        }
+
+        return $response;
     }
 
     public function store(Request $request)
     {
+        $inIframe = $request->boolean('in-iframe');
         $data = $request->validate([
             'subject_choice' => ['required', 'in:existing,proposed'],
             'seminar_subject_id' => ['nullable', 'required_if:subject_choice,existing', 'exists:seminar_subjects,id'],
@@ -67,7 +75,8 @@ class SeminarOfferController extends Controller
         Mail::to($seminarOffer->user->email)->send(new SeminarOfferReceived($seminarOffer));
         $this->set_log('create', 'Seminer verme başvurusu oluşturuldu.');
 
-        return redirect()->route('create-seminar-offer')->with('success-status', 'Seminer verme başvurunuz alındı ve değerlendirmeye gönderildi.');
+        return redirect()->route('create-seminar-offer', $inIframe ? ['in-iframe' => 1] : [])
+            ->with('success-status', 'Seminer verme başvurunuz alındı ve değerlendirmeye gönderildi.');
     }
 
     public function index()

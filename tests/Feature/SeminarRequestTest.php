@@ -37,6 +37,7 @@ class SeminarRequestTest extends TestCase
         $this->get('/create-seminar-request?in-iframe=1')
             ->assertOk()
             ->assertDontSee('navbar')
+            ->assertSee('create-seminar-offer?in-iframe=1', false)
             ->assertHeader('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
     }
 
