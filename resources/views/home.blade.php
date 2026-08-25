@@ -58,7 +58,7 @@
                         </button>
                         <div class="collapse" id="announcementCollapse{{$announcement->id}}">
                             <div class="card card-body text-dark bg-light rounded-0">
-                                <div>{!! $announcement->detail !!}</div>
+                                <div>{!! app(\App\Support\HtmlSanitizer::class)->sanitize($announcement->detail) !!}</div>
                             </div>
                         </div>
                         <small>&nbsp;</small>

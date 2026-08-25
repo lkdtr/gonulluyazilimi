@@ -9,7 +9,6 @@ class Universities extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'universities';
     protected $primaryKey = 'id';
 }

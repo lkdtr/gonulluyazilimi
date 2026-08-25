@@ -9,9 +9,13 @@ class SeminarSubjects extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'seminar_subjects';
     protected $primaryKey = 'id';
+
+    public function seminarRequests()
+    {
+        return $this->hasMany(SeminarRequests::class);
+    }
 
     public function getCreatedBy() {
         if($this->created_by==0) {

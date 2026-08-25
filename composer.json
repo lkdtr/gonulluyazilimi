@@ -10,6 +10,7 @@
         "bahricanli/tckimlik": "^1.0.6",
         "bahricanli/whatsapp-bridge": "^1.2.1",
         "doctrine/dbal": "^4.0",
+        "ezyang/htmlpurifier": "^4.18",
         "guzzlehttp/guzzle": "^7.8",
         "laminas/laminas-xmlrpc": "^2.16",
         "laravel/framework": "^13.0",

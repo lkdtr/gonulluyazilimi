@@ -9,7 +9,6 @@ class Events extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'events';
     protected $primaryKey = 'id';
 }

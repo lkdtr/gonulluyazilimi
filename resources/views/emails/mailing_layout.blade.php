@@ -645,7 +645,7 @@
 
     <tr>
         <td class="content-block">
-            {!! $data->content !!}
+            {!! app(\App\Support\HtmlSanitizer::class)->sanitize($data->content) !!}
         </td>
     </tr>
 

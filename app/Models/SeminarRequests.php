@@ -9,7 +9,25 @@ class SeminarRequests extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'seminar_requests';
     protected $primaryKey = 'id';
+
+    protected $casts = [
+        'seminar_date' => 'date',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function seminarSubject()
+    {
+        return $this->belongsTo(SeminarSubjects::class);
+    }
+
+    public function organizationRecord()
+    {
+        return $this->belongsTo(Organizations::class, 'organization_id');
+    }
 }

@@ -9,7 +9,6 @@ class ReferenceRequests extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'reference_requests';
     protected $primaryKey = 'id';
 

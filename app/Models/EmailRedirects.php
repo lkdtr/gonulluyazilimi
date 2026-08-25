@@ -9,7 +9,6 @@ class EmailRedirects extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'email_redirects';
     protected $primaryKey = 'id';
 }

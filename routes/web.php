@@ -39,21 +39,22 @@ Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);
 Route::get('/user-agreement', [App\Http\Controllers\AgreementController::class, 'userAgreement']);
 Route::get('/email-agreement', [App\Http\Controllers\AgreementController::class, 'emailAgreement']);
 
-Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerificationRequest']);
-Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification']);
+Route::post('/phone-number-verification-request', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerificationRequest'])->middleware('throttle:3,1');
+Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificationController::class, 'postPhoneNumberVerification'])->middleware('throttle:10,1');
 
-Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+Route::middleware(['auth', 'role:1,2'])->group(function () {
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+});
 
-Route::get('/send-penguen-welcome/{user_id}', [App\Http\Controllers\AdminController::class, 'sendPenguenWelcome'])->name('send-penguen-welcome');
-
-Route::get('/remove-penguen/{user_id}', [App\Http\Controllers\AdminController::class, 'removePenguen'])->name('remove-penguen');
-Route::get('/remove-user/{user_id}', [App\Http\Controllers\AdminController::class, 'removeUser'])->name('remove-user');
-
-
-Route::get('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setManagerRole'])->name('set-manager-role');
-Route::get('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setOwnerRole'])->name('set-owner-role');
-Route::get('/set-user-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setUserRole'])->name('set-user-role');
-Route::get('/tc-kimlik-dogrula/{user_id}', [App\Http\Controllers\AdminController::class, 'tcKimlikDogrula'])->name('tc-kimlik-dogrula');
+Route::middleware(['auth', 'role:1'])->group(function () {
+    Route::post('/send-penguen-welcome/{user_id}', [App\Http\Controllers\AdminController::class, 'sendPenguenWelcome'])->name('send-penguen-welcome');
+    Route::delete('/remove-penguen/{user_id}', [App\Http\Controllers\AdminController::class, 'removePenguen'])->name('remove-penguen');
+    Route::delete('/remove-user/{user_id}', [App\Http\Controllers\AdminController::class, 'removeUser'])->name('remove-user');
+    Route::patch('/set-manager-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setManagerRole'])->name('set-manager-role');
+    Route::patch('/set-owner-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setOwnerRole'])->name('set-owner-role');
+    Route::patch('/set-user-role/{user_id}', [App\Http\Controllers\AdminController::class, 'setUserRole'])->name('set-user-role');
+    Route::post('/tc-kimlik-dogrula/{user_id}', [App\Http\Controllers\AdminController::class, 'tcKimlikDogrula'])->name('tc-kimlik-dogrula');
+});
 
 Route::get('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'getUserInfos'])->name('user-infos');
 Route::post('/user-infos/{user_id}', [App\Http\Controllers\UserController::class, 'postUserInfos']);
@@ -76,9 +77,10 @@ Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::c
 Route::get('/edit-announcement/{id}', [App\Http\Controllers\AnnouncementController::class, 'getEdit'])->name('edit-announcement');
 Route::post('/edit-announcement/{id}', [App\Http\Controllers\AnnouncementController::class, 'postEdit']);
 
-Route::get('/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->name('seminar-requests');
 Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
-Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate']);
+Route::get('/create-seminar-request/create', [App\Http\Controllers\SeminarController::class, 'getCreate'])->middleware('auth')->name('seminar-request.start');
+Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate'])->middleware('auth')->name('seminar-request.store');
+Route::get('/admin/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->middleware(['auth', 'role:1'])->name('admin.seminar-requests');
 Route::get('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'getCreateSubject'])->name('new-seminar-subject');
 Route::post('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'postCreateSubject']);
 Route::get('/edit-seminar-subject/{id}', [App\Http\Controllers\SeminarController::class, 'getEditSubject'])->name('edit-seminar-subject');

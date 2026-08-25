@@ -7,24 +7,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 use App\Models\SeminarSubjects;
+use App\Models\SeminarRequests;
+use App\Models\Organizations;
+use App\Mail\SeminarRequestNotification;
+use App\Mail\SeminarRequestReceived;
 
 class SeminarController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-
-            $this->middleware('auth');
-
-            if(!Auth::check() ) {
-                return redirect('/login')->with('redirect', URL::full() );
-            }
-
-            return $next($request);
-        });
+        $this->middleware('auth')->only([
+            'postCreate',
+            'getCreateSubject',
+            'postCreateSubject',
+            'getEditSubject',
+            'postEditSubject',
+            'getSubjectList',
+        ]);
     }
 
     public function getList() {
@@ -33,23 +37,70 @@ class SeminarController extends Controller
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
-        return view('admin.seminar_requests');
+        $seminarRequests = SeminarRequests::with(['user', 'seminarSubject', 'organizationRecord'])
+            ->latest()
+            ->get();
+
+        return view('admin.seminar_requests', compact('seminarRequests'));
 
     }
 
     public function getCreate() {
 
-        if (Auth::user()->role!=1 ) {
-            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+        $inIframe = request()->boolean('in-iframe');
+        $seminarSubjects = SeminarSubjects::where('status', 1)->orderBy('subject')->get();
+        $organizations = Organizations::orderBy('name')->get();
+        $minimumSeminarDate = now()->addDays(60)->toDateString();
+
+        $response = response()->view('user.create_seminar_request', compact('seminarSubjects', 'organizations', 'minimumSeminarDate', 'inIframe'));
+
+        if ($inIframe) {
+            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
         }
 
-        return view('user.create_seminar_request');
+        return $response;
 
     }
 
     public function postCreate(Request $request) {
 
-        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
+        $inIframe = $request->boolean('in-iframe');
+        $minimumSeminarDate = now()->addDays(60)->toDateString();
+        $data = $request->validate([
+            'seminar_subject_id' => ['required', 'integer', 'exists:seminar_subjects,id'],
+            'organization' => ['required', 'string', 'max:255'],
+            'location' => ['required', 'string', 'max:255'],
+            'seminar_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:'.$minimumSeminarDate],
+        ]);
+
+        $seminarSubject = SeminarSubjects::where('id', $data['seminar_subject_id'])
+            ->where('status', 1)
+            ->firstOrFail();
+
+        $organizationName = $this->tr_ucwords(Str::squish($data['organization']));
+        $organization = Organizations::firstOrCreate(
+            ['normalized_name' => Str::lower($organizationName)],
+            ['name' => $organizationName]
+        );
+
+        $seminarRequest = new SeminarRequests();
+        $seminarRequest->user_id = Auth::id();
+        $seminarRequest->seminar_subject_id = $seminarSubject->id;
+        $seminarRequest->organization_id = $organization->id;
+        $seminarRequest->organization = $organization->name;
+        $seminarRequest->location = $data['location'];
+        $seminarRequest->seminar_date = $data['seminar_date'];
+        $seminarRequest->status = 'pending';
+        $seminarRequest->save();
+        $seminarRequest->load(['user', 'seminarSubject', 'organizationRecord']);
+
+        Mail::to('yk@lkd.org.tr')->send(new SeminarRequestNotification($seminarRequest));
+        Mail::to($seminarRequest->user->email)->send(new SeminarRequestReceived($seminarRequest));
+
+        $this->set_log('create', $seminarSubject->subject.' semineri için talep oluşturuldu');
+
+        return Redirect::to(route('create-seminar-request', $inIframe ? ['in-iframe' => 1] : []))
+            ->with('success-status', 'Seminer talebiniz alındı ve değerlendirmeye gönderildi.');
 
     }
 

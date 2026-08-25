@@ -213,21 +213,16 @@ class AdminController extends Controller
             'dogumyili' => $birth_year,
         ];
 
-        $result = false;
-        $error_message = null;
-
         try {
             $result = TcKimlik::validate($request_data);
-        } catch (\Throwable $e) {
-            $error_message = $e->getMessage();
+        } catch (\Throwable) {
+            return Redirect::to(secure_url('/users'))->with('danger-status', 'TC Kimlik doğrulama servisine ulaşılamadı.');
         }
 
-        return view('admin.tc_kimlik_debug', [
-            'user' => $user,
-            'request_data' => $request_data,
-            'result' => $result,
-            'error_message' => $error_message,
-        ]);
+        return Redirect::to(secure_url('/users'))->with(
+            $result ? 'success-status' : 'danger-status',
+            $result ? 'TC Kimlik doğrulaması başarılı.' : 'TC Kimlik doğrulaması başarısız.'
+        );
     }
 
 }

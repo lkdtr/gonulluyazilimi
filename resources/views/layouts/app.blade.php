@@ -136,7 +136,7 @@
                                     <a class="dropdown-item" href="{{ route('new-seminar-subject') }}">
                                         {{ trans("panel.new_seminar_subject") }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('seminar-requests') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.seminar-requests') }}">
                                         {{ trans("panel.seminar_requests") }}
                                     </a>
                                     <hr style="margin: 5px; color: #999;">

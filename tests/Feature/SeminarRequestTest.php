@@ -1,0 +1,115 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Mail\SeminarRequestNotification;
+use App\Mail\SeminarRequestReceived;
+use App\Models\SeminarRequests;
+use App\Models\SeminarSubjects;
+use App\Models\Organizations;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
+
+class SeminarRequestTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_public_catalog_is_available_but_the_request_form_requires_authentication(): void
+    {
+        $subject = $this->createSubject();
+
+        $this->get('/create-seminar-request')
+            ->assertOk()
+            ->assertSee($subject->subject)
+            ->assertSee('Giriş yaparak talep oluştur');
+
+        $this->get('/create-seminar-request/create')
+            ->assertRedirect('/login');
+    }
+
+    public function test_iframe_mode_hides_the_site_chrome_and_allows_only_lkd_embedding(): void
+    {
+        $this->createSubject();
+
+        $this->get('/create-seminar-request?in-iframe=1')
+            ->assertOk()
+            ->assertDontSee('navbar')
+            ->assertHeader('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+    }
+
+    public function test_seminar_date_must_be_at_least_sixty_days_in_the_future(): void
+    {
+        $user = User::factory()->create();
+        $subject = $this->createSubject();
+
+        $this->actingAs($user)->from('/create-seminar-request')->post('/create-seminar-request', $this->requestData($subject, now()->addDays(59)->toDateString()))
+            ->assertRedirect('/create-seminar-request')
+            ->assertSessionHasErrors('seminar_date');
+
+        $this->assertDatabaseCount('seminar_requests', 0);
+    }
+
+    public function test_valid_request_notifies_the_board_and_the_requester(): void
+    {
+        Mail::fake();
+        $user = User::factory()->create(['phone_number' => '905551112233']);
+        $subject = $this->createSubject();
+
+        $this->actingAs($user)->post('/create-seminar-request', $this->requestData($subject, now()->addDays(60)->toDateString()))
+            ->assertRedirect('/create-seminar-request')
+            ->assertSessionHas('success-status');
+
+        $seminarRequest = SeminarRequests::with(['user', 'seminarSubject'])->firstOrFail();
+        $this->assertSame('pending', $seminarRequest->status);
+        $this->assertSame($user->id, $seminarRequest->user_id);
+        $this->assertSame($subject->id, $seminarRequest->seminar_subject_id);
+        $this->assertSame('Örnek Üniversite', $seminarRequest->organizationRecord->name);
+
+        Mail::assertSent(SeminarRequestNotification::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
+        Mail::assertSent(SeminarRequestReceived::class, fn ($mail) => $mail->hasTo($user->email));
+    }
+
+    public function test_existing_organization_is_reused_despite_different_letter_case(): void
+    {
+        Mail::fake();
+        $subject = $this->createSubject();
+        $firstUser = User::factory()->create();
+        $secondUser = User::factory()->create();
+
+        $this->actingAs($firstUser)->post('/create-seminar-request', $this->requestData($subject, now()->addDays(60)->toDateString()));
+        $this->actingAs($secondUser)->post('/create-seminar-request', array_merge(
+            $this->requestData($subject, now()->addDays(61)->toDateString()),
+            ['organization' => 'ÖRNEK ÜNİVERSİTE']
+        ));
+
+        $this->assertDatabaseCount('organizations', 1);
+        $this->assertSame(
+            SeminarRequests::firstOrFail()->organization_id,
+            SeminarRequests::latest('id')->firstOrFail()->organization_id
+        );
+    }
+
+    private function createSubject(): SeminarSubjects
+    {
+        $subject = new SeminarSubjects();
+        $subject->subject = 'Özgür Yazılım';
+        $subject->summary = 'Özgür yazılıma giriş';
+        $subject->duration = 2;
+        $subject->status = 1;
+        $subject->save();
+
+        return $subject;
+    }
+
+    private function requestData(SeminarSubjects $subject, string $date): array
+    {
+        return [
+            'seminar_subject_id' => $subject->id,
+            'organization' => 'örnek üniversite',
+            'location' => 'Kadıköy, İstanbul',
+            'seminar_date' => $date,
+        ];
+    }
+}

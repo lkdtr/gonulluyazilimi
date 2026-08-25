@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 use App\Mail\PenguenWelcome;
 
@@ -67,7 +68,7 @@ class EmailRedirectsController extends Controller
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'surname' => ['required', 'string', 'max:255', 'min:2'],
             'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
-            'birthday' => ['required'],
+            'birthday' => ['required', 'date'],
             'agreement' => ['required']
         ]);
 
@@ -136,7 +137,7 @@ class EmailRedirectsController extends Controller
     public function postForwarding(Request $request) {
 
         $validator = $request->validate([
-            'email_alias' => ['required'],
+            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@penguen.org.tr'],
             'agreement' => ['required']
         ]);
 
@@ -144,18 +145,20 @@ class EmailRedirectsController extends Controller
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
 
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->firstOrFail();
+
+        $request->validate([
+            'email_alias' => [Rule::unique('email_redirects', 'email_alias')->ignore($email_redirects->id)],
+        ]);
 
         if( ($email_alias == $email_redirects->email_alias) && ($email_redirects->status == 1) ) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
         }
 
-        $email_redirects->email_alias = $email_alias;
-
         try {
-            $result = $this->create_alias($email_redirects->email_alias, $email_redirects->email_forwarding);
+            $result = $this->create_alias($email_alias, $email_redirects->email_forwarding);
         }
-        catch(Exception $e) {
+        catch(\Throwable $e) {
             $this->set_log("create", $e->getMessage() );
             return Redirect::to(secure_url('/home'))->with("danger-status", $e->getMessage() );
         }
@@ -164,6 +167,7 @@ class EmailRedirectsController extends Controller
 
         if($result) {
 
+            $email_redirects->email_alias = $email_alias;
             $email_redirects->status = 1;
             $email_redirects->save();
 

@@ -9,7 +9,6 @@ class ProcessLogs extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'process_logs';
     protected $primaryKey = 'id';
 

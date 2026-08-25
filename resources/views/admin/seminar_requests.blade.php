@@ -1,5 +1,21 @@
 @extends('layouts.app')
-
+                    <table class="table">
+                        <thead><tr><th>Seminer</th><th>Kurum</th><th>Yer</th><th>Tarih</th><th>Talep sahibi</th><th>Durum</th></tr></thead>
+                        <tbody>
+                            @forelse ($seminarRequests as $seminarRequest)
+                                <tr>
+                                    <td>{{ $seminarRequest->seminarSubject->subject }}</td>
+                                    <td>{{ $seminarRequest->organizationRecord?->name ?? $seminarRequest->organization }}</td>
+                                    <td>{{ $seminarRequest->location }}</td>
+                                    <td>{{ $seminarRequest->seminar_date->format('d.m.Y') }}</td>
+                                    <td>{{ $seminarRequest->user->name }} {{ $seminarRequest->user->surname }}<br><small>{{ $seminarRequest->user->email }}</small></td>
+                                    <td>Değerlendiriliyor</td>
+                                </tr>
+                            @empty
+                                <tr><td colspan="6">Henüz seminer talebi yok.</td></tr>
+                            @endforelse
+                        </tbody>
+                    </table>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

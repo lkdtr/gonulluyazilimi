@@ -5,25 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
-use \Exception;
-use \ErrorException;
-use \RuntimeException;
-
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
-use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
-
-//use Symfony\Component\Debug\ExceptionHandler as SymfonyExceptionHandler;
-//use Symfony\Component\Debug\Exception\FatalThrowableError;
-//use Symfony\Component\Debug\Exception\FatalErrorException;
-
-use Symfony\Component\Console\Exception\CommandNotFoundException;
-use App\Exceptions\DummyException;
-
-use App\Mail\ExceptionOccured;
-
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
 
 class Handler extends ExceptionHandler
 {
@@ -40,16 +22,6 @@ class Handler extends ExceptionHandler
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
     ];
-
-    protected $shouldCapture = [
-        //FatalThrowableError::class,
-        //FatalErrorException::class,
-        CommandNotFoundException::class,
-        DummyException::class,
-        ErrorException::class,
-        RuntimeException::class,
-    ];
-
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
@@ -96,7 +68,6 @@ class Handler extends ExceptionHandler
         $error = [
             'url'    => $request->url(),
             'method' => $request->method(),
-            'data'   => $request->all(),
         ];
 
         $message = '404: ' . $error['url'] . "\n" . json_encode($error, JSON_PRETTY_PRINT);
@@ -105,44 +76,6 @@ class Handler extends ExceptionHandler
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
-
-    public function shouldReport(Throwable $exception)
-    {
-        if ($this->is404($exception)) return false;
-        if ($this->isAuth($exception)) return false;
-
-        if (!is_array($this->shouldCapture)) {
-            return false;
-        }
-        if (in_array('*', $this->shouldCapture)) {
-            return true;
-        }
-        foreach ($this->shouldCapture as $type) {
-            if ($exception instanceof $type) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function sendEmail(Throwable $exception, $request)
-    {
-
-        try {
-            $e = FlattenException::createFromThrowable($exception);
-            $handler = new HtmlErrorRenderer(true);
-            $css = $handler->getStylesheet();
-            $html = $handler->getBody($e);
-            $error_type = get_class($e);
-
-            Mail::to('web@linux.org.tr')->send(new ExceptionOccured($error_type, $html, $css, $request));
-            Log::info('hata bilgisi gönderildi');
-
-        } catch (Throwable $ex) {
-            dd($ex);
-        }
-
-    }
 
     public function getClientIp() {
 
@@ -174,22 +107,4 @@ class Handler extends ExceptionHandler
     }
 
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->reportable(function (Throwable $e) {
-            if ($this->shouldReport($e)) {
-                $request = (object)[
-                    'url' => Request::url(),
-                    'inputs' => Request::all(),
-                    'ip' => $this->getClientIp()
-                ];
-                $this->sendEmail($e, $request); // sends an email
-            }
-        });
-    }
 }

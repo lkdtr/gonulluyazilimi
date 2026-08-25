@@ -14,6 +14,7 @@ use App\Models\Announcements;
 use Carbon\Carbon;
 
 use App\Mail\AnnouncementMailing;
+use App\Support\HtmlSanitizer;
 
 class AnnouncementController extends Controller
 {
@@ -62,7 +63,7 @@ class AnnouncementController extends Controller
 
         $announcement = new Announcements();
         $announcement->subject = $request->input("subject");
-        $announcement->detail = $request->input("detail");
+        $announcement->detail = app(HtmlSanitizer::class)->sanitize($request->input('detail'));
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");
@@ -129,7 +130,7 @@ class AnnouncementController extends Controller
 
         $announcement = Announcements::where("id", $id)->first();
         $announcement->subject = $request->input("subject");
-        $announcement->detail = $request->input("detail");
+        $announcement->detail = app(HtmlSanitizer::class)->sanitize($request->input('detail'));
         $announcement->started_at = Carbon::parse($request->get("started_at"))->format("Y-m-d H:i:s");
         $announcement->finished_at = Carbon::parse($request->get("finished_at"))->format("Y-m-d H:i:s");
         $announcement->status = $request->input("status");

@@ -9,7 +9,6 @@ class Cities extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $table = 'cities';
     protected $primaryKey = 'id';
 

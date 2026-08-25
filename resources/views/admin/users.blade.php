@@ -60,21 +60,25 @@
                                         </button>
                                         <ul class="dropdown-menu pull-left">
                                             <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
-                                            <li><a class="dropdown-item" href="{{secure_url('/tc-kimlik-dogrula/'.$user->id)}}" target="_blank">TC Kimlik Doğru mu?</a></li>
+                                            @if(Auth::user()->role == 1)
+                                                <li><form method="POST" action="{{ route('tc-kimlik-dogrula', $user) }}">@csrf<button class="dropdown-item" type="submit">TC Kimlik Doğru mu?</button></form></li>
+                                            @endif
 
                                             @if($user->getEmailRedirects()->email_alias!="")
                                                 <hr style="margin: 5px; color: #999;">
-                                                <li><a class="dropdown-item" href="{{secure_url('/send-penguen-welcome/'.$user->id)}}">{{ trans("panel.send_penguen_welcome") }}</a></li>
-                                                <li><a class="dropdown-item" href="{{secure_url('/remove-penguen/'.$user->id)}}">{{ trans("panel.remove_penguen") }}</a></li>
+                                                @if(Auth::user()->role == 1)
+                                                    <li><form method="POST" action="{{ route('send-penguen-welcome', $user) }}">@csrf<button class="dropdown-item" type="submit">{{ trans("panel.send_penguen_welcome") }}</button></form></li>
+                                                    <li><form method="POST" action="{{ route('remove-penguen', $user) }}">@csrf @method('DELETE')<button class="dropdown-item" type="submit">{{ trans("panel.remove_penguen") }}</button></form></li>
+                                                @endif
                                             @endif
 
                                             @if( Auth::user()->role==1)
                                             <hr style="margin: 5px; color: #999;">
-                                            <li><a class="dropdown-item" href="{{secure_url('/set-owner-role/'.$user->id)}}">{{ trans("panel.set_owner_role") }}</a></li>
-                                            <li><a class="dropdown-item" href="{{secure_url('/set-manager-role/'.$user->id)}}">{{ trans("panel.set_manager_role") }}</a></li>
-                                            <li><a class="dropdown-item" href="{{secure_url('/set-user-role/'.$user->id)}}">{{ trans("panel.set_user_role") }}</a></li>
+                                            <li><form method="POST" action="{{ route('set-owner-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_owner_role") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('set-manager-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_manager_role") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('set-user-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_user_role") }}</button></form></li>
                                             <hr style="margin: 5px; color: #999;">
-                                            <li><a class="dropdown-item" href="{{secure_url('/remove-user/'.$user->id)}}">{{ trans("panel.remove_user") }}</a></li>
+                                            <li><form method="POST" action="{{ route('remove-user', $user) }}">@csrf @method('DELETE')<button class="dropdown-item" type="submit">{{ trans("panel.remove_user") }}</button></form></li>
                                             @endif
 
                                         </ul>
