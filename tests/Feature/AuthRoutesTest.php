@@ -23,7 +23,7 @@ class AuthRoutesTest extends TestCase
             ->assertSee(route('create-seminar-request'), false)
             ->assertSee(route('create-seminar-offer'), false)
             ->assertSee('LKD Temsilcilikleri')
-            ->assertSee(route('representations.index'), false)
+            ->assertSee('https://www.lkd.org.tr/hakkimizda/temsilcilikler/', false)
             ->assertSee(route('representations.candidate'), false);
     }
 }
