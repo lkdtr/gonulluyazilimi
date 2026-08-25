@@ -69,7 +69,8 @@
                             <label for="phone_number" class="col-md-4 col-form-label text-md-end">{{ trans("auth.phone_number") }}</label>
 
                             <div class="col-md-6" id="phone_number_block">
-                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="phone_number">
+                                <input id="phone_number" type="tel" inputmode="numeric" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}" required autocomplete="tel" placeholder="05XX XXX XX XX">
+                                <button type="button" id="phone_number_request" class="btn btn-outline-secondary mt-2">Doğrulama kodu gönder</button>
                                 <span style="display: none" id="label_phone_number" class="form-control" >Telefon numaranıza gönderilen doğrulama kodunu, alt kısma yazın</span>
                                 <input id="hidden_phone_number" type="hidden" name="phone_number">
 
@@ -181,5 +182,7 @@ function openModal(url) {
 }
 
 </script>
+
+<script src="{{ asset('js/phone-registration.js') }}" defer></script>
 
 @endsection

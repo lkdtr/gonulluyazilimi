@@ -8,7 +8,6 @@ import languageTR from 'datatables.net-plugins/i18n/tr.mjs';
 
 jQuery(function () {
     Inputmask({ "mask": "99999999999" }).mask("national_id");
-    Inputmask({ "mask": "(599) 999-9999" }).mask("phone_number");
     Inputmask("email").mask("email");
 
     jQuery.datetimepicker.setLocale('tr');
@@ -67,13 +66,18 @@ jQuery(function () {
         passwordChecker($("#password-confirm"), $("#password-confirm-strength-status"));
     }
 
-    $("#phone_number").on("change", function () {
+    $("#phone_number_request").on("click", function () {
 
-        $("#hidden_phone_number").val($("#phone_number").val());
+        var phone_number = $("#phone_number").val().replace(/\D/g, '');
+        if (phone_number.length === 11 && phone_number.startsWith('0')) {
+            phone_number = '90' + phone_number.substring(1);
+        } else if (phone_number.length === 10 && phone_number.startsWith('5')) {
+            phone_number = '90' + phone_number;
+        }
+        $("#hidden_phone_number").val(phone_number);
 
-        var phone_number = $("#hidden_phone_number").val();
-
-        if (phone_number.length < 6) {
+        if (phone_number.length < 10 || phone_number.length > 15) {
+            alert('Lütfen geçerli bir telefon numarası girin.');
             return false;
         }
 
@@ -88,6 +92,7 @@ jQuery(function () {
                 if (data.status == true) {
 
                     $("#phone_number").attr("readonly", "readonly");
+                    $("#phone_number_request").hide();
                     $("#label_phone_number").show();
                     $("#phone_number").hide();
                     $("#phone_number_validation").focus();
