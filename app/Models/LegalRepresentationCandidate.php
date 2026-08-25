@@ -1,0 +1,3 @@
+<?php
+namespace App\Models; use Illuminate\Database\Eloquent\Model;
+class LegalRepresentationCandidate extends Model {protected $fillable=['legal_representation_id','user_id','is_lkd_member','membership_number','local_area','motivation','community_experience','availability','club_name','contact_consent','status','processed_by','processed_at'];protected $casts=['is_lkd_member'=>'boolean','contact_consent'=>'boolean','processed_at'=>'datetime'];public function representation(){return $this->belongsTo(LegalRepresentation::class,'legal_representation_id');}public function user(){return $this->belongsTo(User::class);}}

@@ -109,6 +109,8 @@
                                 <a class="dropdown-item" href="{{ route('join-lkd-young') }}">
                                     {{ trans("panel.join_lkd_young") }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('representations.index') }}">Temsilcilikler</a>
+                                <a class="dropdown-item" href="{{ route('representations.candidate') }}">Temsilci adayı ol</a>
 
                             </div>
                         </li>
@@ -146,6 +148,8 @@
                                     @if(Auth::user()->role == 1)<a class="dropdown-item" href="{{ route('admin.seminar-offers') }}">Seminer verme başvuruları</a>@endif
                                     @if(Auth::user()->role == 1)
                                         <a class="dropdown-item" href="{{ route('admin.email-change-requests') }}">E-posta değişikliği talepleri</a>
+                                        <a class="dropdown-item" href="{{ route('admin.lkd-young') }}">LKD Genç yönetimi</a>
+                                        <a class="dropdown-item" href="{{ route('admin.representations') }}">Temsilcilik yönetimi</a>
                                     @endif
                                     <hr style="margin: 5px; color: #999;">
                                     <a class="dropdown-item" href="{{ route('reference-requests') }}">

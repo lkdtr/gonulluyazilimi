@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 
 use App\Models\User;
 use App\Models\Cities;
+use App\Models\LegalRepresentation;
+use App\Models\LegalRepresentationVolunteer;
 
 use BahriCanli\TcKimlik;
 use Carbon\Carbon;
@@ -101,6 +103,11 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        $representation = LegalRepresentation::where('city', Cities::find($user->city_id)?->city_name)->where('status', true)->first();
+        if ($representation && ! LegalRepresentationVolunteer::where('legal_representation_id', $representation->id)->where('user_id', $user->id)->exists()) {
+            return Redirect::route('representations.consent', $representation);
+        }
 
         return Redirect::back()->with("status", trans("panel.successfully_saved"));
     }
