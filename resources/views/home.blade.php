@@ -63,6 +63,12 @@
                         </div>
                         <small>&nbsp;</small>
                     @endforeach
+
+                    @if ($announcements->hasPages())
+                        <div class="mt-4 d-flex justify-content-center">
+                            {{ $announcements->onEachSide(1)->links('pagination::bootstrap-5') }}
+                        </div>
+                    @endif
                 </div>
             </div>
 
