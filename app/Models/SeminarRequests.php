@@ -14,6 +14,8 @@ class SeminarRequests extends Model
 
     protected $casts = [
         'seminar_date' => 'date',
+        'seminar_start_date' => 'date',
+        'seminar_end_date' => 'date',
     ];
 
     public function user()

@@ -32,6 +32,8 @@ Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordControlle
 
 Route::get('/password/confirm', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
 Route::post('/password/confirm', [App\Http\Controllers\Auth\ConfirmPasswordController::class, 'confirm']);
+Route::get('/change-password', [App\Http\Controllers\PasswordChangeController::class, 'edit'])->middleware('auth')->name('password.change.edit');
+Route::put('/change-password', [App\Http\Controllers\PasswordChangeController::class, 'update'])->middleware('auth')->name('password.change.update');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);

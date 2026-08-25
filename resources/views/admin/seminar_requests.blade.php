@@ -7,7 +7,7 @@
                                     <td>{{ $seminarRequest->seminarSubject->subject }}</td>
                                     <td>{{ $seminarRequest->organizationRecord?->name ?? $seminarRequest->organization }}</td>
                                     <td>{{ $seminarRequest->location }}</td>
-                                    <td>{{ $seminarRequest->seminar_date->format('d.m.Y') }}</td>
+                                    <td>{{ $seminarRequest->seminar_start_date->format('d.m.Y') }}@if(!$seminarRequest->seminar_start_date->isSameDay($seminarRequest->seminar_end_date)) – {{ $seminarRequest->seminar_end_date->format('d.m.Y') }}@endif</td>
                                     <td>{{ $seminarRequest->user->name }} {{ $seminarRequest->user->surname }}<br><small>{{ $seminarRequest->user->email }}</small></td>
                                     <td>Değerlendiriliyor</td>
                                 </tr>

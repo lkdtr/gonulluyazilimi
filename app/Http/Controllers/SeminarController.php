@@ -70,7 +70,8 @@ class SeminarController extends Controller
             'seminar_subject_id' => ['required', 'integer', 'exists:seminar_subjects,id'],
             'organization' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
-            'seminar_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:'.$minimumSeminarDate],
+            'seminar_start_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:'.$minimumSeminarDate],
+            'seminar_end_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:seminar_start_date'],
         ]);
 
         $seminarSubject = SeminarSubjects::where('id', $data['seminar_subject_id'])
@@ -89,7 +90,10 @@ class SeminarController extends Controller
         $seminarRequest->organization_id = $organization->id;
         $seminarRequest->organization = $organization->name;
         $seminarRequest->location = $data['location'];
-        $seminarRequest->seminar_date = $data['seminar_date'];
+        // Keep the original column populated for existing reports and integrations.
+        $seminarRequest->seminar_date = $data['seminar_start_date'];
+        $seminarRequest->seminar_start_date = $data['seminar_start_date'];
+        $seminarRequest->seminar_end_date = $data['seminar_end_date'];
         $seminarRequest->status = 'pending';
         $seminarRequest->save();
         $seminarRequest->load(['user', 'seminarSubject', 'organizationRecord']);

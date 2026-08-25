@@ -5,7 +5,7 @@
 <ul>
     <li><strong>Kurum/kuruluş:</strong> {{ $seminarRequest->organizationRecord?->name ?? $seminarRequest->organization }}</li>
     <li><strong>Yer:</strong> {{ $seminarRequest->location }}</li>
-    <li><strong>Tercih edilen tarih:</strong> {{ $seminarRequest->seminar_date->format('d.m.Y') }}</li>
+    <li><strong>Tercih edilen tarih aralığı:</strong> {{ $seminarRequest->seminar_start_date->format('d.m.Y') }}@if(!$seminarRequest->seminar_start_date->isSameDay($seminarRequest->seminar_end_date)) – {{ $seminarRequest->seminar_end_date->format('d.m.Y') }}@endif</li>
 </ul>
 
 <p>Linux Kullanıcıları Derneği</p>

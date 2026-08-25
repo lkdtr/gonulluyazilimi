@@ -161,6 +161,7 @@
                                     <a class="dropdown-item" href="{{ route('my-infos') }}">
                                         {{trans('panel.my_infos')}}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('password.change.edit') }}">Parola değiştir</a>
                                     <hr style="margin: 5px; color: #999;">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
