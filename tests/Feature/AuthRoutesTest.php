@@ -12,4 +12,13 @@ class AuthRoutesTest extends TestCase
         $this->get('/register')->assertOk();
         $this->get('/password/reset')->assertOk();
     }
+
+    public function test_home_page_links_to_both_seminar_flows(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Seminer Talepleri')
+            ->assertSee(route('create-seminar-request'), false)
+            ->assertSee(route('create-seminar-offer'), false);
+    }
 }
