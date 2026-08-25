@@ -93,6 +93,9 @@
                                 <a class="dropdown-item" href="{{ route('email-redirects') }}">
                                     {{trans('panel.email_forwarding')}}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('email-change-requests.create') }}">
+                                    E-posta değişikliği talebi
+                                </a>
                                 <hr style="margin: 5px; color: #999;">
                                 <a class="dropdown-item" href="{{ route('create-seminar-request') }}">
                                     {{ trans("panel.create_seminar_request") }}
@@ -139,6 +142,9 @@
                                     <a class="dropdown-item" href="{{ route('admin.seminar-requests') }}">
                                         {{ trans("panel.seminar_requests") }}
                                     </a>
+                                    @if(Auth::user()->role == 1)
+                                        <a class="dropdown-item" href="{{ route('admin.email-change-requests') }}">E-posta değişikliği talepleri</a>
+                                    @endif
                                     <hr style="margin: 5px; color: #999;">
                                     <a class="dropdown-item" href="{{ route('reference-requests') }}">
                                         {{ trans("panel.reference_requests") }}

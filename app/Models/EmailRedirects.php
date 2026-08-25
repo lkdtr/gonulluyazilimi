@@ -11,4 +11,11 @@ class EmailRedirects extends Model
 
     protected $table = 'email_redirects';
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'user_id',
+        'email_alias',
+        'email_forwarding',
+        'status',
+    ];
 }

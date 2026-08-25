@@ -70,6 +70,9 @@ Route::get('/email-forwarding', function () {
 });
 Route::post('/email-forwarding', [App\Http\Controllers\EmailRedirectsController::class, 'postForwarding'])->name('email-forwarding');
 
+Route::get('/email-change-request', [App\Http\Controllers\EmailChangeRequestController::class, 'create'])->middleware('auth')->name('email-change-requests.create');
+Route::post('/email-change-request', [App\Http\Controllers\EmailChangeRequestController::class, 'store'])->middleware('auth')->name('email-change-requests.store');
+
 Route::get('/announcements', [App\Http\Controllers\AnnouncementController::class, 'getList'])->name('announcements');
 Route::get('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'getCreate'])->name('new-announcement');
 Route::post('/new-announcement', [App\Http\Controllers\AnnouncementController::class, 'postCreate']);
@@ -81,6 +84,9 @@ Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::c
 Route::get('/create-seminar-request/create', [App\Http\Controllers\SeminarController::class, 'getCreate'])->middleware('auth')->name('seminar-request.start');
 Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate'])->middleware('auth')->name('seminar-request.store');
 Route::get('/admin/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->middleware(['auth', 'role:1'])->name('admin.seminar-requests');
+Route::get('/admin/email-change-requests', [App\Http\Controllers\EmailChangeRequestController::class, 'index'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests');
+Route::patch('/admin/email-change-requests/{emailChangeRequest}/approve', [App\Http\Controllers\EmailChangeRequestController::class, 'approve'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests.approve');
+Route::patch('/admin/email-change-requests/{emailChangeRequest}/reject', [App\Http\Controllers\EmailChangeRequestController::class, 'reject'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests.reject');
 Route::get('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'getCreateSubject'])->name('new-seminar-subject');
 Route::post('/new-seminar-subject', [App\Http\Controllers\SeminarController::class, 'postCreateSubject']);
 Route::get('/edit-seminar-subject/{id}', [App\Http\Controllers\SeminarController::class, 'getEditSubject'])->name('edit-seminar-subject');
