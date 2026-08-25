@@ -17,6 +17,8 @@ class AuthRoutesTest extends TestCase
     {
         $this->get('/')
             ->assertOk()
+            ->assertSee('LKD Genç')
+            ->assertSee(route('join-lkd-young'), false)
             ->assertSee('Seminer Talepleri')
             ->assertSee(route('create-seminar-request'), false)
             ->assertSee(route('create-seminar-offer'), false);
