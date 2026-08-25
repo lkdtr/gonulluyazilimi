@@ -1,0 +1,2 @@
+@extends('layouts.app')
+@section('content')<div class="container"><a class="btn btn-primary mb-3" href="{{route('lkd-young.announcements.create')}}">Yeni duyuru</a><div class="card"><div class="card-header">Duyuru arşivi</div><div class="card-body"><table class="table">@foreach($announcements as $a)<tr><td>{{$a->university->university_name}}</td><td>{{$a->subject}}</td><td>{{$a->status}}</td><td>{{$a->created_at}}</td></tr>@endforeach</table></div></div></div>@endsection

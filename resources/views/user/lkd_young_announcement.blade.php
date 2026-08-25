@@ -1,0 +1,2 @@
+@extends('layouts.app')
+@section('content')<div class="container"><div class="card"><div class="card-header">{{$rep->university->university_name}} duyurusu</div><div class="card-body"><form method="POST" action="{{route('lkd-young.announcements.store')}}">@csrf<input class="form-control mb-2" name="subject" placeholder="Konu" required><textarea class="form-control" name="detail" required></textarea><button class="btn btn-primary mt-3">Gönder</button></form></div></div></div>@endsection

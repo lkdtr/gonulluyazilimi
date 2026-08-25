@@ -108,3 +108,9 @@ Route::get('/process-logs', [App\Http\Controllers\ProcessLogController::class, '
 
 Route::get('/join-lkd-young', [App\Http\Controllers\LkdYoungController::class, 'getJoinLkdYoung'])->name('join-lkd-young');
 Route::post('/join-lkd-young', [App\Http\Controllers\LkdYoungController::class, 'postJoinLkdYoung']);
+Route::get('/lkd-young/announcements', [App\Http\Controllers\LkdYoungController::class, 'announcements'])->name('lkd-young.announcements');
+Route::get('/lkd-young/announcements/create', [App\Http\Controllers\LkdYoungController::class, 'createAnnouncement'])->name('lkd-young.announcements.create');
+Route::post('/lkd-young/announcements', [App\Http\Controllers\LkdYoungController::class, 'storeAnnouncement'])->name('lkd-young.announcements.store');
+Route::get('/admin/lkd-young', [App\Http\Controllers\LkdYoungController::class, 'admin'])->middleware(['auth','role:1'])->name('admin.lkd-young');
+Route::patch('/admin/lkd-young/representatives/{rep}/approve', [App\Http\Controllers\LkdYoungController::class, 'approveRepresentative'])->middleware(['auth','role:1'])->name('admin.lkd-young.representatives.approve');
+Route::patch('/admin/lkd-young/announcements/{a}/approve', [App\Http\Controllers\LkdYoungController::class, 'approveAnnouncement'])->middleware(['auth','role:1'])->name('admin.lkd-young.announcements.approve');

@@ -1,44 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Redirect;
-
-class LkdYoungController extends Controller
-{
-
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-
-            $this->middleware('auth');
-
-            if(!Auth::check() ) {
-                return redirect('/login')->with('redirect', URL::full() );
-            }
-
-            return $next($request);
-        });
-    }
-
-    public function getJoinLkdYoung() {
-
-        if (Auth::user()->role!=1 ) {
-            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
-        }
-
-        return view('user.join_lkd_young');
-
-    }
-
-    public function postJoinLkdYoung(Request $request) {
-
-        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.under_construction"));
-
-    }
-
+use App\Models\{EmailRedirects,LkdYoungAnnouncement,LkdYoungApplication,LkdYoungRepresentative,Universities}; use App\Services\MailgunMailingList; use App\Support\HtmlSanitizer; use Illuminate\Http\Request; use Illuminate\Support\Facades\{Auth,Mail};
+class LkdYoungController extends Controller {
+ public function __construct(){ $this->middleware('auth'); }
+ public function getJoinLkdYoung(){ $universities=Universities::where('status',1)->orderBy('university_name')->get(); return view('user.join_lkd_young',compact('universities')); }
+ public function postJoinLkdYoung(Request $r, MailgunMailingList $lists){$d=$r->validate(['university_id'=>['required','exists:universities,id'],'department'=>'required|max:255','education_level'=>'required|max:255','club_name'=>'nullable|max:255','club_role'=>'nullable|max:255','motivation'=>'nullable|max:4000','contact_consent'=>'accepted','wants_representative'=>'nullable|boolean']);$w=$r->boolean('wants_representative'); if($w && !$this->activeAlias($r->user())) return back()->withErrors(['wants_representative'=>'Temsilcilik için önce @penguen.org.tr e-posta yönlendirmenizi aktifleştirmelisiniz.'])->withInput(); $app=LkdYoungApplication::updateOrCreate(['user_id'=>Auth::id(),'university_id'=>$d['university_id']],array_merge($d,['wants_representative'=>$w,'contact_consent'=>true,'status'=>'active'])); $rep=LkdYoungRepresentative::with('user')->where('university_id',$d['university_id'])->where('status','active')->first(); if($rep){$this->sendIntroduction($app,$rep);if($rep->mailing_list_address)$lists->upsertMember($rep->mailing_list_address,$app->user->email,$app->user->name.' '.$app->user->surname);} if($w){LkdYoungRepresentative::updateOrCreate(['university_id'=>$d['university_id'],'user_id'=>Auth::id()],['status'=>'pending']); Mail::raw('Yeni LKD Genç temsilcilik adaylığı: '.$r->user()->email,fn($m)=>$m->to('yk@lkd.org.tr')->subject('LKD Genç temsilcilik adaylığı'));} return redirect()->route('join-lkd-young')->with('success-status',$rep?'Başvurunuz alındı. Temsilci iletişim bilgileri e-posta ile paylaşıldı.':'Başvurunuz alındı.'); }
+ public function admin(){return view('admin.lkd_young',['applications'=>LkdYoungApplication::with(['user','university'])->latest()->get(),'representatives'=>LkdYoungRepresentative::with(['user','university'])->latest()->get()]);}
+ public function approveRepresentative(LkdYoungRepresentative $rep,MailgunMailingList $lists){if(LkdYoungRepresentative::where('university_id',$rep->university_id)->where('status','active')->where('id','!=',$rep->id)->exists())return back()->with('danger-status','Bu üniversitenin zaten aktif temsilcisi var.');if(!$this->activeAlias($rep->user))return back()->with('danger-status','Adayın aktif Penguen yönlendirmesi yok.');$domain=config('services.mailgun.lists_domain');if(!$domain)return back()->with('danger-status','MAILGUN_LISTS_DOMAIN yapılandırılmamış.');$address='lkd-genc-university-'.$rep->university_id.'@'.$domain;if(!$lists->ensure($address,'LKD Genç '.$rep->university->university_name))return back()->with('danger-status','Mailgun listesi oluşturulamadı.');$rep->update(['status'=>'active','approved_at'=>now(),'approved_by'=>Auth::id(),'mailing_list_address'=>$address]);foreach(LkdYoungApplication::with('user')->where('university_id',$rep->university_id)->where('contact_consent',true)->get() as $a)$lists->upsertMember($address,$a->user->email,$a->user->name.' '.$a->user->surname);$alias=$this->activeAlias($rep->user);$lists->upsertMember($address,$alias->email_alias,$rep->user->name.' '.$rep->user->surname);return back()->with('success-status','Temsilci onaylandı ve üniversite listesi oluşturuldu.');}
+ public function createAnnouncement(){ $rep=LkdYoungRepresentative::with('university')->where('user_id',Auth::id())->where('status','active')->firstOrFail();return view('user.lkd_young_announcement',compact('rep')); }
+ public function storeAnnouncement(Request $r){$rep=LkdYoungRepresentative::where('user_id',Auth::id())->where('status','active')->firstOrFail();$d=$r->validate(['subject'=>'required|max:255','detail'=>'required|max:20000']);$a=LkdYoungAnnouncement::create(['university_id'=>$rep->university_id,'representative_id'=>$rep->id,'created_by'=>Auth::id(),'subject'=>$d['subject'],'detail'=>app(HtmlSanitizer::class)->sanitize($d['detail']),'status'=>$rep->can_send_announcements?'approved':'pending']);if($a->status==='approved')$this->sendAnnouncement($a,$rep);else Mail::raw('LKD Genç duyurusu onay bekliyor: '.$a->subject,fn($m)=>$m->to('yk@lkd.org.tr')->subject('LKD Genç duyuru onayı'));return redirect()->route('lkd-young.announcements')->with('success-status',$a->status==='pending'?'Duyuru YK onayına gönderildi.':'Duyuru gönderildi.'); }
+ public function announcements(){ $rep=LkdYoungRepresentative::where('user_id',Auth::id())->where('status','active')->first();$q=LkdYoungAnnouncement::with('university')->latest();if(Auth::user()->role!=1){if(!$rep)abort(403);$q->where('university_id',$rep->university_id);}return view('user.lkd_young_announcements',['announcements'=>$q->get()]); }
+ public function approveAnnouncement(LkdYoungAnnouncement $a){$rep=LkdYoungRepresentative::where('university_id',$a->university_id)->where('status','active')->firstOrFail();$a->update(['status'=>'approved','approved_by'=>Auth::id()]);$this->sendAnnouncement($a,$rep);return back()->with('success-status','Duyuru gönderildi.');}
+ private function sendAnnouncement($a,$rep){try{Mail::to($rep->mailing_list_address)->send(new \App\Mail\AnnouncementMailing((object)['subject'=>$a->subject,'content'=>$a->detail]));$a->update(['status'=>'sent','sent_at'=>now(),'recipient_count'=>LkdYoungApplication::where('university_id',$a->university_id)->where('contact_consent',true)->count()+1]);}catch(\Throwable $e){$a->update(['status'=>'failed','failure_reason'=>$e->getMessage()]);}}
+ private function activeAlias($u){return EmailRedirects::where('user_id',$u->id)->where('status',1)->first();} private function sendIntroduction($app,$rep){$alias=$this->activeAlias($rep->user);if(!$alias)return;Mail::raw('Yeni LKD Genç katılımcısı: '.$app->user->name.' '.$app->user->surname.'; E-posta: '.$app->user->email.'; Telefon: '.$app->user->phone_number,fn($m)=>$m->to($alias->email_alias)->subject('Yeni LKD Genç katılımcısı'));Mail::raw('Üniversitenizdeki LKD Genç temsilcisi: '.$rep->user->name.' '.$rep->user->surname.'; E-posta: '.$alias->email_alias.'; Telefon: '.$rep->user->phone_number,fn($m)=>$m->to($app->user->email)->subject('LKD Genç temsilci iletişim bilgileri'));}
 }
