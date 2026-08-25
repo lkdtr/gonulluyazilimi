@@ -124,6 +124,8 @@ Route::post('/representation-candidate', [App\Http\Controllers\LegalRepresentati
 Route::get('/representation-announcements', [App\Http\Controllers\LegalRepresentationController::class, 'announcements'])->middleware('auth')->name('representations.announcements');
 Route::post('/representation-announcements', [App\Http\Controllers\LegalRepresentationController::class, 'storeAnnouncement'])->middleware('auth')->name('representations.announcements.store');
 Route::get('/admin/representations', [App\Http\Controllers\LegalRepresentationController::class, 'admin'])->middleware(['auth','role:1'])->name('admin.representations');
+Route::get('/admin/representations/{representation}/edit', [App\Http\Controllers\LegalRepresentationController::class, 'edit'])->middleware(['auth','role:1'])->name('admin.representations.edit');
+Route::patch('/admin/representations/{representation}', [App\Http\Controllers\LegalRepresentationController::class, 'update'])->middleware(['auth','role:1'])->name('admin.representations.update');
 Route::patch('/admin/representation-candidates/{candidate}/approve', [App\Http\Controllers\LegalRepresentationController::class, 'approveCandidate'])->middleware(['auth','role:1'])->name('admin.representations.candidates.approve');
 Route::patch('/admin/representation-candidates/{candidate}/reject', [App\Http\Controllers\LegalRepresentationController::class, 'rejectCandidate'])->middleware(['auth','role:1'])->name('admin.representations.candidates.reject');
 Route::patch('/admin/representations/{representation}/announcement-permission', [App\Http\Controllers\LegalRepresentationController::class, 'setAnnouncementPermission'])->middleware(['auth','role:1'])->name('admin.representations.announcement-permission');
