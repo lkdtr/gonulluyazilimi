@@ -12,6 +12,17 @@ class SeminarSubjects extends Model
     protected $table = 'seminar_subjects';
     protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'subject',
+        'type',
+        'summary',
+        'syllabus',
+        'duration',
+        'status',
+        'created_by',
+        'updated_by',
+    ];
+
     public function seminarRequests()
     {
         return $this->hasMany(SeminarRequests::class);

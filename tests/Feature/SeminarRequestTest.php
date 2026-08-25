@@ -118,6 +118,31 @@ class SeminarRequestTest extends TestCase
         ))->assertSessionHasErrors('seminar_end_date');
     }
 
+    public function test_online_seminar_request_does_not_require_an_address(): void
+    {
+        Mail::fake();
+        $user = User::factory()->create();
+        $subject = $this->createSubject();
+
+        $this->actingAs($user)->post('/create-seminar-request', array_merge(
+            $this->requestData($subject, now()->addDays(60)->toDateString()),
+            ['seminar_type' => 'online', 'location' => '']
+        ))->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('seminar_requests', ['seminar_type' => 'online', 'location' => '']);
+    }
+
+    public function test_in_person_seminar_request_requires_an_address(): void
+    {
+        $user = User::factory()->create();
+        $subject = $this->createSubject();
+
+        $this->actingAs($user)->post('/create-seminar-request', array_merge(
+            $this->requestData($subject, now()->addDays(60)->toDateString()),
+            ['seminar_type' => 'in_person', 'location' => '']
+        ))->assertSessionHasErrors('location');
+    }
+
     private function createSubject(): SeminarSubjects
     {
         $subject = new SeminarSubjects();
@@ -136,6 +161,7 @@ class SeminarRequestTest extends TestCase
             'seminar_subject_id' => $subject->id,
             'organization' => 'örnek üniversite',
             'location' => 'Kadıköy, İstanbul',
+            'seminar_type' => 'in_person',
             'seminar_start_date' => $startDate,
             'seminar_end_date' => $endDate ?? $startDate,
         ];

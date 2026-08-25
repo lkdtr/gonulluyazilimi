@@ -14,6 +14,7 @@
                             <div>{{ session('success-status') }}</div>
                         </div>
                     @endif
+                    <p class="text-end"><a href="{{ route('create-seminar-offer') }}">Seminer vermek ister misiniz? Başvuru formunu doldurun.</a></p>
 
                     @guest
                         <p>Talep oluşturabilmek için üye girişi gereklidir. İletişim bilgileriniz üyelik kaydınızdan alınır.</p>
@@ -47,6 +48,20 @@
                                 <div class="col-md-7"><input id="organization" name="organization" list="organizations" value="{{ old('organization') }}" class="form-control @error('organization') is-invalid @enderror" required><datalist id="organizations">@foreach ($organizations as $organization)<option value="{{ $organization->name }}">@endforeach</datalist><small class="form-text text-muted">Listede yoksa kurum adını yazın; kurum havuzuna eklenecektir.</small><span class="invalid-feedback">@error('organization'){{ $message }}@enderror</span></div>
                             </div>
                             <div class="row mb-3">
+                                <label class="col-md-3 col-form-label text-md-end">Seminer türü</label>
+                                <div class="col-md-7">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="seminar_type" id="seminar_type_in_person" value="in_person" @checked(old('seminar_type', 'in_person') === 'in_person')>
+                                        <label class="form-check-label" for="seminar_type_in_person">Yüz yüze</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="seminar_type" id="seminar_type_online" value="online" @checked(old('seminar_type') === 'online')>
+                                        <label class="form-check-label" for="seminar_type_online">Online</label>
+                                    </div>
+                                    @error('seminar_type')<div class="text-danger small">{{ $message }}</div>@enderror
+                                </div>
+                            </div>
+                            <div class="row mb-3" id="location-field">
                                 <label for="location" class="col-md-3 col-form-label text-md-end">Seminer verilecek yer</label>
                                 <div class="col-md-7"><input id="location" name="location" value="{{ old('location') }}" placeholder="İl, ilçe ve açık adres" class="form-control @error('location') is-invalid @enderror" required><span class="invalid-feedback">@error('location'){{ $message }}@enderror</span></div>
                             </div>
@@ -70,4 +85,18 @@
         </div>
     </div>
 </div>
+@auth
+<script>
+    const seminarTypeInputs = document.querySelectorAll('input[name="seminar_type"]');
+    const locationField = document.getElementById('location-field');
+    const locationInput = document.getElementById('location');
+    const updateLocationField = () => {
+        const isOnline = document.querySelector('input[name="seminar_type"]:checked').value === 'online';
+        locationField.classList.toggle('d-none', isOnline);
+        locationInput.required = !isOnline;
+    };
+    seminarTypeInputs.forEach((input) => input.addEventListener('change', updateLocationField));
+    updateLocationField();
+</script>
+@endauth
 @endsection

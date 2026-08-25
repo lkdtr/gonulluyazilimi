@@ -6,6 +6,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Seminer Talebi')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        body { margin: 0; }
+        main .container { width: 100%; max-width: none; padding-right: 12px; padding-left: 12px; }
+    </style>
 </head>
 <body>
     <main class="py-4" style="background-color: #f8f8f8; min-height: 100vh;">

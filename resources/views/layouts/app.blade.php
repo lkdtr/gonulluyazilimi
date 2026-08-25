@@ -100,6 +100,7 @@
                                 <a class="dropdown-item" href="{{ route('create-seminar-request') }}">
                                     {{ trans("panel.create_seminar_request") }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('create-seminar-offer') }}">Seminer vermek istiyorum</a>
                                 <hr style="margin: 5px; color: #999;">
                                 <a class="dropdown-item" href="{{ route('create-reference-request') }}">
                                     {{ trans("panel.create_reference_request") }}
@@ -142,6 +143,7 @@
                                     <a class="dropdown-item" href="{{ route('admin.seminar-requests') }}">
                                         {{ trans("panel.seminar_requests") }}
                                     </a>
+                                    @if(Auth::user()->role == 1)<a class="dropdown-item" href="{{ route('admin.seminar-offers') }}">Seminer verme başvuruları</a>@endif
                                     @if(Auth::user()->role == 1)
                                         <a class="dropdown-item" href="{{ route('admin.email-change-requests') }}">E-posta değişikliği talepleri</a>
                                     @endif

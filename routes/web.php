@@ -85,7 +85,11 @@ Route::post('/edit-announcement/{id}', [App\Http\Controllers\AnnouncementControl
 Route::get('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'getCreate'])->name('create-seminar-request');
 Route::get('/create-seminar-request/create', [App\Http\Controllers\SeminarController::class, 'getCreate'])->middleware('auth')->name('seminar-request.start');
 Route::post('/create-seminar-request', [App\Http\Controllers\SeminarController::class, 'postCreate'])->middleware('auth')->name('seminar-request.store');
+Route::get('/create-seminar-offer', [App\Http\Controllers\SeminarOfferController::class, 'create'])->name('create-seminar-offer');
+Route::post('/create-seminar-offer', [App\Http\Controllers\SeminarOfferController::class, 'store'])->name('seminar-offer.store');
 Route::get('/admin/seminar-requests', [App\Http\Controllers\SeminarController::class, 'getList'])->middleware(['auth', 'role:1'])->name('admin.seminar-requests');
+Route::get('/admin/seminar-offers', [App\Http\Controllers\SeminarOfferController::class, 'index'])->middleware(['auth', 'role:1'])->name('admin.seminar-offers');
+Route::patch('/admin/seminar-subject-proposals/{seminarSubjectProposal}/accept', [App\Http\Controllers\SeminarOfferController::class, 'acceptSubjectProposal'])->middleware(['auth', 'role:1'])->name('admin.seminar-subject-proposals.accept');
 Route::get('/admin/email-change-requests', [App\Http\Controllers\EmailChangeRequestController::class, 'index'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests');
 Route::patch('/admin/email-change-requests/{emailChangeRequest}/approve', [App\Http\Controllers\EmailChangeRequestController::class, 'approve'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests.approve');
 Route::patch('/admin/email-change-requests/{emailChangeRequest}/reject', [App\Http\Controllers\EmailChangeRequestController::class, 'reject'])->middleware(['auth', 'role:1'])->name('admin.email-change-requests.reject');
