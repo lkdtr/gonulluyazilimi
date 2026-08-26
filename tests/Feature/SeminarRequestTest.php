@@ -144,6 +144,30 @@ class SeminarRequestTest extends TestCase
         ))->assertSessionHasErrors('location');
     }
 
+    public function test_admin_list_renders_requests_inside_a_responsive_table_container(): void
+    {
+        $admin = User::factory()->create(['role' => 1]);
+        $requester = User::factory()->create();
+        $subject = $this->createSubject();
+        $seminarRequest = new SeminarRequests();
+        $seminarRequest->user_id = $requester->id;
+        $seminarRequest->seminar_subject_id = $subject->id;
+        $seminarRequest->organization = 'Örnek Üniversite';
+        $seminarRequest->seminar_type = 'in_person';
+        $seminarRequest->location = 'Kadıköy, İstanbul';
+        $seminarRequest->seminar_date = now()->addDays(60)->toDateString();
+        $seminarRequest->seminar_start_date = now()->addDays(60)->toDateString();
+        $seminarRequest->seminar_end_date = now()->addDays(60)->toDateString();
+        $seminarRequest->status = 'pending';
+        $seminarRequest->save();
+
+        $this->actingAs($admin)->get('/admin/seminar-requests')
+            ->assertOk()
+            ->assertSee('table-responsive', false)
+            ->assertSee('Özgür Yazılım')
+            ->assertSee('Örnek Üniversite');
+    }
+
     private function createSubject(): SeminarSubjects
     {
         $subject = new SeminarSubjects();
