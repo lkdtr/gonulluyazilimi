@@ -46,4 +46,22 @@ class LegalRepresentationTest extends TestCase
 
         $this->assertDatabaseHas('legal_representation_candidates', ['legal_representation_id' => $representation->id, 'user_id' => $user->id, 'status' => 'pending']);
     }
+
+    public function test_contact_consent_is_saved_when_email_delivery_fails(): void
+    {
+        $user = User::factory()->create();
+        $representation = LegalRepresentation::where('city', 'Antalya')->firstOrFail();
+        Mail::shouldReceive('raw')->once()->andThrow(new \RuntimeException('Mail service unavailable'));
+
+        $this->actingAs($user)->post(route('representations.consent.store', $representation), [
+            'contact_consent' => '1',
+        ])->assertRedirect(route('representations.index'));
+
+        $this->assertDatabaseHas('legal_representation_volunteers', [
+            'legal_representation_id' => $representation->id,
+            'user_id' => $user->id,
+            'contact_consent' => 1,
+            'notified_at' => null,
+        ]);
+    }
 }
