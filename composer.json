@@ -17,6 +17,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "php-http/guzzle7-adapter": "^1.0",
+        "symfony/mailgun-mailer": "^7.4",
         "tinymce/tinymce": "^7.0"
     },
     "require-dev": {
