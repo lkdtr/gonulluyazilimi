@@ -22,7 +22,14 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        $inIframe = request()->boolean('in-iframe');
+        $response = response()->view('auth.register', compact('inIframe'));
+
+        if ($inIframe) {
+            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+        }
+
+        return $response;
     }
 
     public function register(Request $request)

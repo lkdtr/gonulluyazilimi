@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            return route('login', $request->boolean('in-iframe') ? ['in-iframe' => 1] : []);
         }
     }
 }
