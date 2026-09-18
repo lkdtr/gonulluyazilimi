@@ -103,7 +103,7 @@ class Handler extends ExceptionHandler
     public function unauthenticated($request=false, $exception=false)
     {
         // return ''; // use redirect('/login') or something if you want to redirect to login.
-        return redirect('/login');
+        return redirect()->guest($exception->redirectTo($request) ?? route('login'));
     }
 
 

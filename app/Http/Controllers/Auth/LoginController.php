@@ -17,7 +17,14 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login');
+        $inIframe = request()->boolean('in-iframe');
+        $response = response()->view('auth.login', compact('inIframe'));
+
+        if ($inIframe) {
+            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+        }
+
+        return $response;
     }
 
     public function login(Request $request)
