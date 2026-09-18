@@ -50,7 +50,7 @@ class SeminarOfferController extends Controller
 
         if (! Auth::check()) {
             session(['seminar_offer_form' => $data]);
-            return redirect()->guest(route('login'));
+            return redirect()->guest(route('login', $inIframe ? ['in-iframe' => 1] : []));
         }
 
         $proposal = null;

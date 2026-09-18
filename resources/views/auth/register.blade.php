@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($inIframe ? 'layouts.iframe' : 'layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header text-white bg-secondary">{{ trans("auth.become_a_volunteer_title") }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" id="register_form">
+                    <form method="POST" action="{{ route('register', $inIframe ? ['in-iframe' => 1] : []) }}" id="register_form">
                         @csrf
 
                         <div class="mb-3 alert alert-info d-flex" id="info-block">
@@ -135,6 +135,12 @@
                                 <button id="register_button" type="submit" class="btn btn-lg btn-primary">
                                     {{ trans("auth.register") }}
                                 </button>
+
+                                @if ($inIframe)
+                                    <a class="btn btn-link" href="{{ route('login', ['in-iframe' => 1]) }}">
+                                        {{ trans("auth.login") }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

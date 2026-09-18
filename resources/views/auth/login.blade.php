@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends($inIframe ? 'layouts.iframe' : 'layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header text-white bg-secondary">{{ trans("auth.login_title") }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login', $inIframe ? ['in-iframe' => 1] : []) }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -56,6 +56,12 @@
                                 <button type="submit" class="btn btn-lg btn-primary">
                                     {{ trans("auth.login") }}
                                 </button>
+
+                                @if ($inIframe)
+                                    <a class="btn btn-link" href="{{ route('register', ['in-iframe' => 1]) }}">
+                                        {{ trans("auth.register") }}
+                                    </a>
+                                @endif
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
