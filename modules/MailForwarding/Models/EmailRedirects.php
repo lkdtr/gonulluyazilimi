@@ -1,0 +1,21 @@
+<?php
+
+namespace Modules\MailForwarding\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class EmailRedirects extends Model
+{
+    use HasFactory;
+
+    protected $table = 'email_redirects';
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'user_id',
+        'email_alias',
+        'email_forwarding',
+        'status',
+    ];
+}

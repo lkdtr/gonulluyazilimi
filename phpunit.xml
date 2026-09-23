@@ -7,6 +7,9 @@
     <testsuite name="Feature">
       <directory suffix="Test.php">./tests/Feature</directory>
     </testsuite>
+    <testsuite name="Modules">
+      <directory suffix="Test.php">./modules/*/Tests</directory>
+    </testsuite>
   </testsuites>
   <php>
     <server name="APP_ENV" value="testing"/>
@@ -23,6 +26,7 @@
   <source>
     <include>
       <directory suffix=".php">./app</directory>
+      <directory suffix=".php">./modules</directory>
     </include>
   </source>
 </phpunit>
