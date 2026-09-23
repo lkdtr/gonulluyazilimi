@@ -28,7 +28,8 @@ class DashboardTest extends TestCase
     {
         $owner = User::factory()->create(['role' => 1]);
         User::factory()->count(2)->create();
-        User::factory()->create(['status' => 0]);
+        User::factory()->create(['status' => 0, 'lkd_user_id' => 7]);
+        User::factory()->create(['lkd_user_id' => 42]);
 
         $waiting = new ReferenceRequests();
         $waiting->user_id = $owner->id;
@@ -45,8 +46,14 @@ class DashboardTest extends TestCase
 
         $stats = $response->viewData('stats');
         $this->assertSame(3, $this->figure($stats, 'Gönüllü'));
+        $this->assertSame(1, $this->figure($stats, 'Üye'));
+        $this->assertSame(3, $this->figure($stats, 'Son 30 günde katılan'));
         $this->assertSame(1, $this->figure($stats, 'Referans bekleyen üye'));
         $this->assertSame(1, $this->figure($stats, 'Verilebilir seminer'));
+
+        $charts = collect($response->viewData('charts'))->keyBy('title');
+        $this->assertSame(3, last($charts['Toplam gönüllü']['data']));
+        $this->assertSame(3, array_sum($charts['Aylık yeni gönüllü']['data']));
     }
 
     public function test_managers_do_not_see_owner_only_figures(): void
