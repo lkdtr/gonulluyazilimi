@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border-secondary">
-                <div class="card-header text-white bg-secondary">E-posta değişikliği talebi</div>
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">E-posta değişikliği talebi</h3></div>
                 <div class="card-body">
                     @if (session('success-status'))<div class="alert alert-success">{{ session('success-status') }}</div>@endif
                     @if (session('danger-status'))<div class="alert alert-danger">{{ session('danger-status') }}</div>@endif

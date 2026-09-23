@@ -19,8 +19,9 @@ class LkdYoungServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
-        $menu->label('user', 'community', 'Topluluk');
+        $menu->label('user', 'community', 'Topluluk', 'users-group');
         $menu->add('user', 'community', 'panel.join_lkd_young', 'join-lkd-young', [], 50);
+        $menu->label('admin', 'lkd-young', null, 'school');
         $menu->add('admin', 'lkd-young', 'LKD Genç yönetimi', 'admin.lkd-young', [1], 60);
 
         $slots->push('welcome.sections', 'lkd-young::partials.welcome', 10);

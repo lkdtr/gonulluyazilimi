@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card border-secondary">
-                <div class="card-header text-white bg-secondary">Parola değiştir</div>
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">Parola değiştir</h3></div>
                 <div class="card-body">
                     @if (session('success-status'))<div class="alert alert-success">{{ session('success-status') }}</div>@endif
                     <form method="POST" action="{{ route('password.change.update') }}">

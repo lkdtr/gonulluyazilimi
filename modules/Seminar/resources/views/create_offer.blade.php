@@ -1,6 +1,6 @@
 @extends($inIframe ? 'layouts.iframe' : 'layouts.app')
 @section('content')
-<div class="container"><div class="row justify-content-center"><div class="col-md-9"><div class="card border-secondary"><div class="card-header text-white bg-secondary">Seminer Vermek İstiyorum</div><div class="card-body">
+<div class="container"><div class="row justify-content-center"><div class="col-md-9"><div class="card"><div class="card-header"><h3 class="card-title">Seminer Vermek İstiyorum</h3></div><div class="card-body">
 @if(session('success-status'))<div class="alert alert-success">{{ session('success-status') }}</div>@endif
 <p>Başvuru formunu doldurabilirsiniz. Gönderim aşamasında üyelik veya giriş gereklidir; iletişim bilgileriniz üyelik kaydınızdan alınır.</p>
 <form method="POST" action="{{ route('seminar-offer.store', $inIframe ? ['in-iframe' => 1] : []) }}">@csrf
