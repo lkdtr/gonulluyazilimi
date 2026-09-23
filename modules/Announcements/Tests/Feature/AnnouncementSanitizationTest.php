@@ -15,13 +15,13 @@ class AnnouncementSanitizationTest extends TestCase
     {
         $owner = User::factory()->create(['role' => 1]);
 
-        $this->actingAs($owner)->post('/new-announcement', [
+        $this->actingAs($owner)->post('/admin/announcements/create', [
             'subject' => 'Duyuru',
             'detail' => '<p>Güvenli</p><script>alert(1)</script><img src=x onerror=alert(1)>',
             'started_at' => now()->format('Y-m-d\\TH:i'),
             'finished_at' => now()->addDay()->format('Y-m-d\\TH:i'),
             'status' => 1,
-        ])->assertRedirect(secure_url('/announcements'));
+        ])->assertRedirect(route('admin.announcements'));
 
         $announcement = Announcements::firstOrFail();
         $this->assertStringContainsString('<p>Güvenli</p>', $announcement->detail);

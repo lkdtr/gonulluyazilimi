@@ -23,7 +23,7 @@ class ModulesServiceProvider extends ServiceProvider
         }
     }
 
-    public function boot(ModuleManager $modules, Menu $menu): void
+    public function boot(ModuleManager $modules): void
     {
         foreach (array_keys($modules->providers()) as $name) {
             $this->loadMigrationsFrom($modules->path($name, 'database/migrations'));
@@ -31,8 +31,5 @@ class ModulesServiceProvider extends ServiceProvider
 
         Blade::directive('moduleSlot', fn (string $expression) => "<?php echo app(\\App\\Modules\\Slots::class)->render({$expression}); ?>");
         Blade::if('module', fn (string $name) => $modules->enabled($name));
-
-        $menu->add('admin', 'users', 'panel.users', 'users', [1, 2], 10);
-        $menu->add('admin', 'process-logs', 'panel.process_logs', 'process-logs', [1, 2], 20);
     }
 }

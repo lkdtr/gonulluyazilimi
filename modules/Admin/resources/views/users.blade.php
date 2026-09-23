@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -59,20 +59,20 @@
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="{{secure_url('/user-infos/'.$user->id)}}">{{ trans("panel.user_infos") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('admin.users.show', $user->id) }}">{{ trans("panel.user_infos") }}</a></li>
                                             @if(Auth::user()->role == 1)
-                                                <li><form method="POST" action="{{ route('tc-kimlik-dogrula', $user) }}">@csrf<button class="dropdown-item" type="submit">TC Kimlik Doğru mu?</button></form></li>
+                                                <li><form method="POST" action="{{ route('admin.users.tc-kimlik', $user) }}">@csrf<button class="dropdown-item" type="submit">TC Kimlik Doğru mu?</button></form></li>
                                             @endif
 
                                             @moduleSlot('admin.users.actions', ['user' => $user])
 
                                             @if( Auth::user()->role==1)
                                             <hr style="margin: 5px; color: #999;">
-                                            <li><form method="POST" action="{{ route('set-owner-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_owner_role") }}</button></form></li>
-                                            <li><form method="POST" action="{{ route('set-manager-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_manager_role") }}</button></form></li>
-                                            <li><form method="POST" action="{{ route('set-user-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_user_role") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('admin.users.owner-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_owner_role") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('admin.users.manager-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_manager_role") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('admin.users.user-role', $user) }}">@csrf @method('PATCH')<button class="dropdown-item" type="submit">{{ trans("panel.set_user_role") }}</button></form></li>
                                             <hr style="margin: 5px; color: #999;">
-                                            <li><form method="POST" action="{{ route('remove-user', $user) }}">@csrf @method('DELETE')<button class="dropdown-item" type="submit">{{ trans("panel.remove_user") }}</button></form></li>
+                                            <li><form method="POST" action="{{ route('admin.users.destroy', $user) }}">@csrf @method('DELETE')<button class="dropdown-item" type="submit">{{ trans("panel.remove_user") }}</button></form></li>
                                             @endif
 
                                         </ul>

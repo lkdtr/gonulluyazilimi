@@ -32,6 +32,7 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
             $this->commands([Console\aliasTest::class, Console\emailTest::class]);
         }
 
+        $menu->label('user', 'account', 'E-posta');
         $menu->add('user', 'account', 'panel.email_forwarding', 'email-redirects', [], 10);
 
         $slots->push('home.top', 'mail-forwarding::partials.home-banner');

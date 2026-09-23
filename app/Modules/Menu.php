@@ -5,15 +5,18 @@ namespace App\Modules;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
- * Navigation items contributed by modules.
+ * Navigation items contributed by the core and modules.
  *
- * Sections rendered by layouts.app: "user" (user operations dropdown) and
- * "admin" (manager operations dropdown). Items of the same group are rendered
- * together and groups are separated by a divider.
+ * Sections: "user" (site menu, layouts.app) and "admin" (admin panel menu,
+ * layouts.admin). Both menus are horizontal: a group with a single visible
+ * item is rendered as a link, a larger group as a dropdown titled with the
+ * group label.
  */
 class Menu
 {
     private array $items = [];
+
+    private array $labels = [];
 
     /**
      * @param  string  $label  translation key or plain text
@@ -25,7 +28,15 @@ class Menu
     }
 
     /**
-     * Visible items of a section, grouped: [[item, item], [item], ...].
+     * Title of a group's dropdown; defaults to the label of its first item.
+     */
+    public function label(string $section, string $group, string $label): void
+    {
+        $this->labels[$section][$group] = $label;
+    }
+
+    /**
+     * Visible groups of a section in order: [['label' => ..., 'items' => [...]], ...].
      */
     public function groups(string $section, ?Authenticatable $user): array
     {
@@ -38,7 +49,8 @@ class Menu
 
         $groups = [];
         foreach ($items as $item) {
-            $groups[$item['group']][] = $item;
+            $groups[$item['group']]['items'][] = $item;
+            $groups[$item['group']]['label'] ??= $this->labels[$section][$item['group']] ?? $item['label'];
         }
 
         return array_values($groups);

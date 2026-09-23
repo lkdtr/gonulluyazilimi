@@ -21,6 +21,7 @@ class RepresentationServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
+        $menu->label('user', 'community', 'Topluluk');
         $menu->add('user', 'community', 'Temsilcilikler', 'representations.index', [], 51);
         $menu->add('user', 'community', 'Temsilci adayı ol', 'representations.candidate', [], 52);
         $menu->add('admin', 'representation', 'Temsilcilik yönetimi', 'admin.representations', [1], 70);

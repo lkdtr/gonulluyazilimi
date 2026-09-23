@@ -20,8 +20,9 @@ class AnnouncementsServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
-        $menu->add('admin', 'announcements', 'panel.announcements', 'announcements', [1, 2], 30);
-        $menu->add('admin', 'announcements', 'panel.new_announcement', 'new-announcement', [1, 2], 31);
+        $menu->label('admin', 'announcements', 'panel.announcements');
+        $menu->add('admin', 'announcements', 'panel.announcements', 'admin.announcements', [1, 2], 30);
+        $menu->add('admin', 'announcements', 'panel.new_announcement', 'admin.announcements.create', [1, 2], 31);
 
         $slots->push('home.main', 'announcements::partials.home');
 

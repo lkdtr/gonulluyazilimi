@@ -37,33 +37,21 @@ class UserController extends Controller
     }
 
     public function getMyInfos() {
-        $user_id = Auth::id();
-        return $this->getUserInfos($user_id);
+        return $this->showProfile(Auth::user());
     }
-
-    public function getUserInfos($user_id) {
-
-        if ( (Auth::user()->role!=1 ) && (Auth::user()->role!=2 ) && (Auth::id()!=$user_id) ) {
-            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
-        }
-
-        $user = User::findOrFail($user_id);
-        $cities = Cities::where("status", "1")->get();
-
-        return view('admin.user_infos', ["user" => $user, "cities" => $cities]);
-    }
-
 
     public function postMyInfos(Request $request) {
-        $user_id = Auth::id();
-        return $this->postUserInfos($request, $user_id);
+        return $this->saveProfile($request, Auth::user());
     }
 
-    public function postUserInfos(Request $request, $user_id) {
+    protected function showProfile(User $user, string $layout = 'layouts.app') {
 
-        if ( (Auth::user()->role!=1 ) && (Auth::user()->role!=2 ) && (Auth::id()!=$user_id) ) {
-            return Redirect::to(secure_url('/users'))->with("danger-status", trans("panel.unauthorized_process"));
-        }
+        $cities = Cities::where("status", "1")->get();
+
+        return view('profile.edit', ["user" => $user, "cities" => $cities, "layout" => $layout]);
+    }
+
+    protected function saveProfile(Request $request, User $user) {
 
         $validator = $request->validate([
             'city' => ['required', 'integer', 'exists:cities,id'],
@@ -71,7 +59,6 @@ class UserController extends Controller
             'national_id' => ['nullable', 'digits:11'],
         ]);
 
-        $user = User::findOrFail($user_id);
         $user->name = $this->tr_ucwords($user->name);
         $user->surname = $this->tr_ucwords($user->surname);
         $user->city_id = $request->get("city");

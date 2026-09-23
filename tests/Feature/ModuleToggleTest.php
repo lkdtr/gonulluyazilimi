@@ -51,7 +51,7 @@ class ModuleToggleTest extends TestCase
             ->assertDontSee('/email-redirects', false)
             ->assertSee(route('create-seminar-request'), false);
 
-        $this->actingAs($owner)->get('/users')
+        $this->actingAs($owner)->get('/admin/users')
             ->assertOk()
             ->assertDontSee(trans('auth.alias'));
 
