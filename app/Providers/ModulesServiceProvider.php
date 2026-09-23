@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modules\Dashboard;
 use App\Modules\Menu;
 use App\Modules\ModuleManager;
 use App\Modules\Slots;
@@ -15,6 +16,7 @@ class ModulesServiceProvider extends ServiceProvider
         $this->app->singleton(ModuleManager::class, fn ($app) => new ModuleManager($app['config']->get('modules.modules', [])));
         $this->app->singleton(Menu::class);
         $this->app->singleton(Slots::class);
+        $this->app->singleton(Dashboard::class);
 
         $modules = $this->app->make(ModuleManager::class);
 

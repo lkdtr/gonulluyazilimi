@@ -28,7 +28,8 @@ abstract class ModuleServiceProvider extends ServiceProvider
     abstract protected function name(): string;
 
     /**
-     * Register menu items, view slots and listeners of the module.
+     * Register menu items, view slots, dashboard figures (see dashboard())
+     * and listeners of the module.
      */
     protected function bootModule(Menu $menu, Slots $slots): void
     {
@@ -58,6 +59,14 @@ abstract class ModuleServiceProvider extends ServiceProvider
         }
 
         $this->bootModule($this->app->make(Menu::class), $this->app->make(Slots::class));
+    }
+
+    /**
+     * Figures and charts of the admin panel home.
+     */
+    protected function dashboard(): Dashboard
+    {
+        return $this->app->make(Dashboard::class);
     }
 
     protected function modulePath(string $path = ''): string
