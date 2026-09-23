@@ -80,84 +80,31 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ trans("auth.become_a_volunteer") }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ trans(config('app.register_label', 'auth.register')) }}</a>
                                 </li>
                             @endif
                         @else
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ trans("panel.user_operations") }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('email-redirects') }}">
-                                    {{trans('panel.email_forwarding')}}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('email-change-requests.create') }}">
-                                    E-posta değişikliği talebi
-                                </a>
-                                <hr style="margin: 5px; color: #999;">
-                                <a class="dropdown-item" href="{{ route('create-seminar-request') }}">
-                                    {{ trans("panel.create_seminar_request") }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('create-seminar-offer') }}">Seminer vermek istiyorum</a>
-                                <hr style="margin: 5px; color: #999;">
-                                <a class="dropdown-item" href="{{ route('create-reference-request') }}">
-                                    {{ trans("panel.create_reference_request") }}
-                                </a>
-                                <hr style="margin: 5px; color: #999;">
-                                <a class="dropdown-item" href="{{ route('join-lkd-young') }}">
-                                    {{ trans("panel.join_lkd_young") }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('representations.index') }}">Temsilcilikler</a>
-                                <a class="dropdown-item" href="{{ route('representations.candidate') }}">Temsilci adayı ol</a>
-
-                            </div>
-                        </li>
-
-                        @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ trans("panel.manager_operations") }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('users') }}">
-                                        {{ trans("panel.users") }}
+                        @foreach (['user' => 'panel.user_operations', 'admin' => 'panel.manager_operations'] as $section => $title)
+                            @php($menuGroups = app(\App\Modules\Menu::class)->groups($section, Auth::user()))
+                            @if ($menuGroups)
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ trans($title) }}
                                     </a>
-                                    <hr style="margin: 5px; color: #999;">
-                                    <a class="dropdown-item" href="{{ route('process-logs') }}">
-                                        {{ trans("panel.process_logs") }}
-                                    </a>
-                                    <hr style="margin: 5px; color: #999;">
-                                    <a class="dropdown-item" href="{{ route('announcements') }}">
-                                        {{ trans("panel.announcements") }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('new-announcement') }}">
-                                        {{ trans("panel.new_announcement") }}
-                                    </a>
-                                    <hr style="margin: 5px; color: #999;">
-                                    <a class="dropdown-item" href="{{ route('seminar-subjects') }}">
-                                        {{ trans("panel.seminar_subjects") }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('new-seminar-subject') }}">
-                                        {{ trans("panel.new_seminar_subject") }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('admin.seminar-requests') }}">
-                                        {{ trans("panel.seminar_requests") }}
-                                    </a>
-                                    @if(Auth::user()->role == 1)<a class="dropdown-item" href="{{ route('admin.seminar-offers') }}">Seminer verme başvuruları</a>@endif
-                                    @if(Auth::user()->role == 1)
-                                        <a class="dropdown-item" href="{{ route('admin.email-change-requests') }}">E-posta değişikliği talepleri</a>
-                                        <a class="dropdown-item" href="{{ route('admin.lkd-young') }}">LKD Genç yönetimi</a>
-                                        <a class="dropdown-item" href="{{ route('admin.representations') }}">Temsilcilik yönetimi</a>
-                                    @endif
-                                    <hr style="margin: 5px; color: #999;">
-                                    <a class="dropdown-item" href="{{ route('reference-requests') }}">
-                                        {{ trans("panel.reference_requests") }}
-                                    </a>
-                                </div>
-                            </li>
-                        @endif
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        @foreach ($menuGroups as $items)
+                                            @if (! $loop->first)
+                                                <hr style="margin: 5px; color: #999;">
+                                            @endif
+                                            @foreach ($items as $item)
+                                                <a class="dropdown-item" href="{{ route($item['route']) }}">{{ __($item['label']) }}</a>
+                                            @endforeach
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endif
+                        @endforeach
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

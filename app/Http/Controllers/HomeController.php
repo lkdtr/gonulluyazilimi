@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
+use App\Events\DashboardVisited;
 use App\Models\UserEvents;
-use App\Models\EmailRedirects;
-use App\Models\Announcements;
 
 class HomeController extends Controller
 {
@@ -29,34 +28,11 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $user_id = Auth::id();
-        $email_redirect_is_exist = EmailRedirects::where("user_id", $user_id)->first();
-        $announcements = Announcements::where("status", 1)
-            ->where('finished_at', '>', now())
-            ->orderBy("id", "DESC")
-            ->paginate(10);
-
-        $user = Auth::user();
-
-        try {
-
-            $result = $this->addMemberInEmmaiList(
-                $user->email,
-                $user->name." ".$user->surname
-            );
-
-        }
-        catch(Exception $e) {
-
-        }
-
+        event(new DashboardVisited(Auth::user()));
 
         $this->set_log("other", Auth::user()->email." giriş yaptı");
 
-        return view('home', [
-            "announcements" => $announcements,
-            "email_redirect_is_exist" => $email_redirect_is_exist,
-        ]);
+        return view('home');
     }
 
     public function postHome(Request $request) {

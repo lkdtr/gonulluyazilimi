@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card border-secondary">
-                <div class="card-header text-white bg-secondary">{{ trans("auth.become_a_volunteer_title") }}</div>
+                <div class="card-header text-white bg-secondary">{{ trans(config('app.register_label', 'auth.register')) }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register', $inIframe ? ['in-iframe' => 1] : []) }}" id="register_form">

@@ -58,6 +58,28 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Seminer talep/teklif sayfaları ile giriş/kayıt sayfaları `?in-iframe=1` ile `layouts.iframe` düzeninde açılır ve `frame-ancestors` CSP başlığı (lkd.org.tr) gönderir.
 - `in-iframe` parametresi auth yönlendirmesinde (`Authenticate::redirectTo`, `Handler::unauthenticated`) ve form action'larında taşınır; yeni bir sayfa iframe akışına eklenirse aynı deseni izle.
 
+## Modüler Yapı
+- Çekirdek `app/` altındadır ve hep açıktır: giriş/kayıt/parola, telefon doğrulama, profil, kullanıcı/rol yönetimi, TC doğrulama, işlem kayıtları, sözleşmeler, ortak servisler (`HtmlSanitizer`, `MailgunMailingList`, `AnnouncementMailing`).
+- Diğer her özellik `modules/<Ad>/` altında bir modüldür (`Modules\<Ad>\` PSR-4). Modüller ve açık/kapalı bayrakları `config/modules.php`'de (`MODULE_*` env):
+  | Modül | Anahtar | Not |
+  |---|---|---|
+  | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi. `requires: mail-forwarding, reference` |
+  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Domain `MAIL_FORWARDING_DOMAIN` (gönüllü: penguen.org.tr, üyeler için linux.org.tr planlanıyor) |
+  | Reference | `reference` | Referans talebi |
+  | EmailChange | `email-change` | Hesap e-postası değişikliği talebi |
+  | Announcements | `announcements` | Duyurular, ana sayfa duyuru kartı |
+  | Seminar | `seminar` | Seminer konuları, talepleri, verme başvuruları |
+  | LkdYoung | `lkd-young` | LKD Genç. `requires: mail-forwarding` |
+  | Representation | `representation` | Temsilcilikler |
+- Bir modül, açık olan başka bir modülün `requires` listesindeyse otomatik açılır; `enabled => false` olup yalnızca gönüllü modülünün ihtiyaç duyduğu modüller gönüllü kapanınca kapanır.
+- Kapalı modülün route'ları, menüleri, view'ları ve listener'ları yüklenmez; migration'ları ise her zaman yüklenir (şema modül durumuna bağlı değildir).
+- Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
+- Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
+  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <roller>, <sıra>)`
+  - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions', [...])`
+  - Çekirdek olaylar (`app/Events`): `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
+  - View içinde isteğe bağlı içerik: `@module('<anahtar>') ... @endmodule`
+
 ## PostfixAdmin XML-RPC
 - E-posta yönlendirmeleri `POSTFIXADMIN_SERVER` üzerindeki PostfixAdmin 3.2.1'in XML-RPC arayüzüyle yönetilir: `server3.linux.org.tr` (10.10.10.23, `192.168.0.34` üzerinden SSH), dosya `/usr/share/postfixadmin/public/xmlrpc.php`.
 - Projedeki `mailserver/xmlrpc_server.php` bu dosyanın birebir kopyasıdır ve her zaman güncel tutulmalıdır. Uygulamanın çağırdığı her `alias.*` metodu burada tanımlı olmalı (`create`, `update`); yeni bir metot kullanılacaksa önce bu dosyaya eklenir, sonra sunucuya aynı dosya kopyalanır. Canlı dosyanın md5'i proje kopyasıyla eşleşmelidir.

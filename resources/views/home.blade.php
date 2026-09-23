@@ -19,58 +19,16 @@
                 </div>
             @endif
 
-            @if (session('forwarding-success'))
+            @moduleSlot('home.top')
+
+            @if (session('status'))
                 <div class="alert alert-success d-flex" role="alert">
                     <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                    <div>{{ session('forwarding-success') }}</div>
+                    <div>{{ session('status') }}</div>
                 </div>
-            @else
-                @if($email_redirect_is_exist==null)
-                    <a href="{{secure_url('/email-redirects')}}" role="alert">
-                        <div class="alert alert-info d-flex">
-                            <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
-                            <div>{{ trans("panel.email_redirects_info") }}</div>
-                        </div>
-                    </a>
-                    <br/>
-                @elseif($email_redirect_is_exist->status==0)
-                    <div class="alert alert-danger d-flex" role="alert">
-                        <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                        <div>{{ trans("panel.remove_penguen_success") }}. <a href="{{secure_url('/email-redirects')}}">{{ trans("panel.try_reactive_penguen") }}</a></div>
-                    </div>
-                @endif
             @endif
 
-            <div class="card border-secondary">
-                <div class="card-header text-white bg-secondary">{{ trans("panel.available_announcements_title") }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success d-flex" role="alert">
-                            <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                            <div>{{ session('status') }}</div>
-                        </div>
-                    @endif
-
-                    @foreach ($announcements as $announcement)
-                        <button style="width: 100%;text-align: left;" class="btn btn-lg btn-success rounded-0" type="button" data-bs-toggle="collapse" href="#announcementCollapse{{$announcement->id}}" role="button" aria-expanded="false" aria-controls="announcementCollapse{{$announcement->id}}">
-                            {{$announcement->subject}}
-                        </button>
-                        <div class="collapse" id="announcementCollapse{{$announcement->id}}">
-                            <div class="card card-body text-dark bg-light rounded-0">
-                                <div>{!! app(\App\Support\HtmlSanitizer::class)->sanitize($announcement->detail) !!}</div>
-                            </div>
-                        </div>
-                        <small>&nbsp;</small>
-                    @endforeach
-
-                    @if ($announcements->hasPages())
-                        <div class="mt-4 d-flex justify-content-center">
-                            {{ $announcements->onEachSide(1)->links('pagination::bootstrap-5') }}
-                        </div>
-                    @endif
-                </div>
-            </div>
+            @moduleSlot('home.main')
 
         </div>
     </div>
