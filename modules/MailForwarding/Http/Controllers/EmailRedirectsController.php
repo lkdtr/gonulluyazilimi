@@ -1,0 +1,191 @@
+<?php
+
+namespace Modules\MailForwarding\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+
+use Modules\MailForwarding\Mail\ForwardingWelcome;
+
+use App\Models\User;
+use Modules\MailForwarding\Models\EmailRedirects;
+
+use BahriCanli\TcKimlik;
+use Carbon\Carbon;
+
+use Modules\MailForwarding\Support\PostfixAdmin;
+
+class EmailRedirectsController extends Controller
+{
+    use PostfixAdmin;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getValidation()
+    {
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $first_redirect = false;
+
+        if($email_redirects==null) {
+            $email_redirects = new EmailRedirects();
+            $first_redirect = true;
+        }
+        else if($email_redirects->status == 0) {
+            $first_redirect = true;
+        }
+
+        $user->birthday = date("d-m-Y", strtotime($user->birthday));
+
+        return view('mail-forwarding::email-redirects', [
+            "user" => $user,
+            "email_redirects" => $email_redirects,
+            "first_redirect" => $first_redirect,
+        ]);
+    }
+
+    public function postValidation(Request $request)
+    {
+        $validator = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3'],
+            'surname' => ['required', 'string', 'max:255', 'min:2'],
+            'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
+            'birthday' => ['required', 'date'],
+            'agreement' => ['required']
+        ]);
+
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+
+        $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
+        $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
+        $national_id = $request->get("national_id") == "10000000146" ? $user->national_id : $request->get("national_id");
+        $birthday = $request->get("birthday") == "notchange" ? $user->birthday : $request->get("birthday");
+
+        $birty_year = date("Y", strtotime($birthday));
+
+        $data = [
+            'tcno'          => $national_id,
+            'isim'          => $name,
+            'soyisim'       => $surname,
+            'dogumyili'     => $birty_year,
+        ];
+
+        if (!TcKimlik::validate($data)) {
+            return back()->withErrors(["national_id" => "TC Kimlik Numarası vermiş olduğunuz kimlik bilgilerinizle eşleşmiyor"])->withInput();
+        }
+
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+        $user->name = $this->tr_ucwords($name);
+        $user->surname = $this->tr_ucwords($surname);
+        $user->birthday = Carbon::parse($birthday)->format("Y-m-d");
+        $user->national_id = $national_id;
+        $user->save();
+
+        $user->name = $this->slug(mb_strtolower($user->name));
+        $user->surname = $this->slug(mb_strtolower($user->surname));
+
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        if($email_redirects==null) {
+            $email_redirects = new EmailRedirects();
+            $email_redirects->user_id = $user->id;
+            $email_redirects->email_forwarding = $user->email;
+            $email_redirects->email_alias = $user->name.".".$user->surname."@".config('mail-forwarding.domain');
+            $email_redirects->status = 0;
+            $email_redirects->save();
+        }
+
+        $name_array = explode("-", $user->name);
+        $surname_array = explode("-", $user->surname);
+
+        $user->name = str_replace("-", "", $user->name);
+        $user->surname = str_replace("-", "", $user->surname);
+
+        if ( (count($name_array) == 1) && (count($surname_array) == 1) ) {
+            $name_array = [];
+            $surname_array = [];
+        }
+
+        return view('mail-forwarding::email-forwarding', [
+            "user" => $user,
+            "email_redirects" => $email_redirects,
+            "name_array" => $name_array,
+            "surname_array" => $surname_array
+        ]);
+    }
+
+    public function postForwarding(Request $request) {
+
+        $validator = $request->validate([
+            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.config('mail-forwarding.domain')],
+            'agreement' => ['required']
+        ]);
+
+        $email_alias = $request->get("email_alias");
+        $user_id = Auth::id();
+        $user = User::where("id", $user_id)->first();
+
+        $email_redirects = EmailRedirects::where("user_id", $user_id)->firstOrFail();
+
+        $request->validate([
+            'email_alias' => [Rule::unique('email_redirects', 'email_alias')->ignore($email_redirects->id)],
+        ]);
+
+        if( ($email_alias == $email_redirects->email_alias) && ($email_redirects->status == 1) ) {
+            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_notchange"));
+        }
+
+        try {
+            $result = $this->create_alias($email_alias, $email_redirects->email_forwarding);
+        }
+        catch(\Throwable $e) {
+            $this->set_log("create", $e->getMessage() );
+            return Redirect::to(secure_url('/home'))->with("danger-status", $e->getMessage() );
+        }
+
+        Log::info($result);
+
+        if($result) {
+
+            $email_redirects->email_alias = $email_alias;
+            $email_redirects->status = 1;
+            $email_redirects->save();
+
+            $user->alias = $email_redirects->email_alias;
+            Mail::to($email_redirects->email_alias)->send(new ForwardingWelcome($user));
+            $this->set_log("other", $email_redirects->email_alias." adresine yönlendirme başarılı e-postası gönderildi");
+
+            $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklendi");
+            return Redirect::to(secure_url('/home'))->with("forwarding-success", trans("panel.email_forwarding_success"));
+        }
+
+        $email_redirects->status = 0;
+        $email_redirects->save();
+
+        $this->set_log("create", $email_redirects->email_alias. " e-posta yönlendirmesi eklenemedi");
+        return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.email_forwarding_failed"));
+    }
+
+}

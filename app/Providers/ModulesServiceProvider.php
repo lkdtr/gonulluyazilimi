@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Providers;
+
+use App\Modules\Dashboard;
+use App\Modules\Menu;
+use App\Modules\ModuleManager;
+use App\Modules\Slots;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
+
+class ModulesServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->app->singleton(ModuleManager::class, fn ($app) => new ModuleManager($app['config']->get('modules.modules', [])));
+        $this->app->singleton(Menu::class);
+        $this->app->singleton(Slots::class);
+        $this->app->singleton(Dashboard::class);
+
+        $modules = $this->app->make(ModuleManager::class);
+
+        foreach ($modules->enabledModules() as $name) {
+            $this->app->register($modules->provider($name));
+        }
+    }
+
+    public function boot(ModuleManager $modules): void
+    {
+        foreach (array_keys($modules->providers()) as $name) {
+            $this->loadMigrationsFrom($modules->path($name, 'database/migrations'));
+        }
+
+        Blade::directive('moduleSlot', fn (string $expression) => "<?php echo app(\\App\\Modules\\Slots::class)->render({$expression}); ?>");
+        Blade::if('module', fn (string $name) => $modules->enabled($name));
+    }
+}

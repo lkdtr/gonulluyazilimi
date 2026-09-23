@@ -52,17 +52,6 @@ class User extends Authenticatable
         'birthday' => 'date',
     ];
 
-    public function getEmailRedirects() {
-        $emailRedirect = $this->hasOne('App\Models\EmailRedirects', 'user_id', 'id')->where("status", 1)->first();
-        if($emailRedirect==null) {
-            $res = ["email_alias"=>""];
-            return (object) $res;
-        }
-        else {
-            return $emailRedirect;
-        }
-    }
-
     public function getValidation() {
         $contactPermission = $this->hasOne('App\Models\ContactPermissions', 'value', 'phone_number')
                         ->where('value_type', 'phone_number')->first();

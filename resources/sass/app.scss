@@ -1,19 +1,39 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-@import "innoq-bootstrap-theme/src/styles/innoq-bootstrap-theme.scss";
-
+// Tabler (Bootstrap 5.3 based) theme, icons and vendor widget styles
+@import "~@tabler/core/dist/css/tabler.min.css";
+@import "~@tabler/icons-webfont/dist/tabler-icons.min.css";
 @import "~jquery-datetimepicker/jquery.datetimepicker.css";
+@import "~datatables.net-bs5/css/dataTables.bootstrap5.css";
+@import "~datatables.net-responsive-bs5/css/responsive.bootstrap5.css";
 
-// Datatables BS4
-@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
+// LKD brand colour (logo red)
+:root,
+[data-bs-theme=light] {
+    --tblr-primary: #d9151d;
+    --tblr-primary-rgb: 217, 21, 29;
+    --tblr-primary-fg: #fff;
+    --tblr-primary-darken: #b81118;
+    --tblr-primary-lt: #fbe8e8;
+    --tblr-primary-lt-rgb: 251, 232, 232;
+    --tblr-link-color: #b81118;
+    --tblr-link-color-rgb: 184, 17, 24;
+    --tblr-link-hover-color: #8f0d13;
+}
+
+.navbar-brand-image {
+    height: 3.5rem;
+    width: auto;
+}
+
+.navbar-vertical .navbar-brand {
+    font-size: 1rem;
+    letter-spacing: .02em;
+}
+
+// DataTables controls inside cards
+div.dataTables_wrapper div.dataTables_length select {
+    width: auto;
+    display: inline-block;
+}
 
 .password-strength-status {
     padding: 5px 10px;

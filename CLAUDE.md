@@ -58,9 +58,46 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Seminer talep/teklif sayfaları ile giriş/kayıt sayfaları `?in-iframe=1` ile `layouts.iframe` düzeninde açılır ve `frame-ancestors` CSP başlığı (lkd.org.tr) gönderir.
 - `in-iframe` parametresi auth yönlendirmesinde (`Authenticate::redirectTo`, `Handler::unauthenticated`) ve form action'larında taşınır; yeni bir sayfa iframe akışına eklenirse aynı deseni izle.
 
+## Modüler Yapı
+- Çekirdek `app/` altındadır ve hep açıktır: giriş/kayıt/parola, telefon doğrulama, profil, kullanıcı/rol yönetimi, TC doğrulama, işlem kayıtları, sözleşmeler, ortak servisler (`HtmlSanitizer`, `MailgunMailingList`, `AnnouncementMailing`).
+- Diğer her özellik `modules/<Ad>/` altında bir modüldür (`Modules\<Ad>\` PSR-4). Modüller ve açık/kapalı bayrakları `config/modules.php`'de (`MODULE_*` env):
+  | Modül | Anahtar | Not |
+  |---|---|---|
+  | Admin | `admin` | `/admin` paneli ana sayfası, kullanıcılar/roller, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
+  | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi. `requires: mail-forwarding, reference` |
+  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Domain `MAIL_FORWARDING_DOMAIN` (gönüllü: penguen.org.tr, üyeler için linux.org.tr planlanıyor) |
+  | Reference | `reference` | Referans talebi |
+  | EmailChange | `email-change` | Hesap e-postası değişikliği talebi |
+  | Announcements | `announcements` | Duyurular, ana sayfa duyuru kartı |
+  | Seminar | `seminar` | Seminer konuları, talepleri, verme başvuruları |
+  | LkdYoung | `lkd-young` | LKD Genç. `requires: mail-forwarding` |
+  | Representation | `representation` | Temsilcilikler |
+- Bir modül, açık olan başka bir modülün `requires` listesindeyse otomatik açılır; `enabled => false` olup yalnızca gönüllü modülünün ihtiyaç duyduğu modüller gönüllü kapanınca kapanır.
+- Kapalı modülün route'ları, menüleri, view'ları ve listener'ları yüklenmez; migration'ları ise her zaman yüklenir (şema modül durumuna bağlı değildir).
+- Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `routes/admin.php` (yönetim sayfaları), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
+- Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
+  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <roller>, <sıra>)`
+  - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions', [...])`
+  - Yönetim paneli ana ekranı (`/admin`): `$this->dashboard()->stat(<etiket>, <ikon>, fn () => <sayı>, <route adı|null>, <roller>, <sıra>, <not>)` ve `->chart(<başlık>, fn () => [<etiket> => <sayı>], 'bar'|'line', <roller>, <sıra>, <açıklama>)`; aylık seri için `Dashboard::monthly($query, 12, cumulative: false)`. Grafikler sunucu tarafında SVG olarak çizilir (`admin::partials.chart`)
+  - Çekirdek olaylar (`app/Events`): `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
+  - View içinde isteğe bağlı içerik: `@module('<anahtar>') ... @endmodule`
+
+## Kullanıcı ve Yönetim Arayüzü
+- Site (`layouts.app`) ile yönetim paneli (`layouts.admin`, `/admin`) ayrıdır; ikisinin de yatay menüsü `Menu` kayıt defterinden gelir (`user` ve `admin` bölümleri). Tek öğeli grup bağlantı, çok öğeli grup `$menu->label(...)` başlıklı açılır menü olur.
+- Yönetim sayfaları modülün `routes/admin.php` dosyasında tanımlanır: otomatik olarak `/admin` önekli, `admin.` adlı ve `auth` + `role:1,2` korumalıdır; yalnızca sahiplere (rol 1) açık olanlar ayrıca `role:1` ile sarılır. Controller'ları `Http/Controllers/Admin/`, view'ları `resources/views/admin/` altındadır ve `layouts.admin`'i genişletir.
+- Eski yönetim adresleri (`/users`, `/announcements`, `/seminar-subjects` vb.) ilgili modülün `routes/web.php` dosyasında 301 ile `/admin/...` karşılığına yönlenir.
+
 ## PostfixAdmin XML-RPC
 - E-posta yönlendirmeleri `POSTFIXADMIN_SERVER` üzerindeki PostfixAdmin 3.2.1'in XML-RPC arayüzüyle yönetilir: `server3.linux.org.tr` (10.10.10.23, `192.168.0.34` üzerinden SSH), dosya `/usr/share/postfixadmin/public/xmlrpc.php`.
 - Projedeki `mailserver/xmlrpc_server.php` bu dosyanın birebir kopyasıdır ve her zaman güncel tutulmalıdır. Uygulamanın çağırdığı her `alias.*` metodu burada tanımlı olmalı (`create`, `update`); yeni bir metot kullanılacaksa önce bu dosyaya eklenir, sonra sunucuya aynı dosya kopyalanır. Canlı dosyanın md5'i proje kopyasıyla eşleşmelidir.
+
+## Canlı (Prod)
+- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/gonullu.lkd.org.tr` dizininde; `lkdtr/gonulluyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Dosyalar root'a aittir.
+- Web PHP 8.4 php-fpm ile çalışır; sunucudaki varsayılan `php` CLI 8.5'tir. Composer ve artisan komutları `php8.4` ile çalıştırılmalı:
+  ```bash
+  sudo php8.4 /usr/bin/composer install --no-dev --optimize-autoloader
+  sudo php8.4 artisan optimize:clear
+  ```
 
 ## Bilinen Uyarılar
 - `laminas/laminas-loader` ve `laminas/laminas-math` abandoned uyarıları var, kritik değil. `laminas-math` PHP 8.5'i desteklemediği için PHP yükseltmesinin önünde engel.

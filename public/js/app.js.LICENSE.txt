@@ -33,12 +33,12 @@
 
 /*! Axios v1.19.0 Copyright (c) 2026 Matt Zabriskie and contributors */
 
-/*! Bootstrap 4 integration for DataTables' Responsive
+/*! Bootstrap 5 integration for DataTables' Responsive
  * © SpryMedia Ltd - datatables.net/license
  */
 
-/*! DataTables Bootstrap 4 integration
- * ©2011-2017 SpryMedia Ltd - datatables.net/license
+/*! DataTables Bootstrap 5 integration
+ * 2020 SpryMedia Ltd - datatables.net/license
  */
 
 /*! Responsive 2.5.0
