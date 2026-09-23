@@ -19,7 +19,10 @@ class AdminServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
-        $menu->label('admin', 'users', 'panel.users');
+        $menu->label('admin', 'dashboard', null, 'layout-dashboard');
+        $menu->add('admin', 'dashboard', 'Genel Bakış', 'admin.dashboard', [1, 2], 1);
+
+        $menu->label('admin', 'users', 'panel.users', 'users');
         $menu->add('admin', 'users', 'panel.users', 'admin.users', [1, 2], 10);
         $menu->add('admin', 'users', 'panel.process_logs', 'admin.process-logs', [1], 11);
     }

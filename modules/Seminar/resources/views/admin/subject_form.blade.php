@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card border-secondary">
-                <div class="card-header text-white bg-secondary">{{ trans("panel.create_seminar_subject_title") }}</div>
+            <div class="card">
+                <div class="card-header"><h3 class="card-title">{{ trans("panel.create_seminar_subject_title") }}</h3></div>
                 <div class="card-body">
 
                     @if (session('status'))

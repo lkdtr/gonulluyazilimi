@@ -3,7 +3,7 @@ window.$ = window.jQuery = $;
 
 import 'inputmask';
 import 'jquery-datetimepicker';
-import 'datatables.net-responsive-bs4';
+import 'datatables.net-responsive-bs5';
 import languageTR from 'datatables.net-plugins/i18n/tr.mjs';
 
 jQuery(function () {

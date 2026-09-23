@@ -18,11 +18,11 @@ class SeminarServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
-        $menu->label('user', 'seminar', 'Seminerler');
+        $menu->label('user', 'seminar', 'Seminerler', 'presentation');
         $menu->add('user', 'seminar', 'panel.create_seminar_request', 'create-seminar-request', [], 30);
         $menu->add('user', 'seminar', 'Seminer vermek istiyorum', 'create-seminar-offer', [], 31);
 
-        $menu->label('admin', 'seminar', 'Seminerler');
+        $menu->label('admin', 'seminar', 'Seminerler', 'presentation');
         $menu->add('admin', 'seminar', 'panel.seminar_subjects', 'admin.seminar-subjects', [1, 2], 40);
         $menu->add('admin', 'seminar', 'panel.new_seminar_subject', 'admin.seminar-subjects.create', [1, 2], 41);
         $menu->add('admin', 'seminar', 'panel.seminar_requests', 'admin.seminar-requests', [1, 2], 42);

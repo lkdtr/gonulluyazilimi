@@ -28,15 +28,16 @@ class Menu
     }
 
     /**
-     * Title of a group's dropdown; defaults to the label of its first item.
+     * Title and Tabler icon name (e.g. "users" for "ti ti-users") of a group.
+     * The title is used for a dropdown and defaults to the first item's label.
      */
-    public function label(string $section, string $group, string $label): void
+    public function label(string $section, string $group, ?string $label, ?string $icon = null): void
     {
-        $this->labels[$section][$group] = $label;
+        $this->labels[$section][$group] = compact('label', 'icon');
     }
 
     /**
-     * Visible groups of a section in order: [['label' => ..., 'items' => [...]], ...].
+     * Visible groups of a section in order: [['label' => ..., 'icon' => ..., 'items' => [...]], ...].
      */
     public function groups(string $section, ?Authenticatable $user): array
     {
@@ -50,7 +51,8 @@ class Menu
         $groups = [];
         foreach ($items as $item) {
             $groups[$item['group']]['items'][] = $item;
-            $groups[$item['group']]['label'] ??= $this->labels[$section][$item['group']] ?? $item['label'];
+            $groups[$item['group']]['label'] ??= $this->labels[$section][$item['group']]['label'] ?? $item['label'];
+            $groups[$item['group']]['icon'] ??= $this->labels[$section][$item['group']]['icon'] ?? 'point';
         }
 
         return array_values($groups);

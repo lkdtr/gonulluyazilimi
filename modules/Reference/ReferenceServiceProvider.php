@@ -18,6 +18,8 @@ class ReferenceServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
+        $menu->label('user', 'reference', null, 'certificate');
+        $menu->label('admin', 'reference', null, 'certificate');
         $menu->add('user', 'reference', 'panel.create_reference_request', 'create-reference-request', [], 40);
         $menu->add('admin', 'reference', 'panel.reference_requests', 'admin.reference-requests', [1, 2], 80);
     }
