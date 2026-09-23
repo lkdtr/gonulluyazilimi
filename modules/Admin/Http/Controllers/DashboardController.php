@@ -3,13 +3,16 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Menu;
+use App\Modules\Dashboard;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index(Menu $menu)
+    public function index(Dashboard $dashboard)
     {
-        return view('admin::dashboard', ['groups' => $menu->groups('admin', Auth::user())]);
+        return view('admin::dashboard', [
+            'stats' => $dashboard->stats(Auth::user()),
+            'charts' => $dashboard->charts(Auth::user()),
+        ]);
     }
 }
