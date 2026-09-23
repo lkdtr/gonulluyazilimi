@@ -4,7 +4,7 @@
         <span class="avatar avatar-sm bg-primary-lt">{{ $initials }}</span>
         <div class="d-none d-xl-block ps-2">
             <div>{{ Auth::user()->name }} {{ Auth::user()->surname }}</div>
-            <div class="mt-1 small text-secondary">{{ trans('panel.user_'.Auth::user()->role) }}</div>
+            <div class="mt-1 small text-secondary">{{ trans('panel.user_'.Auth::user()->accessLevel()) }}</div>
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
