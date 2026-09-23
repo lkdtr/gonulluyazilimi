@@ -78,6 +78,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
   - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <roller>, <sıra>)`
   - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions', [...])`
+  - Yönetim paneli ana ekranı (`/admin`): `$this->dashboard()->stat(<etiket>, <ikon>, fn () => <sayı>, <route adı|null>, <roller>, <sıra>, <not>)` ve `->chart(<başlık>, fn () => [<etiket> => <sayı>], 'bar'|'line', <roller>, <sıra>, <açıklama>)`; aylık seri için `Dashboard::monthly($query, 12, cumulative: false)`. Grafikler sunucu tarafında SVG olarak çizilir (`admin::partials.chart`)
   - Çekirdek olaylar (`app/Events`): `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
   - View içinde isteğe bağlı içerik: `@module('<anahtar>') ... @endmodule`
 
