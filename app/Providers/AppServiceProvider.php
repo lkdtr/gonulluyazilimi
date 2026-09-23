@@ -32,13 +32,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if($this->checkHTTPSStatus()){
+        // TLS ends at Cloudflare and the origin is reached over plain HTTP, so the
+        // request looks insecure: generate https URLs and redirects whenever the
+        // site is served over https.
+        if (str_starts_with((string) config('app.url'), 'https://')) {
             URL::forceScheme('https');
         }
-    }
-
-    private function checkHTTPSStatus()
-    {
-	    return (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO']==='http');
     }
 }
