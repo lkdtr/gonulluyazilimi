@@ -84,5 +84,13 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - E-posta yönlendirmeleri `POSTFIXADMIN_SERVER` üzerindeki PostfixAdmin 3.2.1'in XML-RPC arayüzüyle yönetilir: `server3.linux.org.tr` (10.10.10.23, `192.168.0.34` üzerinden SSH), dosya `/usr/share/postfixadmin/public/xmlrpc.php`.
 - Projedeki `mailserver/xmlrpc_server.php` bu dosyanın birebir kopyasıdır ve her zaman güncel tutulmalıdır. Uygulamanın çağırdığı her `alias.*` metodu burada tanımlı olmalı (`create`, `update`); yeni bir metot kullanılacaksa önce bu dosyaya eklenir, sonra sunucuya aynı dosya kopyalanır. Canlı dosyanın md5'i proje kopyasıyla eşleşmelidir.
 
+## Canlı (Prod)
+- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/gonullu.lkd.org.tr` dizininde; `lkdtr/gonulluyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Dosyalar root'a aittir.
+- Web PHP 8.4 php-fpm ile çalışır; sunucudaki varsayılan `php` CLI 8.5'tir. Composer ve artisan komutları `php8.4` ile çalıştırılmalı:
+  ```bash
+  sudo php8.4 /usr/bin/composer install --no-dev --optimize-autoloader
+  sudo php8.4 artisan optimize:clear
+  ```
+
 ## Bilinen Uyarılar
 - `laminas/laminas-loader` ve `laminas/laminas-math` abandoned uyarıları var, kritik değil. `laminas-math` PHP 8.5'i desteklemediği için PHP yükseltmesinin önünde engel.
