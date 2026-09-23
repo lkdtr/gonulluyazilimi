@@ -20,7 +20,11 @@ jQuery(function () {
         dayOfWeekStart: 1
     });
 
-    $('table').dataTable({
+    // DataTables needs a header row and a uniform column count: skip tables without
+    // a thead (e.g. hidden chart data) and ones showing a colspan "no records" row.
+    $('table').filter(function () {
+        return $(this).children('thead').length && !$(this).find('tbody td[colspan]').length;
+    }).dataTable({
         language: languageTR,
         pageLength: 25,
         responsive: true
