@@ -9,7 +9,8 @@ use App\Modules\ModuleServiceProvider;
 use App\Modules\Slots;
 
 /**
- * Admin panel home, users and roles, identity checks and process logs.
+ * Admin panel home, contacts and their affiliations, users, roles and
+ * permissions, identity checks and process logs.
  * Locked: every module adds its own pages to the panel.
  */
 class AdminServiceProvider extends ModuleServiceProvider
@@ -23,6 +24,21 @@ class AdminServiceProvider extends ModuleServiceProvider
     {
         $menu->label('admin', 'dashboard', null, 'layout-dashboard');
         $menu->add('admin', 'dashboard', 'Genel Bakış', 'admin.dashboard', [1, 2], 1);
+
+        $this->permissions()->group('contacts', 'Kişi & Kurumlar', 10);
+        $this->permissions()->register('contacts.view', 'Kişi ve kurumları görebilsin', 'contacts', 10);
+        $this->permissions()->register('contacts.manage', 'Kişi ve kurum ekleyip düzenleyebilsin, sıfat verebilsin', 'contacts', 11);
+        $this->permissions()->group('settings', 'Ayarlar', 90);
+        $this->permissions()->register('affiliations.manage', 'Sıfat türlerini düzenleyebilsin', 'settings', 90);
+        $this->permissions()->register('roles.manage', 'Rolleri, yetkileri ve rol şablonlarını düzenleyebilsin', 'settings', 91);
+
+        $menu->label('admin', 'contacts', 'Kişi & Kurumlar', 'address-book');
+        $menu->add('admin', 'contacts', 'Kişi & Kurumlar', 'admin.contacts', ['contacts.view'], 5);
+        $menu->add('admin', 'contacts', 'Kişi / kurum ekle', 'admin.contacts.create', ['contacts.manage'], 6);
+
+        $menu->label('admin', 'settings', 'Ayarlar', 'settings');
+        $menu->add('admin', 'settings', 'Sıfatlar', 'admin.affiliation-types', ['affiliations.manage'], 90);
+        $menu->add('admin', 'settings', 'Roller ve yetkiler', 'admin.roles', ['roles.manage'], 91);
 
         $menu->label('admin', 'users', 'panel.users', 'users');
         $menu->add('admin', 'users', 'panel.users', 'admin.users', [1, 2], 10);
