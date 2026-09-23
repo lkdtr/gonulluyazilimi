@@ -19,6 +19,7 @@ class EmailChangeServiceProvider extends ModuleServiceProvider
 
     protected function bootModule(Menu $menu, Slots $slots): void
     {
+        $menu->label('user', 'account', 'E-posta');
         $menu->add('user', 'account', 'E-posta değişikliği talebi', 'email-change-requests.create', [], 20);
         $menu->add('admin', 'email-change', 'E-posta değişikliği talepleri', 'admin.email-change-requests', [1], 50);
     }

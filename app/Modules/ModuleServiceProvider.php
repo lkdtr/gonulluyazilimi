@@ -12,6 +12,8 @@ use Illuminate\Support\ServiceProvider;
  *   <Name>ServiceProvider.php
  *   config.php               merged into config("<name>")
  *   routes/web.php           loaded inside the "web" middleware group
+ *   routes/admin.php         admin panel pages: /admin prefix, "admin." route names,
+ *                            signed-in owners and managers only (role:1,2)
  *   resources/views          available as "<name>::view.name"
  *   database/migrations      loaded by ModulesServiceProvider for every module
  *
@@ -45,8 +47,14 @@ abstract class ModuleServiceProvider extends ServiceProvider
             $this->loadViewsFrom($views, $this->name());
         }
 
-        if (is_file($routes = $this->modulePath('routes/web.php')) && ! $this->app->routesAreCached()) {
-            Route::middleware('web')->group($routes);
+        if (! $this->app->routesAreCached()) {
+            if (is_file($routes = $this->modulePath('routes/web.php'))) {
+                Route::middleware('web')->group($routes);
+            }
+
+            if (is_file($routes = $this->modulePath('routes/admin.php'))) {
+                Route::middleware(['web', 'auth', 'role:1,2'])->prefix('admin')->name('admin.')->group($routes);
+            }
         }
 
         $this->bootModule($this->app->make(Menu::class), $this->app->make(Slots::class));

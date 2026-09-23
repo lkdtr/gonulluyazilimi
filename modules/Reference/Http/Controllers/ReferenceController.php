@@ -37,18 +37,6 @@ class ReferenceController extends Controller
         });
     }
 
-    public function getList() {
-
-        if (Auth::user()->role!=1 ) {
-            return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
-        }
-
-        $referenceRequests = ReferenceRequests::where("status", 1)->get();
-
-        return view('reference::admin.index', ["referenceRequests" => $referenceRequests]);
-
-    }
-
     public function getCreate() {
 
         $user_id = Auth::id();

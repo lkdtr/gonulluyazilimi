@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -49,7 +49,7 @@
                                             {{ trans("panel.processes") }}
                                         </button>
                                         <ul class="dropdown-menu pull-left">
-                                            <li><a class="dropdown-item" href="{{secure_url('/edit-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.edit") }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('admin.seminar-subjects.edit', $seminarSubject->id) }}">{{ trans("panel.edit") }}</a></li>
                                             <li><a class="dropdown-item" href="{{secure_url('/delete-seminar-subject/'.$seminarSubject->id)}}">{{ trans("panel.delete") }}</a></li>
                                         </ul>
                                     </div>

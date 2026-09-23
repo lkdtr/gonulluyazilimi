@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 class ModuleManager
 {
-    /** @var array<string, array{enabled?: mixed, provider: class-string, requires?: string[]}> */
+    /** @var array<string, array{enabled?: mixed, locked?: bool, provider: class-string, requires?: string[]}> */
     private array $modules;
 
     /** @var string[] */
@@ -79,7 +79,7 @@ class ModuleManager
         };
 
         foreach ($this->modules as $name => $module) {
-            if (filter_var($module['enabled'] ?? false, FILTER_VALIDATE_BOOL)) {
+            if (($module['locked'] ?? false) || filter_var($module['enabled'] ?? false, FILTER_VALIDATE_BOOL)) {
                 $enable($name);
             }
         }

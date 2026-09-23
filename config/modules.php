@@ -1,5 +1,6 @@
 <?php
 
+use Modules\Admin\AdminServiceProvider;
 use Modules\Announcements\AnnouncementsServiceProvider;
 use Modules\EmailChange\EmailChangeServiceProvider;
 use Modules\LkdYoung\LkdYoungServiceProvider;
@@ -22,11 +23,17 @@ return [
     | (enabled => false) is switched off together with it.
     |
     | Migrations of every module are always loaded, so the schema does not
-    | depend on which modules are enabled.
+    | depend on which modules are enabled. A "locked" module cannot be
+    | disabled.
     |
     */
 
     'modules' => [
+
+        'admin' => [
+            'locked' => true,
+            'provider' => AdminServiceProvider::class,
+        ],
 
         'volunteer' => [
             'enabled' => env('MODULE_VOLUNTEER', true),

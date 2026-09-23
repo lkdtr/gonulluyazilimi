@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Announcements\Http\Controllers;
+namespace Modules\Announcements\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
@@ -94,7 +94,7 @@ class AnnouncementController extends Controller
         }
 
 
-        return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
+        return Redirect::route('admin.announcements')->with("success-status", trans("panel.save_announcement_success"));
     }
 
     public function getList() {
@@ -157,7 +157,7 @@ class AnnouncementController extends Controller
             $result = Mail::to($tomail)->send(new AnnouncementMailing($data));
         }
 
-        return Redirect::to(secure_url('/announcements'))->with("success-status", trans("panel.save_announcement_success"));
+        return Redirect::route('admin.announcements')->with("success-status", trans("panel.save_announcement_success"));
     }
 
 

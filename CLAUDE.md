@@ -63,6 +63,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Diğer her özellik `modules/<Ad>/` altında bir modüldür (`Modules\<Ad>\` PSR-4). Modüller ve açık/kapalı bayrakları `config/modules.php`'de (`MODULE_*` env):
   | Modül | Anahtar | Not |
   |---|---|---|
+  | Admin | `admin` | `/admin` paneli ana sayfası, kullanıcılar/roller, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
   | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi. `requires: mail-forwarding, reference` |
   | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Domain `MAIL_FORWARDING_DOMAIN` (gönüllü: penguen.org.tr, üyeler için linux.org.tr planlanıyor) |
   | Reference | `reference` | Referans talebi |
@@ -73,12 +74,17 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
   | Representation | `representation` | Temsilcilikler |
 - Bir modül, açık olan başka bir modülün `requires` listesindeyse otomatik açılır; `enabled => false` olup yalnızca gönüllü modülünün ihtiyaç duyduğu modüller gönüllü kapanınca kapanır.
 - Kapalı modülün route'ları, menüleri, view'ları ve listener'ları yüklenmez; migration'ları ise her zaman yüklenir (şema modül durumuna bağlı değildir).
-- Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
+- Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `routes/admin.php` (yönetim sayfaları), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
 - Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
   - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <roller>, <sıra>)`
   - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions', [...])`
   - Çekirdek olaylar (`app/Events`): `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
   - View içinde isteğe bağlı içerik: `@module('<anahtar>') ... @endmodule`
+
+## Kullanıcı ve Yönetim Arayüzü
+- Site (`layouts.app`) ile yönetim paneli (`layouts.admin`, `/admin`) ayrıdır; ikisinin de yatay menüsü `Menu` kayıt defterinden gelir (`user` ve `admin` bölümleri). Tek öğeli grup bağlantı, çok öğeli grup `$menu->label(...)` başlıklı açılır menü olur.
+- Yönetim sayfaları modülün `routes/admin.php` dosyasında tanımlanır: otomatik olarak `/admin` önekli, `admin.` adlı ve `auth` + `role:1,2` korumalıdır; yalnızca sahiplere (rol 1) açık olanlar ayrıca `role:1` ile sarılır. Controller'ları `Http/Controllers/Admin/`, view'ları `resources/views/admin/` altındadır ve `layouts.admin`'i genişletir.
+- Eski yönetim adresleri (`/users`, `/announcements`, `/seminar-subjects` vb.) ilgili modülün `routes/web.php` dosyasında 301 ile `/admin/...` karşılığına yönlenir.
 
 ## PostfixAdmin XML-RPC
 - E-posta yönlendirmeleri `POSTFIXADMIN_SERVER` üzerindeki PostfixAdmin 3.2.1'in XML-RPC arayüzüyle yönetilir: `server3.linux.org.tr` (10.10.10.23, `192.168.0.34` üzerinden SSH), dosya `/usr/share/postfixadmin/public/xmlrpc.php`.
