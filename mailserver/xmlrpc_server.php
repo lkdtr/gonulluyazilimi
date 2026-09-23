@@ -121,6 +121,30 @@ class AliasProxy {
     }
 
     /**
+     * Changes the forward target of an existing alias; vacation and mailbox
+     * settings of the alias are kept as they are.
+     *
+     * @param string $email alias address, e.g. name.surname@penguen.org.tr
+     * @param string $forward new target address
+     * @return boolean true on success
+     */
+    public function update($email, $forward) {
+        $ah = new AliasHandler(0, $_SESSION['sessid']['username']);
+
+        if (!$ah->init($email)) {
+            error_log('ah->init failed for ' . $email);
+            return false;
+        }
+
+        if (!$ah->set(array('goto' => array($forward)))) {
+            error_log('ah->set failed for ' . $email . ': ' . print_r($ah->errormsg, true));
+            return false;
+        }
+
+        return $ah->store();
+    }
+
+    /**
      * @return boolean true if the user has 'store_and_forward' set.
      * (i.e. their email address is also in the alias table). IF it returns false, then it's 'remote_only'
      */

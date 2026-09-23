@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\PostfixAdminClient;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -58,7 +59,7 @@ class EmailChangeRequestController extends Controller
             'reason' => $request->string('reason')->trim()->value() ?: null,
         ]);
 
-        Mail::to('yk@lkd.org.tr')->send(new EmailChangeRequestSubmitted($emailChangeRequest->load('user')));
+        $this->sendMail('yk@lkd.org.tr', new EmailChangeRequestSubmitted($emailChangeRequest->load('user')));
         $this->set_log('create', $user->email.' e-posta değişikliği talebi oluşturdu.');
 
         return redirect()->route('email-change-requests.create')
@@ -108,7 +109,7 @@ class EmailChangeRequestController extends Controller
             $emailChangeRequest->save();
         });
 
-        Mail::to($emailChangeRequest->requested_email)->send(new EmailChangeRequestProcessed($emailChangeRequest->load('user')));
+        $this->sendMail($emailChangeRequest->requested_email, new EmailChangeRequestProcessed($emailChangeRequest->load('user')));
         $this->set_log('change', $user->id.' numaralı kullanıcının e-posta değişikliği onaylandı.');
 
         return back()->with('success-status', 'E-posta adresi ve aktif yönlendirmesi güncellendi.');
@@ -126,9 +127,22 @@ class EmailChangeRequestController extends Controller
             'processed_at' => now(),
         ]);
 
-        Mail::to($emailChangeRequest->current_email)->send(new EmailChangeRequestProcessed($emailChangeRequest->load('user')));
+        $this->sendMail($emailChangeRequest->current_email, new EmailChangeRequestProcessed($emailChangeRequest->load('user')));
         $this->set_log('change', $emailChangeRequest->id.' numaralı e-posta değişikliği talebi reddedildi.');
 
         return back()->with('success-status', 'Talep reddedildi.');
+    }
+
+    /**
+     * The request is already saved when these notifications go out; a mail
+     * delivery failure must not turn a completed action into an error page.
+     */
+    private function sendMail(string $to, Mailable $mailable): void
+    {
+        try {
+            Mail::to($to)->send($mailable);
+        } catch (\Throwable $exception) {
+            report($exception);
+        }
     }
 }

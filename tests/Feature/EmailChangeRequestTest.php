@@ -105,4 +105,40 @@ class EmailChangeRequestTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => 'old@example.test']);
         $this->assertDatabaseHas('email_change_requests', ['id' => $changeRequest->id, 'status' => 'pending']);
     }
+
+    public function test_request_is_saved_and_confirmed_when_management_notification_fails(): void
+    {
+        $user = User::factory()->create(['email' => 'old@example.test']);
+        Mail::shouldReceive('to')->once()->andThrow(new \RuntimeException('Mail service unavailable'));
+
+        $this->actingAs($user)->post('/email-change-request', [
+            'requested_email' => 'new@example.test',
+            'password' => 'password',
+        ])->assertRedirect(route('email-change-requests.create'))
+            ->assertSessionHas('success-status');
+
+        $this->assertDatabaseHas('email_change_requests', [
+            'user_id' => $user->id,
+            'requested_email' => 'new@example.test',
+            'status' => 'pending',
+        ]);
+    }
+
+    public function test_approval_completes_when_the_member_notification_fails(): void
+    {
+        $owner = User::factory()->create(['role' => 1]);
+        $user = User::factory()->create(['email' => 'old@example.test']);
+        $changeRequest = EmailChangeRequest::create([
+            'user_id' => $user->id,
+            'current_email' => 'old@example.test',
+            'requested_email' => 'new@example.test',
+        ]);
+        Mail::shouldReceive('to')->once()->andThrow(new \RuntimeException('Mail service unavailable'));
+
+        $this->actingAs($owner)->patch(route('admin.email-change-requests.approve', $changeRequest))
+            ->assertSessionHas('success-status');
+
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => 'new@example.test']);
+        $this->assertDatabaseHas('email_change_requests', ['id' => $changeRequest->id, 'status' => 'approved']);
+    }
 }
