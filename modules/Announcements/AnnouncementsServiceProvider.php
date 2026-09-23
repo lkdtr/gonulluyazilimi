@@ -24,6 +24,8 @@ class AnnouncementsServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'announcements', 'panel.announcements', 'admin.announcements', [1, 2], 30);
         $menu->add('admin', 'announcements', 'panel.new_announcement', 'admin.announcements.create', [1, 2], 31);
 
+        $this->dashboard()->stat('Yayındaki duyuru', 'speakerphone', fn () => Announcements::where('status', 1)->where('finished_at', '>', now())->count(), 'admin.announcements', [1, 2], 40);
+
         $slots->push('home.main', 'announcements::partials.home');
 
         View::composer('announcements::partials.home', function ($view) {
