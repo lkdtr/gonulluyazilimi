@@ -33,5 +33,15 @@ class RepresentationServiceProvider extends ModuleServiceProvider
         $slots->push('welcome.sections', 'representation::partials.welcome', 20);
 
         Event::listen(ProfileUpdated::class, AskForContactConsent::class);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            if ($event->userId) {
+                LegalRepresentationCandidate::where('user_id', $event->userId)->delete();
+                \Modules\Representation\Models\LegalRepresentationVolunteer::where('user_id', $event->userId)->delete();
+                \Modules\Representation\Models\LegalRepresentation::where('user_id', $event->userId)->update(['user_id' => null]);
+            }
+        });
+
     }
 }

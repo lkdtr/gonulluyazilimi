@@ -26,5 +26,11 @@ class EmailChangeServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'email-change', 'E-posta değişikliği talepleri', 'admin.email-change-requests', [1], 50);
 
         $this->dashboard()->stat('E-posta değişikliği talebi', 'mail-cog', fn () => EmailChangeRequest::where('status', 'pending')->count(), 'admin.email-change-requests', [1], 50, 'Onay bekleyen');
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            $event->userId && EmailChangeRequest::where('user_id', $event->userId)->delete();
+        });
+
     }
 }

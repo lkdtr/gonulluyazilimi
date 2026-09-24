@@ -30,5 +30,11 @@ class LkdYoungServiceProvider extends ModuleServiceProvider
         $this->dashboard()->stat('Bekleyen LKD Genç temsilcisi', 'user-question', fn () => LkdYoungRepresentative::where('status', 'pending')->count(), 'admin.lkd-young', [1], 61);
 
         $slots->push('welcome.sections', 'lkd-young::partials.welcome', 10);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            $event->userId && LkdYoungApplication::where('user_id', $event->userId)->delete();
+        });
+
     }
 }

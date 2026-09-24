@@ -7,6 +7,7 @@ use Modules\Admin\Http\Controllers\ContactAffiliationController;
 use Modules\Admin\Http\Controllers\ContactConsentController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
+use Modules\Admin\Http\Controllers\DataDeletionAdminController;
 use Modules\Admin\Http\Controllers\OrganizationSettingsController;
 use Modules\Admin\Http\Controllers\PhotoReviewController;
 use Modules\Admin\Http\Controllers\ProcessLogController;
@@ -46,6 +47,12 @@ Route::middleware('permission:agreements.manage')->group(function () {
     Route::get('/agreements/{agreement}/edit', [AgreementAdminController::class, 'edit'])->name('agreements.edit');
     Route::put('/agreements/{agreement}', [AgreementAdminController::class, 'update'])->name('agreements.update');
     Route::delete('/agreements/{agreement}/draft', [AgreementAdminController::class, 'discardDraft'])->name('agreements.draft.destroy');
+});
+
+Route::middleware('permission:data-deletion.manage')->group(function () {
+    Route::get('/data-deletions', [DataDeletionAdminController::class, 'index'])->name('data-deletions');
+    Route::patch('/data-deletions/{deletion}/approve', [DataDeletionAdminController::class, 'approve'])->name('data-deletions.approve');
+    Route::patch('/data-deletions/{deletion}/reject', [DataDeletionAdminController::class, 'reject'])->name('data-deletions.reject');
 });
 
 Route::middleware('permission:photos.review')->group(function () {
