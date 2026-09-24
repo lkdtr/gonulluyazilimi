@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AffiliationTypeController;
+use Modules\Admin\Http\Controllers\AgreementAdminController;
 use Modules\Admin\Http\Controllers\ContactAffiliationController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
@@ -33,6 +34,16 @@ Route::middleware('permission:settings.manage')->group(function () {
     Route::get('/settings/organization', [OrganizationSettingsController::class, 'edit'])->name('settings.organization');
     Route::put('/settings/organization', [OrganizationSettingsController::class, 'update'])->name('settings.organization.update');
     Route::post('/settings/organization/images', [OrganizationSettingsController::class, 'uploadImage'])->middleware('throttle:30,1')->name('settings.organization.images');
+});
+
+Route::middleware('permission:agreements.manage')->group(function () {
+    Route::get('/agreements', [AgreementAdminController::class, 'index'])->name('agreements');
+    Route::get('/agreements/create', [AgreementAdminController::class, 'create'])->name('agreements.create');
+    Route::post('/agreements', [AgreementAdminController::class, 'store'])->name('agreements.store');
+    Route::get('/agreements/{agreement}', [AgreementAdminController::class, 'show'])->name('agreements.show');
+    Route::get('/agreements/{agreement}/edit', [AgreementAdminController::class, 'edit'])->name('agreements.edit');
+    Route::put('/agreements/{agreement}', [AgreementAdminController::class, 'update'])->name('agreements.update');
+    Route::delete('/agreements/{agreement}/draft', [AgreementAdminController::class, 'discardDraft'])->name('agreements.draft.destroy');
 });
 
 Route::middleware('permission:photos.review')->group(function () {
