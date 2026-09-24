@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
  *   php artisan db:seed --class=LkdOrganizationSeeder --force
  *
  * Only settings that are still empty are filled, so values edited in the
- * admin panel are kept.
+ * admin panel are kept. LKD's agreements are seeded too (LkdAgreementSeeder).
  */
 class LkdOrganizationSeeder extends Seeder
 {
@@ -47,5 +47,7 @@ class LkdOrganizationSeeder extends Seeder
         }
 
         $organization->save(array_filter($values, fn ($value, $key) => $organization->get($key) === null, ARRAY_FILTER_USE_BOTH));
+
+        $this->call(LkdAgreementSeeder::class);
     }
 }

@@ -71,8 +71,9 @@ class EmailRedirectsController extends Controller
             'surname' => ['required', 'string', 'max:255', 'min:2'],
             'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
             'birthday' => ['required', 'date'],
-            'agreement' => ['required']
+            'agreement' => app(\App\Support\Agreements::class)->rules(\App\Models\Agreement::PRIVACY),
         ]);
+        app(\App\Support\Agreements::class)->accept(Auth::user(), 'email-forwarding', \App\Models\Agreement::PRIVACY);
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
@@ -140,8 +141,9 @@ class EmailRedirectsController extends Controller
 
         $validator = $request->validate([
             'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.config('mail-forwarding.domain')],
-            'agreement' => ['required']
+            'agreement' => app(\App\Support\Agreements::class)->rules(\App\Models\Agreement::EMAIL_USAGE),
         ]);
+        app(\App\Support\Agreements::class)->accept(Auth::user(), 'email-forwarding', \App\Models\Agreement::EMAIL_USAGE);
 
         $email_alias = $request->get("email_alias");
         $user_id = Auth::id();

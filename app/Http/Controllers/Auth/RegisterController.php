@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Agreement;
 use App\Http\Controllers\Controller;
 use App\Mail\Welcome;
 use App\Models\User;
@@ -40,7 +41,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'phone_number' => ['required', 'string', 'regex:/^\+?[0-9]{10,15}$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'agreement' => ['required'],
+            'agreement' => app(\App\Support\Agreements::class)->rules(Agreement::PRIVACY),
         ]);
 
         $phoneVerification = ContactPermissions::query()
@@ -55,6 +56,7 @@ class RegisterController extends Controller
         }
 
         $user = $this->create($data, $phoneVerification);
+        app(\App\Support\Agreements::class)->accept($user, 'register', Agreement::PRIVACY);
         event(new Registered($user));
         Auth::login($user);
 
