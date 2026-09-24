@@ -7,25 +7,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
- * The signed-in person's profile photo: upload for review, remove, and the
- * authorised file route every photo is served through.
+ * The signed-in person's profile photo (shown on the profile page): upload
+ * for review, remove, and the authorised file route every photo is served
+ * through.
  */
 class PhotoController extends Controller
 {
-    public function edit(): View
-    {
-        $contact = Auth::user()->contact;
-
-        return view('profile.photo', [
-            'approved' => $contact?->approvedPhoto,
-            'upload' => $contact?->latestPhotoUpload,
-        ]);
-    }
-
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -44,7 +34,7 @@ class PhotoController extends Controller
 
         $this->set_log('create', 'Profil fotoğrafı onaya gönderildi.');
 
-        return redirect()->route('my-photo')->with('success-status', 'Fotoğrafınız onaya gönderildi. Onaylanınca kartlarınızda görünecek.');
+        return redirect(route('my-infos').'#photo')->with('photo-status', 'Fotoğrafınız onaya gönderildi. Onaylanınca kartlarınızda görünecek.');
     }
 
     public function destroy(): RedirectResponse
@@ -52,7 +42,7 @@ class PhotoController extends Controller
         Auth::user()->contact?->photos()->get()->each->delete();
         $this->set_log('delete', 'Profil fotoğrafı kaldırıldı.');
 
-        return redirect()->route('my-photo')->with('success-status', 'Fotoğrafınız kaldırıldı.');
+        return redirect(route('my-infos').'#photo')->with('photo-status', 'Fotoğrafınız kaldırıldı.');
     }
 
     /**

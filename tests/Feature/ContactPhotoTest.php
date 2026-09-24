@@ -35,7 +35,7 @@ class ContactPhotoTest extends TestCase
     private function upload(User $user): ContactPhoto
     {
         $this->actingAs($user)->post('/my-photo', ['photo' => $this->fakePng('me.png', 300, 400)])
-            ->assertRedirect('/my-photo');
+            ->assertRedirect('/my-infos#photo');
 
         return $user->fresh()->contact->photos()->latest('id')->first();
     }
@@ -102,12 +102,32 @@ class ContactPhotoTest extends TestCase
         $this->actingAs(User::factory()->create(['role' => 2]))->get('/admin/photos')->assertForbidden();
     }
 
+    public function test_the_photo_is_managed_on_the_profile_page(): void
+    {
+        $user = User::factory()->create();
+        $this->upload($user);
+
+        $this->actingAs($user)->get('/my-infos')->assertOk()->assertSee('id="photo"', false)->assertSee('Onay bekliyor')->assertSee('Onaya gönder');
+        $this->actingAs($user)->get('/my-photo')->assertRedirect('/my-infos#photo')->assertStatus(301);
+    }
+
+    public function test_managers_see_the_photo_on_a_profile_without_changing_it(): void
+    {
+        $user = User::factory()->create();
+        $photo = $this->upload($user);
+        $photo->approve(User::factory()->create(['role' => 1]));
+
+        $this->actingAs(User::factory()->create(['role' => 1]))->get("/admin/users/{$user->id}")->assertOk()
+            ->assertSee(route('photos.show', $photo), false)
+            ->assertDontSee('Onaya gönder');
+    }
+
     public function test_the_owner_can_delete_their_photos(): void
     {
         $user = User::factory()->create();
         $photo = $this->upload($user);
 
-        $this->actingAs($user)->delete('/my-photo')->assertRedirect('/my-photo');
+        $this->actingAs($user)->delete('/my-photo')->assertRedirect('/my-infos#photo');
 
         $this->assertSame(0, ContactPhoto::count());
         Storage::disk('local')->assertMissing($photo->path);

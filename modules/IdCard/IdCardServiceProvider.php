@@ -28,8 +28,7 @@ class IdCardServiceProvider extends ModuleServiceProvider
         $this->permissions()->group('id-cards', 'Kimlik kartları', 40);
         $this->permissions()->register('id-cards.manage', 'Kart şablonlarını düzenleyebilsin, kartları iptal edebilsin', 'id-cards', 40);
 
-        $menu->label('user', 'id-card', null, 'id-badge-2');
-        $menu->add('user', 'id-card', 'Kartlarım', 'id-cards', [], 20);
+        $slots->push('account.menu', 'id-card::partials.account-menu', 20);
 
         $menu->label('admin', 'id-card', 'Kimlik kartları', 'id-badge-2');
         $menu->add('admin', 'id-card', 'Kart şablonları', 'admin.id-cards', ['id-cards.manage'], 40);

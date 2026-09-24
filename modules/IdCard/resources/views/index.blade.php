@@ -9,7 +9,7 @@
     @endforeach
 
     <div class="page-header mb-3 d-print-none">
-        <h2 class="page-title">Kartlarım</h2>
+        <h2 class="page-title">Kimlik kartlarım</h2>
         <div class="text-secondary mt-1">Dernekteki her sıfatınız için bir kimlik kartı. Kartın üzerindeki QR kod okutulunca kartın geçerli olup olmadığı gösterilir; sıfatınız sona erince kart da geçersiz olur.</div>
     </div>
 
@@ -31,7 +31,7 @@
                         @if ($contact->latestPhotoUpload?->isPending())
                             Yüklediğiniz fotoğraf onay bekliyor.
                         @else
-                            <a href="{{ route('my-photo') }}">Fotoğraf yükleyin</a>; yönetici onayından sonra kartınız hazır olur.
+                            <a href="{{ route('my-infos') }}#photo">Profil sayfanızdan fotoğraf yükleyin</a>; yönetici onayından sonra kartınız hazır olur.
                         @endif
                     </div>
                 </div>

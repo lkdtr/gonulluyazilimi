@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if (session('photo-status'))
+                <div class="alert alert-success" role="alert">{{ session('photo-status') }}</div>
+            @endif
+
+            @isset($photo)
+                @include('profile.partials.photo', $photo)
+            @endisset
+
             <div class="card">
                 <div class="card-header"><h3 class="card-title">{{ trans("panel.user_infos_title") }}</h3></div>
                 <div class="card-body">
