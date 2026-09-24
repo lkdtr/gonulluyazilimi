@@ -1,4 +1,4 @@
-@if($user->activeEmailRedirect)
+@if($user->activeEmailRedirects->isNotEmpty())
     <hr style="margin: 5px; color: #999;">
     @if(Auth::user()->isOwner())
         <li><form method="POST" action="{{ route('admin.forwarding.welcome', $user) }}">@csrf<button class="dropdown-item" type="submit">{{ trans("panel.send_penguen_welcome") }}</button></form></li>

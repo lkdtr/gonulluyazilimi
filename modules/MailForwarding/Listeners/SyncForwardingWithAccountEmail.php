@@ -19,10 +19,9 @@ class SyncForwardingWithAccountEmail
 
     public function changing(UserEmailChanging $event): void
     {
-        $emailRedirect = EmailRedirects::where('user_id', $event->user->id)->first();
-
+        // The person's own addresses (one per domain) all point to their email.
         $usedByAnotherForwarding = EmailRedirects::where('email_forwarding', $event->newEmail)
-            ->when($emailRedirect, fn ($query) => $query->where('id', '!=', $emailRedirect->id))
+            ->where('user_id', '!=', $event->user->id)
             ->exists();
 
         if ($usedByAnotherForwarding) {
@@ -33,8 +32,10 @@ class SyncForwardingWithAccountEmail
             return;
         }
 
-        if ($emailRedirect?->status === 1 && ! $this->postfixAdmin->updateAlias($emailRedirect->email_alias, $event->newEmail)) {
-            throw new ActionBlocked('PostfixAdmin yönlendirmesi güncellenemedi; e-posta değişikliği uygulanmadı.');
+        foreach (EmailRedirects::where('user_id', $event->user->id)->where('status', 1)->get() as $emailRedirect) {
+            if (! $this->postfixAdmin->updateAlias($emailRedirect->email_alias, $event->newEmail)) {
+                throw new ActionBlocked('PostfixAdmin yönlendirmesi güncellenemedi ('.$emailRedirect->email_alias.'); e-posta değişikliği uygulanmadı.');
+            }
         }
     }
 

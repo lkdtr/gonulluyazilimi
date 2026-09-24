@@ -28,6 +28,8 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
     protected function bootModule(Menu $menu, Slots $slots): void
     {
         User::resolveRelationUsing('activeEmailRedirect', fn (User $user) => $user->hasOne(EmailRedirects::class)->where('status', 1));
+        // A person may hold one address per domain (e.g. volunteer and member).
+        User::resolveRelationUsing('activeEmailRedirects', fn (User $user) => $user->hasMany(EmailRedirects::class)->where('status', 1)->orderBy('id'));
 
         if ($this->app->runningInConsole()) {
             $this->commands([Console\aliasTest::class, Console\emailTest::class]);
@@ -41,7 +43,14 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
         $menu->label('admin', 'settings', 'Ayarlar', 'settings');
         $menu->add('admin', 'settings', 'E-posta yönlendirme', 'admin.forwarding.settings', ['forwarding.manage'], 92);
 
-        $this->contactFields()->register('forwarding_email', app(ForwardingPolicy::class)->label(), fn ($contact) => $contact->user?->activeEmailRedirect?->email_alias, 15);
+        $this->contactFields()->register('forwarding_email', app(ForwardingPolicy::class)->label(), fn ($contact) => $contact->user?->activeEmailRedirects->pluck('email_alias')->implode(', ') ?: null, 15);
+        // One field per domain, so a volunteer card can show @penguen.org.tr and a member card @linux.org.tr.
+        $this->contactFields()->resolver(fn () => collect(app(ForwardingPolicy::class)->domains())->unique()->values()->map(fn ($domain, $i) => [
+            'forwarding_email.'.$domain,
+            'E-posta adresi (@'.$domain.')',
+            fn ($contact) => $contact->user?->activeEmailRedirects->firstWhere('domain', $domain)?->email_alias,
+            16 + $i,
+        ])->all());
 
         $this->dashboard()->stat('Aktif e-posta yönlendirmesi', 'mail-forward', fn () => EmailRedirects::where('status', 1)->count(), null, [1, 2], 13, implode(', ', array_map(fn ($domain) => '@'.$domain, array_unique(app(ForwardingPolicy::class)->domains()))));
 
@@ -51,8 +60,12 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
         $slots->push('admin.users.actions', 'mail-forwarding::partials.users-actions');
 
         View::composer('mail-forwarding::partials.home-banner', function ($view) {
-            $view->with('forwarding_eligible', app(ForwardingPolicy::class)->eligible(Auth::user()));
-            $view->with('email_redirect_is_exist', EmailRedirects::where('user_id', Auth::id())->first());
+            // Point to the first domain the person may still set up.
+            $policy = app(ForwardingPolicy::class);
+            $redirects = EmailRedirects::where('user_id', Auth::id())->get()->keyBy('domain');
+            $pending = collect($policy->domainsFor(Auth::user()))->keys()->first(fn ($domain) => ($redirects[$domain]->status ?? 0) != 1);
+            $view->with('email_redirect_is_exist', $pending === null ? $redirects->first() : ($redirects[$pending] ?? null));
+            $view->with('forwarding_eligible', $pending !== null || $redirects->isNotEmpty());
         });
 
         Event::listen(UserEmailChanging::class, [SyncForwardingWithAccountEmail::class, 'changing']);
@@ -67,8 +80,9 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
             // screen warns to remove it there first.
             EmailRedirects::where('user_id', $event->userId)->get()->each(fn (EmailRedirects $redirect) => $redirect->forceFill([
                 'status' => 0,
-                'email_alias' => 'silinmis-'.$redirect->id.'@invalid.invalid',
-                'email_forwarding' => 'silinmis-'.$redirect->id.'@invalid.invalid',
+                // A distinct fake domain per row keeps (user, domain) unique.
+                'email_alias' => 'silinmis@'.$redirect->id.'.invalid',
+                'email_forwarding' => 'silinmis@'.$redirect->id.'.invalid',
             ])->save());
         });
 
