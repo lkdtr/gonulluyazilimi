@@ -6,6 +6,7 @@ use Modules\EmailChange\EmailChangeServiceProvider;
 use Modules\IdCard\IdCardServiceProvider;
 use Modules\LkdYoung\LkdYoungServiceProvider;
 use Modules\MailForwarding\MailForwardingServiceProvider;
+use Modules\Membership\MembershipServiceProvider;
 use Modules\Reference\ReferenceServiceProvider;
 use Modules\Representation\RepresentationServiceProvider;
 use Modules\Seminar\SeminarServiceProvider;
@@ -77,6 +78,11 @@ return [
         'representation' => [
             'enabled' => env('MODULE_REPRESENTATION', false),
             'provider' => RepresentationServiceProvider::class,
+        ],
+
+        'membership' => [
+            'enabled' => env('MODULE_MEMBERSHIP', false),
+            'provider' => MembershipServiceProvider::class,
         ],
 
         'id-card' => [

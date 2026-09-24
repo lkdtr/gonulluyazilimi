@@ -35,6 +35,7 @@ class Audit
         \App\Models\CustomField::class => 'Özel alan',
         \App\Models\CustomFieldValue::class => 'Özel alan değeri',
         \Modules\IdCard\Models\IdCard::class => 'Kimlik kartı',
+        \Modules\Membership\Models\Membership::class => 'Üyelik',
         \Modules\IdCard\Models\IdCardTemplate::class => 'Kart şablonu',
     ];
 

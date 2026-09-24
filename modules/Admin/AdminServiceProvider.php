@@ -60,12 +60,13 @@ class AdminServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'users', 'panel.users', 'admin.users', [1, 2], 10);
         $menu->add('admin', 'users', 'panel.process_logs', 'admin.process-logs', [1], 11);
 
-        // An LKD member number makes the user a member, not a volunteer.
-        $volunteers = fn () => User::where('status', 1)->where(fn ($query) => $query->whereNull('lkd_user_id')->orWhere('lkd_user_id', '<=', 0));
-        $members = fn () => User::where('status', 1)->where('lkd_user_id', '>', 0);
+        // A member (active member affiliation) is not counted as a volunteer.
+        $memberContacts = fn () => \App\Models\ContactAffiliation::active()->ofType(\App\Models\AffiliationType::MEMBER)->select('contact_id');
+        $volunteers = fn () => User::where('status', 1)->whereNotIn('contact_id', $memberContacts());
+        $members = fn () => User::where('status', 1)->whereIn('contact_id', $memberContacts());
 
         $this->dashboard()->stat('Gönüllü', 'users', fn () => $volunteers()->count(), 'admin.users', [1, 2], 10, 'Üyeler hariç');
-        $this->dashboard()->stat('Üye', 'id-badge', fn () => $members()->count(), 'admin.users', [1, 2], 10, 'LKD üye numarası olan');
+        $this->dashboard()->stat('Üye', 'id-badge', fn () => $members()->count(), 'admin.users', [1, 2], 10, 'Üye sıfatı olan hesap');
         $this->dashboard()->stat('Son 30 günde katılan', 'user-plus', fn () => $volunteers()->where('created_at', '>=', now()->subDays(30))->count(), 'admin.users', [1, 2], 11);
         $this->dashboard()->chart('Toplam gönüllü', fn () => Dashboard::monthly($volunteers(), cumulative: true), 'line', [1, 2], 10, 'Son 12 ayın sonundaki gönüllü sayısı');
         $this->dashboard()->chart('Aylık yeni gönüllü', fn () => Dashboard::monthly($volunteers()), 'bar', [1, 2], 11, 'Son 12 ayda her ay kaydolan gönüllü sayısı');

@@ -9,7 +9,7 @@
                 <div class="card-header"><h3 class="card-title">{{ trans("panel.create_reference_request_title") }}</h3></div>
                 <div class="card-body">
 
-                    @if($user->lkd_user_id > 0)
+                    @if($user->contact?->hasAffiliation('member'))
                         <div class="alert alert-warning d-flex">
                             <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                             <div>{{ trans("panel.lkd_user_info") }}</div>

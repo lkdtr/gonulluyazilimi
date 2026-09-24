@@ -98,6 +98,8 @@
         </div>
 
         <div class="col-xl-8">
+            @moduleSlot('admin.contacts.show', ['contact' => $contact])
+
             <div class="card">
                 <div class="card-header"><h3 class="card-title">Sıfatlar</h3></div>
                 <div class="table-responsive">

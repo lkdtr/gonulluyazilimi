@@ -83,6 +83,8 @@
                             </div>
                         </div>
 
+                        {{-- With the membership module the member number lives in the membership record. --}}
+                        @unlessmodule('membership')
                         @if( Auth::user()->accessLevel() <= 2 )
                         <div class="row mb-3">
                             <label for="lkd_user_id" class="col-md-4 col-form-label text-md-end">
@@ -108,6 +110,7 @@
                             </div>
                         </div>
                         @endif
+                        @endmodule
 
                         <div class="row mb-3">
                             <label for="birthday" class="col-md-4 col-form-label text-md-end">
@@ -162,12 +165,18 @@
                 </div>
             </div>
 
+            @moduleSlot('profile.sections', ['user' => $user, 'contact' => $user->contact])
+
             @isset($fields)
                 @include('profile.partials.fields', $fields)
             @endisset
 
             @isset($consents)
                 @include('profile.partials.consents', $consents)
+            @endisset
+
+            @isset($acceptances)
+                @include('profile.partials.agreements', ['acceptances' => $acceptances])
             @endisset
 
             @isset($deletion)
