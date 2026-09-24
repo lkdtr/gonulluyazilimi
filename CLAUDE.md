@@ -103,7 +103,8 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
   sudo php8.4 /usr/bin/composer install --no-dev --optimize-autoloader
   sudo php8.4 artisan optimize:clear
   ```
-- Kodda derneğe özgü değer (ad, e-posta, alan adı, logo) yazılmaz; `Organization` üzerinden okunur. LKD'nin değerleri `LkdOrganizationSeeder`'dadır (yalnız boş ayarları doldurur; LKD sözleşmelerini de `LkdAgreementSeeder` ile 1. sürüm olarak yayınlar ve `users.agreement_at` kabullerini aktarır): `sudo php8.4 artisan db:seed --class=LkdOrganizationSeeder --force`.
+- Kodda derneğe özgü değer (ad, e-posta, alan adı, logo) yazılmaz; `Organization` üzerinden okunur. LKD'nin değerleri `LkdOrganizationSeeder`'dadır (yalnız boş ayarları doldurur; LKD sözleşmelerini de `LkdAgreementSeeder` ile 1. sürüm olarak yayınlar ve `users.agreement_at` kabullerini aktarır): `sudo -u www-data php8.4 artisan db:seed --class=LkdOrganizationSeeder --force`.
+- `storage` içine dosya yazan artisan komutları (seeder, tinker) `www-data` olarak çalıştırılmalı: `sudo -u www-data php8.4 artisan ...`. `sudo` ile root olarak çalışırsa oluşan klasörler root'a ait kalır, web tarafı okuyamaz/yazamaz; düzeltmek için `sudo chown -R www-data:www-data storage`.
 - Modüller yalnızca `.env`'de `MODULE_<AD>=true` ile açılır; yeni bir modül canlıya çıkmadan önce satırı `.env`'e eklenmeli.
 - Migration'dan önce veritabanı yedeği: root'un MySQL parolası yok, `/etc/mysql/debian.cnf` kullanılır:
   ```bash
