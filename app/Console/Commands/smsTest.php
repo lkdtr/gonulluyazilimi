@@ -2,55 +2,25 @@
 
 namespace App\Console\Commands;
 
+use App\Contracts\Messaging\SmsSender;
+use App\Support\Organization;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Notification;
-use NotificationChannels\Netgsm\NetgsmChannel;
-use BahriCanli\Netgsm\ShortMessage;
 
 class smsTest extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'sms:test {phone : Alıcı telefon numarası (örn: 905551234567)}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'SMS test gönder';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(SmsSender $sms, Organization $organization): int
     {
         $phone = $this->argument('phone');
-        $code  = rand(100000, 999999);
+        $code = random_int(100000, 999999);
 
         $this->info("SMS gönderiliyor → {$phone} (kod: {$code})");
-
-        $message = $code . " kodu ile telefon numaranizi dogrulayin. Linux Kullanicilari Dernegi";
-
-        app('netgsm-sms')->sendShortMessage(
-            new ShortMessage($phone, $message)
-        );
-
+        $sms->send($phone, "{$code} kodu ile telefon numaranızı doğrulayabilirsiniz. ".$organization->name());
         $this->info('Gönderildi.');
+
+        return self::SUCCESS;
     }
 }

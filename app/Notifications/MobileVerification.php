@@ -2,69 +2,40 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
+use App\Contracts\Messaging\WhatsAppSender;
+use App\Notifications\Channels\SmsChannel;
+use App\Notifications\Channels\WhatsAppChannel;
+use App\Support\Organization;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
-
-use NotificationChannels\Netgsm\NetgsmChannel;
-use NotificationChannels\Netgsm\NetgsmMessage;
-use BahriCanli\Netgsm\ShortMessage;
-
-use NotificationChannels\WhatsAppBridge\WhatsAppChannel;
-use NotificationChannels\WhatsAppBridge\WhatsAppMessage;
-
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Phone verification code, sent by SMS and, when a WhatsApp bridge is
+ * available, by WhatsApp in parallel.
+ */
 class MobileVerification extends Notification
 {
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function via($notifiable): array
     {
-        //
+        return app(WhatsAppSender::class)->available() ? [SmsChannel::class, WhatsAppChannel::class] : [SmsChannel::class];
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    /**
-     * SMS (NetGSM) ve WhatsApp paralel olarak gönderilir.
-     * WHATSAPP_BRIDGE_URL tanımlı değilse sadece SMS gönderilir.
-     */
-    public function via($notifiable)
+    public function toSms($notifiable): string
     {
-        $channels = [NetgsmChannel::class];
+        Log::info('Validate Phone Sent (SMS) '.$notifiable->phone_number);
 
-        if (config('whatsapp-bridge.bridge_url')) {
-            $channels[] = WhatsAppChannel::class;
-        }
-
-        return $channels;
+        return $this->text($notifiable);
     }
 
-    public function toNetgsm($notifiable)
+    public function toWhatsApp($notifiable): string
     {
-        Log::info("Validate Phone Sent (SMS) ".$notifiable->phone_number);
+        Log::info('Validate Phone Sent (WhatsApp) '.$notifiable->phone_number);
 
-        $message = $notifiable->verification_code. " kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name();
-        $message = str_replace(["ı", "ü", "ö", "ç", "ş", "ğ", "İ", "Ü", "Ö"],["i", "u", "o", "c", "s", "g", "I", "U", "O"], $message);
-        return new ShortMessage($notifiable->phone_number, $message);
+        return $this->text($notifiable);
     }
 
-    public function toWhatsApp($notifiable)
+    private function text($notifiable): string
     {
-        Log::info("Validate Phone Sent (WhatsApp) ".$notifiable->phone_number);
-
-        $message = $notifiable->verification_code . " kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name();
-
-        return WhatsAppMessage::create($message)->to($notifiable->phone_number);
+        return $notifiable->verification_code.' kodu ile telefon numaranızı doğrulayabilirsiniz. '.app(Organization::class)->name();
     }
 }
