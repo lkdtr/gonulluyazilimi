@@ -48,7 +48,19 @@ class UserController extends Controller
 
         $cities = Cities::where("status", "1")->get();
 
-        return view('profile.edit', ["user" => $user, "cities" => $cities, "layout" => $layout]);
+        $contact = $user->contact;
+
+        return view('profile.edit', [
+            "user" => $user,
+            "cities" => $cities,
+            "layout" => $layout,
+            // Managers see the approved photo; only the person uploads or deletes.
+            "photo" => [
+                'approved' => $contact?->approvedPhoto,
+                'upload' => $contact?->latestPhotoUpload,
+                'editable' => $user->is(Auth::user()),
+            ],
+        ]);
     }
 
     protected function saveProfile(Request $request, User $user) {

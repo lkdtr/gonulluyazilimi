@@ -9,7 +9,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <a class="dropdown-item" href="{{ route('my-infos') }}"><i class="ti ti-user icon dropdown-item-icon"></i>{{ trans('panel.my_infos') }}</a>
-        <a class="dropdown-item" href="{{ route('my-photo') }}"><i class="ti ti-camera icon dropdown-item-icon"></i>Fotoğrafım</a>
+        @moduleSlot('account.menu')
         <a class="dropdown-item" href="{{ route('password.change.edit') }}"><i class="ti ti-lock icon dropdown-item-icon"></i>Parola değiştir</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ti ti-logout icon dropdown-item-icon"></i>{{ trans('auth.logout') }}</a>
