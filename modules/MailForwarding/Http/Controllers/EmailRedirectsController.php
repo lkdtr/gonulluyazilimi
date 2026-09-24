@@ -44,9 +44,21 @@ class EmailRedirectsController extends Controller
         });
     }
 
+    /**
+     * The domain being set up: the requested one when the user may hold an
+     * address on it, otherwise the first one they may.
+     */
     private function domain(): string
     {
-        return (string) app(ForwardingPolicy::class)->domainFor(Auth::user());
+        $domains = app(ForwardingPolicy::class)->domainsFor(Auth::user());
+        $requested = strtolower((string) request('domain'));
+
+        return array_key_exists($requested, $domains) ? $requested : (string) array_key_first($domains);
+    }
+
+    private function redirectFor(int $userId, string $domain): ?EmailRedirects
+    {
+        return EmailRedirects::where('user_id', $userId)->where('domain', $domain)->first();
     }
 
     /**
@@ -58,7 +70,8 @@ class EmailRedirectsController extends Controller
     {
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $domain = $this->domain();
+        $email_redirects = $this->redirectFor($user_id, $domain);
         $first_redirect = false;
 
         if($email_redirects==null) {
@@ -72,6 +85,9 @@ class EmailRedirectsController extends Controller
         $user->birthday = date("d-m-Y", strtotime($user->birthday));
 
         return view('mail-forwarding::email-redirects', [
+            "domain" => $domain,
+            "domains" => app(ForwardingPolicy::class)->domainsFor($user),
+            "redirects" => EmailRedirects::where('user_id', $user_id)->get()->keyBy('domain'),
             "user" => $user,
             "email_redirects" => $email_redirects,
             "first_redirect" => $first_redirect,
@@ -91,7 +107,7 @@ class EmailRedirectsController extends Controller
 
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $domain = $this->domain();
 
         $name = $request->get("name") == "notchange" ? $user->name : $request->get("name");
         $surname = $request->get("surname") == "notchange" ? $user->surname : $request->get("surname");
@@ -122,12 +138,12 @@ class EmailRedirectsController extends Controller
         $user->name = $this->slug(mb_strtolower($user->name));
         $user->surname = $this->slug(mb_strtolower($user->surname));
 
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->first();
+        $email_redirects = $this->redirectFor($user_id, $domain);
         if($email_redirects==null) {
             $email_redirects = new EmailRedirects();
             $email_redirects->user_id = $user->id;
             $email_redirects->email_forwarding = $user->email;
-            $email_redirects->email_alias = $user->name.".".$user->surname."@".$this->domain();
+            $email_redirects->email_alias = $user->name.".".$user->surname."@".$domain;
             $email_redirects->status = 0;
             $email_redirects->save();
         }
@@ -144,7 +160,7 @@ class EmailRedirectsController extends Controller
         }
 
         return view('mail-forwarding::email-forwarding', [
-            "domain" => $this->domain(),
+            "domain" => $domain,
             "user" => $user,
             "email_redirects" => $email_redirects,
             "name_array" => $name_array,
@@ -155,7 +171,7 @@ class EmailRedirectsController extends Controller
     public function postForwarding(Request $request) {
 
         $validator = $request->validate([
-            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.$this->domain()],
+            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.($domain = $this->domain())],
             'agreement' => app(\App\Support\Agreements::class)->rules(\App\Models\Agreement::EMAIL_USAGE),
         ]);
         app(\App\Support\Agreements::class)->accept(Auth::user(), 'email-forwarding', \App\Models\Agreement::EMAIL_USAGE);
@@ -164,7 +180,7 @@ class EmailRedirectsController extends Controller
         $user_id = Auth::id();
         $user = User::where("id", $user_id)->first();
 
-        $email_redirects = EmailRedirects::where("user_id", $user_id)->firstOrFail();
+        $email_redirects = $this->redirectFor($user_id, $domain) ?? abort(404);
 
         $request->validate([
             'email_alias' => [Rule::unique('email_redirects', 'email_alias')->ignore($email_redirects->id)],

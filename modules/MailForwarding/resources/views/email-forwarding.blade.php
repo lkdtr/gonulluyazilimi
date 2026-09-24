@@ -12,6 +12,7 @@
 
                     <form method="POST" action="{{ route('email-forwarding') }}">
                         @csrf
+                        <input type="hidden" name="domain" value="{{ $domain }}">
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ trans("auth.alias") }}</label>
