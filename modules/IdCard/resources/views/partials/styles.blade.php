@@ -20,8 +20,8 @@
     .id-card-org { font-size: 3.4cqw; font-weight: 700; line-height: 1.15; }
     .id-card-type { margin-left: auto; font-size: 2.6cqw; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .95; white-space: nowrap; }
     .id-card-body { flex: 1; display: flex; gap: 4cqw; padding: 3.5cqw 4cqw 3cqw; min-height: 0; }
-    /* align-self keeps the 3:4 box: stretched to the body's height, the photo turned tall and narrow. */
-    .id-card-photo { width: 22cqw; height: auto; aspect-ratio: 3 / 4; flex: none; align-self: flex-start; box-sizing: border-box; border-radius: 1.8cqw; object-fit: cover; background: rgba(0, 0, 0, .06); display: flex; align-items: center; justify-content: center; border: .4cqw solid var(--card-accent); }
+    /* align-self keeps the 5:6 (vesikalık) box: stretched to the body's height, the photo turned tall and narrow. */
+    .id-card-photo { width: 22cqw; height: auto; aspect-ratio: 5 / 6; flex: none; align-self: flex-start; box-sizing: border-box; border-radius: 1.8cqw; object-fit: cover; background: rgba(0, 0, 0, .06); display: flex; align-items: center; justify-content: center; border: .4cqw solid var(--card-accent); }
     .id-card-photo i { font-size: 10cqw; opacity: .35; }
     .id-card-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
     .id-card-name { font-size: 5.2cqw; font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
