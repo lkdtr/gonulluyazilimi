@@ -32,7 +32,7 @@
                     @unless ($contact->isOrganization())
                         <div class="text-center mb-3">
                             @if ($contact->approvedPhoto)
-                                <img src="{{ route('photos.show', $contact->approvedPhoto) }}" alt="{{ $contact->display_name }}" class="rounded border" style="width: 120px; height: 150px; object-fit: cover;">
+                                <img src="{{ route('photos.show', $contact->approvedPhoto) }}" alt="{{ $contact->display_name }}" class="rounded border" style="width: 125px; height: 150px; object-fit: cover;">
                             @else
                                 <span class="avatar avatar-xl">{{ mb_strtoupper(mb_substr((string) $contact->first_name, 0, 1).mb_substr((string) $contact->last_name, 0, 1)) }}</span>
                                 <div class="small text-secondary mt-1">Onaylı fotoğraf yok</div>

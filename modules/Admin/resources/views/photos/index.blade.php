@@ -25,13 +25,13 @@
                             <div class="d-flex gap-2 justify-content-center mb-3">
                                 @if ($photo->contact->approvedPhoto)
                                     <div class="text-center">
-                                        <img src="{{ route('photos.show', $photo->contact->approvedPhoto) }}" alt="Mevcut fotoğraf" class="rounded border opacity-50" style="width: 72px; height: 90px; object-fit: cover;">
+                                        <img src="{{ route('photos.show', $photo->contact->approvedPhoto) }}" alt="Mevcut fotoğraf" class="rounded border opacity-50" style="width: 75px; height: 90px; object-fit: cover;">
                                         <div class="small text-secondary">Mevcut</div>
                                     </div>
                                 @endif
                                 <div class="text-center">
                                     <a href="{{ route('photos.show', $photo) }}" target="_blank" rel="noopener">
-                                        <img src="{{ route('photos.show', $photo) }}" alt="Onay bekleyen fotoğraf" class="rounded border" style="width: 144px; height: 180px; object-fit: cover;">
+                                        <img src="{{ route('photos.show', $photo) }}" alt="Onay bekleyen fotoğraf" class="rounded border" style="width: 150px; height: 180px; object-fit: cover;">
                                     </a>
                                     <div class="small text-secondary">Yeni</div>
                                 </div>
