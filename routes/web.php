@@ -38,6 +38,7 @@ Route::put('/change-password', [App\Http\Controllers\PasswordChangeController::c
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::post('/home', [App\Http\Controllers\HomeController::class, 'postHome']);
 
+Route::get('/agreements/{key}', [App\Http\Controllers\AgreementController::class, 'show'])->where('key', '[a-z0-9-]+')->name('agreements.show');
 Route::get('/user-agreement', [App\Http\Controllers\AgreementController::class, 'userAgreement']);
 Route::get('/email-agreement', [App\Http\Controllers\AgreementController::class, 'emailAgreement']);
 
@@ -46,6 +47,10 @@ Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificati
 
 Route::get('/my-infos', [App\Http\Controllers\UserController::class, 'getMyInfos'])->name('my-infos');
 Route::post('/my-infos', [App\Http\Controllers\UserController::class, 'postMyInfos']);
+
+Route::get('/organization/logo', [App\Http\Controllers\OrganizationFileController::class, 'logo'])->name('organization.logo');
+Route::get('/organization/favicon', [App\Http\Controllers\OrganizationFileController::class, 'favicon'])->name('organization.favicon');
+Route::get('/organization/images/{name}', [App\Http\Controllers\OrganizationFileController::class, 'image'])->where('name', '[A-Za-z0-9]+\.(png|jpe?g|webp|gif)')->name('organization.image');
 
 Route::middleware('auth')->group(function () {
     // The photo moved onto the profile page.

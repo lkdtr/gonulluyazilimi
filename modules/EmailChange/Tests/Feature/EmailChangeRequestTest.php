@@ -10,11 +10,20 @@ use App\Models\User;
 use Modules\MailForwarding\Support\PostfixAdminClient;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use App\Support\Organization;
 use Tests\TestCase;
 
 class EmailChangeRequestTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Management notices go to the address set in the organization settings.
+        app(Organization::class)->save(['notification_email' => 'yk@lkd.org.tr']);
+    }
 
     public function test_member_can_submit_one_email_change_request_and_management_is_notified(): void
     {

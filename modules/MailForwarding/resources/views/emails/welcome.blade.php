@@ -13,11 +13,13 @@
                 <table>
                     <tbody>
                         <tr>
+                            @if ($organization->logoUrl(true))
+                                <td>
+                                    <img src="{{ $organization->logoUrl(true) }}" alt="{{ $organization->name() }}" style="height: 50px;">
+                                </td>
+                            @endif
                             <td>
-                                <img src="https://www.lkd.org.tr/wp-content/uploads/2022/03/cropped-LKD_logo.gif" style="height: 50px;">
-                            </td>
-                            <td>
-                                <span style="font-size: 20px;"> Gönüllü Sistemi</span>
+                                <span style="font-size: 20px;"> {{ $organization->name() }}</span>
                             </td>
                         </tr>
                     </tbody>

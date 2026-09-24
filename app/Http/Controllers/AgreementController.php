@@ -2,38 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\View;
-
+use App\Models\Agreement;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
+/**
+ * Public text of an agreement: the version in force, or an earlier published
+ * version with ?version=N. ?iframe shows it bare for the forms' modal.
+ */
 class AgreementController extends Controller
 {
-    public function userAgreement(Request $request) {
-        $iframe = $request->has("iframe")?true:false;
-        $title = "Kişisel Verilerin Korunması ve İşlenmesi Politikası";
-        $content = View::make('agreements.userAgreement');
-        $link = "/user-agreement";
+    public function show(Request $request, string $key): View
+    {
+        $agreement = Agreement::where('key', $key)->firstOrFail();
 
-        if($iframe) {
-            return view('agreement-iframe', ["title" => $title, "content" => $content]);
-        }
-        else {
-            return view('agreement', ["title" => $title, "content" => $content, "link" => $link]);
-        }
+        $version = $request->filled('version')
+            ? $agreement->versions()->whereNotNull('published_at')->where('version', $request->integer('version'))->firstOrFail()
+            : $agreement->currentVersion ?? abort(404);
+
+        $data = [
+            'title' => $agreement->title,
+            'content' => $version->content,
+            'version' => $version,
+            'history' => $agreement->versions()->whereNotNull('published_at')->get(['id', 'agreement_id', 'version', 'published_at']),
+            'agreement' => $agreement,
+        ];
+
+        return view($request->has('iframe') ? 'agreement-iframe' : 'agreement', $data);
     }
 
-    public function emailAgreement(Request $request) {
-        $iframe = $request->has("iframe")?true:false;
-        $title = "E-Posta Kullanım Sözleşmesi";
-        $content = View::make('agreements.emailAgreement');
-        $link = "/email-agreement";
+    // Addresses used before agreements were editable.
 
-        if($iframe) {
-            return view('agreement-iframe', ["title" => $title, "content" => $content]);
-        }
-        else {
-            return view('agreement', ["title" => $title, "content" => $content, "link" => $link]);
-        }
+    public function userAgreement(Request $request): View
+    {
+        return $this->show($request, Agreement::PRIVACY);
     }
 
+    public function emailAgreement(Request $request): View
+    {
+        return $this->show($request, Agreement::EMAIL_USAGE);
+    }
 }

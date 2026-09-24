@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Support\Organization;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Support\Facades\URL;
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
+        $this->app->singleton(Organization::class);
+        $this->app->singleton(\App\Support\Agreements::class);
+
     }
 
     /**
@@ -38,5 +43,8 @@ class AppServiceProvider extends ServiceProvider
         if (str_starts_with((string) config('app.url'), 'https://')) {
             URL::forceScheme('https');
         }
+
+        // Every view reads the association's name, logo and contact details here.
+        View::share('organization', $this->app->make(Organization::class));
     }
 }

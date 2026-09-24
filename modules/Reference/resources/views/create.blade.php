@@ -85,9 +85,7 @@
 
                                 <div class="separator bottom"><br></div>
 
-                                <div class="row">
-                                    <label class="col-md-8 offset-md-4 mb-3" for="agreement"><input name="agreement" id="agreement" value="true" type="checkbox" required> &nbsp; <a href="javascript:openModal('/user-agreement')"> Kişisel Verilerin Korunması ve İşlenmesi Politikası</a>'nın koşullarını kabul ediyorum</label>
-                                </div>
+                                <x-agreement-checkbox key="kvkk" />
 
                                 <div class="separator bottom"><br></div>
 

@@ -13,7 +13,7 @@
 
                 <div class="navbar-brand navbar-brand-autodark">
                     <a href="{{ route('admin.dashboard') }}" class="text-reset text-decoration-none">
-                        <i class="ti ti-settings icon me-1"></i>LKD Yönetim
+                        <i class="ti ti-settings icon me-1"></i>{{ $organization->shortName() }} Yönetim
                     </a>
                 </div>
 

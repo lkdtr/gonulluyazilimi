@@ -24,7 +24,7 @@ class SeminarOfferController extends Controller
         $response = response()->view('seminar::create_offer', compact('seminarSubjects', 'formData', 'inIframe'));
 
         if ($inIframe) {
-            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+            $response->headers->set('Content-Security-Policy', app(\App\Support\Organization::class)->frameAncestorsPolicy());
         }
 
         return $response;
@@ -73,7 +73,9 @@ class SeminarOfferController extends Controller
         $seminarOffer->load(['user', 'seminarSubject', 'seminarSubjectProposal']);
         session()->forget('seminar_offer_form');
 
-        Mail::to('yk@lkd.org.tr')->send(new SeminarOfferNotification($seminarOffer));
+        if ($notify = app(\App\Support\Organization::class)->notificationEmail()) {
+            Mail::to($notify)->send(new SeminarOfferNotification($seminarOffer));
+        }
         Mail::to($seminarOffer->user->email)->send(new SeminarOfferReceived($seminarOffer));
         $this->set_log('create', 'Seminer verme başvurusu oluşturuldu.');
 

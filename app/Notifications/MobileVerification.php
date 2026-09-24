@@ -54,7 +54,7 @@ class MobileVerification extends Notification
     {
         Log::info("Validate Phone Sent (SMS) ".$notifiable->phone_number);
 
-        $message = $notifiable->verification_code. " kodu ile telefon numaranızı doğrulayabilirsiniz. Linux Kullanıcıları Derneği";
+        $message = $notifiable->verification_code. " kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name();
         $message = str_replace(["ı", "ü", "ö", "ç", "ş", "ğ", "İ", "Ü", "Ö"],["i", "u", "o", "c", "s", "g", "I", "U", "O"], $message);
         return new ShortMessage($notifiable->phone_number, $message);
     }
@@ -63,7 +63,7 @@ class MobileVerification extends Notification
     {
         Log::info("Validate Phone Sent (WhatsApp) ".$notifiable->phone_number);
 
-        $message = $notifiable->verification_code . " kodu ile telefon numaranızı doğrulayabilirsiniz. Linux Kullanıcıları Derneği";
+        $message = $notifiable->verification_code . " kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name();
 
         return WhatsAppMessage::create($message)->to($notifiable->phone_number);
     }

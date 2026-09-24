@@ -55,8 +55,9 @@ class ReferenceController extends Controller
             'surname' => ['required', 'string', 'max:255', 'min:2'],
             'national_id' => ['required', 'string', 'max:11', 'tckimlik'],
             'birthday' => ['required'],
-            'agreement' => ['required']
+            'agreement' => app(\App\Support\Agreements::class)->rules(\App\Models\Agreement::PRIVACY),
         ]);
+        app(\App\Support\Agreements::class)->accept(Auth::user(), 'reference', \App\Models\Agreement::PRIVACY);
 
         $name = $request->get("name");
         $surname = $request->get("surname");
