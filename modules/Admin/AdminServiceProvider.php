@@ -33,6 +33,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $this->permissions()->register('data-deletion.manage', 'KVKK veri silme taleplerini onaylayıp reddedebilsin', 'contacts', 13);
         $this->permissions()->group('settings', 'Ayarlar', 90);
         $this->permissions()->register('settings.manage', 'Kurum ayarlarını (ad, logo, iletişim, ana sayfa) düzenleyebilsin', 'settings', 89);
+        $this->permissions()->register('fields.manage', 'Etiketleri ve özel alanları tanımlayabilsin', 'settings', 89);
         $this->permissions()->register('agreements.manage', 'Sözleşmeleri düzenleyip yayınlayabilsin, kabulleri görebilsin', 'settings', 89);
         $this->permissions()->register('affiliations.manage', 'Sıfat türlerini düzenleyebilsin', 'settings', 90);
         $this->permissions()->register('roles.manage', 'Rolleri, yetkileri ve rol şablonlarını düzenleyebilsin', 'settings', 91);
@@ -49,6 +50,8 @@ class AdminServiceProvider extends ModuleServiceProvider
 
         $menu->label('admin', 'settings', 'Ayarlar', 'settings');
         $menu->add('admin', 'settings', 'Kurum ayarları', 'admin.settings.organization', ['settings.manage'], 89);
+        $menu->add('admin', 'settings', 'Özel alanlar', 'admin.custom-fields', ['fields.manage'], 89);
+        $menu->add('admin', 'settings', 'Etiketler', 'admin.tags', ['fields.manage'], 89);
         $menu->add('admin', 'settings', 'Sözleşmeler', 'admin.agreements', ['agreements.manage'], 89);
         $menu->add('admin', 'settings', 'Sıfatlar', 'admin.affiliation-types', ['affiliations.manage'], 90);
         $menu->add('admin', 'settings', 'Roller ve yetkiler', 'admin.roles', ['roles.manage'], 91);

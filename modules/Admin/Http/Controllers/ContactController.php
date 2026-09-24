@@ -17,9 +17,10 @@ class ContactController extends Controller
         $search = trim((string) $request->query('q'));
         $type = $request->query('type');
         $affiliation = $request->query('affiliation');
+        $tag = $request->integer('tag') ?: null;
 
         $contacts = Contact::query()
-            ->with(['affiliations' => fn ($query) => $query->active()->with('type'), 'user'])
+            ->with(['affiliations' => fn ($query) => $query->active()->with('type'), 'user', 'tags'])
             ->when($search !== '', fn ($query) => $query->where(fn ($query) => $query
                 ->where('first_name', 'like', "%{$search}%")
                 ->orWhere('last_name', 'like', "%{$search}%")
@@ -29,6 +30,7 @@ class ContactController extends Controller
                 ->orWhere('identity_number', 'like', "%{$search}%")))
             ->when(in_array($type, [Contact::TYPE_PERSON, Contact::TYPE_ORGANIZATION], true), fn ($query) => $query->where('type', $type))
             ->when($affiliation, fn ($query) => $query->whereHas('affiliations', fn ($query) => $query->active()->ofType($affiliation)))
+            ->when($tag, fn ($query) => $query->whereHas('tags', fn ($query) => $query->whereKey($tag)))
             ->orderBy('organization_name')->orderBy('first_name')->orderBy('last_name')
             ->paginate(25)
             ->withQueryString();
@@ -36,7 +38,8 @@ class ContactController extends Controller
         return view('admin::contacts.index', [
             'contacts' => $contacts,
             'types' => AffiliationType::orderBy('sort')->get(),
-            'filters' => compact('search', 'type', 'affiliation'),
+            'tags' => \App\Models\Tag::orderBy('name')->get(),
+            'filters' => compact('search', 'type', 'affiliation', 'tag'),
         ]);
     }
 

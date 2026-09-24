@@ -24,14 +24,22 @@
                 <div class="col-md-4">
                     <input type="search" name="q" value="{{ $filters['search'] }}" class="form-control" placeholder="Ad, kurum, e-posta, telefon veya kimlik no" aria-label="Ara">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <select name="type" class="form-select" aria-label="Kayıt türü">
                         <option value="">Tüm kayıt türleri</option>
                         <option value="person" @selected($filters['type'] === 'person')>Kişi</option>
                         <option value="organization" @selected($filters['type'] === 'organization')>Kurum</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <select name="tag" class="form-select" aria-label="Etiket">
+                        <option value="">Tüm etiketler</option>
+                        @foreach ($tags as $tagOption)
+                            <option value="{{ $tagOption->id }}" @selected($filters['tag'] === $tagOption->id)>{{ $tagOption->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-2">
                     <select name="affiliation" class="form-select" aria-label="Sıfat">
                         <option value="">Tüm sıfatlar</option>
                         @foreach ($types as $type)
@@ -62,6 +70,9 @@
                         <tr>
                             <td>
                                 <a href="{{ route('admin.contacts.show', $contact) }}">{{ $contact->display_name ?: '—' }}</a>
+                                @foreach ($contact->tags as $contactTag)
+                                    <span class="badge bg-{{ $contactTag->color }}-lt ms-1">{{ $contactTag->name }}</span>
+                                @endforeach
                                 @if ($contact->isOrganization())
                                     <span class="badge bg-azure-lt ms-1">Kurum</span>
                                 @endif

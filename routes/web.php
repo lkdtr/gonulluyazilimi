@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/my-photo', [App\Http\Controllers\PhotoController::class, 'destroy'])->name('my-photo.destroy');
     Route::post('/my-data-deletion', [App\Http\Controllers\DataDeletionController::class, 'store'])->middleware('throttle:5,1')->name('my-data-deletion.store');
     Route::delete('/my-data-deletion', [App\Http\Controllers\DataDeletionController::class, 'cancel'])->name('my-data-deletion.cancel');
+    Route::put('/my-fields', [App\Http\Controllers\MemberFieldsController::class, 'update'])->name('my-fields.update');
     Route::put('/my-consents', [App\Http\Controllers\ConsentController::class, 'update'])->name('my-consents.update');
     Route::get('/photos/{photo}', [App\Http\Controllers\PhotoController::class, 'show'])->name('photos.show');
 });
