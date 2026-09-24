@@ -30,7 +30,7 @@ class ForwardingWelcome extends Mailable
      */
     public function build()
     {
-        return $this->subject(ucfirst(config('mail-forwarding.domain'))." e-postanız aktif edildi")
+        return $this->subject(ucfirst(substr(strrchr((string) $this->data->alias, '@') ?: '@'.config('mail-forwarding.domain'), 1))." e-postanız aktif edildi")
                     ->view('mail-forwarding::emails.welcome')
                     ->with(['data' => $this->data]);
     }

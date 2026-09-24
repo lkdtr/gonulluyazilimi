@@ -41,7 +41,7 @@ return [
         'volunteer' => [
             'enabled' => env('MODULE_VOLUNTEER', false),
             'provider' => VolunteerServiceProvider::class,
-            'requires' => ['mail-forwarding', 'reference'],
+            'requires' => ['reference'],
         ],
 
         'mail-forwarding' => [

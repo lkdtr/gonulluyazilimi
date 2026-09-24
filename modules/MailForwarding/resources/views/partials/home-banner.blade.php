@@ -1,3 +1,4 @@
+@if ($forwarding_eligible || session('forwarding-success'))
 @if (session('forwarding-success'))
     <div class="alert alert-success d-flex" role="alert">
         <svg style="height: 20px;width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
@@ -18,4 +19,5 @@
             <div>{{ trans("panel.remove_penguen_success") }}. <a href="{{secure_url('/email-redirects')}}">{{ trans("panel.try_reactive_penguen") }}</a></div>
         </div>
     @endif
+@endif
 @endif
