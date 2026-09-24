@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 use Modules\MailForwarding\Listeners\SyncForwardingWithAccountEmail;
 use Modules\MailForwarding\Models\EmailRedirects;
+use Modules\MailForwarding\Support\ForwardingPolicy;
 
 /**
  * E-mail forwarding addresses (name.surname@<domain>) managed on PostfixAdmin.
@@ -33,11 +34,16 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
         }
 
         $menu->label('user', 'account', 'E-posta', 'mail');
-        $menu->add('user', 'account', 'panel.email_forwarding', 'email-redirects', [], 10);
+        $menu->add('user', 'account', 'panel.email_forwarding', 'email-redirects', [], 10, fn ($user) => app(ForwardingPolicy::class)->eligible($user));
 
-        $this->contactFields()->register('forwarding_email', 'Gönüllü e-posta adresi', fn ($contact) => $contact->user?->activeEmailRedirect?->email_alias, 15);
+        $this->permissions()->group('mail-forwarding', 'E-posta yönlendirme', 50);
+        $this->permissions()->register('forwarding.manage', 'Dernek e-posta adresinin kimlere verileceğini ayarlayabilsin', 'mail-forwarding', 50);
+        $menu->label('admin', 'settings', 'Ayarlar', 'settings');
+        $menu->add('admin', 'settings', 'E-posta yönlendirme', 'admin.forwarding.settings', ['forwarding.manage'], 92);
 
-        $this->dashboard()->stat('Aktif e-posta yönlendirmesi', 'mail-forward', fn () => EmailRedirects::where('status', 1)->count(), null, [1, 2], 13, '@'.config('mail-forwarding.domain').' adresi');
+        $this->contactFields()->register('forwarding_email', app(ForwardingPolicy::class)->label(), fn ($contact) => $contact->user?->activeEmailRedirect?->email_alias, 15);
+
+        $this->dashboard()->stat('Aktif e-posta yönlendirmesi', 'mail-forward', fn () => EmailRedirects::where('status', 1)->count(), null, [1, 2], 13, implode(', ', array_map(fn ($domain) => '@'.$domain, array_unique(app(ForwardingPolicy::class)->domains()))));
 
         $slots->push('home.top', 'mail-forwarding::partials.home-banner');
         $slots->push('admin.users.head', 'mail-forwarding::partials.users-head');
@@ -45,6 +51,7 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
         $slots->push('admin.users.actions', 'mail-forwarding::partials.users-actions');
 
         View::composer('mail-forwarding::partials.home-banner', function ($view) {
+            $view->with('forwarding_eligible', app(ForwardingPolicy::class)->eligible(Auth::user()));
             $view->with('email_redirect_is_exist', EmailRedirects::where('user_id', Auth::id())->first());
         });
 

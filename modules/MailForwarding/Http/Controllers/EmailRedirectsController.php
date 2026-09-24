@@ -19,6 +19,7 @@ use Modules\MailForwarding\Models\EmailRedirects;
 use BahriCanli\TcKimlik;
 use Carbon\Carbon;
 
+use Modules\MailForwarding\Support\ForwardingPolicy;
 use Modules\MailForwarding\Support\PostfixAdmin;
 
 class EmailRedirectsController extends Controller
@@ -33,6 +34,19 @@ class EmailRedirectsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        // Only people whose affiliation gets an association address.
+        $this->middleware(function ($request, $next) {
+            if (! app(ForwardingPolicy::class)->eligible($request->user())) {
+                return redirect()->route('home')->with('danger-status', 'Dernek e-posta adresi hizmeti sizin için açık değil.');
+            }
+
+            return $next($request);
+        });
+    }
+
+    private function domain(): string
+    {
+        return (string) app(ForwardingPolicy::class)->domainFor(Auth::user());
     }
 
     /**
@@ -113,7 +127,7 @@ class EmailRedirectsController extends Controller
             $email_redirects = new EmailRedirects();
             $email_redirects->user_id = $user->id;
             $email_redirects->email_forwarding = $user->email;
-            $email_redirects->email_alias = $user->name.".".$user->surname."@".config('mail-forwarding.domain');
+            $email_redirects->email_alias = $user->name.".".$user->surname."@".$this->domain();
             $email_redirects->status = 0;
             $email_redirects->save();
         }
@@ -130,6 +144,7 @@ class EmailRedirectsController extends Controller
         }
 
         return view('mail-forwarding::email-forwarding', [
+            "domain" => $this->domain(),
             "user" => $user,
             "email_redirects" => $email_redirects,
             "name_array" => $name_array,
@@ -140,7 +155,7 @@ class EmailRedirectsController extends Controller
     public function postForwarding(Request $request) {
 
         $validator = $request->validate([
-            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.config('mail-forwarding.domain')],
+            'email_alias' => ['required', 'email:rfc', 'max:255', 'ends_with:@'.$this->domain()],
             'agreement' => app(\App\Support\Agreements::class)->rules(\App\Models\Agreement::EMAIL_USAGE),
         ]);
         app(\App\Support\Agreements::class)->accept(Auth::user(), 'email-forwarding', \App\Models\Agreement::EMAIL_USAGE);

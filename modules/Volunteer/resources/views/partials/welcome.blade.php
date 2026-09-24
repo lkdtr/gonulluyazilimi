@@ -4,9 +4,11 @@
     <li>
         <strong>Öncelikli Bilgilendirme:</strong> Dernek ile ilgili duyuruları ve etkinlikleri öncelikli olarak e-posta ile alabilirsiniz.
     </li>
+@module('mail-forwarding')
     <li>
         <strong>E-posta Yönlendirmesi:</strong> Sisteme üye olup bilgilerini doğrulayan herkese {{ '@'.config('mail-forwarding.domain') }} uzantılı e-posta yönlendirmesi sağlanmaktadır.
     </li>
+    @endmodule
     <li>
         <strong>Üyelik İçin Referans:</strong> LKD, referans ile üye kabul etmektedir. Gönüllü olarak sistem üzerinden talepte bulunup daha hızlı referans bulabilirsiniz.
     </li>

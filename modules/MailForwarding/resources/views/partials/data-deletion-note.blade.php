@@ -2,6 +2,6 @@
 @if ($redirect)
     <div class="alert alert-warning mb-2">
         <strong>Aktif e-posta yönlendirmesi:</strong> <code>{{ $redirect->email_alias }}</code>.
-        Onaydan önce bu adresi PostfixAdmin'de ({{ config('mail-forwarding.domain') }}) kaldırın; onay yalnız portaldaki kaydı siler, sunucudaki yönlendirme çalışmaya devam eder.
+        Onaydan önce bu adresi PostfixAdmin'de kaldırın; onay yalnız portaldaki kaydı siler, sunucudaki yönlendirme çalışmaya devam eder.
     </div>
 @endif

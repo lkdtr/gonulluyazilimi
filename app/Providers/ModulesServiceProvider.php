@@ -29,6 +29,14 @@ class ModulesServiceProvider extends ServiceProvider
             return $permissions;
         });
         $this->app->singleton(\App\Support\CustomFields::class);
+        $this->app->singleton(\App\Modules\ProfileTabs::class, function () {
+            $tabs = new \App\Modules\ProfileTabs();
+            $tabs->add('personal', 'Kişisel', 'profile.tabs.personal', 10, ['personal', 'other'], 'user');
+            $tabs->add('contact', 'İletişim', 'profile.tabs.contact', 20, ['contact', 'work'], 'address-book');
+            $tabs->add('privacy', 'Gizlilik ve Ayarlar', 'profile.tabs.privacy', 90, [], 'shield-lock');
+
+            return $tabs;
+        });
         $this->app->singleton(ContactFields::class, function () {
             $fields = new ContactFields();
             $fields->register('first_name', 'Ad', fn (Contact $contact) => $contact->first_name, 1);

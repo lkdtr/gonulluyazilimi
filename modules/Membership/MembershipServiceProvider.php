@@ -32,7 +32,7 @@ class MembershipServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'membership', 'Üyeler', 'admin.memberships', ['memberships.view'], 20);
 
         $slots->push('admin.contacts.show', 'membership::partials.contact-card', 10);
-        $slots->push('profile.sections', 'membership::partials.profile', 10);
+        $this->profileTabs()->add('membership', 'Üyelik', 'membership::partials.profile', 30, ['membership'], 'id');
 
         $this->customFields()->group('membership', 'Üyelik', 25);
 

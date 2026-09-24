@@ -52,6 +52,16 @@ class CoreOnlyInstallTest extends TestCase
         $this->assertSame(['admin'], app(ModuleManager::class)->enabledModules());
     }
 
+    public function test_nothing_volunteer_specific_shows_without_the_volunteer_module(): void
+    {
+        $owner = User::factory()->create(['role' => 1]);
+
+        $this->get('/register')->assertOk()->assertDontSee('Gönüllü Ol');
+        $response = $this->actingAs($owner)->get('/admin')->assertOk()->assertDontSee('Gönüllü')->assertDontSee('gönüllü');
+        $this->assertNotNull(collect($response->viewData('stats'))->firstWhere('label', 'Kayıtlı hesap'));
+        $this->assertNotNull(collect($response->viewData('stats'))->firstWhere('label', 'Üye'));
+    }
+
     public function test_the_core_and_admin_panel_work_without_modules(): void
     {
         $owner = User::factory()->create(['role' => 1]);

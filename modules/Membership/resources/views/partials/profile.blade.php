@@ -2,7 +2,7 @@
 @php($membership = $contact ? \Modules\Membership\Models\Membership::with('events')->where('contact_id', $contact->id)->first() : null)
 
 @if ($membership)
-    <div class="card mt-3" id="membership">
+    <div class="card" id="membership">
         <div class="card-header">
             <h3 class="card-title">Üyelik</h3>
             <div class="card-actions"><span class="badge bg-{{ \Modules\Membership\Models\Membership::STATUS_COLORS[$membership->status] }}-lt">{{ $membership->statusLabel() }}</span></div>
@@ -28,5 +28,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+@else
+    <div class="card" id="membership">
+        <div class="card-body text-secondary">Üyelik kaydınız yok.</div>
     </div>
 @endif
