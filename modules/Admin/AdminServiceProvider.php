@@ -2,6 +2,7 @@
 
 namespace Modules\Admin;
 
+use App\Models\ContactPhoto;
 use App\Models\User;
 use App\Modules\Dashboard;
 use App\Modules\Menu;
@@ -28,6 +29,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $this->permissions()->group('contacts', 'Kişi & Kurumlar', 10);
         $this->permissions()->register('contacts.view', 'Kişi ve kurumları görebilsin', 'contacts', 10);
         $this->permissions()->register('contacts.manage', 'Kişi ve kurum ekleyip düzenleyebilsin, sıfat verebilsin', 'contacts', 11);
+        $this->permissions()->register('photos.review', 'Profil fotoğraflarını onaylayıp reddedebilsin', 'contacts', 12);
         $this->permissions()->group('settings', 'Ayarlar', 90);
         $this->permissions()->register('affiliations.manage', 'Sıfat türlerini düzenleyebilsin', 'settings', 90);
         $this->permissions()->register('roles.manage', 'Rolleri, yetkileri ve rol şablonlarını düzenleyebilsin', 'settings', 91);
@@ -35,6 +37,9 @@ class AdminServiceProvider extends ModuleServiceProvider
         $menu->label('admin', 'contacts', 'Kişi & Kurumlar', 'address-book');
         $menu->add('admin', 'contacts', 'Kişi & Kurumlar', 'admin.contacts', ['contacts.view'], 5);
         $menu->add('admin', 'contacts', 'Kişi / kurum ekle', 'admin.contacts.create', ['contacts.manage'], 6);
+        $menu->add('admin', 'contacts', 'Fotoğraf onayı', 'admin.photos', ['photos.review'], 7);
+
+        $this->dashboard()->stat('Onay bekleyen fotoğraf', 'photo-check', fn () => ContactPhoto::pending()->count(), 'admin.photos', ['photos.review'], 14);
 
         $menu->label('admin', 'settings', 'Ayarlar', 'settings');
         $menu->add('admin', 'settings', 'Sıfatlar', 'admin.affiliation-types', ['affiliations.manage'], 90);

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Cities;
+use App\Models\Contact;
+use App\Modules\ContactFields;
 use App\Modules\Dashboard;
 use App\Modules\Menu;
 use App\Modules\ModuleManager;
@@ -24,6 +27,19 @@ class ModulesServiceProvider extends ServiceProvider
             $permissions->register('admin.access', 'Yönetim paneline girebilsin', 'panel', 1);
 
             return $permissions;
+        });
+        $this->app->singleton(ContactFields::class, function () {
+            $fields = new ContactFields();
+            $fields->register('first_name', 'Ad', fn (Contact $contact) => $contact->first_name, 1);
+            $fields->register('last_name', 'Soyad', fn (Contact $contact) => $contact->last_name, 2);
+            $fields->register('email', 'E-posta', fn (Contact $contact) => $contact->email, 10);
+            $fields->register('phone', 'Telefon', fn (Contact $contact) => $contact->phone, 11);
+            $fields->register('city', 'İl', fn (Contact $contact) => $contact->city_id ? Cities::where('city_plate_no', $contact->city_id)->value('city_name') : null, 12);
+            // Until a membership module holds member numbers, the account's LKD
+            // member number is the one known.
+            $fields->register('member_number', 'Üye no', fn (Contact $contact) => $contact->user?->lkd_user_id > 0 ? $contact->user->lkd_user_id : null, 20);
+
+            return $fields;
         });
 
         $modules = $this->app->make(ModuleManager::class);
