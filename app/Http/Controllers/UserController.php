@@ -60,6 +60,14 @@ class UserController extends Controller
                 'upload' => $contact?->latestPhotoUpload,
                 'editable' => $user->is(Auth::user()),
             ],
+            "consents" => [
+                'current' => $contact ? app(\App\Support\Consents::class)->current($contact) : array_fill_keys(array_keys(\App\Support\Consents::CHANNELS), null),
+                'editable' => $user->is(Auth::user()),
+            ],
+            // Only on the person's own profile.
+            "deletion" => $user->is(Auth::user()) ? [
+                'pending' => $contact ? \App\Models\DataDeletionRequest::pending()->where('contact_id', $contact->id)->first() : null,
+            ] : null,
         ]);
     }
 

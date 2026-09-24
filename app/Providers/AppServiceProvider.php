@@ -28,6 +28,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(Organization::class);
         $this->app->singleton(\App\Support\Agreements::class);
 
+        // Messaging channels behind interfaces; "log" writes instead of sending.
+        $this->app->singleton(\App\Contracts\Messaging\SmsSender::class, fn () => config('messaging.sms') === 'log'
+            ? new \App\Support\Messaging\LogSender('sms')
+            : new \App\Support\Messaging\NetgsmSmsSender());
+        $this->app->singleton(\App\Contracts\Messaging\WhatsAppSender::class, fn () => config('messaging.whatsapp') === 'log'
+            ? new \App\Support\Messaging\LogSender('whatsapp')
+            : new \App\Support\Messaging\WhatsAppBridgeSender());
+
     }
 
     /**

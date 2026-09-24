@@ -50,5 +50,22 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
 
         Event::listen(UserEmailChanging::class, [SyncForwardingWithAccountEmail::class, 'changing']);
         Event::listen(UserEmailChanged::class, [SyncForwardingWithAccountEmail::class, 'changed']);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            if ($event->userId === null) {
+                return;
+            }
+            // The alias on the mail server is not touched here: the deletion
+            // screen warns to remove it there first.
+            EmailRedirects::where('user_id', $event->userId)->get()->each(fn (EmailRedirects $redirect) => $redirect->forceFill([
+                'status' => 0,
+                'email_alias' => 'silinmis-'.$redirect->id.'@invalid.invalid',
+                'email_forwarding' => 'silinmis-'.$redirect->id.'@invalid.invalid',
+            ])->save());
+        });
+
+        $slots->push('admin.data-deletion.notes', 'mail-forwarding::partials.data-deletion-note');
+
     }
 }

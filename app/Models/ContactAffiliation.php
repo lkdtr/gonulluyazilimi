@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class ContactAffiliation extends Model
 {
+    use Auditable;
+
     protected $fillable = ['contact_id', 'affiliation_type_id', 'title', 'started_at', 'ended_at', 'note'];
 
     protected $casts = [
@@ -42,5 +46,10 @@ class ContactAffiliation extends Model
     public function isActive(): bool
     {
         return $this->ended_at === null || $this->ended_at->gt(today());
+    }
+
+    public function auditLabel(): string
+    {
+        return trim(($this->type?->name ?? '').' — '.($this->contact?->display_name ?? ''), ' —');
     }
 }

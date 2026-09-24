@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\RateLimiter;
 
 use App\Notifications\MobileVerification;
 use App\Notifications\PhoneVerificationRecipient;
-use App\Models\ContactPermissions;
+use App\Models\PhoneVerification;
 
 class MobileVerificationController extends Controller
 {
@@ -30,8 +30,8 @@ class MobileVerificationController extends Controller
         $verification_code = (string) random_int(100000, 999999);
         RateLimiter::hit($rateLimitKey, 60);
 
-        $contactPermission = ContactPermissions::where("value_type", "phone_number")->where("value", $phone_number)->first();
-        if($contactPermission==null) $contactPermission = new ContactPermissions();
+        $contactPermission = PhoneVerification::where("value_type", "phone_number")->where("value", $phone_number)->first();
+        if($contactPermission==null) $contactPermission = new PhoneVerification();
 
         Notification::send(
             new PhoneVerificationRecipient($phone_number, $verification_code),
@@ -61,7 +61,7 @@ class MobileVerificationController extends Controller
         $phone_number = $request->get("phone_number");
         $validation = $request->get("validation");
 
-        $contactPermission = ContactPermissions::where("value_type", "phone_number")->where("value", $phone_number)->first();
+        $contactPermission = PhoneVerification::where("value_type", "phone_number")->where("value", $phone_number)->first();
         if($contactPermission==null) {
             return $this->output("json", ["status" => false, "message" => "null"]);
         }

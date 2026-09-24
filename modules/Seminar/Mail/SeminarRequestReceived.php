@@ -4,10 +4,11 @@ namespace Modules\Seminar\Mail;
 
 use Modules\Seminar\Models\SeminarRequests;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SeminarRequestReceived extends Mailable
+class SeminarRequestReceived extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

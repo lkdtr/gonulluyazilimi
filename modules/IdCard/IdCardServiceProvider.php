@@ -35,5 +35,11 @@ class IdCardServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'id-card', 'Verilen kartlar', 'admin.id-cards.issued', ['id-cards.manage'], 41);
 
         $this->dashboard()->stat('Verilen kimlik kartı', 'id-badge-2', fn () => IdCard::whereNull('revoked_at')->count(), 'admin.id-cards.issued', ['id-cards.manage'], 45);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            IdCard::where('contact_id', $event->contact->id)->whereNull('revoked_at')->update(['revoked_at' => now(), 'revoked_reason' => 'Kişisel veriler silindi']);
+        });
+
     }
 }

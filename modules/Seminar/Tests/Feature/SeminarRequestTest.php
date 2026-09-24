@@ -92,8 +92,8 @@ class SeminarRequestTest extends TestCase
         $this->assertSame(now()->addDays(60)->toDateString(), $seminarRequest->seminar_start_date->toDateString());
         $this->assertSame(now()->addDays(60)->toDateString(), $seminarRequest->seminar_end_date->toDateString());
 
-        Mail::assertSent(SeminarRequestNotification::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
-        Mail::assertSent(SeminarRequestReceived::class, fn ($mail) => $mail->hasTo($user->email));
+        Mail::assertQueued(SeminarRequestNotification::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
+        Mail::assertQueued(SeminarRequestReceived::class, fn ($mail) => $mail->hasTo($user->email));
     }
 
     public function test_existing_organization_is_reused_despite_different_letter_case(): void

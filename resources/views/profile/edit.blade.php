@@ -161,6 +161,14 @@
 
                 </div>
             </div>
+
+            @isset($consents)
+                @include('profile.partials.consents', $consents)
+            @endisset
+
+            @isset($deletion)
+                @include('profile.partials.deletion', $deletion)
+            @endisset
         </div>
     </div>
 </div>

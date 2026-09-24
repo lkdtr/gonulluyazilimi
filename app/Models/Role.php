@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Role extends Model
 {
+    use Auditable;
+
     public const OWNER = 'owner';
 
     public const MANAGER = 'manager';
@@ -55,6 +59,10 @@ class Role extends Model
      */
     public function syncPermissions(array $permissions): void
     {
+        $old = DB::table('permission_role')->where('role_id', $this->id)->orderBy('permission')->pluck('permission')->all();
+        $new = array_values(array_unique($permissions));
+        sort($new);
+
         DB::transaction(function () use ($permissions) {
             DB::table('permission_role')->where('role_id', $this->id)->delete();
             DB::table('permission_role')->insert(array_map(
@@ -62,5 +70,14 @@ class Role extends Model
                 array_values(array_unique($permissions))
             ));
         });
+
+        if ($old !== $new) {
+            \App\Support\Audit::record('change', $this, ['permissions' => [implode(', ', $old), implode(', ', $new)]], $this->auditDescription('yetkileri değişti'));
+        }
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->name;
     }
 }
