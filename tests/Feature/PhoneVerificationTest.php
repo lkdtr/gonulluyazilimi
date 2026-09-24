@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\ContactPermissions;
+use App\Models\PhoneVerification;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +22,7 @@ class PhoneVerificationTest extends TestCase
             'phone_number' => '905551112233',
         ])->assertOk()->assertJson(['status' => true]);
 
-        $verification = ContactPermissions::where('value', '905551112233')->firstOrFail();
+        $verification = PhoneVerification::where('value', '905551112233')->firstOrFail();
         $this->assertStringStartsWith('$2y$', $verification->verification_code);
         $this->assertTrue($verification->verification_code_expires_at->isFuture());
         $this->assertFalse($verification->verified);
@@ -30,7 +30,7 @@ class PhoneVerificationTest extends TestCase
 
     public function test_phone_verification_marks_a_valid_unexpired_code_as_verified(): void
     {
-        $verification = ContactPermissions::create([
+        $verification = PhoneVerification::create([
             'value_type' => 'phone_number',
             'value' => '905551112233',
             'verification_code' => Hash::make('123456'),
@@ -53,7 +53,7 @@ class PhoneVerificationTest extends TestCase
 
     public function test_expired_or_invalid_codes_do_not_verify_the_phone(): void
     {
-        ContactPermissions::create([
+        PhoneVerification::create([
             'value_type' => 'phone_number',
             'value' => '905551112233',
             'verification_code' => Hash::make('123456'),
@@ -67,7 +67,7 @@ class PhoneVerificationTest extends TestCase
             'validation' => '123456',
         ])->assertOk()->assertJson(['status' => false, 'message' => 'Code expired']);
 
-        $this->assertDatabaseHas('contact_permissions', [
+        $this->assertDatabaseHas('phone_verifications', [
             'value' => '905551112233',
             'verified' => false,
         ]);
@@ -88,7 +88,7 @@ class PhoneVerificationTest extends TestCase
     {
         Mail::fake();
         $verifiedAt = now()->subMinute();
-        ContactPermissions::create([
+        PhoneVerification::create([
             'value_type' => 'phone_number',
             'value' => '905551112233',
             'verified' => true,

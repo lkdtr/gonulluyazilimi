@@ -161,6 +161,10 @@
 
                 </div>
             </div>
+
+            @isset($consents)
+                @include('profile.partials.consents', $consents)
+            @endisset
         </div>
     </div>
 </div>

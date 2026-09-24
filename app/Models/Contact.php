@@ -56,6 +56,14 @@ class Contact extends Model
         return $this->hasMany(ContactAffiliation::class);
     }
 
+    /**
+     * Grants and withdrawals of communication consents, newest first.
+     */
+    public function consentEvents(): HasMany
+    {
+        return $this->hasMany(ConsentEvent::class)->latest('id');
+    }
+
     public function photos(): HasMany
     {
         return $this->hasMany(ContactPhoto::class);

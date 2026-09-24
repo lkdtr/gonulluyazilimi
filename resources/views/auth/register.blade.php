@@ -124,6 +124,18 @@
 
                         <div class="separator bottom"><br></div>
 
+                        <div class="row mb-3">
+                            <div class="col-md-8 offset-md-4">
+                                <div class="form-label">İletişim izinleri <span class="text-secondary fw-normal">(isteğe bağlı)</span></div>
+                                @foreach (['email', 'sms', 'whatsapp'] as $channel)
+                                    <label class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="consents[{{ $channel }}]" value="1" @checked(old("consents.$channel"))>
+                                        <span class="form-check-label">{{ \App\Support\Consents::CHANNELS[$channel] }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
                         <x-agreement-checkbox key="kvkk" />
 
                         <div class="separator bottom"><br></div>

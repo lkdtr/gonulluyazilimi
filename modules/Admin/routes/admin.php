@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AffiliationTypeController;
 use Modules\Admin\Http\Controllers\AgreementAdminController;
 use Modules\Admin\Http\Controllers\ContactAffiliationController;
+use Modules\Admin\Http\Controllers\ContactConsentController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\OrganizationSettingsController;
@@ -20,6 +21,7 @@ Route::middleware('permission:contacts.manage')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
     Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::put('/contacts/{contact}/consents', [ContactConsentController::class, 'update'])->name('contacts.consents.update');
     Route::post('/contacts/{contact}/affiliations', [ContactAffiliationController::class, 'store'])->name('contacts.affiliations.store');
     Route::patch('/contacts/{contact}/affiliations/{affiliation}/end', [ContactAffiliationController::class, 'end'])->name('contacts.affiliations.end');
     Route::delete('/contacts/{contact}/affiliations/{affiliation}', [ContactAffiliationController::class, 'destroy'])->name('contacts.affiliations.destroy');
