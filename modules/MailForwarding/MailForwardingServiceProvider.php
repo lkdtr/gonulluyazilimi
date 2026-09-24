@@ -35,7 +35,7 @@ class MailForwardingServiceProvider extends ModuleServiceProvider
         $menu->label('user', 'account', 'E-posta', 'mail');
         $menu->add('user', 'account', 'panel.email_forwarding', 'email-redirects', [], 10);
 
-        $this->dashboard()->stat('Aktif e-posta yönlendirmesi', 'mail-forward', fn () => EmailRedirects::where('status', 1)->count(), null, [1, 2], 13, '@linux.org.tr adresi');
+        $this->dashboard()->stat('Aktif e-posta yönlendirmesi', 'mail-forward', fn () => EmailRedirects::where('status', 1)->count(), null, [1, 2], 13, '@'.config('mail-forwarding.domain').' adresi');
 
         $slots->push('home.top', 'mail-forwarding::partials.home-banner');
         $slots->push('admin.users.head', 'mail-forwarding::partials.users-head');
