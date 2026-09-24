@@ -222,6 +222,14 @@ class IdCardTest extends TestCase
         $this->assertSame('https://portal.example.org/kart/'.$card->verify_token, CardView::verifyUrl($card));
     }
 
+    public function test_cards_are_linked_from_the_account_menu_not_the_main_menu(): void
+    {
+        $html = $this->actingAs($this->volunteer())->get('/my-infos')->assertOk()->getContent();
+
+        $this->assertStringContainsString('dropdown-item" href="'.route('id-cards').'"', $html);
+        $this->assertStringNotContainsString('nav-link" href="'.route('id-cards').'"', $html);
+    }
+
     public function test_masked_names_keep_first_names_and_the_surname_initial(): void
     {
         $this->assertSame('Ayşe Nur Ş****', CardView::maskedName(new Contact(['first_name' => 'Ayşe Nur', 'last_name' => 'şahin'])));
