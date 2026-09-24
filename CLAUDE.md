@@ -95,11 +95,16 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Projedeki `mailserver/xmlrpc_server.php` bu dosyanın birebir kopyasıdır ve her zaman güncel tutulmalıdır. Uygulamanın çağırdığı her `alias.*` metodu burada tanımlı olmalı (`create`, `update`); yeni bir metot kullanılacaksa önce bu dosyaya eklenir, sonra sunucuya aynı dosya kopyalanır. Canlı dosyanın md5'i proje kopyasıyla eşleşmelidir.
 
 ## Canlı (Prod)
-- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/gonullu.lkd.org.tr` dizininde; `lkdtr/dernekyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Repo 24 Eylül 2026'da `gonulluyazilimi` → `dernekyazilimi` olarak yeniden adlandırıldı; GitHub eski adresi yönlendirir ama sunucudaki uzak adres `sudo git remote set-url origin <yeni adres>` ile güncellenmeli. Dosyalar root'a aittir.
+- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/portal.lkd.org.tr` dizininde (24 Eylül 2026'dan önce `/var/www/gonullu.lkd.org.tr`); Apache vhost'u `portal.lkd.org.tr`, `gonullu.lkd.org.tr` onun takma adıdır. TLS Cloudflare'de sonlanır, origin'e düz HTTP gelir; `lkdtr/dernekyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Repo 24 Eylül 2026'da `gonulluyazilimi` → `dernekyazilimi` olarak yeniden adlandırıldı; GitHub eski adresi yönlendirir ama sunucudaki uzak adres `sudo git remote set-url origin <yeni adres>` ile güncellenmeli. Dosyalar root'a aittir.
 - Web PHP 8.4 php-fpm ile çalışır; sunucudaki varsayılan `php` CLI 8.5'tir. Composer ve artisan komutları `php8.4` ile çalıştırılmalı:
   ```bash
   sudo php8.4 /usr/bin/composer install --no-dev --optimize-autoloader
   sudo php8.4 artisan optimize:clear
+  ```
+- Modüller yalnızca `.env`'de `MODULE_<AD>=true` ile açılır; yeni bir modül canlıya çıkmadan önce satırı `.env`'e eklenmeli.
+- Migration'dan önce veritabanı yedeği: root'un MySQL parolası yok, `/etc/mysql/debian.cnf` kullanılır:
+  ```bash
+  sudo sh -c 'mysqldump --defaults-file=/etc/mysql/debian.cnf --single-transaction --routines gonullulkdorgtr | gzip > /var/backups/gonullulkdorgtr-$(date +%Y%m%d-%H%M%S).sql.gz' && sudo chmod 600 /var/backups/gonullulkdorgtr-*.sql.gz
   ```
 
 ## Bilinen Uyarılar
