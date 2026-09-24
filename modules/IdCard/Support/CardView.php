@@ -74,10 +74,19 @@ class CardView
         return trim(trim((string) $contact->first_name).($initial !== '' ? ' '.mb_strtoupper($initial, 'UTF-8').'****' : ''));
     }
 
+    /**
+     * Verification address on the site's own domain (APP_URL), whichever
+     * domain the card page was opened on: the QR code outlives the visit.
+     */
+    public static function verifyUrl(IdCard $card): string
+    {
+        return rtrim((string) config('app.url'), '/').route('id-card.verify', $card->verify_token, false);
+    }
+
     public function qrSvg(IdCard $card, int $size = 200): string
     {
         $writer = new Writer(new ImageRenderer(new RendererStyle($size, 1), new SvgImageBackEnd()));
-        $svg = $writer->writeString(route('id-card.verify', $card->verify_token));
+        $svg = $writer->writeString(self::verifyUrl($card));
 
         // Inline markup: drop the XML declaration.
         return preg_replace('/^<\?xml[^>]*>\s*/', '', $svg);
