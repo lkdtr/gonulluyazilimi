@@ -4,7 +4,7 @@
 - **Framework:** Laravel 13 (`composer.lock`: v13.26.1)
 - **PHP:** 8.4 (`composer.json`: `"php": "^8.4"`)
 - **Veritabanı:** MySQL
-- **Repo:** `git@github.com:bmericc/gonulluyazilimi.git` (SSH)
+- **Repo:** `git@github.com:bmericc/dernekyazilimi.git` (SSH)
 
 ## Yerel PHP (Docker)
 - Yerel makinede PHP kurulu değil; PHP 8.4, Docker'daki `php:8.4-cli` imajıyla çalıştırılır (7.4 için `php:7.4-cli` de mevcut):
@@ -95,7 +95,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Projedeki `mailserver/xmlrpc_server.php` bu dosyanın birebir kopyasıdır ve her zaman güncel tutulmalıdır. Uygulamanın çağırdığı her `alias.*` metodu burada tanımlı olmalı (`create`, `update`); yeni bir metot kullanılacaksa önce bu dosyaya eklenir, sonra sunucuya aynı dosya kopyalanır. Canlı dosyanın md5'i proje kopyasıyla eşleşmelidir.
 
 ## Canlı (Prod)
-- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/gonullu.lkd.org.tr` dizininde; `lkdtr/gonulluyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Dosyalar root'a aittir.
+- Uygulama `server1.linux.org.tr` (`192.168.0.34` üzerinden SSH) `/var/www/gonullu.lkd.org.tr` dizininde; `lkdtr/dernekyazilimi` reposunun `main` dalını çeker (değişiklikler bmericc fork'undan lkdtr'ye PR ile gelir). Repo 24 Eylül 2026'da `gonulluyazilimi` → `dernekyazilimi` olarak yeniden adlandırıldı; GitHub eski adresi yönlendirir ama sunucudaki uzak adres `sudo git remote set-url origin <yeni adres>` ile güncellenmeli. Dosyalar root'a aittir.
 - Web PHP 8.4 php-fpm ile çalışır; sunucudaki varsayılan `php` CLI 8.5'tir. Composer ve artisan komutları `php8.4` ile çalıştırılmalı:
   ```bash
   sudo php8.4 /usr/bin/composer install --no-dev --optimize-autoloader

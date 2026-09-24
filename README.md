@@ -13,6 +13,6 @@ Kurulum aşamaları [[Install](INSTALLING.md)].
 Bu projeye katkıda bulunanlar. [[Contribute](CONTRIBUTING.md)].
 
 ## Lisans
-Bu uygulama GPLv3 altındadır. Orjinal lisans dökümanını "[LICENSE](https://github.com/lkdtr/gonulluyazilimi/blob/master/LICENSE)" dosyasından okuyabilirsiniz.
-Markdown formatında lisans -> [LICENSE.md](https://github.com/lkdtr/gonulluyazilimi/blob/master/LICENSE.md)
+Bu uygulama GPLv3 altındadır. Orjinal lisans dökümanını "[LICENSE](https://github.com/lkdtr/dernekyazilimi/blob/master/LICENSE)" dosyasından okuyabilirsiniz.
+Markdown formatında lisans -> [LICENSE.md](https://github.com/lkdtr/dernekyazilimi/blob/master/LICENSE.md)
 
