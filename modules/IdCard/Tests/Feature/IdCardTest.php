@@ -62,6 +62,10 @@ class IdCardTest extends TestCase
     {
         $user = $this->volunteer(['lkd_user_id' => 1234]);
         $user->contact->affiliate('board');
+        // With the membership module on, the member number comes from the membership record.
+        if (class_exists(\Modules\Membership\Models\Membership::class)) {
+            \Modules\Membership\Models\Membership::create(['contact_id' => $user->contact_id, 'number' => '1234']);
+        }
         $this->approvePhoto($user);
 
         $this->actingAs($user)->get('/my-cards')->assertOk()

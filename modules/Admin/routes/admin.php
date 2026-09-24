@@ -6,6 +6,9 @@ use Modules\Admin\Http\Controllers\AgreementAdminController;
 use Modules\Admin\Http\Controllers\ContactAffiliationController;
 use Modules\Admin\Http\Controllers\ContactConsentController;
 use Modules\Admin\Http\Controllers\ContactController;
+use Modules\Admin\Http\Controllers\ContactDetailsController;
+use Modules\Admin\Http\Controllers\CustomFieldController;
+use Modules\Admin\Http\Controllers\TagController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\DataDeletionAdminController;
 use Modules\Admin\Http\Controllers\OrganizationSettingsController;
@@ -22,6 +25,8 @@ Route::middleware('permission:contacts.manage')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
     Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::put('/contacts/{contact}/tags', [ContactDetailsController::class, 'tags'])->name('contacts.tags.update');
+    Route::put('/contacts/{contact}/fields', [ContactDetailsController::class, 'fields'])->name('contacts.fields.update');
     Route::put('/contacts/{contact}/consents', [ContactConsentController::class, 'update'])->name('contacts.consents.update');
     Route::post('/contacts/{contact}/affiliations', [ContactAffiliationController::class, 'store'])->name('contacts.affiliations.store');
     Route::patch('/contacts/{contact}/affiliations/{affiliation}/end', [ContactAffiliationController::class, 'end'])->name('contacts.affiliations.end');
@@ -37,6 +42,19 @@ Route::middleware('permission:settings.manage')->group(function () {
     Route::get('/settings/organization', [OrganizationSettingsController::class, 'edit'])->name('settings.organization');
     Route::put('/settings/organization', [OrganizationSettingsController::class, 'update'])->name('settings.organization.update');
     Route::post('/settings/organization/images', [OrganizationSettingsController::class, 'uploadImage'])->middleware('throttle:30,1')->name('settings.organization.images');
+});
+
+Route::middleware('permission:fields.manage')->group(function () {
+    Route::get('/tags', [TagController::class, 'index'])->name('tags');
+    Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
+    Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
+    Route::get('/custom-fields', [CustomFieldController::class, 'index'])->name('custom-fields');
+    Route::get('/custom-fields/create', [CustomFieldController::class, 'create'])->name('custom-fields.create');
+    Route::post('/custom-fields', [CustomFieldController::class, 'store'])->name('custom-fields.store');
+    Route::get('/custom-fields/{customField}/edit', [CustomFieldController::class, 'edit'])->name('custom-fields.edit');
+    Route::put('/custom-fields/{customField}', [CustomFieldController::class, 'update'])->name('custom-fields.update');
+    Route::delete('/custom-fields/{customField}', [CustomFieldController::class, 'destroy'])->name('custom-fields.destroy');
 });
 
 Route::middleware('permission:agreements.manage')->group(function () {

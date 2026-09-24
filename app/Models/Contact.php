@@ -64,6 +64,16 @@ class Contact extends Model
         return $this->hasMany(ConsentEvent::class)->latest('id');
     }
 
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class)->withPivot('created_at')->orderBy('name');
+    }
+
+    public function customFieldValues(): HasMany
+    {
+        return $this->hasMany(CustomFieldValue::class);
+    }
+
     public function photos(): HasMany
     {
         return $this->hasMany(ContactPhoto::class);

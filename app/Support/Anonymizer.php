@@ -34,14 +34,17 @@ class Anonymizer
             $phone = $user?->phone_number ?? $contact->phone;
             $emails = array_filter([$user?->email, $contact->email]);
             $photoIds = $contact->photos()->pluck('id')->all();
+            $customValueIds = $contact->customFieldValues()->pluck('id')->all();
 
             // The audit entries of the anonymization itself must not store the
             // values being removed.
-            Audit::withoutRecording(function () use ($contact, $user, $phone, $emails, $photoIds) {
+            Audit::withoutRecording(function () use ($contact, $user, $phone, $emails, $photoIds, $customValueIds) {
                 // Withdraw every consent; the history stays as proof.
                 $this->consents->set($contact, array_fill_keys(array_keys(Consents::CHANNELS), false), 'deletion');
 
                 $contact->photos()->get()->each(fn (ContactPhoto $photo) => $photo->delete());
+                $contact->customFieldValues()->delete();
+                $contact->tags()->detach();
                 $contact->affiliations()->active()->update(['ended_at' => today()]);
 
                 if ($user) {
@@ -79,7 +82,7 @@ class Anonymizer
 
                 event(new ContactAnonymized($contact, $user?->id));
 
-                $this->scrubAuditHistory($contact, $user, $photoIds, $emails);
+                $this->scrubAuditHistory($contact, $user, $photoIds, $emails, $customValueIds);
             });
 
             $contact->delete();
@@ -92,12 +95,13 @@ class Anonymizer
      * Earlier audit entries of the contact and its account carry old values;
      * keep that something happened, not what the values were.
      */
-    private function scrubAuditHistory(Contact $contact, ?User $user, array $photoIds, array $emails): void
+    private function scrubAuditHistory(Contact $contact, ?User $user, array $photoIds, array $emails, array $customValueIds): void
     {
         $subjects = [
             [Contact::class, [$contact->id]],
             [ContactPhoto::class, $photoIds],
             [\App\Models\ContactAffiliation::class, $contact->affiliations()->pluck('id')->all()],
+            [\App\Models\CustomFieldValue::class, $customValueIds],
         ];
         if ($user) {
             $subjects[] = [User::class, [$user->id]];

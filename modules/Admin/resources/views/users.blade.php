@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@php($memberContacts = \App\Models\ContactAffiliation::active()->ofType('member')->pluck('contact_id')->flip())
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -49,7 +50,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone_number}} @if($user->getValidation()->verified) <svg style="height: 16px;width: 16px;" class="bi flex-shrink-0 me-2" role="img"><use xlink:href="#check-fill"/></svg> @endif</td>
                                 <td>@if(isset($user->getCity()->city_name)) {{$user->getCity()->city_name}} @endif</td>
-                                <td>{{trans("panel.user_".$user->accessLevel())}} @if($user->lkd_user_id>0) ({{trans("panel.lkd_user")}}) @endif</td>
+                                <td>{{trans("panel.user_".$user->accessLevel())}} @if(isset($memberContacts[$user->contact_id])) ({{trans("panel.lkd_user")}}) @endif</td>
                                 @moduleSlot('admin.users.cell', ['user' => $user])
                                 <td>{{$user->created_at->format('d-m-Y H:i')}}</td>
                                 <td>{{$user->updated_at->format('d-m-Y H:i')}}</td>
