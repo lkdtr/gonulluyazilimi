@@ -6,7 +6,7 @@ use App\Models\Agreement;
 use App\Http\Controllers\Controller;
 use App\Mail\Welcome;
 use App\Models\User;
-use App\Models\ContactPermissions;
+use App\Models\PhoneVerification;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'agreement' => app(\App\Support\Agreements::class)->rules(Agreement::PRIVACY),
         ]);
 
-        $phoneVerification = ContactPermissions::query()
+        $phoneVerification = PhoneVerification::query()
             ->where('value_type', 'phone_number')
             ->where('value', $data['phone_number'])
             ->where('verified', true)
@@ -57,13 +57,15 @@ class RegisterController extends Controller
 
         $user = $this->create($data, $phoneVerification);
         app(\App\Support\Agreements::class)->accept($user, 'register', Agreement::PRIVACY);
+        // The form asks these three; unticked means declined.
+        app(\App\Support\Consents::class)->set($user->contact, collect(['email', 'sms', 'whatsapp'])->mapWithKeys(fn ($channel) => [$channel => $request->boolean("consents.{$channel}")])->all(), 'register');
         event(new Registered($user));
         Auth::login($user);
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    protected function create(array $data, ContactPermissions $phoneVerification): User
+    protected function create(array $data, PhoneVerification $phoneVerification): User
     {
         $user = User::create([
             'name' => $this->tr_ucwords($data['name']),

@@ -230,7 +230,7 @@ class User extends Authenticatable
     }
 
     public function getValidation() {
-        $contactPermission = $this->hasOne('App\Models\ContactPermissions', 'value', 'phone_number')
+        $contactPermission = $this->hasOne('App\Models\PhoneVerification', 'value', 'phone_number')
                         ->where('value_type', 'phone_number')->first();
         if($contactPermission==null) {
             $res = ["verified"=>"", "verification_code" => ""];

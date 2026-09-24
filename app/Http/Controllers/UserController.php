@@ -60,6 +60,10 @@ class UserController extends Controller
                 'upload' => $contact?->latestPhotoUpload,
                 'editable' => $user->is(Auth::user()),
             ],
+            "consents" => [
+                'current' => $contact ? app(\App\Support\Consents::class)->current($contact) : array_fill_keys(array_keys(\App\Support\Consents::CHANNELS), null),
+                'editable' => $user->is(Auth::user()),
+            ],
         ]);
     }
 

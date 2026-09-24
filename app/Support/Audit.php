@@ -59,7 +59,7 @@ class Audit
             $log->subject_id = $subject->getKey();
             $log->changes = $changes ?: null;
             $log->process_by = Auth::id();
-            $log->request_ip = app()->runningInConsole() ? null : request()->ip();
+            $log->request_ip = request()->ip();
             $log->save();
         } catch (Throwable $e) {
             // Auditing must never break the change itself.

@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactPermissions extends Model
+/**
+ * Phone number verification codes sent by SMS or WhatsApp (formerly the
+ * contact_permissions table; it never held communication consents).
+ */
+class PhoneVerification extends Model
 {
     use HasFactory;
 
-    protected $table = 'contact_permissions';
+    protected $table = 'phone_verifications';
     protected $primaryKey = 'id';
 
     protected $fillable = [

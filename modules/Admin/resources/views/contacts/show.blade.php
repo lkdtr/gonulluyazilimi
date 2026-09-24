@@ -60,6 +60,41 @@
                     </dl>
                 </div>
             </div>
+
+            @php($consentState = app(\App\Support\Consents::class)->current($contact))
+            <div class="card mt-3">
+                <div class="card-header"><h3 class="card-title">İletişim izinleri</h3></div>
+                <div class="card-body">
+                    @if ($canManage)
+                        <form method="POST" action="{{ route('admin.contacts.consents.update', $contact) }}">
+                            @csrf @method('PUT')
+                            @foreach (\App\Support\Consents::CHANNELS as $channel => $label)
+                                <label class="form-check form-switch">
+                                    <input type="checkbox" class="form-check-input" name="consents[{{ $channel }}]" value="1" @checked($consentState[$channel])>
+                                    <span class="form-check-label">{{ $label }} @if ($consentState[$channel] === null)<span class="text-secondary small">(sorulmadı)</span>@endif</span>
+                                </label>
+                            @endforeach
+                            <div class="form-hint mb-2">Kişinin bildirdiği değişikliği kaydedin; kayıt "Yönetici" kaynağıyla ve sizin adınızla tutulur.</div>
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Kaydet</button>
+                        </form>
+                    @else
+                        @foreach (\App\Support\Consents::CHANNELS as $channel => $label)
+                            <div>{{ $consentState[$channel] === null ? '—' : ($consentState[$channel] ? '✓' : '✗') }} {{ $label }}</div>
+                        @endforeach
+                    @endif
+                </div>
+                @if ($contact->consentEvents()->exists())
+                    <div class="list-group list-group-flush small">
+                        @foreach ($contact->consentEvents()->with('actor')->limit(10)->get() as $event)
+                            <div class="list-group-item">
+                                <span class="{{ $event->granted ? 'text-success' : 'text-danger' }}">{{ $event->granted ? 'Verildi' : 'Geri alındı' }}</span>:
+                                {{ \App\Support\Consents::CHANNELS[$event->channel] ?? $event->channel }}
+                                <div class="text-secondary">{{ $event->created_at->format('d.m.Y H:i') }} · {{ \App\Support\Consents::SOURCES[$event->source] ?? $event->source }}@if ($event->actor && $event->actor->contact_id !== $contact->id) · {{ $event->actor->name }} {{ $event->actor->surname }}@endif @if ($event->ip)· {{ $event->ip }}@endif</div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
 
         <div class="col-xl-8">

@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Agreement;
 use App\Models\AgreementAcceptance;
-use App\Models\ContactPermissions;
+use App\Models\PhoneVerification;
 use App\Models\Role;
 use App\Models\User;
 use Database\Seeders\LkdAgreementSeeder;
@@ -38,7 +38,7 @@ class AgreementTest extends TestCase
     private function register(array $overrides = []): \Illuminate\Testing\TestResponse
     {
         Mail::fake();
-        ContactPermissions::create(['value_type' => 'phone_number', 'value' => '905551112233', 'verified' => true, 'verified_at' => now(), 'status' => 1]);
+        PhoneVerification::create(['value_type' => 'phone_number', 'value' => '905551112233', 'verified' => true, 'verified_at' => now(), 'status' => 1]);
 
         return $this->post('/register', $overrides + [
             'name' => 'Ayşe', 'surname' => 'Yılmaz', 'email' => 'ayse@example.test', 'phone_number' => '905551112233',

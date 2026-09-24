@@ -57,5 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::permanentRedirect('/my-photo', '/my-infos#photo');
     Route::post('/my-photo', [App\Http\Controllers\PhotoController::class, 'store'])->middleware('throttle:10,1')->name('my-photo.store');
     Route::delete('/my-photo', [App\Http\Controllers\PhotoController::class, 'destroy'])->name('my-photo.destroy');
+    Route::put('/my-consents', [App\Http\Controllers\ConsentController::class, 'update'])->name('my-consents.update');
     Route::get('/photos/{photo}', [App\Http\Controllers\PhotoController::class, 'show'])->name('photos.show');
 });
