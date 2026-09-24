@@ -1,0 +1,19 @@
+# Queue worker of the portal (QUEUE_CONNECTION=database).
+# Install on the server:
+#   sudo cp deploy/portal-queue.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now portal-queue
+# After each deploy: sudo -u www-data php8.4 artisan queue:restart
+[Unit]
+Description=portal.lkd.org.tr queue worker
+After=network.target mysql.service
+
+[Service]
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=5
+WorkingDirectory=/var/www/portal.lkd.org.tr
+ExecStart=/usr/bin/php8.4 artisan queue:work database --sleep=3 --tries=3 --backoff=60 --max-time=3600
+
+[Install]
+WantedBy=multi-user.target
