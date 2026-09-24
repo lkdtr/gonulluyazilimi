@@ -12,6 +12,10 @@ class ProcessLogs extends Model
     protected $table = 'process_logs';
     protected $primaryKey = 'id';
 
+    protected $casts = [
+        'changes' => 'array',
+    ];
+
     public function getProcessBy() {
         if($this->process_by==0) {
             $res = ["name"=>"", "surname" => ""];

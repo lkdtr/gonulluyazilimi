@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Auditable, HasApiTokens, HasFactory, Notifiable;
 
     private ?Collection $effectiveRoles = null;
 
@@ -245,5 +247,10 @@ class User extends Authenticatable
             return (object) $res;
         }
         return $this->hasOne('App\Models\Cities', 'id', 'city_id')->first();
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->email;
     }
 }

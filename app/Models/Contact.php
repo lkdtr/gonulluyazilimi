@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -14,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Contact extends Model
 {
-    use SoftDeletes;
+    use Auditable, SoftDeletes;
 
     public const TYPE_PERSON = 'person';
 
@@ -114,5 +116,10 @@ class Contact extends Model
         }
 
         return trim($this->first_name.' '.$this->last_name);
+    }
+
+    public function auditLabel(): string
+    {
+        return $this->display_name ?: '#'.$this->getKey();
     }
 }

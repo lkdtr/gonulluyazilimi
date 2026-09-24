@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AgreementVersion extends Model
 {
+    use Auditable;
+
     protected $fillable = ['agreement_id', 'version', 'content'];
 
     protected $casts = [
@@ -32,5 +36,10 @@ class AgreementVersion extends Model
     public function isPublished(): bool
     {
         return $this->published_at !== null;
+    }
+
+    public function auditLabel(): string
+    {
+        return ($this->agreement?->title ?? '').' sürüm '.$this->version;
     }
 }

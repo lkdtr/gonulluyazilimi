@@ -2,6 +2,8 @@
 
 namespace Modules\IdCard\Models;
 
+use App\Models\Concerns\Auditable;
+
 use App\Models\AffiliationType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Storage;
  */
 class IdCardTemplate extends Model
 {
+    use Auditable;
+
     /** Fields a card has room for besides the name. */
     public const MAX_FIELDS = 4;
 
@@ -68,5 +72,10 @@ class IdCardTemplate extends Model
     public function formatNumber(int $serial): string
     {
         return $this->number_prefix.str_pad((string) $serial, $this->number_digits, '0', STR_PAD_LEFT);
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->name;
     }
 }

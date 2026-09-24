@@ -13,6 +13,9 @@
             </div>
             <div class="col-auto d-flex gap-2">
                 <a href="{{ route('admin.contacts') }}" class="btn btn-outline-secondary">Listeye dön</a>
+                @if (Auth::user()->canAccess([1]))
+                    <a href="{{ route('admin.process-logs', ['subject' => $contact->getMorphClass(), 'subject_id' => $contact->id]) }}" class="btn btn-outline-secondary"><i class="ti ti-history icon"></i> Değişiklik geçmişi</a>
+                @endif
                 @if ($contact->user)
                     <a href="{{ route('admin.users.show', $contact->user->id) }}" class="btn btn-outline-primary"><i class="ti ti-user icon"></i> Hesap profili</a>
                 @elseif ($canManage)
