@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "bacon/bacon-qr-code": "^3.0",
         "bahricanli/netgsm": "^1.0.3",
         "bahricanli/tckimlik": "^1.0.6",
         "bahricanli/whatsapp-bridge": "^1.2.1",

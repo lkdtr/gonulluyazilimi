@@ -70,6 +70,14 @@ abstract class ModuleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Values shown about a contact outside its profile (e.g. on ID cards).
+     */
+    protected function contactFields(): ContactFields
+    {
+        return $this->app->make(ContactFields::class);
+    }
+
+    /**
      * Figures and charts of the admin panel home.
      */
     protected function dashboard(): Dashboard

@@ -54,6 +54,27 @@ class Contact extends Model
         return $this->hasMany(ContactAffiliation::class);
     }
 
+    public function photos(): HasMany
+    {
+        return $this->hasMany(ContactPhoto::class);
+    }
+
+    /**
+     * The photo shown for the contact: the approved one, if any.
+     */
+    public function approvedPhoto(): HasOne
+    {
+        return $this->hasOne(ContactPhoto::class)->ofMany(['id' => 'max'], fn ($query) => $query->approved());
+    }
+
+    /**
+     * The latest upload waiting for review, or the latest rejection.
+     */
+    public function latestPhotoUpload(): HasOne
+    {
+        return $this->hasOne(ContactPhoto::class)->ofMany(['id' => 'max'], fn ($query) => $query->where('status', '!=', ContactPhoto::APPROVED));
+    }
+
     public function hasAffiliation(string $key): bool
     {
         return $this->affiliations()->active()->ofType($key)->exists();
