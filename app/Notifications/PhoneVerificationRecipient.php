@@ -18,4 +18,14 @@ class PhoneVerificationRecipient
     {
         return $this->phone_number;
     }
+
+    public function routeNotificationForSms(): string
+    {
+        return $this->phone_number;
+    }
+
+    public function routeNotificationForWhatsapp(): string
+    {
+        return $this->phone_number;
+    }
 }

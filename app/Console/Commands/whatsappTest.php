@@ -2,56 +2,31 @@
 
 namespace App\Console\Commands;
 
+use App\Contracts\Messaging\WhatsAppSender;
+use App\Support\Organization;
 use Illuminate\Console\Command;
-use NotificationChannels\WhatsAppBridge\WhatsAppFacade as WhatsApp;
-use NotificationChannels\WhatsAppBridge\WhatsAppMessage;
 
 class whatsappTest extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'whatsapp:test {phone : Alıcı telefon numarası (örn: 905551234567)}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'WhatsApp bridge üzerinden test mesajı gönder';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function handle(WhatsAppSender $whatsApp, Organization $organization): int
     {
-        parent::__construct();
-    }
+        if (! $whatsApp->available()) {
+            $this->error('WhatsApp bridge tanımlı değil (WHATSAPP_BRIDGE_URL).');
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
+            return self::FAILURE;
+        }
+
         $phone = $this->argument('phone');
-        $code  = rand(100000, 999999);
+        $code = random_int(100000, 999999);
 
         $this->info("WhatsApp gönderiliyor → {$phone} (kod: {$code})");
-
-        $message = WhatsAppMessage::create(
-            "{$code} kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name()
-        )->to($phone);
-
-        WhatsApp::sendMessage($message);
-
+        $whatsApp->send($phone, "{$code} kodu ile telefon numaranızı doğrulayabilirsiniz. ".$organization->name());
         $this->info('Gönderildi.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }
