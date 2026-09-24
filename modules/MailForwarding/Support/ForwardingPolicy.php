@@ -36,29 +36,45 @@ class ForwardingPolicy
     }
 
     /**
-     * The domain the user's address is on, or null when not eligible.
+     * Domains the user may hold an address on, in affiliation order, each
+     * with the affiliation names that give it: [domain => 'Gönüllü', ...].
+     * Someone both volunteer and member may get two addresses.
+     *
+     * @return array<string, string>
      */
-    public function domainFor(?User $user): ?string
+    public function domainsFor(?User $user): array
     {
         $domains = $this->domains();
         if (! $user || ! $user->contact_id || $domains === []) {
-            return null;
+            return [];
         }
 
-        $affiliation = ContactAffiliation::active()
+        $result = [];
+        ContactAffiliation::active()
             ->where('contact_id', $user->contact_id)
             ->whereHas('type', fn ($query) => $query->whereIn('key', array_keys($domains)))
             ->with('type')
             ->get()
             ->sortBy(fn (ContactAffiliation $affiliation) => $affiliation->type->sort)
-            ->first();
+            ->each(function (ContactAffiliation $affiliation) use ($domains, &$result) {
+                $domain = $domains[$affiliation->type->key];
+                $result[$domain] = isset($result[$domain]) ? $result[$domain].', '.$affiliation->type->name : $affiliation->type->name;
+            });
 
-        return $affiliation ? $domains[$affiliation->type->key] : null;
+        return $result;
+    }
+
+    /**
+     * The first domain the user may hold an address on, or null when not eligible.
+     */
+    public function domainFor(?User $user): ?string
+    {
+        return array_key_first($this->domainsFor($user));
     }
 
     public function eligible(?User $user): bool
     {
-        return $this->domainFor($user) !== null;
+        return $this->domainsFor($user) !== [];
     }
 
     /**

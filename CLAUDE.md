@@ -68,7 +68,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
   |---|---|---|
   | Admin | `admin` | `/admin` paneli ana sayfası, kişi & kurumlar ve sıfatları, sıfat türleri, roller ve yetkiler, kullanıcılar, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
   | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi, gönüllü sayıları/grafikleri. `requires: reference` |
-  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Kendi başına açılır (`MODULE_MAIL_FORWARDING`; LKD Genç gerektirir). Adresi kimlerin alacağı ve alan adı sıfat türüne göre `/admin/forwarding/settings`'te (`mail_forwarding_domains` ayarı; ayar yoksa `MAIL_FORWARDING_DOMAIN` yalnız gönüllülere). LKD: gönüllü ve üye → penguen.org.tr (üyeler için linux.org.tr planlanıyor). Uygun sıfatı olmayan sayfayı ve menüyü görmez |
+  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Kendi başına açılır (`MODULE_MAIL_FORWARDING`; LKD Genç gerektirir). Adresi kimlerin alacağı ve alan adı sıfat türüne göre `/admin/forwarding/settings`'te (`mail_forwarding_domains` ayarı; ayar yoksa `MAIL_FORWARDING_DOMAIN` yalnız gönüllülere). LKD: gönüllü ve üye → penguen.org.tr (üyeler için linux.org.tr planlanıyor). Uygun sıfatı olmayan sayfayı ve menüyü görmez. Kişi her uygun alan adında ayrı adres alabilir (`email_redirects.domain`, kişi+alan adı benzersiz; ör. gönüllü @penguen.org.tr ve üye @linux.org.tr aynı kişisel adrese); kartta `forwarding_email.<alan adı>` alanı |
   | Reference | `reference` | Referans talebi |
   | EmailChange | `email-change` | Hesap e-postası değişikliği talebi |
   | Announcements | `announcements` | Duyurular, ana sayfa duyuru kartı |

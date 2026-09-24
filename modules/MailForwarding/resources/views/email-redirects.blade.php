@@ -21,8 +21,25 @@
 
                     <div class="separator bottom"><br></div>
 
+                    @if (count($domains) > 1)
+                        <div class="mb-3">
+                            <div class="form-label">Hangi adres?</div>
+                            <div class="btn-group flex-wrap" role="group">
+                                @foreach ($domains as $option => $affiliations)
+                                    @php($existing = $redirects[$option] ?? null)
+                                    <a href="{{ url('/email-redirects') }}?domain={{ $option }}" class="btn {{ $option === $domain ? 'btn-primary' : 'btn-outline-primary' }}">
+                                        {{ '@'.$option }} <span class="small ms-1 opacity-75">({{ $affiliations }})</span>
+                                        @if ($existing && $existing->status == 1)<i class="ti ti-check icon ms-1" title="{{ $existing->email_alias }}"></i>@endif
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="form-hint">Birden fazla sıfatınız için ayrı adresler alabilirsiniz; hepsi aynı kişisel e-posta adresinize yönlenir.</div>
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('email-redirects') }}">
                         @csrf
+                        <input type="hidden" name="domain" value="{{ $domain }}">
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ trans("auth.name") }}</label>

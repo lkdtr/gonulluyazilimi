@@ -1,1 +1,1 @@
-<td>{{ $user->activeEmailRedirect?->email_alias }}</td>
+<td>{{ $user->activeEmailRedirects->pluck('email_alias')->implode(', ') }}</td>
