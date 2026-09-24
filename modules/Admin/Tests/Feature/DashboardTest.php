@@ -46,7 +46,10 @@ class DashboardTest extends TestCase
 
         $stats = $response->viewData('stats');
         $this->assertSame(3, $this->figure($stats, 'Gönüllü'));
-        $this->assertSame(1, $this->figure($stats, 'Üye'));
+        // With the membership module on, members are counted from membership records.
+        $this->assertNull($this->figure($stats, 'Üye'));
+        $this->assertSame(0, $this->figure($stats, 'Aktif üye'));
+        $this->assertSame(4, $this->figure($stats, 'Kayıtlı hesap'));
         $this->assertSame(3, $this->figure($stats, 'Son 30 günde katılan'));
         $this->assertSame(1, $this->figure($stats, 'Referans bekleyen üye'));
         $this->assertSame(1, $this->figure($stats, 'Verilebilir seminer'));

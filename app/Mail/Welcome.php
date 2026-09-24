@@ -30,7 +30,7 @@ class Welcome extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject("LKD Gönüllü Sistemine Hoş Geldiniz")
+        return $this->subject(app(\App\Support\Organization::class)->name().' portalına hoş geldiniz')
                     ->view('emails.welcome')
                     ->with(['data' => $this->data]);
     }
