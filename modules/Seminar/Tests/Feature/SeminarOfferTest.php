@@ -52,8 +52,8 @@ class SeminarOfferTest extends TestCase
             ->assertSessionHas('success-status');
 
         $this->assertDatabaseHas('seminar_offers', ['user_id' => $user->id, 'seminar_subject_id' => $subject->id]);
-        Mail::assertSent(SeminarOfferNotification::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
-        Mail::assertSent(SeminarOfferReceived::class, fn ($mail) => $mail->hasTo($user->email));
+        Mail::assertQueued(SeminarOfferNotification::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
+        Mail::assertQueued(SeminarOfferReceived::class, fn ($mail) => $mail->hasTo($user->email));
     }
 
     public function test_owner_can_accept_a_proposed_subject_into_the_subject_pool(): void

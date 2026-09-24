@@ -43,6 +43,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'contacts', 'Fotoğraf onayı', 'admin.photos', ['photos.review'], 7);
         $menu->add('admin', 'contacts', 'Veri silme talepleri', 'admin.data-deletions', ['data-deletion.manage'], 8);
 
+        $this->dashboard()->stat('Başarısız kuyruk işi', 'alert-triangle', fn () => \Illuminate\Support\Facades\DB::table('failed_jobs')->count(), null, [1], 99, 'Gönderilemeyen e-postalar; queue:failed ile incelenir');
         $this->dashboard()->stat('Veri silme talebi', 'user-x', fn () => \App\Models\DataDeletionRequest::pending()->count(), 'admin.data-deletions', ['data-deletion.manage'], 15, 'Değerlendirme bekleyen');
         $this->dashboard()->stat('Onay bekleyen fotoğraf', 'photo-check', fn () => ContactPhoto::pending()->count(), 'admin.photos', ['photos.review'], 14);
 

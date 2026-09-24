@@ -4,10 +4,11 @@ namespace Modules\EmailChange\Mail;
 
 use Modules\EmailChange\Models\EmailChangeRequest;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EmailChangeRequestSubmitted extends Mailable
+class EmailChangeRequestSubmitted extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

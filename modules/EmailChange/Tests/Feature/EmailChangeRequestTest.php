@@ -42,7 +42,7 @@ class EmailChangeRequestTest extends TestCase
             'requested_email' => 'new@example.test',
             'status' => 'pending',
         ]);
-        Mail::assertSent(EmailChangeRequestSubmitted::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
+        Mail::assertQueued(EmailChangeRequestSubmitted::class, fn ($mail) => $mail->hasTo('yk@lkd.org.tr'));
 
         $this->actingAs($user)->post('/email-change-request', [
             'requested_email' => 'another@example.test',
@@ -82,7 +82,7 @@ class EmailChangeRequestTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $user->id, 'email' => 'new@example.test']);
         $this->assertDatabaseHas('email_redirects', ['user_id' => $user->id, 'email_forwarding' => 'new@example.test']);
         $this->assertDatabaseHas('email_change_requests', ['id' => $changeRequest->id, 'status' => 'approved', 'processed_by' => $owner->id]);
-        Mail::assertSent(EmailChangeRequestProcessed::class, fn ($mail) => $mail->hasTo('new@example.test'));
+        Mail::assertQueued(EmailChangeRequestProcessed::class, fn ($mail) => $mail->hasTo('new@example.test'));
     }
 
     public function test_postfix_failure_keeps_email_change_request_pending(): void
