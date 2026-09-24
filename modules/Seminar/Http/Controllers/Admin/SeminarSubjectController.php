@@ -12,7 +12,7 @@ class SeminarSubjectController extends Controller
 {
     public function getSubjectList() {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -23,7 +23,7 @@ class SeminarSubjectController extends Controller
 
     public function getCreateSubject() {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -33,7 +33,7 @@ class SeminarSubjectController extends Controller
 
     public function postCreateSubject(Request $request) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -60,7 +60,7 @@ class SeminarSubjectController extends Controller
 
     public function getEditSubject($id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -70,7 +70,7 @@ class SeminarSubjectController extends Controller
 
     public function postEditSubject(Request $request, $id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 

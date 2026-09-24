@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\Dashboard;
 use App\Modules\Menu;
 use App\Modules\ModuleManager;
+use App\Modules\Permissions;
 use App\Modules\Slots;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +18,13 @@ class ModulesServiceProvider extends ServiceProvider
         $this->app->singleton(Menu::class);
         $this->app->singleton(Slots::class);
         $this->app->singleton(Dashboard::class);
+        $this->app->singleton(Permissions::class, function () {
+            $permissions = new Permissions();
+            $permissions->group('panel', 'Yönetim paneli', 1);
+            $permissions->register('admin.access', 'Yönetim paneline girebilsin', 'panel', 1);
+
+            return $permissions;
+        });
 
         $modules = $this->app->make(ModuleManager::class);
 

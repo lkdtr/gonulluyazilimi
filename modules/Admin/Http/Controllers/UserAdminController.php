@@ -23,7 +23,7 @@ class UserAdminController extends Controller
 
     public function setManagerRole($user_id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::route('admin.users')->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -45,7 +45,7 @@ class UserAdminController extends Controller
 
     public function setOwnerRole($user_id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::route('admin.users')->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -67,7 +67,7 @@ class UserAdminController extends Controller
 
     public function setUserRole($user_id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::route('admin.users')->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -89,7 +89,7 @@ class UserAdminController extends Controller
 
     public function removeUser($user_id) {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::route('admin.users')->with("danger-status", trans("panel.unauthorized_process"));
         }
 

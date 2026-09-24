@@ -13,7 +13,7 @@ use Illuminate\Support\ServiceProvider;
  *   config.php               merged into config("<name>")
  *   routes/web.php           loaded inside the "web" middleware group
  *   routes/admin.php         admin panel pages: /admin prefix, "admin." route names,
- *                            signed-in owners and managers only (role:1,2)
+ *                            accounts with the admin.access permission
  *   resources/views          available as "<name>::view.name"
  *   database/migrations      loaded by ModulesServiceProvider for every module
  *
@@ -28,8 +28,8 @@ abstract class ModuleServiceProvider extends ServiceProvider
     abstract protected function name(): string;
 
     /**
-     * Register menu items, view slots, dashboard figures (see dashboard())
-     * and listeners of the module.
+     * Register menu items, view slots, dashboard figures (see dashboard()),
+     * permissions (see permissions()) and listeners of the module.
      */
     protected function bootModule(Menu $menu, Slots $slots): void
     {
@@ -54,11 +54,19 @@ abstract class ModuleServiceProvider extends ServiceProvider
             }
 
             if (is_file($routes = $this->modulePath('routes/admin.php'))) {
-                Route::middleware(['web', 'auth', 'role:1,2'])->prefix('admin')->name('admin.')->group($routes);
+                Route::middleware(['web', 'auth', 'permission:admin.access'])->prefix('admin')->name('admin.')->group($routes);
             }
         }
 
         $this->bootModule($this->app->make(Menu::class), $this->app->make(Slots::class));
+    }
+
+    /**
+     * Permission catalogue: register the permission keys the module checks.
+     */
+    protected function permissions(): Permissions
+    {
+        return $this->app->make(Permissions::class);
     }
 
     /**

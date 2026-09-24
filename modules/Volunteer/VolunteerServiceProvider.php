@@ -6,8 +6,10 @@ use App\Events\DashboardVisited;
 use App\Modules\Menu;
 use App\Modules\ModuleServiceProvider;
 use App\Modules\Slots;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
+use Modules\Volunteer\Listeners\MarkAsVolunteer;
 use Modules\Volunteer\Listeners\SubscribeToVolunteerList;
 
 /**
@@ -30,6 +32,7 @@ class VolunteerServiceProvider extends ModuleServiceProvider
 
         View::composer('welcome', fn ($view) => $view->with('title', 'Linux Kullanıcıları Derneği Gönüllüsü Nedir?'));
 
+        Event::listen(Registered::class, MarkAsVolunteer::class);
         Event::listen(DashboardVisited::class, SubscribeToVolunteerList::class);
     }
 }

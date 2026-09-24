@@ -20,7 +20,8 @@ class Menu
 
     /**
      * @param  string  $label  translation key or plain text
-     * @param  int[]  $roles  allowed user roles; empty means every signed-in user
+     * @param  array<int|string>  $roles  legacy access levels (1 owner, 2 manager) and/or
+     *                                    permission keys; empty means every signed-in user
      */
     public function add(string $section, string $group, string $label, string $route, array $roles = [], int $order = 100): void
     {
@@ -43,7 +44,7 @@ class Menu
     {
         $items = array_filter(
             $this->items[$section] ?? [],
-            fn (array $item) => $item['roles'] === [] || ($user && in_array((int) $user->role, $item['roles'], true))
+            fn (array $item) => $item['roles'] === [] || ($user && $user->canAccess($item['roles']))
         );
 
         usort($items, fn (array $a, array $b) => $a['order'] <=> $b['order']);

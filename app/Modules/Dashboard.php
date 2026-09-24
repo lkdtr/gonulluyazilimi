@@ -23,7 +23,7 @@ class Dashboard
      * @param  string  $icon  Tabler icon name, e.g. "users" for "ti ti-users"
      * @param  Closure(): int  $value
      * @param  string|null  $route  page listing the counted records
-     * @param  int[]  $roles  allowed user roles; empty means every panel user
+     * @param  array<int|string>  $roles  legacy access levels and/or permission keys; empty means every panel user
      * @param  string|null  $hint  short note under the figure
      */
     public function stat(string $label, string $icon, Closure $value, ?string $route = null, array $roles = [], int $order = 100, ?string $hint = null): void
@@ -103,7 +103,7 @@ class Dashboard
     {
         $entries = array_values(array_filter(
             $entries,
-            fn (array $entry) => $entry['roles'] === [] || ($user && in_array((int) $user->role, $entry['roles'], true))
+            fn (array $entry) => $entry['roles'] === [] || ($user && $user->canAccess($entry['roles']))
         ));
 
         usort($entries, fn (array $a, array $b) => $a['order'] <=> $b['order']);

@@ -31,7 +31,7 @@
                             <a class="btn btn-primary" href="{{ route('register') }}">{{ trans(config('app.register_label', 'auth.register')) }}</a>
                         @endif
                     @else
-                        @if (in_array((int) Auth::user()->role, [1, 2], true))
+                        @if (in_array(Auth::user()->accessLevel(), [1, 2], true))
                             <a class="btn btn-outline-secondary d-none d-sm-inline-flex" href="{{ route('admin.dashboard') }}">
                                 <i class="ti ti-settings icon"></i>{{ trans("panel.manager_operations") }}
                             </a>
@@ -49,7 +49,7 @@
                         <div class="container-xl">
                             <ul class="navbar-nav">
                                 @include('layouts.partials.menu', ['section' => 'user'])
-                                @if (in_array((int) Auth::user()->role, [1, 2], true))
+                                @if (in_array(Auth::user()->accessLevel(), [1, 2], true))
                                     <li class="nav-item d-sm-none">
                                         <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                             <span class="nav-link-icon"><i class="ti ti-settings icon"></i></span>

@@ -60,10 +60,13 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 
 ## Modüler Yapı
 - Çekirdek `app/` altındadır ve hep açıktır: giriş/kayıt/parola, telefon doğrulama, profil, kullanıcı/rol yönetimi, TC doğrulama, işlem kayıtları, sözleşmeler, ortak servisler (`HtmlSanitizer`, `MailgunMailingList`, `AnnouncementMailing`).
+- Kişi/kurum kaydı (`App\Models\Contact`, `contacts`) çekirdektedir: üyelik, bağış, gönüllülük gibi modüller kişiye bağlanır. Hesap (`User`) kişiden ayrıdır ve `users.contact_id` ile ona işaret eder; hesabı olmayan kişi (ör. kurum, içe aktarılan kayıt) olabilir. Profil alanları kişiye taşınana kadar hesap esas kaynaktır: `User` her kaydedildiğinde `syncContact()` kişiyi günceller. Hesapları yalnız Eloquent ile kaydet; sorgu oluşturucuyla `users` güncellemesi kişiye yansımaz.
+- Sıfatlar (gönüllü, üye, yönetim/denetleme/disiplin kurulu üyesi...) `affiliation_types` tablosunda veridir; kişinin sıfatları `contact_affiliations` satırlarıdır. Bir kişi aynı anda birden fazla sıfat taşıyabilir; biten sıfat silinmez, `ended_at` (sıfatın geçerli olmadığı ilk gün) ile tarihçede kalır. `$contact->affiliate('<anahtar>')`, `endAffiliation()`, `hasAffiliation()`. Koddan yalnız `is_system` türlere (`volunteer`, `member`) başvur. Geçiş döneminde `lkd_user_id` üye sıfatını açar/kapatır; Volunteer modülü kayıtta gönüllü sıfatı verir.
+- Rol ve yetki: `roles` tablosu, yetki anahtarları `permission_role`'de. Hesabın rolleri = doğrudan verilenler (`role_user`) + kişisinin sürmekte olan sıfatlarının rol şablonları (`affiliation_type_role`); sıfat bitince yetki düşer. Sistem rolleri `owner` (Sahip, bütün yetkiler) ve `manager` (Yönetici). Yetki anahtarları kodda kayıtlıdır: çekirdek `admin.access`, modüller `$this->permissions()->register('<anahtar>', '<Türkçe etiket>', '<grup>', <sıra>)`. Kontrol: `$user->hasPermission()`, `isOwner()`, rota için `permission:<anahtar>` middleware. Eski `users.role` sütunu (1 sahip, 2 yönetici, 3 kullanıcı) hâlâ doğrudan owner/manager rolünü belirler ve kaydedilince `role_user`'a yansır; eski ekranlar `accessLevel()` ile aynı 1/2/3 değerini okur, `role:1` middleware'i de buna bakar. Yeni kodda `->role` okuma, yetki anahtarı kullan.
 - Diğer her özellik `modules/<Ad>/` altında bir modüldür (`Modules\<Ad>\` PSR-4). Modüller ve açık/kapalı bayrakları `config/modules.php`'de (`MODULE_*` env):
   | Modül | Anahtar | Not |
   |---|---|---|
-  | Admin | `admin` | `/admin` paneli ana sayfası, kullanıcılar/roller, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
+  | Admin | `admin` | `/admin` paneli ana sayfası, kişi & kurumlar ve sıfatları, sıfat türleri, roller ve yetkiler, kullanıcılar, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
   | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi. `requires: mail-forwarding, reference` |
   | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Domain `MAIL_FORWARDING_DOMAIN` (gönüllü: penguen.org.tr, üyeler için linux.org.tr planlanıyor) |
   | Reference | `reference` | Referans talebi |
@@ -76,7 +79,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 - Kapalı modülün route'ları, menüleri, view'ları ve listener'ları yüklenmez; migration'ları ise her zaman yüklenir (şema modül durumuna bağlı değildir).
 - Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `routes/admin.php` (yönetim sayfaları), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
 - Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
-  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <roller>, <sıra>)`
+  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <erişim>, <sıra>)`; `<erişim>` eski seviyeler (1, 2) ve/veya yetki anahtarları, boşsa herkes
   - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions', [...])`
   - Yönetim paneli ana ekranı (`/admin`): `$this->dashboard()->stat(<etiket>, <ikon>, fn () => <sayı>, <route adı|null>, <roller>, <sıra>, <not>)` ve `->chart(<başlık>, fn () => [<etiket> => <sayı>], 'bar'|'line', <roller>, <sıra>, <açıklama>)`; aylık seri için `Dashboard::monthly($query, 12, cumulative: false)`. Grafikler sunucu tarafında SVG olarak çizilir (`admin::partials.chart`)
   - Çekirdek olaylar (`app/Events`): `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
@@ -84,7 +87,7 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
 
 ## Kullanıcı ve Yönetim Arayüzü
 - Site (`layouts.app`) ile yönetim paneli (`layouts.admin`, `/admin`) ayrıdır; ikisinin de yatay menüsü `Menu` kayıt defterinden gelir (`user` ve `admin` bölümleri). Tek öğeli grup bağlantı, çok öğeli grup `$menu->label(...)` başlıklı açılır menü olur.
-- Yönetim sayfaları modülün `routes/admin.php` dosyasında tanımlanır: otomatik olarak `/admin` önekli, `admin.` adlı ve `auth` + `role:1,2` korumalıdır; yalnızca sahiplere (rol 1) açık olanlar ayrıca `role:1` ile sarılır. Controller'ları `Http/Controllers/Admin/`, view'ları `resources/views/admin/` altındadır ve `layouts.admin`'i genişletir.
+- Yönetim sayfaları modülün `routes/admin.php` dosyasında tanımlanır: otomatik olarak `/admin` önekli, `admin.` adlı ve `auth` + `permission:admin.access` korumalıdır; sayfa kendi yetki anahtarıyla (`permission:<anahtar>`) ayrıca sarılır, eski sahip-yalnız sayfalar `role:1` kullanır. Controller'ları `Http/Controllers/Admin/`, view'ları `resources/views/admin/` altındadır ve `layouts.admin`'i genişletir. `resources/js/jquery.js` `<thead>`'li her tabloya DataTables uygular; sunucuda sayfalanan/filtrelenen tablolara `data-no-datatable` ekle (JS değişince varlıkları Docker'da `node:20` ile `npm run production` derle; yerel Node 26 Mix'i çalıştıramıyor).
 - Eski yönetim adresleri (`/users`, `/announcements`, `/seminar-subjects` vb.) ilgili modülün `routes/web.php` dosyasında 301 ile `/admin/...` karşılığına yönlenir.
 
 ## PostfixAdmin XML-RPC

@@ -11,7 +11,7 @@ class SeminarRequestController extends Controller
 {
     public function getList() {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 

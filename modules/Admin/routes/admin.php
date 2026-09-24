@@ -1,12 +1,49 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\AffiliationTypeController;
+use Modules\Admin\Http\Controllers\ContactAffiliationController;
+use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
 use Modules\Admin\Http\Controllers\ProcessLogController;
 use Modules\Admin\Http\Controllers\ProfileAdminController;
+use Modules\Admin\Http\Controllers\RoleController;
 use Modules\Admin\Http\Controllers\UserAdminController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::middleware('permission:contacts.manage')->group(function () {
+    Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+    Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::post('/contacts/{contact}/affiliations', [ContactAffiliationController::class, 'store'])->name('contacts.affiliations.store');
+    Route::patch('/contacts/{contact}/affiliations/{affiliation}/end', [ContactAffiliationController::class, 'end'])->name('contacts.affiliations.end');
+    Route::delete('/contacts/{contact}/affiliations/{affiliation}', [ContactAffiliationController::class, 'destroy'])->name('contacts.affiliations.destroy');
+});
+
+Route::middleware('permission:contacts.view')->group(function () {
+    Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
+    Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+});
+
+Route::middleware('permission:affiliations.manage')->group(function () {
+    Route::get('/affiliation-types', [AffiliationTypeController::class, 'index'])->name('affiliation-types');
+    Route::get('/affiliation-types/create', [AffiliationTypeController::class, 'create'])->name('affiliation-types.create');
+    Route::post('/affiliation-types', [AffiliationTypeController::class, 'store'])->name('affiliation-types.store');
+    Route::get('/affiliation-types/{affiliationType}/edit', [AffiliationTypeController::class, 'edit'])->name('affiliation-types.edit');
+    Route::put('/affiliation-types/{affiliationType}', [AffiliationTypeController::class, 'update'])->name('affiliation-types.update');
+    Route::delete('/affiliation-types/{affiliationType}', [AffiliationTypeController::class, 'destroy'])->name('affiliation-types.destroy');
+});
+
+Route::middleware('permission:roles.manage')->group(function () {
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+});
 
 Route::get('/users', [UserAdminController::class, 'users'])->name('users');
 Route::get('/users/{user_id}', [ProfileAdminController::class, 'show'])->name('users.show');
