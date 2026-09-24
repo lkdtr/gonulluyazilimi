@@ -31,6 +31,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $this->permissions()->register('contacts.manage', 'Kişi ve kurum ekleyip düzenleyebilsin, sıfat verebilsin', 'contacts', 11);
         $this->permissions()->register('photos.review', 'Profil fotoğraflarını onaylayıp reddedebilsin', 'contacts', 12);
         $this->permissions()->group('settings', 'Ayarlar', 90);
+        $this->permissions()->register('settings.manage', 'Kurum ayarlarını (ad, logo, iletişim, ana sayfa) düzenleyebilsin', 'settings', 89);
         $this->permissions()->register('affiliations.manage', 'Sıfat türlerini düzenleyebilsin', 'settings', 90);
         $this->permissions()->register('roles.manage', 'Rolleri, yetkileri ve rol şablonlarını düzenleyebilsin', 'settings', 91);
 
@@ -42,6 +43,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $this->dashboard()->stat('Onay bekleyen fotoğraf', 'photo-check', fn () => ContactPhoto::pending()->count(), 'admin.photos', ['photos.review'], 14);
 
         $menu->label('admin', 'settings', 'Ayarlar', 'settings');
+        $menu->add('admin', 'settings', 'Kurum ayarları', 'admin.settings.organization', ['settings.manage'], 89);
         $menu->add('admin', 'settings', 'Sıfatlar', 'admin.affiliation-types', ['affiliations.manage'], 90);
         $menu->add('admin', 'settings', 'Roller ve yetkiler', 'admin.roles', ['roles.manage'], 91);
 

@@ -45,7 +45,7 @@ class whatsappTest extends Command
         $this->info("WhatsApp gönderiliyor → {$phone} (kod: {$code})");
 
         $message = WhatsAppMessage::create(
-            "{$code} kodu ile telefon numaranızı doğrulayabilirsiniz. Linux Kullanıcıları Derneği"
+            "{$code} kodu ile telefon numaranızı doğrulayabilirsiniz. ".app(\App\Support\Organization::class)->name()
         )->to($phone);
 
         WhatsApp::sendMessage($message);

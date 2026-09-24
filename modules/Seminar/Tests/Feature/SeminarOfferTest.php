@@ -8,11 +8,20 @@ use Modules\Seminar\Models\SeminarSubjects;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use App\Support\Organization;
 use Tests\TestCase;
 
 class SeminarOfferTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Management notices go to the address set in the organization settings.
+        app(Organization::class)->save(['notification_email' => 'yk@lkd.org.tr', 'frame_ancestors' => "https://lkd.org.tr\nhttps://www.lkd.org.tr"]);
+    }
 
     public function test_guest_can_fill_the_form_but_must_log_in_before_submitting(): void
     {

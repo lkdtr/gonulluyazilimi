@@ -10,11 +10,20 @@ use Modules\Seminar\Models\Organizations;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use App\Support\Organization;
 use Tests\TestCase;
 
 class SeminarRequestTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Management notices go to the address set in the organization settings.
+        app(Organization::class)->save(['notification_email' => 'yk@lkd.org.tr', 'frame_ancestors' => "https://lkd.org.tr\nhttps://www.lkd.org.tr"]);
+    }
 
     public function test_public_catalog_is_available_but_the_request_form_requires_authentication(): void
     {

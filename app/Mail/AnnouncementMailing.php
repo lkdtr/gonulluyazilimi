@@ -32,7 +32,9 @@ class AnnouncementMailing extends Mailable
     public function build()
     {
 
-        return $this->from('gonullu@lkd.org.tr', 'Linux Kullanıcıları Derneği')
+        [$address, $name] = app(\App\Support\Organization::class)->sender();
+
+        return $this->from($address, $name)
                     ->subject($this->data->subject)
                     ->view('emails.mailing_layout')
                     ->with(['data' => $this->data]);

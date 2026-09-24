@@ -63,7 +63,9 @@ class EmailChangeRequestController extends Controller
             'reason' => $request->string('reason')->trim()->value() ?: null,
         ]);
 
-        $this->sendMail('yk@lkd.org.tr', new EmailChangeRequestSubmitted($emailChangeRequest->load('user')));
+        if ($notify = app(\App\Support\Organization::class)->notificationEmail()) {
+            $this->sendMail($notify, new EmailChangeRequestSubmitted($emailChangeRequest->load('user')));
+        }
         $this->set_log('create', $user->email.' e-posta değişikliği talebi oluşturdu.');
 
         return redirect()->route('email-change-requests.create')

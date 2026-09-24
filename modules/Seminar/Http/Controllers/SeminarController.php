@@ -35,7 +35,7 @@ class SeminarController extends Controller
         $response = response()->view('seminar::create_request', compact('seminarSubjects', 'organizations', 'minimumSeminarDate', 'inIframe'));
 
         if ($inIframe) {
-            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+            $response->headers->set('Content-Security-Policy', app(\App\Support\Organization::class)->frameAncestorsPolicy());
         }
 
         return $response;
@@ -80,7 +80,9 @@ class SeminarController extends Controller
         $seminarRequest->save();
         $seminarRequest->load(['user', 'seminarSubject', 'organizationRecord']);
 
-        Mail::to('yk@lkd.org.tr')->send(new SeminarRequestNotification($seminarRequest));
+        if ($notify = app(\App\Support\Organization::class)->notificationEmail()) {
+            Mail::to($notify)->send(new SeminarRequestNotification($seminarRequest));
+        }
         Mail::to($seminarRequest->user->email)->send(new SeminarRequestReceived($seminarRequest));
 
         $this->set_log('create', $seminarSubject->subject.' semineri için talep oluşturuldu');

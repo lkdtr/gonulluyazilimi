@@ -637,7 +637,11 @@
 
         <tr>
             <td align="center">
-                <img alt="Linux Kullanıcıları Derneği" align="center" src="{{env('APP_URL')}}/images/mailing/lkd-logo.png" style="max-width:120px;vertical-align:top;" class="img-responsive">
+                @if ($organization->logoUrl(true))
+                    <img alt="{{ $organization->name() }}" align="center" src="{{ $organization->logoUrl(true) }}" style="max-width:120px;vertical-align:top;" class="img-responsive">
+                @else
+                    <strong>{{ $organization->name() }}</strong>
+                @endif
             </td>
         </tr>
 
@@ -658,69 +662,40 @@
                         </tr>
                     </table>
                     <div class="footer">
+                        @php
+                            $mailIcon = fn (string $name) => rtrim(config('app.url'), '/').'/images/mailing/'.$name.'.png';
+                            $mailLinks = array_filter([
+                                ['home', $organization->get('website_url')],
+                                ['envelope', $organization->get('contact_email') ? 'mailto:'.$organization->get('contact_email') : null],
+                                ['phone', $organization->get('phone') ? 'tel:'.preg_replace('/[^0-9+]/', '', $organization->get('phone')) : null],
+                                ['facebook', $organization->get('social_facebook')],
+                                ['twitter', $organization->get('social_x')],
+                                ['instagram', $organization->get('social_instagram')],
+                                ['linkedin', $organization->get('social_linkedin')],
+                                ['youtube', $organization->get('social_youtube')],
+                                ['whatsapp', $organization->get('social_whatsapp')],
+                            ], fn ($link) => $link[1]);
+                        @endphp
                         <table width="100%">
                             <tr>
                                 <td class="content-block aligncenter" align="center">
-                                    Linux Kullanıcıları Derneği <br>
-
-                                    PK 50, 06430 Yenişehir / Ankara
-
+                                    {{ $organization->name() }}
+                                    @if ($organization->get('address'))
+                                        <br>{{ $organization->get('address') }}
+                                    @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="content-block aligncenter" align="center">
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.lkd.org.tr">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/home.png" alt="home" title="home">
+                            @if ($mailLinks)
+                                <tr>
+                                    <td class="content-block aligncenter" align="center">
+                                        @foreach ($mailLinks as [$icon, $url])
+                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="{{ $url }}">
+                                                <img height="15" width="15" src="{{ $mailIcon($icon) }}" alt="{{ $icon }}" title="{{ $icon }}">
                                             </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="mailto:bilgi@lkd.org.tr">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/envelope.png" alt="envelope" title="envelope">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="tel:+90%20850%20307%20450">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/phone.png" alt="phone" title="phone">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.facebook.com/lkdtr" title="Facebook" alt="Facebook">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/facebook.png" alt="facebook" title="facebook">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://twitter.com/lkdtr" title="X" alt="X">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/twitter.png" alt="X" title="X">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.instagram.com/lkdorgtr/" title="Instagram" alt="Instagram">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/instagram.png" alt="instagram" title="instagram">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://www.linkedin.com/company/linux-kullanicilari-dernegi/" title="Linkedin" alt="Linkedin">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/linkedin.png" alt="linkedin" title="linkedin">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://youtube.com/channel/UC8tIk0G-bmwVoWQI0qHaQmQ" title="Youtube" alt="Youtube">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/youtube.png" alt="youtube" title="youtube">
-                                            </a>
-
-
-                                            <a class="text-nondecorated m-w-sm" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=+90%20850%20307%204502" title="Whatsapp" alt="Whatsapp">
-                                                <img height="15" width="15" src="{{env('APP_URL')}}/images/mailing/whatsapp.png" alt="whatsapp" title="whatsapp">
-                                            </a>
-
-
-                                </td>
-                            </tr>
-
-
-
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            @endif
                         </table>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class LoginController extends Controller
         $response = response()->view('auth.login', compact('inIframe'));
 
         if ($inIframe) {
-            $response->headers->set('Content-Security-Policy', "frame-ancestors 'self' https://lkd.org.tr https://www.lkd.org.tr");
+            $response->headers->set('Content-Security-Policy', app(\App\Support\Organization::class)->frameAncestorsPolicy());
         }
 
         return $response;

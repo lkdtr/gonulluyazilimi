@@ -4,10 +4,12 @@
     @include('layouts.partials.head')
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4XWJ3LM"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    @if ($gtmId = $organization->get('gtm_container_id'))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $gtmId }}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endif
 
     <div class="page" id="app">
         <header class="navbar navbar-expand-md d-print-none">
@@ -19,7 +21,11 @@
                 @endauth
 
                 <a class="navbar-brand pe-0 pe-md-3" href="{{ secure_url('/') }}">
-                    <img src="/images/lkd-gonullusu.png?v3" alt="Linux Kullanıcıları Derneği Gönüllüsü" class="navbar-brand-image">
+                    @if ($organization->logoUrl())
+                        <img src="{{ $organization->logoUrl() }}" alt="{{ $organization->name() }}" class="navbar-brand-image">
+                    @else
+                        <span class="fw-bold text-reset">{{ $organization->shortName() }}</span>
+                    @endif
                 </a>
 
                 <div class="navbar-nav flex-row order-md-last align-items-center gap-2">
