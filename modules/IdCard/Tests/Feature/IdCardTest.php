@@ -208,6 +208,20 @@ class IdCardTest extends TestCase
         $this->get("/kart/{$card->verify_token}")->assertSee('Geçersiz kart');
     }
 
+    public function test_the_qr_code_points_to_the_site_domain_whatever_domain_is_visited(): void
+    {
+        config(['app.url' => 'https://portal.example.org']);
+        IdCardTemplate::query()->update(['requires_photo' => false]);
+        $user = $this->volunteer();
+
+        $html = $this->actingAs($user)->get('http://old.example.org/my-cards')->assertOk()->getContent();
+        $card = IdCard::first();
+
+        $this->assertStringContainsString('href="https://portal.example.org/kart/'.$card->verify_token.'"', $html);
+        $this->assertStringNotContainsString('old.example.org/kart', $html);
+        $this->assertSame('https://portal.example.org/kart/'.$card->verify_token, CardView::verifyUrl($card));
+    }
+
     public function test_masked_names_keep_first_names_and_the_surname_initial(): void
     {
         $this->assertSame('Ayşe Nur Ş****', CardView::maskedName(new Contact(['first_name' => 'Ayşe Nur', 'last_name' => 'şahin'])));
