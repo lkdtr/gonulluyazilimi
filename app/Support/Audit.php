@@ -31,7 +31,11 @@ class Audit
         \App\Models\Agreement::class => 'Sözleşme',
         \App\Models\AgreementVersion::class => 'Sözleşme sürümü',
         \App\Models\ContactPhoto::class => 'Fotoğraf',
+        \App\Models\Tag::class => 'Etiket',
+        \App\Models\CustomField::class => 'Özel alan',
+        \App\Models\CustomFieldValue::class => 'Özel alan değeri',
         \Modules\IdCard\Models\IdCard::class => 'Kimlik kartı',
+        \Modules\Membership\Models\Membership::class => 'Üyelik',
         \Modules\IdCard\Models\IdCardTemplate::class => 'Kart şablonu',
     ];
 

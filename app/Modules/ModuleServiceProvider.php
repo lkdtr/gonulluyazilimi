@@ -78,6 +78,14 @@ abstract class ModuleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Custom field groups: a module registers the groups its fields belong to.
+     */
+    protected function customFields(): \App\Support\CustomFields
+    {
+        return $this->app->make(\App\Support\CustomFields::class);
+    }
+
+    /**
      * Figures and charts of the admin panel home.
      */
     protected function dashboard(): Dashboard

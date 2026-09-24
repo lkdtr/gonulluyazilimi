@@ -98,6 +98,8 @@
         </div>
 
         <div class="col-xl-8">
+            @moduleSlot('admin.contacts.show', ['contact' => $contact])
+
             <div class="card">
                 <div class="card-header"><h3 class="card-title">Sıfatlar</h3></div>
                 <div class="table-responsive">
@@ -199,6 +201,65 @@
                     </form>
                 @endif
             </div>
+
+            @php($allTags = \App\Models\Tag::orderBy('name')->get())
+            @if ($allTags->isNotEmpty() || $contact->tags->isNotEmpty())
+                <div class="card mt-3">
+                    <div class="card-header"><h3 class="card-title">Etiketler</h3></div>
+                    <div class="card-body">
+                        @if ($canManage)
+                            <form method="POST" action="{{ route('admin.contacts.tags.update', $contact) }}" class="d-flex flex-wrap gap-2 align-items-center">
+                                @csrf @method('PUT')
+                                @foreach ($allTags as $tag)
+                                    <label class="form-selectgroup-item">
+                                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-selectgroup-input" @checked($contact->tags->contains($tag))>
+                                        <span class="form-selectgroup-label">{{ $tag->name }}</span>
+                                    </label>
+                                @endforeach
+                                <button type="submit" class="btn btn-sm btn-outline-primary ms-auto">Kaydet</button>
+                            </form>
+                        @else
+                            @forelse ($contact->tags as $tag)
+                                <span class="badge bg-{{ $tag->color }}-lt">{{ $tag->name }}</span>
+                            @empty
+                                <span class="text-secondary">—</span>
+                            @endforelse
+                        @endif
+                    </div>
+                </div>
+            @endif
+
+            @php($customFieldList = app(\App\Support\CustomFields::class)->fieldsFor($contact))
+            @if ($customFieldList->isNotEmpty())
+                @php($customValues = app(\App\Support\CustomFields::class)->values($contact))
+                @php($customGroups = app(\App\Support\CustomFields::class)->groups())
+                <div class="card mt-3">
+                    <div class="card-header"><h3 class="card-title">Ek bilgiler</h3></div>
+                    <div class="card-body">
+                        @if ($canManage)
+                            <form method="POST" action="{{ route('admin.contacts.fields.update', $contact) }}">
+                                @csrf @method('PUT')
+                                <div class="row">
+                                    @foreach ($customFieldList->groupBy('group') as $group => $groupFields)
+                                        <div class="col-12"><div class="form-label text-secondary text-uppercase small mt-1">{{ $customGroups[$group] ?? $group }}</div></div>
+                                        @foreach ($groupFields as $field)
+                                            <div class="col-md-6"><x-custom-field-input :field="$field" :value="$customValues[$field->id] ?? null" bag="contactFields" /></div>
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Kaydet</button>
+                            </form>
+                        @else
+                            <dl class="row mb-0">
+                                @foreach ($customFieldList as $field)
+                                    <dt class="col-5">{{ $field->label }}</dt>
+                                    <dd class="col-7">{{ $field->display($customValues[$field->id] ?? null) ?? '—' }}</dd>
+                                @endforeach
+                            </dl>
+                        @endif
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>
