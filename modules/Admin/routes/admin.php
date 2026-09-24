@@ -5,6 +5,7 @@ use Modules\Admin\Http\Controllers\AffiliationTypeController;
 use Modules\Admin\Http\Controllers\ContactAffiliationController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
+use Modules\Admin\Http\Controllers\PhotoReviewController;
 use Modules\Admin\Http\Controllers\ProcessLogController;
 use Modules\Admin\Http\Controllers\ProfileAdminController;
 use Modules\Admin\Http\Controllers\RoleController;
@@ -25,6 +26,12 @@ Route::middleware('permission:contacts.manage')->group(function () {
 Route::middleware('permission:contacts.view')->group(function () {
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+});
+
+Route::middleware('permission:photos.review')->group(function () {
+    Route::get('/photos', [PhotoReviewController::class, 'index'])->name('photos');
+    Route::patch('/photos/{photo}/approve', [PhotoReviewController::class, 'approve'])->name('photos.approve');
+    Route::patch('/photos/{photo}/reject', [PhotoReviewController::class, 'reject'])->name('photos.reject');
 });
 
 Route::middleware('permission:affiliations.manage')->group(function () {

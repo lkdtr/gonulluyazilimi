@@ -28,6 +28,7 @@
     <server name="MODULE_SEMINAR" value="true"/>
     <server name="MODULE_LKD_YOUNG" value="true"/>
     <server name="MODULE_REPRESENTATION" value="true"/>
+    <server name="MODULE_ID_CARD" value="true"/>
   </php>
   <source>
     <include>

@@ -3,6 +3,7 @@
 use Modules\Admin\AdminServiceProvider;
 use Modules\Announcements\AnnouncementsServiceProvider;
 use Modules\EmailChange\EmailChangeServiceProvider;
+use Modules\IdCard\IdCardServiceProvider;
 use Modules\LkdYoung\LkdYoungServiceProvider;
 use Modules\MailForwarding\MailForwardingServiceProvider;
 use Modules\Reference\ReferenceServiceProvider;
@@ -76,6 +77,11 @@ return [
         'representation' => [
             'enabled' => env('MODULE_REPRESENTATION', false),
             'provider' => RepresentationServiceProvider::class,
+        ],
+
+        'id-card' => [
+            'enabled' => env('MODULE_ID_CARD', false),
+            'provider' => IdCardServiceProvider::class,
         ],
 
     ],
