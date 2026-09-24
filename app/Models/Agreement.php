@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -12,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Agreement extends Model
 {
+    use Auditable;
+
     /** Privacy policy (KVKK), accepted on registration. */
     public const PRIVACY = 'kvkk';
 
@@ -38,5 +42,10 @@ class Agreement extends Model
     public static function findByKey(string $key): ?self
     {
         return static::where('key', $key)->first();
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->title;
     }
 }

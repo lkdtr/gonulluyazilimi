@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
  */
 class ContactPhoto extends Model
 {
+    use Auditable;
+
     public const PENDING = 'pending';
 
     public const APPROVED = 'approved';
@@ -81,5 +85,10 @@ class ContactPhoto extends Model
         Storage::disk('local')->delete($this->path);
 
         $this->forceFill(['status' => self::REJECTED, 'reviewed_by' => $reviewer->id, 'reviewed_at' => now(), 'rejection_reason' => $reason])->save();
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->contact?->display_name;
     }
 }

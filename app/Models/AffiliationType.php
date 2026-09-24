@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class AffiliationType extends Model
 {
+    use Auditable;
+
     public const VOLUNTEER = 'volunteer';
 
     public const MEMBER = 'member';
@@ -41,5 +45,10 @@ class AffiliationType extends Model
     public function affiliations(): HasMany
     {
         return $this->hasMany(ContactAffiliation::class);
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->name;
     }
 }

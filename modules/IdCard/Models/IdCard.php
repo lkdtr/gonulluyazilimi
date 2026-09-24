@@ -2,6 +2,8 @@
 
 namespace Modules\IdCard\Models;
 
+use App\Models\Concerns\Auditable;
+
 use App\Models\Contact;
 use App\Models\ContactAffiliation;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class IdCard extends Model
 {
+    use Auditable;
+
     public const VALID = 'valid';
 
     public const REVOKED = 'revoked';
@@ -73,5 +77,10 @@ class IdCard extends Model
     public function renewVerifyToken(): void
     {
         $this->forceFill(['verify_token' => self::newVerifyToken()])->save();
+    }
+
+    public function auditLabel(): string
+    {
+        return (string) $this->number;
     }
 }
