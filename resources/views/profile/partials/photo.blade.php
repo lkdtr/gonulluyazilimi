@@ -2,15 +2,15 @@
     Profile photo on the profile page. $approved and $upload (?ContactPhoto);
     $editable: the signed-in person's own profile, with upload and delete.
 --}}
-<div class="card mb-3" id="photo">
+<div class="card h-100" id="photo">
     <div class="card-header"><h3 class="card-title">Fotoğraf</h3></div>
     <div class="card-body">
         @if ($editable)
-            <p class="text-secondary">Fotoğrafınız kimlik kartlarınızda kullanılır. Yüzünüzün net göründüğü, önden çekilmiş vesikalık (5×6) bir fotoğraf yükleyin. Fotoğraf yönetici onayından sonra görünür; yalnız siz ve yetkili yöneticiler görebilir.</p>
+            <p class="text-secondary small">Fotoğrafınız kimlik kartlarınızda kullanılır. Yüzünüzün net göründüğü, önden çekilmiş vesikalık (5×6) bir fotoğraf yükleyin. Fotoğraf yönetici onayından sonra görünür; yalnız siz ve yetkili yöneticiler görebilir.</p>
         @endif
 
-        <div class="row g-4 align-items-start">
-            <div class="col-sm-auto text-center">
+        <div class="row g-3 justify-content-center">
+            <div class="col-auto text-center">
                 <div class="form-label">Onaylı fotoğraf</div>
                 @if ($approved)
                     <img src="{{ route('photos.show', $approved) }}" alt="Onaylı fotoğraf" class="rounded border" style="width: 150px; height: 180px; object-fit: cover;">
@@ -22,7 +22,7 @@
             </div>
 
             @if ($upload)
-                <div class="col-sm-auto text-center">
+                <div class="col-auto text-center">
                     <div class="form-label">Son yükleme</div>
                     @if ($upload->isPending())
                         <img src="{{ route('photos.show', $upload) }}" alt="Onay bekleyen fotoğraf" class="rounded border" style="width: 150px; height: 180px; object-fit: cover;">
@@ -40,18 +40,18 @@
             @endif
 
             @if ($editable)
-                <div class="col">
+                <div class="col-12">
                     <form method="POST" action="{{ route('my-photo.store') }}" enctype="multipart/form-data">
                         @csrf
                         <label for="photo-file" class="form-label">{{ $approved || $upload ? 'Yeni fotoğraf yükle' : 'Fotoğraf yükle' }}</label>
                         <input id="photo-file" type="file" name="photo" accept="image/jpeg,image/png,image/webp" class="form-control @error('photo') is-invalid @enderror" required>
                         @error('photo')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         <div class="form-hint">JPEG, PNG veya WebP; en az 240×240 piksel, en çok 4 MB.</div>
-                        <button type="submit" class="btn btn-primary mt-3"><i class="ti ti-upload icon"></i> Onaya gönder</button>
+                        <button type="submit" class="btn btn-primary w-100 mt-3"><i class="ti ti-upload icon"></i> Onaya gönder</button>
                     </form>
 
                     @if ($approved || $upload)
-                        <form method="POST" action="{{ route('my-photo.destroy') }}" class="mt-3" onsubmit="return confirm('Fotoğraflarınız silinsin mi?')">
+                        <form method="POST" action="{{ route('my-photo.destroy') }}" class="mt-2 text-center" onsubmit="return confirm('Fotoğraflarınız silinsin mi?')">
                             @csrf @method('DELETE')
                             <button type="submit" class="btn btn-ghost-danger btn-sm"><i class="ti ti-trash icon"></i> Fotoğrafımı sil</button>
                         </form>
