@@ -74,7 +74,7 @@
                                     <span class="text-danger">Bu kart iptal edildi{{ $card->revoked_reason ? ': '.$card->revoked_reason : '' }}.</span>
                                 @else
                                     <button type="button" class="btn btn-primary" onclick="printIdCard('id-card-{{ $card->id }}')"><i class="ti ti-printer icon"></i> Yazdır / PDF olarak kaydet</button>
-                                    <a href="{{ route('id-card.verify', $card->verify_token) }}" target="_blank" rel="noopener" class="btn btn-outline-secondary"><i class="ti ti-shield-check icon"></i> Doğrulama sayfası</a>
+                                    <a href="{{ \Modules\IdCard\Support\CardView::verifyUrl($card) }}" target="_blank" rel="noopener" class="btn btn-outline-secondary"><i class="ti ti-shield-check icon"></i> Doğrulama sayfası</a>
                                     <form method="POST" action="{{ route('id-cards.renew', $card) }}" class="ms-auto" onsubmit="return confirm('QR kod yenilensin mi? Kartın eski çıktıları ve ekran görüntüleri artık doğrulanmaz.')">
                                         @csrf
                                         <button type="submit" class="btn btn-ghost-secondary" title="Kartınızın görüntüsü başkasının eline geçtiyse eski QR kodu geçersiz kılar"><i class="ti ti-refresh icon"></i> QR kodu yenile</button>

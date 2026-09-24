@@ -9,7 +9,7 @@
 
     <div class="container" style="padding: 1rem; background: #f5f5f5;">
         <p>
-            <a href="https://gonullu.lkd.org.tr" style="text-decoration: none; color: #004153; font-weight: bold;">
+            <a href="{{ config('app.url') }}" style="text-decoration: none; color: #004153; font-weight: bold;">
                 <table>
                     <tbody>
                         <tr>
