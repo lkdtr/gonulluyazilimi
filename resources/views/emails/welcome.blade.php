@@ -13,11 +13,13 @@
                 <table>
                     <tbody>
                         <tr>
+                            @if ($organization->logoUrl(true))
+                                <td>
+                                    <img src="{{ $organization->logoUrl(true) }}" alt="{{ $organization->name() }}" style="height: 50px;">
+                                </td>
+                            @endif
                             <td>
-                                <img src="https://www.lkd.org.tr/wp-content/uploads/2022/03/cropped-LKD_logo.gif" style="height: 50px;">
-                            </td>
-                            <td>
-                                <span style="font-size: 20px;"> Gönüllü Sistemi</span>
+                                <span style="font-size: 20px;"> {{ $organization->name() }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -26,7 +28,10 @@
         </p>
         <p>Sayın {{$data->name." ".$data->surname}}</p>
         <p>
-            Linux Kullanıcıları Derneği Gönüllü Sistemine hoş geldiniz. Gönüllü Sistemi deneme aşamasında olduğu için hatalar ve eksikler olabilir. Yorum, eleştiri ve önerilerinizi üye <a href="mailto:gonullu@lkd.org.tr">e-posta</a> adresine gönderebilirsiniz.
+            {{ $organization->name() }} portalına hoş geldiniz.
+            @if ($organization->get('contact_email'))
+                Yorum, eleştiri ve önerilerinizi <a href="mailto:{{ $organization->get('contact_email') }}">{{ $organization->get('contact_email') }}</a> adresine gönderebilirsiniz.
+            @endif
         </p>
     </div>
 

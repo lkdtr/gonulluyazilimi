@@ -9,4 +9,4 @@
     <li><strong>Tercih edilen tarih aralığı:</strong> {{ $seminarRequest->seminar_start_date->format('d.m.Y') }}@if(!$seminarRequest->seminar_start_date->isSameDay($seminarRequest->seminar_end_date)) – {{ $seminarRequest->seminar_end_date->format('d.m.Y') }}@endif</li>
 </ul>
 
-<p>Linux Kullanıcıları Derneği</p>
+<p>{{ $organization->name() }}</p>

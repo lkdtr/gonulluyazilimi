@@ -5,6 +5,7 @@ use Modules\Admin\Http\Controllers\AffiliationTypeController;
 use Modules\Admin\Http\Controllers\ContactAffiliationController;
 use Modules\Admin\Http\Controllers\ContactController;
 use Modules\Admin\Http\Controllers\DashboardController;
+use Modules\Admin\Http\Controllers\OrganizationSettingsController;
 use Modules\Admin\Http\Controllers\PhotoReviewController;
 use Modules\Admin\Http\Controllers\ProcessLogController;
 use Modules\Admin\Http\Controllers\ProfileAdminController;
@@ -26,6 +27,12 @@ Route::middleware('permission:contacts.manage')->group(function () {
 Route::middleware('permission:contacts.view')->group(function () {
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+});
+
+Route::middleware('permission:settings.manage')->group(function () {
+    Route::get('/settings/organization', [OrganizationSettingsController::class, 'edit'])->name('settings.organization');
+    Route::put('/settings/organization', [OrganizationSettingsController::class, 'update'])->name('settings.organization.update');
+    Route::post('/settings/organization/images', [OrganizationSettingsController::class, 'uploadImage'])->middleware('throttle:30,1')->name('settings.organization.images');
 });
 
 Route::middleware('permission:photos.review')->group(function () {

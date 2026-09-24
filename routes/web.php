@@ -47,6 +47,10 @@ Route::post('/phone-number-verification', [App\Http\Controllers\MobileVerificati
 Route::get('/my-infos', [App\Http\Controllers\UserController::class, 'getMyInfos'])->name('my-infos');
 Route::post('/my-infos', [App\Http\Controllers\UserController::class, 'postMyInfos']);
 
+Route::get('/organization/logo', [App\Http\Controllers\OrganizationFileController::class, 'logo'])->name('organization.logo');
+Route::get('/organization/favicon', [App\Http\Controllers\OrganizationFileController::class, 'favicon'])->name('organization.favicon');
+Route::get('/organization/images/{name}', [App\Http\Controllers\OrganizationFileController::class, 'image'])->where('name', '[A-Za-z0-9]+\.(png|jpe?g|webp|gif)')->name('organization.image');
+
 Route::middleware('auth')->group(function () {
     // The photo moved onto the profile page.
     Route::permanentRedirect('/my-photo', '/my-infos#photo');
