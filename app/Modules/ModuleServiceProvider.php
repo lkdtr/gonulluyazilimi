@@ -86,6 +86,14 @@ abstract class ModuleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Tabs of the profile page ("Bilgilerim").
+     */
+    protected function profileTabs(): ProfileTabs
+    {
+        return $this->app->make(ProfileTabs::class);
+    }
+
+    /**
      * Figures and charts of the admin panel home.
      */
     protected function dashboard(): Dashboard

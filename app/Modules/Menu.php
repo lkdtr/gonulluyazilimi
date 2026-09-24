@@ -22,10 +22,11 @@ class Menu
      * @param  string  $label  translation key or plain text
      * @param  array<int|string>  $roles  legacy access levels (1 owner, 2 manager) and/or
      *                                    permission keys; empty means every signed-in user
+     * @param  \Closure(?Authenticatable): bool|null  $when  further condition on the user, e.g. an affiliation
      */
-    public function add(string $section, string $group, string $label, string $route, array $roles = [], int $order = 100): void
+    public function add(string $section, string $group, string $label, string $route, array $roles = [], int $order = 100, ?\Closure $when = null): void
     {
-        $this->items[$section][] = compact('group', 'label', 'route', 'roles', 'order');
+        $this->items[$section][] = compact('group', 'label', 'route', 'roles', 'order', 'when');
     }
 
     /**
@@ -44,7 +45,8 @@ class Menu
     {
         $items = array_filter(
             $this->items[$section] ?? [],
-            fn (array $item) => $item['roles'] === [] || ($user && $user->canAccess($item['roles']))
+            fn (array $item) => ($item['roles'] === [] || ($user && $user->canAccess($item['roles'])))
+                && ($item['when'] === null || ($item['when'])($user))
         );
 
         usort($items, fn (array $a, array $b) => $a['order'] <=> $b['order']);

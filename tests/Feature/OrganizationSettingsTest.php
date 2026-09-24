@@ -147,6 +147,7 @@ class OrganizationSettingsTest extends TestCase
         $this->assertSame('kept@ornek.org.tr', $organization->get('contact_email'));
         $this->assertSame('yk@lkd.org.tr', $organization->notificationEmail());
         $this->assertSame('LKD', $organization->shortName());
+        $this->assertSame(['volunteer' => 'penguen.org.tr', 'member' => 'penguen.org.tr'], json_decode($organization->get('mail_forwarding_domains'), true));
         Storage::disk('local')->assertExists($organization->get('logo_path'));
     }
 }

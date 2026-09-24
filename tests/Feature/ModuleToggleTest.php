@@ -40,6 +40,13 @@ class ModuleToggleTest extends TestCase
         }
     }
 
+    public function test_mail_forwarding_is_off_when_no_enabled_module_needs_it(): void
+    {
+        // phpunit.xml does not set MODULE_MAIL_FORWARDING; only volunteer and lkd-young require it.
+        $this->assertFalse(app(\App\Modules\ModuleManager::class)->enabled('mail-forwarding'));
+        $this->assertFalse(\Illuminate\Support\Facades\Route::has('email-redirects'));
+    }
+
     public function test_disabled_modules_register_no_routes(): void
     {
         $user = User::factory()->create();

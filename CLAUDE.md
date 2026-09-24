@@ -67,23 +67,24 @@ TCKIMLIK_TOR_PROXY=socks5h://127.0.0.1:9050
   | Modül | Anahtar | Not |
   |---|---|---|
   | Admin | `admin` | `/admin` paneli ana sayfası, kişi & kurumlar ve sıfatları, sıfat türleri, roller ve yetkiler, kullanıcılar, TC doğrulama, işlem kayıtları. `locked`: kapatılamaz |
-  | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi. `requires: mail-forwarding, reference` |
-  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Domain `MAIL_FORWARDING_DOMAIN` (gönüllü: penguen.org.tr, üyeler için linux.org.tr planlanıyor) |
+  | Volunteer | `volunteer` | Gönüllü tanıtım metinleri, "Gönüllü Ol" etiketi, gönüllü Mailgun listesi, gönüllü sayıları/grafikleri. `requires: reference` |
+  | MailForwarding | `mail-forwarding` | `ad.soyad@<domain>` yönlendirmesi (PostfixAdmin). Kendi başına açılır (`MODULE_MAIL_FORWARDING`; LKD Genç gerektirir). Adresi kimlerin alacağı ve alan adı sıfat türüne göre `/admin/forwarding/settings`'te (`mail_forwarding_domains` ayarı; ayar yoksa `MAIL_FORWARDING_DOMAIN` yalnız gönüllülere). LKD: gönüllü ve üye → penguen.org.tr (üyeler için linux.org.tr planlanıyor). Uygun sıfatı olmayan sayfayı ve menüyü görmez |
   | Reference | `reference` | Referans talebi |
   | EmailChange | `email-change` | Hesap e-postası değişikliği talebi |
   | Announcements | `announcements` | Duyurular, ana sayfa duyuru kartı |
   | Seminar | `seminar` | Seminer konuları, talepleri, verme başvuruları |
   | LkdYoung | `lkd-young` | LKD Genç. `requires: mail-forwarding` |
   | Representation | `representation` | Temsilcilikler |
-  | Membership | `membership` | Üyelik kaydı (`memberships`: üye no kurulumda benzersiz, durum başvuru/üye/askıda/ayrıldı, tarihler, DERBİS) ve tarihçesi (`membership_events`). Aktif üyelik çekirdek "member" sıfatını açar/kapatır. Üye no `users.lkd_user_id`'nin yerini aldı (migration taşır); `member_number` kişi alanını modül verir. Yönetim `/admin/memberships`, kişi sayfasında "Üyelik" bölümü, profilde üyelik ve tarihçe |
+  | Membership | `membership` | Üyelik kaydı (`memberships`: üye no kurulumda benzersiz, durum başvuru/üye/askıda/ayrıldı, tarihler, DERBİS) ve tarihçesi (`membership_events`). Aktif üyelik çekirdek "member" sıfatını açar/kapatır. Üye no `users.lkd_user_id`'nin yerini aldı (migration taşır); `member_number` kişi alanını modül verir. Yönetim `/admin/memberships`, kişi sayfasında "Üyelik" bölümü, profilde "Üyelik" sekmesi |
   | IdCard | `id-card` | Sanal kimlik kartı: sıfat türü başına şablon (`/admin/id-cards`), kişi başına her aktif sıfat için kart (`/my-cards`, hesap menüsünde "Kimlik kartlarım"), herkese açık QR doğrulama `/kart/{token}` (maskeli ad). Geçerlilik sıfattan gelir |
 - Bir modül, açık olan başka bir modülün `requires` listesindeyse kendi bayrağı olmasa da otomatik açılır (ör. `mail-forwarding`, `reference`); onu isteyen modül kapanınca o da kapanır.
 - Kapalı modülün route'ları, menüleri, view'ları ve listener'ları yüklenmez; migration'ları ise her zaman yüklenir (şema modül durumuna bağlı değildir).
 - Modül dizini: `<Ad>ServiceProvider.php` (`App\Modules\ModuleServiceProvider`'dan türer), `config.php` (`config('<anahtar>')`), `routes/web.php` (web middleware), `routes/admin.php` (yönetim sayfaları), `resources/views` (`<anahtar>::view`), `database/migrations`, `Http`, `Models`, `Mail`, `Listeners`, `Tests/Feature` (`Modules\<Ad>\Tests\Feature`).
 - Bağımlılık kuralı: çekirdek hiçbir modüle referans vermez. Modül çekirdeği ve `requires` listesindeki modülleri doğrudan kullanabilir; diğer modüllerle yalnızca şunlar üzerinden konuşur:
-  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <erişim>, <sıra>)`; `<erişim>` eski seviyeler (1, 2) ve/veya yetki anahtarları, boşsa herkes
-  - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'account.menu' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions' | 'account.menu' | 'admin.data-deletion.notes' | 'admin.contacts.show' | 'profile.sections', [...])`
+  - Menü: `$menu->add('user'|'admin', <grup>, <etiket/çeviri anahtarı>, <route adı>, <erişim>, <sıra>, <isteğe bağlı fn ($user) => bool görünürlük koşulu>)`; `<erişim>` eski seviyeler (1, 2) ve/veya yetki anahtarları, boşsa herkes
+  - Slot: `$slots->push('<slot>', '<view>')`; çekirdek view'larda `@moduleSlot('home.top' | 'home.main' | 'welcome.intro' | 'welcome.sections' | 'account.menu' | 'admin.users.head' | 'admin.users.cell' | 'admin.users.actions' | 'account.menu' | 'admin.data-deletion.notes' | 'admin.contacts.show', [...])`
   - Yönetim paneli ana ekranı (`/admin`): `$this->dashboard()->stat(<etiket>, <ikon>, fn () => <sayı>, <route adı|null>, <roller>, <sıra>, <not>)` ve `->chart(<başlık>, fn () => [<etiket> => <sayı>], 'bar'|'line', <roller>, <sıra>, <açıklama>)`; aylık seri için `Dashboard::monthly($query, 12, cumulative: false)`. Grafikler sunucu tarafında SVG olarak çizilir (`admin::partials.chart`)
+  - Profil sekmeleri ("Bilgilerim"): `$this->profileTabs()->add(<anahtar>, <etiket>, <view>, <sıra>, [<özel alan grupları>], <ikon>)`; çekirdek sekmeler Kişisel, İletişim, Gizlilik ve Ayarlar. Hiçbir sekmenin sahiplenmediği alan grubu ilk sekmede görünür
   - Kişi alanları (kimlik kartı gibi profil dışı gösterimler): `$this->contactFields()->register(<anahtar>, <etiket>, fn (Contact $contact) => ?string, <sıra>)`; çekirdek ad, soyad, e-posta, telefon, il, üye no'yu kaydeder
   - Çekirdek olaylar (`app/Events`): `ContactAnonymized` (KVKK silme onayında; modül kişinin kendi tablolarındaki kişisel verisini siler/anonimleştirir), `DashboardVisited`, `ProfileUpdated` (listener `$redirect` atayabilir), `UserEmailChanging` (listener `App\Exceptions\ActionBlocked` fırlatarak işlemi iptal eder), `UserEmailChanged`
   - View içinde isteğe bağlı içerik: `@module('<anahtar>') ... @endmodule`

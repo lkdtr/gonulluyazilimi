@@ -38,6 +38,10 @@ class LkdOrganizationSeeder extends Seeder
             'frame_ancestors' => "https://lkd.org.tr\nhttps://www.lkd.org.tr",
             'ga_measurement_id' => 'G-FH9QSFK0HF',
             'gtm_container_id' => 'GTM-T4XWJ3LM',
+            // Association addresses: volunteers and members on penguen.org.tr
+            // (members are planned to move to linux.org.tr).
+            'mail_forwarding_domains' => json_encode(['volunteer' => 'penguen.org.tr', 'member' => 'penguen.org.tr']),
+            'mail_forwarding_label' => 'Gönüllü e-posta adresi',
         ];
 
         if (! $organization->get('logo_path') && is_file($logo = public_path('images/lkd-gonullusu.png'))) {

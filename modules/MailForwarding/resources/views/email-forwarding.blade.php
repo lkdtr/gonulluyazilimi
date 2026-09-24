@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@php($domain = config('mail-forwarding.domain'))
+@php($domain = $domain ?? config('mail-forwarding.domain'))
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
