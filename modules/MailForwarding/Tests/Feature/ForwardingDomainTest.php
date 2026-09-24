@@ -20,4 +20,12 @@ class ForwardingDomainTest extends TestCase
         ])->assertRedirect('/email-forwarding')
             ->assertSessionHasErrors('email_alias');
     }
+
+    public function test_the_dashboard_names_the_forwarding_domain(): void
+    {
+        $this->actingAs(User::factory()->create(['role' => 1]))->get('/admin')
+            ->assertOk()
+            ->assertSee('@'.config('mail-forwarding.domain').' adresi')
+            ->assertDontSee('@linux.org.tr adresi');
+    }
 }
