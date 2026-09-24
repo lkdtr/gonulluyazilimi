@@ -12,9 +12,12 @@ class ModuleToggleTest extends TestCase
 
     private const DISABLED = ['MODULE_VOLUNTEER', 'MODULE_LKD_YOUNG'];
 
+    private array $saved = [];
+
     protected function setUp(): void
     {
         foreach (self::DISABLED as $name) {
+            $this->saved[$name] = [$_SERVER[$name] ?? null, $_ENV[$name] ?? null];
             $_ENV[$name] = $_SERVER[$name] = 'false';
         }
 
@@ -25,8 +28,15 @@ class ModuleToggleTest extends TestCase
     {
         parent::tearDown();
 
-        foreach (self::DISABLED as $name) {
-            unset($_ENV[$name], $_SERVER[$name]);
+        // Put back the values phpunit.xml set, so later tests see the modules on.
+        foreach ($this->saved as $name => [$server, $env]) {
+            unset($_SERVER[$name], $_ENV[$name]);
+            if ($server !== null) {
+                $_SERVER[$name] = $server;
+            }
+            if ($env !== null) {
+                $_ENV[$name] = $env;
+            }
         }
     }
 

@@ -18,9 +18,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | Every feature outside the core lives in modules/<Name> and is booted only
-    | when enabled. A module listed in "requires" of an enabled module is
-    | enabled automatically; so a module that only the volunteer module needs
-    | (enabled => false) is switched off together with it.
+    | when enabled. A module is enabled only when its MODULE_* variable is set
+    | to true in .env; a missing variable leaves it off, so a new installation
+    | starts with the core and turns on what it needs. A module listed in
+    | "requires" of an enabled module is enabled automatically.
     |
     | Migrations of every module are always loaded, so the schema does not
     | depend on which modules are enabled. A "locked" module cannot be
@@ -36,7 +37,7 @@ return [
         ],
 
         'volunteer' => [
-            'enabled' => env('MODULE_VOLUNTEER', true),
+            'enabled' => env('MODULE_VOLUNTEER', false),
             'provider' => VolunteerServiceProvider::class,
             'requires' => ['mail-forwarding', 'reference'],
         ],
@@ -52,28 +53,28 @@ return [
         ],
 
         'email-change' => [
-            'enabled' => env('MODULE_EMAIL_CHANGE', true),
+            'enabled' => env('MODULE_EMAIL_CHANGE', false),
             'provider' => EmailChangeServiceProvider::class,
         ],
 
         'announcements' => [
-            'enabled' => env('MODULE_ANNOUNCEMENTS', true),
+            'enabled' => env('MODULE_ANNOUNCEMENTS', false),
             'provider' => AnnouncementsServiceProvider::class,
         ],
 
         'seminar' => [
-            'enabled' => env('MODULE_SEMINAR', true),
+            'enabled' => env('MODULE_SEMINAR', false),
             'provider' => SeminarServiceProvider::class,
         ],
 
         'lkd-young' => [
-            'enabled' => env('MODULE_LKD_YOUNG', true),
+            'enabled' => env('MODULE_LKD_YOUNG', false),
             'provider' => LkdYoungServiceProvider::class,
             'requires' => ['mail-forwarding'],
         ],
 
         'representation' => [
-            'enabled' => env('MODULE_REPRESENTATION', true),
+            'enabled' => env('MODULE_REPRESENTATION', false),
             'provider' => RepresentationServiceProvider::class,
         ],
 
