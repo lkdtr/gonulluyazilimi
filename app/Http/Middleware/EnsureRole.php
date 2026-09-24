@@ -10,7 +10,7 @@ class EnsureRole
 {
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        if (! $request->user() || ! in_array((string) $request->user()->role, $roles, true)) {
+        if (! $request->user() || ! in_array((string) $request->user()->accessLevel(), $roles, true)) {
             abort(403);
         }
 

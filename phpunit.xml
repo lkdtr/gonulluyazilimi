@@ -22,6 +22,12 @@
     <server name="QUEUE_CONNECTION" value="sync"/>
     <server name="SESSION_DRIVER" value="array"/>
     <server name="TELESCOPE_ENABLED" value="false"/>
+    <server name="MODULE_VOLUNTEER" value="true"/>
+    <server name="MODULE_EMAIL_CHANGE" value="true"/>
+    <server name="MODULE_ANNOUNCEMENTS" value="true"/>
+    <server name="MODULE_SEMINAR" value="true"/>
+    <server name="MODULE_LKD_YOUNG" value="true"/>
+    <server name="MODULE_REPRESENTATION" value="true"/>
   </php>
   <source>
     <include>

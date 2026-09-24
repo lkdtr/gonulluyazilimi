@@ -22,8 +22,9 @@ jQuery(function () {
 
     // DataTables needs a header row and a uniform column count: skip tables without
     // a thead (e.g. hidden chart data) and ones showing a colspan "no records" row.
+    // Tables paginated and filtered on the server opt out with data-no-datatable.
     $('table').filter(function () {
-        return $(this).children('thead').length && !$(this).find('tbody td[colspan]').length;
+        return $(this).children('thead').length && !$(this).find('tbody td[colspan]').length && !$(this).is('[data-no-datatable]');
     }).dataTable({
         language: languageTR,
         pageLength: 25,

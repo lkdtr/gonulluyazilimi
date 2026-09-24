@@ -84,7 +84,7 @@ class UserController extends Controller
             }
         }
 
-        if ($request->has('lkd_user_id') && in_array(Auth::user()->role, [1, 2], true)) {
+        if ($request->has('lkd_user_id') && in_array(Auth::user()->accessLevel(), [1, 2], true)) {
             $user->lkd_user_id = $request->get("lkd_user_id");
         }
 

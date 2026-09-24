@@ -42,7 +42,7 @@
                                 <td>{{$announcement->getUpdatedBy()->name}} {{$announcement->getUpdatedBy()->surname}}</td>
                                 <td>{{date("d-m-Y H:i:s", strtotime($announcement->updated_at))}}</td>
                                 <td>
-                                    @if( Auth::user()->role==1)
+                                    @if( Auth::user()->isOwner())
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ trans("panel.processes") }}

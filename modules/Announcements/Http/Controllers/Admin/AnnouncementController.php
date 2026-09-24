@@ -35,7 +35,7 @@ class AnnouncementController extends Controller
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
-            if(Auth::user()->role!=1 )  {
+            if(! Auth::user()->isOwner())  {
                 return redirect('/login')->with('redirect', URL::full() );
             }
 
@@ -52,7 +52,7 @@ class AnnouncementController extends Controller
 
     public function postCreate(Request $request) {
 
-       if (Auth::user()->role!=1 ) {
+       if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -99,7 +99,7 @@ class AnnouncementController extends Controller
 
     public function getList() {
 
-        if (Auth::user()->role!=1 ) {
+        if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 
@@ -117,7 +117,7 @@ class AnnouncementController extends Controller
 
     public function postEdit(Request $request, $id) {
 
-       if (Auth::user()->role!=1 ) {
+       if (! Auth::user()->isOwner()) {
             return Redirect::to(secure_url('/home'))->with("danger-status", trans("panel.unauthorized_process"));
         }
 

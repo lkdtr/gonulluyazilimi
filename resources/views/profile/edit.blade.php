@@ -73,7 +73,7 @@
                             </div>
                         </div>
 
-                        @if( (Auth::user()->role==1) || (Auth::user()->role==2) )
+                        @if( Auth::user()->accessLevel() <= 2 )
                         <div class="row mb-3">
                             <label for="lkd_user_id" class="col-md-4 col-form-label text-md-end">
                                 {{ trans("auth.lkd_user_id") }}
