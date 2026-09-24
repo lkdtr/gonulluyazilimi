@@ -38,5 +38,14 @@ class SeminarServiceProvider extends ModuleServiceProvider
         $this->dashboard()->chart('Aylık seminer talebi', fn () => Dashboard::monthly(SeminarRequests::query()), 'bar', [1], 30, 'Son 12 ayda her ay gelen seminer talebi');
 
         $slots->push('welcome.sections', 'seminar::partials.welcome', 30);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            if ($event->userId) {
+                SeminarOffers::where('user_id', $event->userId)->delete();
+                SeminarRequests::where('user_id', $event->userId)->delete();
+            }
+        });
+
     }
 }

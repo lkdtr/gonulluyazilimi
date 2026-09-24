@@ -30,6 +30,7 @@ class AdminServiceProvider extends ModuleServiceProvider
         $this->permissions()->register('contacts.view', 'Kişi ve kurumları görebilsin', 'contacts', 10);
         $this->permissions()->register('contacts.manage', 'Kişi ve kurum ekleyip düzenleyebilsin, sıfat verebilsin', 'contacts', 11);
         $this->permissions()->register('photos.review', 'Profil fotoğraflarını onaylayıp reddedebilsin', 'contacts', 12);
+        $this->permissions()->register('data-deletion.manage', 'KVKK veri silme taleplerini onaylayıp reddedebilsin', 'contacts', 13);
         $this->permissions()->group('settings', 'Ayarlar', 90);
         $this->permissions()->register('settings.manage', 'Kurum ayarlarını (ad, logo, iletişim, ana sayfa) düzenleyebilsin', 'settings', 89);
         $this->permissions()->register('agreements.manage', 'Sözleşmeleri düzenleyip yayınlayabilsin, kabulleri görebilsin', 'settings', 89);
@@ -40,7 +41,9 @@ class AdminServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'contacts', 'Kişi & Kurumlar', 'admin.contacts', ['contacts.view'], 5);
         $menu->add('admin', 'contacts', 'Kişi / kurum ekle', 'admin.contacts.create', ['contacts.manage'], 6);
         $menu->add('admin', 'contacts', 'Fotoğraf onayı', 'admin.photos', ['photos.review'], 7);
+        $menu->add('admin', 'contacts', 'Veri silme talepleri', 'admin.data-deletions', ['data-deletion.manage'], 8);
 
+        $this->dashboard()->stat('Veri silme talebi', 'user-x', fn () => \App\Models\DataDeletionRequest::pending()->count(), 'admin.data-deletions', ['data-deletion.manage'], 15, 'Değerlendirme bekleyen');
         $this->dashboard()->stat('Onay bekleyen fotoğraf', 'photo-check', fn () => ContactPhoto::pending()->count(), 'admin.photos', ['photos.review'], 14);
 
         $menu->label('admin', 'settings', 'Ayarlar', 'settings');

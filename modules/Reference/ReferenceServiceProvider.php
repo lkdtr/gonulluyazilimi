@@ -25,5 +25,11 @@ class ReferenceServiceProvider extends ModuleServiceProvider
         $menu->add('admin', 'reference', 'panel.reference_requests', 'admin.reference-requests', [1, 2], 80);
 
         $this->dashboard()->stat('Referans bekleyen üye', 'certificate', fn () => ReferenceRequests::where('status', 1)->count(), 'admin.reference-requests', [1], 12);
+
+        // KVKK deletion: remove the personal data this module holds.
+        \Illuminate\Support\Facades\Event::listen(\App\Events\ContactAnonymized::class, function (\App\Events\ContactAnonymized $event) {
+            $event->userId && ReferenceRequests::where('user_id', $event->userId)->delete();
+        });
+
     }
 }
