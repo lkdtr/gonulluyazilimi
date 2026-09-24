@@ -2,16 +2,18 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            @if (session('photo-status'))
-                <div class="alert alert-success" role="alert">{{ session('photo-status') }}</div>
-            @endif
+    @if (session('photo-status'))
+        <div class="alert alert-success" role="alert">{{ session('photo-status') }}</div>
+    @endif
 
-            @isset($photo)
+    <div class="row row-cards">
+        @isset($photo)
+            <div class="col-lg-4">
                 @include('profile.partials.photo', $photo)
-            @endisset
+            </div>
+        @endisset
 
+        <div class="{{ isset($photo) ? 'col-lg-8' : 'col-12' }}">
             <div class="card">
                 <div class="card-header"><h3 class="card-title">{{ trans("panel.user_infos_title") }}</h3></div>
                 <div class="card-body">
