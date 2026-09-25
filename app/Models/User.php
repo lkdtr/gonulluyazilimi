@@ -197,7 +197,11 @@ class User extends Authenticatable
     {
         $contact = $this->contact ?? new Contact(['type' => Contact::TYPE_PERSON]);
         // Read before saveQuietly() below resets the change set.
-        $membershipChanged = $this->wasRecentlyCreated || $this->wasChanged('lkd_user_id');
+        // A member number opens the member affiliation; only removing the
+        // number ends it. A new account without a number never ends the
+        // membership of an existing contact it is linked to.
+        $openMembership = $this->lkd_user_id > 0 && ($this->wasRecentlyCreated || $this->wasChanged('lkd_user_id'));
+        $endMembership = ! ($this->lkd_user_id > 0) && $this->wasChanged('lkd_user_id');
 
         $contact->fill([
             'first_name' => $this->name,
@@ -220,10 +224,10 @@ class User extends Authenticatable
 
         // The LKD member number still decides membership until the
         // membership module takes over.
-        if ($membershipChanged) {
-            $this->lkd_user_id > 0
-                ? $contact->affiliate(AffiliationType::MEMBER)
-                : $contact->endAffiliation(AffiliationType::MEMBER);
+        if ($openMembership) {
+            $contact->affiliate(AffiliationType::MEMBER);
+        } elseif ($endMembership) {
+            $contact->endAffiliation(AffiliationType::MEMBER);
         }
 
         return $contact;
