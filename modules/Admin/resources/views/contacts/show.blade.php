@@ -19,6 +19,12 @@
                 @if ($contact->user)
                     <a href="{{ route('admin.users.show', $contact->user->id) }}" class="btn btn-outline-primary"><i class="ti ti-user icon"></i> Hesap profili</a>
                 @elseif ($canManage)
+                    @if (app(\App\Support\AccountActivation::class)->eligible($contact))
+                        <form method="POST" action="{{ route('admin.contacts.activation', $contact) }}" onsubmit="return confirm('{{ $contact->email }} adresine hesap etkinleştirme bağlantısı gönderilsin mi?')">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-primary"><i class="ti ti-mail-forward icon"></i> Etkinleştirme bağlantısı gönder</button>
+                        </form>
+                    @endif
                     <a href="{{ route('admin.contacts.edit', $contact) }}" class="btn btn-primary"><i class="ti ti-edit icon"></i> Düzenle</a>
                 @endif
             </div>

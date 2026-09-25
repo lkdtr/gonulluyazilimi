@@ -25,6 +25,14 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
+Route::middleware('guest')->group(function () {
+    // First sign-in of a contact without an account (e.g. imported members).
+    Route::get('/activate', [App\Http\Controllers\Auth\ActivationController::class, 'create'])->name('account.activation');
+    Route::post('/activate', [App\Http\Controllers\Auth\ActivationController::class, 'send'])->middleware('throttle:5,1')->name('account.activation.send');
+    Route::get('/activate/{contact}/{hash}', [App\Http\Controllers\Auth\ActivationController::class, 'edit'])->middleware('signed')->name('account.activate');
+    Route::post('/activate/{contact}/{hash}', [App\Http\Controllers\Auth\ActivationController::class, 'store'])->middleware(['signed', 'throttle:10,1'])->name('account.activate.store');
+});
+
 Route::get('/password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');

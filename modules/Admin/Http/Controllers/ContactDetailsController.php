@@ -35,4 +35,18 @@ class ContactDetailsController extends Controller
 
         return back()->with('success-status', 'Ek bilgiler kaydedildi.');
     }
+
+    /**
+     * Email a contact without an account the link to set a password.
+     */
+    public function sendActivation(Contact $contact, \App\Support\AccountActivation $activation): RedirectResponse
+    {
+        if (! $activation->send($contact)) {
+            return back()->with('danger-status', 'Bu kişiye etkinleştirme bağlantısı gönderilemez: hesabı var, e-postası yok ya da e-postası başka bir hesapta kullanılıyor.');
+        }
+
+        $this->set_log('other', "Hesap etkinleştirme bağlantısı gönderildi: {$contact->display_name}");
+
+        return back()->with('success-status', "Etkinleştirme bağlantısı {$contact->email} adresine gönderildi.");
+    }
 }
