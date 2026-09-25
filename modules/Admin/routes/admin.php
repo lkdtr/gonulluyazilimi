@@ -25,6 +25,7 @@ Route::middleware('permission:contacts.manage')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store');
     Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
     Route::put('/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::post('/contacts/{contact}/activation', [ContactDetailsController::class, 'sendActivation'])->middleware('throttle:10,1')->name('contacts.activation');
     Route::put('/contacts/{contact}/tags', [ContactDetailsController::class, 'tags'])->name('contacts.tags.update');
     Route::put('/contacts/{contact}/fields', [ContactDetailsController::class, 'fields'])->name('contacts.fields.update');
     Route::put('/contacts/{contact}/consents', [ContactConsentController::class, 'update'])->name('contacts.consents.update');

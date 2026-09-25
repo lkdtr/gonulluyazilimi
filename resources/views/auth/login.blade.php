@@ -68,6 +68,7 @@
                                         {{ trans("auth.forgot_password") }}
                                     </a>
                                 @endif
+                                <a class="btn btn-link" href="{{ route('account.activation') }}">Hesabımı etkinleştir</a>
                             </div>
                         </div>
                     </form>
